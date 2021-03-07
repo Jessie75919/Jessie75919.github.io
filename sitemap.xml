@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://chan-chan-dev.com/2021/03/07/coding/Note/hexo-introduction/</loc>
+    
+    <lastmod>2021-03-07</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://chan-chan-dev.com/2021/03/05/coding/Trick/early-return/</loc>
     
     <lastmod>2021-03-07</lastmod>
@@ -109,6 +116,13 @@
   </url>
   
   <url>
+    <loc>https://chan-chan-dev.com/tags/Hexo/</loc>
+    <lastmod>2021-03-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://chan-chan-dev.com/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/</loc>
     <lastmod>2021-03-07</lastmod>
     <changefreq>daily</changefreq>
@@ -132,7 +146,7 @@
   </url>
   
   <url>
-    <loc>https://chan-chan-dev.com/categories/Coding/Python/</loc>
+    <loc>https://chan-chan-dev.com/categories/Note/</loc>
     <lastmod>2021-03-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -140,6 +154,13 @@
   
   <url>
     <loc>https://chan-chan-dev.com/categories/Coding/Design-Pattern/</loc>
+    <lastmod>2021-03-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://chan-chan-dev.com/categories/Coding/Python/</loc>
     <lastmod>2021-03-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
