@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://chan-chan-dev.com/2021/04/02/coding/Basic/Backend/session-intro/</loc>
+    
+    <lastmod>2021-04-02</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://chan-chan-dev.com/2021/03/20/coding/Basic/Backend/cookie-intro/</loc>
     
-    <lastmod>2021-03-25</lastmod>
+    <lastmod>2021-04-02</lastmod>
     
   </url>
   
@@ -102,7 +109,7 @@
 
   <url>
     <loc>https://chan-chan-dev.com/</loc>
-    <lastmod>2021-03-25</lastmod>
+    <lastmod>2021-04-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -110,42 +117,42 @@
   
   <url>
     <loc>https://chan-chan-dev.com/tags/%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/</loc>
-    <lastmod>2021-03-25</lastmod>
+    <lastmod>2021-04-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://chan-chan-dev.com/tags/Design-Pattern/</loc>
-    <lastmod>2021-03-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://chan-chan-dev.com/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/</loc>
-    <lastmod>2021-03-25</lastmod>
+    <lastmod>2021-04-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://chan-chan-dev.com/tags/Hexo/</loc>
-    <lastmod>2021-03-25</lastmod>
+    <lastmod>2021-04-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://chan-chan-dev.com/tags/Backend/</loc>
-    <lastmod>2021-03-25</lastmod>
+    <loc>https://chan-chan-dev.com/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/</loc>
+    <lastmod>2021-04-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://chan-chan-dev.com/tags/Python/</loc>
-    <lastmod>2021-03-25</lastmod>
+    <lastmod>2021-04-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://chan-chan-dev.com/tags/Backend/</loc>
+    <lastmod>2021-04-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -154,42 +161,42 @@
   
   <url>
     <loc>https://chan-chan-dev.com/categories/Coding/</loc>
-    <lastmod>2021-03-25</lastmod>
+    <lastmod>2021-04-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://chan-chan-dev.com/categories/Note/</loc>
-    <lastmod>2021-03-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://chan-chan-dev.com/categories/Coding/Backend/</loc>
-    <lastmod>2021-03-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://chan-chan-dev.com/categories/Coding/Design-Pattern/</loc>
-    <lastmod>2021-03-25</lastmod>
+    <lastmod>2021-04-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://chan-chan-dev.com/categories/Coding/Python/</loc>
-    <lastmod>2021-03-25</lastmod>
+    <lastmod>2021-04-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://chan-chan-dev.com/categories/Coding/Design-Pattern/</loc>
+    <lastmod>2021-04-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://chan-chan-dev.com/categories/Coding/Backend/</loc>
+    <lastmod>2021-04-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://chan-chan-dev.com/categories/Coding/%E5%A6%82%E6%9E%9C%E6%97%A9%E7%9F%A5%E9%81%93/</loc>
-    <lastmod>2021-03-25</lastmod>
+    <lastmod>2021-04-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
