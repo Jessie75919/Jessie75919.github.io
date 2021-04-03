@@ -1,0 +1,276 @@
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Session &amp; Cookie 傻傻分不清楚：Session 篇 | Chan-Chan-Dev</title><meta name="keywords" content="session,cookie"><meta name="author" content="chan-chan-dev"><meta name="copyright" content="chan-chan-dev"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="你知道什麼是 Session 嗎？為什麼需要它？它又是怎麼運作的呢？ 今天就來聊聊 Session，一起來用簡單地小插圖輕鬆地學習吧。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Session &amp; Cookie 傻傻分不清楚：Session 篇">
+<meta property="og:url" content="https://chan-chan-dev.com/back-end/Session/session-intro/1577685640/index.html">
+<meta property="og:site_name" content="Chan-Chan-Dev">
+<meta property="og:description" content="你知道什麼是 Session 嗎？為什麼需要它？它又是怎麼運作的呢？ 今天就來聊聊 Session，一起來用簡單地小插圖輕鬆地學習吧。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://tingyukuo.com/chan-chan-dev/blogs/session-cookie-intro/Session-Cover-Text.jpg">
+<meta property="article:published_time" content="2021-04-03T04:13:59.775Z">
+<meta property="article:modified_time" content="2021-04-03T04:13:59.776Z">
+<meta property="article:author" content="chan-chan-dev">
+<meta property="article:tag" content="Backend">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tingyukuo.com/chan-chan-dev/blogs/session-cookie-intro/Session-Cover-Text.jpg"><link rel="shortcut icon" href="https://tingyukuo.com/chan-chan-dev/imgs/favicon.ico"><link rel="canonical" href="https://chan-chan-dev.com/back-end/Session/session-intro/1577685640/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-R47Z93ZJTM"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-R47Z93ZJTM');
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '複製成功',
+    error: '複製錯誤',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: chan-chan-dev","link":"連結: ","source":"來源: Chan-Chan-Dev","info":"著作權歸作者所有。商業轉載請聯絡作者獲得授權，非商業轉載請註明出處。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-04-03 12:13:59'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://tingyukuo.com/chan-chan-dev/imgs/chan-chan-dev-logo.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">標籤</div><div class="length-num">6</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分類</div><div class="length-num">14</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分類</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 歸檔</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://tingyukuo.com/chan-chan-dev/blogs/session-cookie-intro/Session-Cover.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Chan-Chan-Dev</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分類</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 歸檔</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Session &amp; Cookie 傻傻分不清楚：Session 篇</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2021-04-03T04:13:59.775Z" title="發表於 2021-04-03 12:13:59">2021-04-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2021-04-03T04:13:59.776Z" title="更新於 2021-04-03 12:13:59">2021-04-03</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/back-end/">Backend</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/back-end/Session/">Session</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字數總計:</span><span class="word-count">2.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">閱讀時長:</span><span>8分鐘</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">閱讀量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>你知道什麼是 Session 嗎？為什麼需要它？它又是怎麼運作的呢？ 今天就來聊聊 Session 吧！</p>
+<span id="more"></span>
+
+<p>身爲一個後端工程師，在學習的過程中一定都會經歷過 2 個關鍵字： <code>Session</code> &amp; <code>Cookie</code>。</p>
+<p>也許許多的語言或者是套件已經幫我們完成了 Session 與 Cookie 的功能，我們需要的僅止於知道如何使用他們。然而剛好趁這次的機會來好好瞭解一下他們的使用方式與背後的原理吧。</p>
+<h1 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h1><p>這篇是《 Session &amp; Cookie 傻傻分不清楚》的下篇，簡單地介紹了 Session 是什麼與介紹情境。</p>
+<p>若錯過上集的朋友，可以請往這邊走： <a href="/back-end/Cookies/cookie-intro/3173700095/" title="Session &amp; Cookie 傻傻分不清楚：Cookie 篇">Session &amp; Cookie 傻傻分不清楚：Cookie 篇</a></p>
+<hr>
+<p>在上一集我們有提到，因爲 <code>HTTP 無狀態</code> 的情況下，<code>伺服器無法在這麼多個 HTTP 的請求分辨是哪些是屬於同一個使用者的！</code></p>
+<p><img src="https://tingyukuo.com/chan-chan-dev/blogs/session-cookie-intro/Http-stateless-02.jpg" alt="HTTP無狀態所遇到的困境"></p>
+<h1 id="🚀-希望達成效果-🚀"><a href="#🚀-希望達成效果-🚀" class="headerlink" title="🚀 希望達成效果 🚀"></a>🚀 希望達成效果 🚀</h1><div style="font-size: 26px; text-align: center; font-weight: bold; vertical-align: middle">
+
+<div class="note blue icon modern"><i class="note-icon fas fa-thumbs-up"></i><p>讓伺服器有記憶能力可以記住每一個使用者的狀態!!</p>
+</div>
+
+</div>
+
+
+<p>之前的解決方案一是使用 <code>Cookie</code> 的方式。只是把資料用 <code>Cookie</code> 的附上存在使用者那邊會遇到幾個問題：</p>
+<ul>
+<li>存放資料不能太大（只有 <code>4 kb</code> 而已，還記得嗎？）</li>
+<li>使用者可以亂改 <code>Cookie</code> 上的資訊（小朋友不可以亂學喔）</li>
+</ul>
+<h1 id="解決方案二：直接幫使用者辦一張會員卡"><a href="#解決方案二：直接幫使用者辦一張會員卡" class="headerlink" title="解決方案二：直接幫使用者辦一張會員卡"></a>解決方案二：直接幫使用者辦一張會員卡</h1><div class="note success modern"><p>那何不把資料都放在伺服器的某一個櫃子裡，然後產生一組會員卡卡號貼在這個櫃子外面，然後將這組會員卡卡號寫在小紙條上 (Cookie) 回覆給使用者，請他下次來的時候就帶這組卡號來就可以了？</p>
+</div>
+<p>使用者發起 HTTP 請求<br><img src="https://tingyukuo.com/chan-chan-dev/blogs/session-cookie-intro/Session-01.jpg" alt="Session HTTP發起請求階段"></p>
+<p>伺服器將使用者的資料存在一個櫃子裡，並起產生一組會員卡卡號貼在這個櫃子外面<br><img src="https://tingyukuo.com/chan-chan-dev/blogs/session-cookie-intro/Session-02.jpg" alt="Session 伺服器將使用者的資料存在一個櫃子裡，並起產生一組會員卡卡號貼在這個櫃子外面"></p>
+<p>伺服器將這組會員卡卡號寫在小紙條上 (Cookie) 回覆給使用者<br><img src="https://tingyukuo.com/chan-chan-dev/blogs/session-cookie-intro/Session-03.jpg" alt="Session 伺服器將這組會員卡卡號寫在小紙條上 Cookie 回覆給使用者"></p>
+<p>下次使用者只要連同這組卡號發起請求，伺服器就可以針對這組卡號去後面的櫃子找到他的資料囉<br><img src="https://tingyukuo.com/chan-chan-dev/blogs/session-cookie-intro/Session-04.jpg" alt="Session 使用者只要連同這組卡號發起請求"><br><img src="https://tingyukuo.com/chan-chan-dev/blogs/session-cookie-intro/Session-05.jpg" alt="Session 伺服器就可以針對這組卡號去後面的櫃子找到他的資料"></p>
+<h1 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h1><p><img src="https://tingyukuo.com/chan-chan-dev/blogs/session-cookie-intro/Session-Cover.jpg" alt="Session-封面"><br>上述講的方法就是使用 <code>sessionID</code> 的機制，將使用者的資料存放在伺服器端，然後產生一組 <code>sessionID</code> 辨認這些資料，並把這組 <code>sessionID</code>以 <code>Cookie</code> 的方式存放在使用者端。</p>
+<p>因此下次使用者只要出示這張如同會員卡卡號的 <code>sessionID</code> ，伺服器就可以找到這個使用者的資料囉。</p>
+<h2 id="什麼是-Session-呢？"><a href="#什麼是-Session-呢？" class="headerlink" title="什麼是 Session 呢？"></a>什麼是 Session 呢？</h2><p>依據 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://zh.wikipedia.org/wiki/%E4%BC%9A%E8%AF%9D_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6)">wiki</a> 的定義：</p>
+<div class="note success simple"><p>在電腦科學領域來說，尤其是在網路領域，對談（session，Microsoft Windows 中文版譯作工作階段）是一種持久網路協定，在使用者（或使用者代理）端和伺服器端之間建立關聯，從而起到交換封包的作用機制，session在網路協定（例如 telnet 或 FTP）中是非常重要的部分。</p>
+<p>在不包含會話層（例如UDP）或者是無法長時間駐留會話層（例如 HTTP）的傳輸協定中，會話的維持需要依靠在傳輸資料中的進階別程式。例如，在瀏覽器和遠端主機之間的 HTTP 傳輸中，HTTP cookie 就會被用來包含一些相關的資訊，例如 session ID，參數和權限資訊等。</p>
+</div>
+
+<h3 id="將-SessionID-傳遞給使用者的方式"><a href="#將-SessionID-傳遞給使用者的方式" class="headerlink" title="將 SessionID 傳遞給使用者的方式"></a>將 SessionID 傳遞給使用者的方式</h3><p>上述的圖解中，是以 <code>Cookie</code> 的方式傳遞給使用者端，也是網路上比較常見的做法。例外一種做法則是透過 <code>URL</code> 進行傳遞，不過相較於第一種使用 Cookie 的做法比較不安全，所以較少使用 😅</p>
+<h1 id="Session-使用方式-PHP"><a href="#Session-使用方式-PHP" class="headerlink" title="Session 使用方式 (PHP)"></a>Session 使用方式 (PHP)</h1><h2 id="開始-PHP-Session-的起手式"><a href="#開始-PHP-Session-的起手式" class="headerlink" title="開始 PHP Session 的起手式"></a>開始 PHP Session 的起手式</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">session_start();</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="將資料存入-Session"><a href="#將資料存入-Session" class="headerlink" title="將資料存入 Session"></a>將資料存入 Session</h2><p>Session 的資料可以存放在 PHP 的 <code>$_SESSION</code> 變數中，假如我們要將資料存入 Session：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">session_start();</span><br><span class="line"></span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="string">&#x27;web&#x27;</span>] = <span class="string">&#x27;Chan-Chan-Dev&#x27;</span>;</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="string">&#x27;url&#x27;</span>] = <span class="string">&#x27;https://chan-chan-dev.com&#x27;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="取得之前存入-Session-的資料"><a href="#取得之前存入-Session-的資料" class="headerlink" title="取得之前存入 Session 的資料"></a>取得之前存入 Session 的資料</h2><p>因爲我們之前已經有將資料存入 Session。所以我們可以用以下的方式來取用</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">session_start();</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$_SESSION</span>[<span class="string">&#x27;web&#x27;</span>]; <span class="comment">// 讀取之前存取 key 爲 web 的內容物</span></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$_SESSION</span>[<span class="string">&#x27;url&#x27;</span>]; <span class="comment">// 讀取之前存取 key 爲 url 的內容物</span></span><br></pre></td></tr></table></figure>
+
+
+<div class="note blue icon simple"><i class="note-icon fas fa-question-circle"></i><h3 id="若直接存取之前沒有存入的值會怎麼樣呢？😅"><a href="#若直接存取之前沒有存入的值會怎麼樣呢？😅" class="headerlink" title="若直接存取之前沒有存入的值會怎麼樣呢？😅"></a>若直接存取之前沒有存入的值會怎麼樣呢？😅</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">session_start();</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$_SESSION</span>[<span class="string">&#x27;abc&#x27;</span>]; <span class="comment">// 之前沒有存入 Key 爲 abc 的內容</span></span><br></pre></td></tr></table></figure>
+
+<p>恩… 就會得到以下的警告錯誤 😆</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*Warning: Undefined array key &quot;abc&quot; in session-1.php on line 11*</span><br></pre></td></tr></table></figure>
+
+<p>因此爲了保險起見，可以在之前用 <code>isset()</code> 檢查是否有這個 key 的內容喔 😍</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">session_start();</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_SESSION</span>[<span class="string">&#x27;abc&#x27;</span>]))&#123; <span class="comment">// 檢查之前是否有存入 Key 爲 abc 的內容</span></span><br><span class="line">  <span class="keyword">echo</span> <span class="variable">$_SESSION</span>[<span class="string">&#x27;abc&#x27;</span>]; </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<h2 id="刪除-Session-的某一個資料"><a href="#刪除-Session-的某一個資料" class="headerlink" title="刪除 Session 的某一個資料"></a>刪除 Session 的某一個資料</h2><p>若要刪除某一個 key 的 key-value 資料的話，可以直接使用 <code>unset()</code> 從 Session 中移除，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">session_start();</span><br><span class="line"><span class="keyword">unset</span>(<span class="variable">$_SESSION</span>[<span class="string">&#x27;web&#x27;</span>]); <span class="comment">// 移除 key 爲 web 的資料</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="註銷-Session"><a href="#註銷-Session" class="headerlink" title="註銷 Session"></a>註銷 Session</h2><p>若因爲使用者登出，或者是其他原因需要把整個 Session 註銷的話，也可以使用 <code>session_destroy()</code> 註銷喔。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">session_destroy();</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+<h1 id="Session-傳值"><a href="#Session-傳值" class="headerlink" title="Session 傳值"></a>Session 傳值</h1><p>就如同上述所說的，伺服器會開啓一個櫃子，把使用者的資料放在裏面，並且有個專屬的會員卡卡號 (SessionID)，所以因爲有了 Session 讓使用者的資料有一個暫時的存放位置。</p>
+<p>那是不是也可以用這個儲存機制在不同的頁面傳遞資料呀？😍</p>
+<p><code>第一次拜訪頁面 A ，將資料存入 Session 並且取得 SessionID</code></p>
+<p><img src="https://tingyukuo.com/chan-chan-dev/blogs/session-cookie-intro/Session-pass-val-1.jpg" alt="Session 第一次拜訪頁面 A ，將資料存入 Session 並且取得 SessionID"></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">session_start();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在頁面 A 存入資料</span></span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="string">&#x27;name&#x27;</span>] = <span class="string">&#x27;小明&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;Here is Page A&quot;</span> . <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>第二次用 SessionID 想要在頁面 B 取得當時後在頁面 A 存入的資料</code></p>
+<p><img src="https://tingyukuo.com/chan-chan-dev/blogs/session-cookie-intro/Session-pass-val-2.jpg" alt="Session 第二次用 SessionID 想要在頁面 B 取得當時後在頁面 A 存入的資料"></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">session_start();</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;Here is Page B&quot;</span> . <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$_SESSION</span>[<span class="string">&#x27;name&#x27;</span>])&#123;</span><br><span class="line">  <span class="comment">// 在頁面 B 存取 頁面 A 存入 Session 的資料</span></span><br><span class="line">  <span class="keyword">echo</span> <span class="variable">$_SESSION</span>[<span class="string">&#x27;name&#x27;</span>] . <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="Session-的那個櫃子究竟存在哪裡呢？-🤔"><a href="#Session-的那個櫃子究竟存在哪裡呢？-🤔" class="headerlink" title="Session 的那個櫃子究竟存在哪裡呢？ 🤔"></a>Session 的那個櫃子究竟存在哪裡呢？ 🤔</h1><p><img src="https://tingyukuo.com/chan-chan-dev/blogs/session-cookie-intro/Session-02.jpg" alt="Session 伺服器將使用者的資料存在一個櫃子裡，並起產生一組會員卡卡號貼在這個櫃子外面"></p>
+<p>我們之前提到伺服器會把資料存放在一個櫃子裡，而櫃子其實只是一個記錄存放的比喻啦，你懂的 😆</p>
+<p>而每一個語言對於 Session 的實作都不太一樣，有些存在記憶體、有些則存在檔案裡。PHP 預設的情況下是存在 <code>檔案</code> 裡，若想看到 Session 相關的詳細設定，我們可以來 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.php.net/manual/zh/session.configuration.php#ini.session.save-handler">這裏</a> 查看有哪些 Session 設定。</p>
+<p>若我們真的想要一探究竟的話，首先我們得先找到電腦裏的 <code>php.ini</code>，若你跟我一樣也是使用 Mac 的終端機的話，可以試試看以下指令看看 <code>php.ini</code>到底身在何處。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ php -i | grep php.ini</span><br><span class="line">Configuration File (php.ini) Path =&gt; /usr/<span class="built_in">local</span>/etc/php/8.0</span><br><span class="line">Loaded Configuration File =&gt; /usr/<span class="built_in">local</span>/etc/php/8.0/php.ini</span><br></pre></td></tr></table></figure>
+
+
+
+<p>用 vs code（或自己習慣的 IDE）開啓 <code>php.ini</code> 後，<code>Cmd + F</code> 搜尋 <code>[Session]</code> 相關的關鍵字，應該就可以找到相關的設定囉 😍</p>
+<p><img src="https://tingyukuo.com/chan-chan-dev/blogs/session-cookie-intro/Session-php.ini-01.png" alt="Session 用 vs code 開啓 php.ini"></p>
+<p>往下應該會找到 <code>session.save_path</code> 區塊，對應的值告訴我們 Session 存放在 <code>/tmp</code> 資料夾，這也是 PHP Session 預設存放的資料夾喔 🙂</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">; http:&#x2F;&#x2F;php.net&#x2F;session.save-path</span><br><span class="line">session.save_path &#x3D; &quot;&#x2F;tmp&quot;</span><br></pre></td></tr></table></figure>
+
+<p>於是乎我們在 <code>/tmp</code> 資料夾裏面找到了這個檔名看起來很奇怪的 <code>sess_8vpvg3dg9m6n3kbgalni847n3q</code> 檔案，原來這就是我們剛剛說的 <code>SessionID</code> 呀！！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── .....</span><br><span class="line">└── sess_8vpvg3dg9m6n3kbgalni847n3q</span><br></pre></td></tr></table></figure>
+
+<p>打開這個檔案後，真相大白！發現原來剛剛在 PHP 程式碼裏面存放在 Session 的資料是存在這裏呀！ 🤩</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">web|s:13:&quot;Chan-Chan-Dev&quot;;url|s:25:&quot;https:&#x2F;&#x2F;chan-chan-dev.com&quot;;</span><br></pre></td></tr></table></figure>
+
+<p>對了 😀 ，還記得剛剛有提到註銷 Session 的指令嗎？</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">session_destroy();</span><br></pre></td></tr></table></figure>
+
+<p>使用這個指令的話，這個 <code>sess_8vpvg3dg9m6n3kbgalni847n3q</code> 檔案就會整個被刪除掉囉！</p>
+<h1 id="查看在-Cookie-的-Session-ID"><a href="#查看在-Cookie-的-Session-ID" class="headerlink" title="查看在 Cookie 的 Session ID"></a>查看在 Cookie 的 Session ID</h1><p><img src="https://tingyukuo.com/chan-chan-dev/blogs/session-cookie-intro/Session-03.jpg" alt="Session 伺服器將這組會員卡卡號寫在小紙條上 Cookie 回覆給使用者"></p>
+<p>上述也有提到伺服器會將得到 <code>SessionID</code> 用 <code>Cookie</code> 的方式回傳給使用者，所以在使用者端的 SessionID 存放在哪裏呢？ 🙂</p>
+<p>我們可以簡單地用以下的步驟利用 Chrome 的 <code>DevTools</code> 查看這筆請求回覆的 Cookies，就會發現有一個叫做 <code>PHPSESSID</code>的記錄，他的 Value 就是我們上述的 SessionID <code>sess_8vpvg3dg9m6n3kbgalni847n3q</code> sess_ 之後的內容囉 😍</p>
+<p><img src="https://tingyukuo.com/chan-chan-dev/blogs/session-cookie-intro/session-id-in-cookie.jpg" alt="Session 用 DevTool 查看回傳的 SessionID"></p>
+<div class="note blue icon simple"><i class="note-icon fas fa-question-circle"></i><p>至於 <code>PHPSESSID</code> 的這個值是可以調整的嗎？ 😆</p>
+<p>剛剛在 <code>php.ini</code> 裏面其中有一個 <code>session.name</code> 的區塊，若有需要調整就可以更改這邊的設定即可囉～</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">; http:&#x2F;&#x2F;php.net&#x2F;session.name</span><br><span class="line">session.name &#x3D; PHPSESSID</span><br></pre></td></tr></table></figure></div>
+
+
+
+<h1 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h1><p>就如同一開始的想要達成的效果：</p>
+<div style="font-size: 26px; text-align: center; font-weight: bold; vertical-align: middle">
+
+<div class="note blue icon modern"><i class="note-icon fas fa-thumbs-up"></i><p>讓伺服器有記憶能力可以記住每一個使用者的狀態!!</p>
+</div>
+
+</div>
+
+
+
+<p>藉由 <code>Session</code> 與 <code>Cookie</code> 的輔助下，伺服器終於有能力記住使用者的狀態了。只是他們存放的位置各有不同， <code>Session</code> 就如同上述提到的是伺服器開啓的一個櫃子，所以是存在伺服器端。而 <code>Cookie</code> 則是像是一張小紙條，會讓使用者帶回去存放在瀏覽器，所以是存放在使用者端，也因爲存放在使用者端相對的資料的安全更需要被注意，因此在 <code>Cookie</code> 儘可能地不要存放機敏資料，若有需要儘可能地存放在 <code>Session</code> 裡也許是一個較爲安全的做法喔 🙂</p>
+<hr>
+<p>好囉，有關 Session 的討論就差不多告一個段落囉！<br>如果覺得喜歡這種圖文介紹的文章的話，歡迎加入 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.facebook.com/chanchandev">Chan-Chan-Dev Facebook</a> 的粉絲團，在發佈的時候就有比較多機會收到通知喔！😍</p>
+<p>最後也感謝你的閱讀，下次再見囉 😍</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined" rel="external nofollow noreferrer">chan-chan-dev</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章連結: </span><span class="post-copyright-info"><a href="https://chan-chan-dev.com/back-end/Session/session-intro/1577685640/">https://chan-chan-dev.com/back-end/Session/session-intro/1577685640/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版權聲明: </span><span class="post-copyright-info">本部落格所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 許可協議。轉載請註明來自 <a href="https://chan-chan-dev.com" target="_blank">Chan-Chan-Dev</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Backend/">Backend</a></div><div class="post_share"><div class="social-share" data-image="https://tingyukuo.com/chan-chan-dev/blogs/session-cookie-intro/Session-Cover-Text.jpg" data-sites="facebook,twitter"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/back-end/Cookies/cookie-intro/3173700095/"><img class="next-cover" src="https://tingyukuo.com/chan-chan-dev/blogs/session-cookie-intro/Cookie-Cover-Text.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Session &amp; Cookie 傻傻分不清楚：Cookie 篇</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相關推薦</span></div><div class="relatedPosts-list"><div><a href="/back-end/Cookies/cookie-intro/3173700095/" title="Session & Cookie 傻傻分不清楚：Cookie 篇"><img class="cover" src="https://tingyukuo.com/chan-chan-dev/blogs/session-cookie-intro/Cookie-Cover-Text.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-03-20</div><div class="title">Session & Cookie 傻傻分不清楚：Cookie 篇</div></div></a></div><div><a href="/back-end/backend-map/319603614/" title="後端語言學習地圖"><img class="cover" src="https://miro.medium.com/max/2000/0*TaPqs1sAhigjBFHf" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-04</div><div class="title">後端語言學習地圖</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目錄</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E6%83%85%E6%8F%90%E8%A6%81"><span class="toc-number">1.</span> <span class="toc-text">前情提要</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%F0%9F%9A%80-%E5%B8%8C%E6%9C%9B%E9%81%94%E6%88%90%E6%95%88%E6%9E%9C-%F0%9F%9A%80"><span class="toc-number">2.</span> <span class="toc-text">🚀 希望達成效果 🚀</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%A3%E6%B1%BA%E6%96%B9%E6%A1%88%E4%BA%8C%EF%BC%9A%E7%9B%B4%E6%8E%A5%E5%B9%AB%E4%BD%BF%E7%94%A8%E8%80%85%E8%BE%A6%E4%B8%80%E5%BC%B5%E6%9C%83%E5%93%A1%E5%8D%A1"><span class="toc-number">3.</span> <span class="toc-text">解決方案二：直接幫使用者辦一張會員卡</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Session"><span class="toc-number">4.</span> <span class="toc-text">Session</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF-Session-%E5%91%A2%EF%BC%9F"><span class="toc-number">4.1.</span> <span class="toc-text">什麼是 Session 呢？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%87-SessionID-%E5%82%B3%E9%81%9E%E7%B5%A6%E4%BD%BF%E7%94%A8%E8%80%85%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="toc-number">4.1.1.</span> <span class="toc-text">將 SessionID 傳遞給使用者的方式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Session-%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F-PHP"><span class="toc-number">5.</span> <span class="toc-text">Session 使用方式 (PHP)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%96%8B%E5%A7%8B-PHP-Session-%E7%9A%84%E8%B5%B7%E6%89%8B%E5%BC%8F"><span class="toc-number">5.1.</span> <span class="toc-text">開始 PHP Session 的起手式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%87%E8%B3%87%E6%96%99%E5%AD%98%E5%85%A5-Session"><span class="toc-number">5.2.</span> <span class="toc-text">將資料存入 Session</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%96%E5%BE%97%E4%B9%8B%E5%89%8D%E5%AD%98%E5%85%A5-Session-%E7%9A%84%E8%B3%87%E6%96%99"><span class="toc-number">5.3.</span> <span class="toc-text">取得之前存入 Session 的資料</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8B%A5%E7%9B%B4%E6%8E%A5%E5%AD%98%E5%8F%96%E4%B9%8B%E5%89%8D%E6%B2%92%E6%9C%89%E5%AD%98%E5%85%A5%E7%9A%84%E5%80%BC%E6%9C%83%E6%80%8E%E9%BA%BC%E6%A8%A3%E5%91%A2%EF%BC%9F%F0%9F%98%85"><span class="toc-number">5.3.1.</span> <span class="toc-text">若直接存取之前沒有存入的值會怎麼樣呢？😅</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%AA%E9%99%A4-Session-%E7%9A%84%E6%9F%90%E4%B8%80%E5%80%8B%E8%B3%87%E6%96%99"><span class="toc-number">5.4.</span> <span class="toc-text">刪除 Session 的某一個資料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A8%BB%E9%8A%B7-Session"><span class="toc-number">5.5.</span> <span class="toc-text">註銷 Session</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Session-%E5%82%B3%E5%80%BC"><span class="toc-number">6.</span> <span class="toc-text">Session 傳值</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Session-%E7%9A%84%E9%82%A3%E5%80%8B%E6%AB%83%E5%AD%90%E7%A9%B6%E7%AB%9F%E5%AD%98%E5%9C%A8%E5%93%AA%E8%A3%A1%E5%91%A2%EF%BC%9F-%F0%9F%A4%94"><span class="toc-number">7.</span> <span class="toc-text">Session 的那個櫃子究竟存在哪裡呢？ 🤔</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%9C%A8-Cookie-%E7%9A%84-Session-ID"><span class="toc-number">8.</span> <span class="toc-text">查看在 Cookie 的 Session ID</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E7%B5%90"><span class="toc-number">9.</span> <span class="toc-text">小結</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By chan-chan-dev</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主題 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="閱讀模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="淺色和深色模式轉換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目錄"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到頂部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script>window.addEventListener('scroll', function() {if (window.pageYOffset>100 &&window.pageYOffset<300){(function(w,d, s, id) {w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = 'https://cdn.webpushr.com/app.min.js';fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BKFjvtXkP8OtFFtkqaoV0rFrRjkDe5s2g9SRI8uY2FTgaTMk0d9t-5Uwvz0yOtZjdLNtpY-E3yxlX_zoxsYtZ3A');}});</script></body></html>
