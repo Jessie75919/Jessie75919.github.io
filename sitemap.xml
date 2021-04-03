@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://chan-chan-dev.com/back-end/Cookies/cookie-intro/3173700095/</loc>
+    
+    <lastmod>2021-04-03</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://chan-chan-dev.com/trick/%E5%A6%82%E6%9E%9C%E6%97%A9%E7%9F%A5%E9%81%93/early-return/3835460171/</loc>
     
     <lastmod>2021-04-03</lastmod>
@@ -86,13 +93,6 @@
   </url>
   
   <url>
-    <loc>https://chan-chan-dev.com/back-end/Cookies/cookie-intro/3173700095/</loc>
-    
-    <lastmod>2021-04-03</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://chan-chan-dev.com/back-end/backend-map/319603614/</loc>
     
     <lastmod>2021-04-03</lastmod>
@@ -130,14 +130,14 @@
   </url>
   
   <url>
-    <loc>https://chan-chan-dev.com/tags/Backend/</loc>
+    <loc>https://chan-chan-dev.com/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/</loc>
     <lastmod>2021-04-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://chan-chan-dev.com/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/</loc>
+    <loc>https://chan-chan-dev.com/tags/Backend/</loc>
     <lastmod>2021-04-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -167,14 +167,14 @@
   </url>
   
   <url>
-    <loc>https://chan-chan-dev.com/categories/back-end/</loc>
+    <loc>https://chan-chan-dev.com/categories/trick/</loc>
     <lastmod>2021-04-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://chan-chan-dev.com/categories/trick/</loc>
+    <loc>https://chan-chan-dev.com/categories/back-end/</loc>
     <lastmod>2021-04-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -202,7 +202,7 @@
   </url>
   
   <url>
-    <loc>https://chan-chan-dev.com/categories/back-end/Session/</loc>
+    <loc>https://chan-chan-dev.com/categories/trick/%E5%A6%82%E6%9E%9C%E6%97%A9%E7%9F%A5%E9%81%93/</loc>
     <lastmod>2021-04-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -216,7 +216,7 @@
   </url>
   
   <url>
-    <loc>https://chan-chan-dev.com/categories/trick/%E5%A6%82%E6%9E%9C%E6%97%A9%E7%9F%A5%E9%81%93/</loc>
+    <loc>https://chan-chan-dev.com/categories/back-end/Session/</loc>
     <lastmod>2021-04-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
