@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://chan-chan-dev.com/js/Function/function-intro/2954858119/</loc>
+    
+    <lastmod>2021-04-21</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://chan-chan-dev.com/js/Async/async-sync-intro/2534378084/</loc>
     
     <lastmod>2021-04-19</lastmod>
@@ -123,7 +130,7 @@
 
   <url>
     <loc>https://chan-chan-dev.com/</loc>
-    <lastmod>2021-04-20</lastmod>
+    <lastmod>2021-04-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -131,77 +138,84 @@
   
   <url>
     <loc>https://chan-chan-dev.com/tags/Javascript/</loc>
-    <lastmod>2021-04-20</lastmod>
+    <lastmod>2021-04-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://chan-chan-dev.com/tags/%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/</loc>
-    <lastmod>2021-04-20</lastmod>
+    <lastmod>2021-04-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://chan-chan-dev.com/tags/Design-Pattern/</loc>
-    <lastmod>2021-04-20</lastmod>
+    <lastmod>2021-04-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://chan-chan-dev.com/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/</loc>
-    <lastmod>2021-04-20</lastmod>
+    <lastmod>2021-04-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://chan-chan-dev.com/tags/Backend/</loc>
-    <lastmod>2021-04-20</lastmod>
+    <lastmod>2021-04-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://chan-chan-dev.com/tags/Python/</loc>
-    <lastmod>2021-04-20</lastmod>
+    <lastmod>2021-04-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://chan-chan-dev.com/tags/Function/</loc>
+    <lastmod>2021-04-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://chan-chan-dev.com/tags/Hexo/</loc>
-    <lastmod>2021-04-20</lastmod>
+    <lastmod>2021-04-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://chan-chan-dev.com/tags/Async/</loc>
-    <lastmod>2021-04-20</lastmod>
+    <lastmod>2021-04-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://chan-chan-dev.com/tags/Event-Loop/</loc>
-    <lastmod>2021-04-20</lastmod>
+    <lastmod>2021-04-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://chan-chan-dev.com/tags/HTTP/</loc>
-    <lastmod>2021-04-20</lastmod>
+    <lastmod>2021-04-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://chan-chan-dev.com/tags/Cache/</loc>
-    <lastmod>2021-04-20</lastmod>
+    <lastmod>2021-04-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -210,126 +224,133 @@
   
   <url>
     <loc>https://chan-chan-dev.com/categories/js/</loc>
-    <lastmod>2021-04-20</lastmod>
+    <lastmod>2021-04-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://chan-chan-dev.com/categories/design-pattern/</loc>
-    <lastmod>2021-04-20</lastmod>
+    <lastmod>2021-04-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://chan-chan-dev.com/categories/trick/</loc>
-    <lastmod>2021-04-20</lastmod>
+    <lastmod>2021-04-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://chan-chan-dev.com/categories/back-end/</loc>
-    <lastmod>2021-04-20</lastmod>
+    <lastmod>2021-04-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://chan-chan-dev.com/categories/design-pattern/Bridge/</loc>
-    <lastmod>2021-04-20</lastmod>
+    <lastmod>2021-04-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://chan-chan-dev.com/categories/Basic/</loc>
-    <lastmod>2021-04-20</lastmod>
+    <lastmod>2021-04-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://chan-chan-dev.com/categories/js/Function/</loc>
+    <lastmod>2021-04-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://chan-chan-dev.com/categories/design-pattern/SRP/</loc>
-    <lastmod>2021-04-20</lastmod>
+    <lastmod>2021-04-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://chan-chan-dev.com/categories/trick/%E5%A6%82%E6%9E%9C%E6%97%A9%E7%9F%A5%E9%81%93/</loc>
-    <lastmod>2021-04-20</lastmod>
+    <lastmod>2021-04-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://chan-chan-dev.com/categories/back-end/Cookies/</loc>
-    <lastmod>2021-04-20</lastmod>
+    <lastmod>2021-04-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://chan-chan-dev.com/categories/back-end/Session/</loc>
-    <lastmod>2021-04-20</lastmod>
+    <lastmod>2021-04-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://chan-chan-dev.com/categories/Basic/Python/</loc>
-    <lastmod>2021-04-20</lastmod>
+    <lastmod>2021-04-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://chan-chan-dev.com/categories/design-pattern/Interface/</loc>
-    <lastmod>2021-04-20</lastmod>
+    <lastmod>2021-04-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://chan-chan-dev.com/categories/design-pattern/Strategy/</loc>
-    <lastmod>2021-04-20</lastmod>
+    <lastmod>2021-04-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://chan-chan-dev.com/categories/note/</loc>
-    <lastmod>2021-04-20</lastmod>
+    <lastmod>2021-04-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://chan-chan-dev.com/categories/js/Async/</loc>
-    <lastmod>2021-04-20</lastmod>
+    <lastmod>2021-04-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://chan-chan-dev.com/categories/HTTP/</loc>
-    <lastmod>2021-04-20</lastmod>
+    <lastmod>2021-04-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://chan-chan-dev.com/categories/note/Hexo/</loc>
-    <lastmod>2021-04-20</lastmod>
+    <lastmod>2021-04-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://chan-chan-dev.com/categories/HTTP/Cache/</loc>
-    <lastmod>2021-04-20</lastmod>
+    <lastmod>2021-04-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
