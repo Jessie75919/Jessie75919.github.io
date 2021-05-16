@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://chan-chan-dev.com/Front-End/Browser/inside-browser-2/1810002848/</loc>
+    <loc>https://chan-chan-dev.com/Front-End/Browser/inside-browser-2/2715917952/</loc>
     
     <lastmod>2021-05-16</lastmod>
     
@@ -186,13 +186,6 @@
   </url>
   
   <url>
-    <loc>https://chan-chan-dev.com/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/</loc>
-    <lastmod>2021-05-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://chan-chan-dev.com/tags/%E4%BA%8C%E9%80%B2%E4%BD%8D/</loc>
     <lastmod>2021-05-16</lastmod>
     <changefreq>daily</changefreq>
@@ -200,7 +193,7 @@
   </url>
   
   <url>
-    <loc>https://chan-chan-dev.com/tags/Backend/</loc>
+    <loc>https://chan-chan-dev.com/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/</loc>
     <lastmod>2021-05-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -215,6 +208,13 @@
   
   <url>
     <loc>https://chan-chan-dev.com/tags/Browser/</loc>
+    <lastmod>2021-05-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://chan-chan-dev.com/tags/Backend/</loc>
     <lastmod>2021-05-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -286,13 +286,6 @@
   </url>
   
   <url>
-    <loc>https://chan-chan-dev.com/categories/trick/</loc>
-    <lastmod>2021-05-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://chan-chan-dev.com/categories/note/</loc>
     <lastmod>2021-05-16</lastmod>
     <changefreq>daily</changefreq>
@@ -300,7 +293,14 @@
   </url>
   
   <url>
-    <loc>https://chan-chan-dev.com/categories/back-end/</loc>
+    <loc>https://chan-chan-dev.com/categories/trick/</loc>
+    <lastmod>2021-05-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://chan-chan-dev.com/categories/Front-End/</loc>
     <lastmod>2021-05-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -314,7 +314,7 @@
   </url>
   
   <url>
-    <loc>https://chan-chan-dev.com/categories/Front-End/</loc>
+    <loc>https://chan-chan-dev.com/categories/back-end/</loc>
     <lastmod>2021-05-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -335,7 +335,7 @@
   </url>
   
   <url>
-    <loc>https://chan-chan-dev.com/categories/Basic/</loc>
+    <loc>https://chan-chan-dev.com/categories/note/Binary/</loc>
     <lastmod>2021-05-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -349,7 +349,7 @@
   </url>
   
   <url>
-    <loc>https://chan-chan-dev.com/categories/note/Binary/</loc>
+    <loc>https://chan-chan-dev.com/categories/Front-End/Browser/</loc>
     <lastmod>2021-05-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -370,7 +370,7 @@
   </url>
   
   <url>
-    <loc>https://chan-chan-dev.com/categories/Front-End/Browser/</loc>
+    <loc>https://chan-chan-dev.com/categories/Basic/</loc>
     <lastmod>2021-05-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
