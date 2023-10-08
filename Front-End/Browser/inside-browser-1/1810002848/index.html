@@ -1,159 +1,278 @@
-<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>瀏覽器學習筆記 Part 1 - 圖解學習 Process 與 Thread！ | Chan-Chan-Dev 圈圈工程師</title><meta name="keywords" content="Browser,Process,Thread"><meta name="author" content="chan-chan-dev"><meta name="copyright" content="chan-chan-dev"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="我們每天都在使用瀏覽器，但是瀏覽器的內部是怎麼運作的呢？在那之前讓我們先來認識一下 Process 與 Thread 是什麼東西吧！">
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="mask-icon" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"chanchandev.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":"flat","style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="我們每天都在使用瀏覽器，但是瀏覽器的內部是怎麼運作的呢？在那之前讓我們先來認識一下 Process 與 Thread 是什麼東西吧！">
 <meta property="og:type" content="article">
 <meta property="og:title" content="瀏覽器學習筆記 Part 1 - 圖解學習 Process 與 Thread！">
-<meta property="og:url" content="https://chan-chan-dev.com/Front-End/Browser/inside-browser-1/1810002848/index.html">
-<meta property="og:site_name" content="Chan-Chan-Dev 圈圈工程師">
+<meta property="og:url" content="https://chanchandev.com/Front-End/Browser/inside-browser-1/1810002848/index.html">
+<meta property="og:site_name" content="圈圈工程師">
 <meta property="og:description" content="我們每天都在使用瀏覽器，但是瀏覽器的內部是怎麼運作的呢？在那之前讓我們先來認識一下 Process 與 Thread 是什麼東西吧！">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-1/Cover.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-1/blank_land.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-1/factories.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-1/work.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-1/isolation.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-1/Process_Thread.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-1/extension-process.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-1/Benefit_of_separate_process.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-1/Site_isolation.jpg">
 <meta property="article:published_time" content="2021-05-04T13:10:08.000Z">
 <meta property="article:modified_time" content="2021-05-16T10:36:41.034Z">
-<meta property="article:author" content="chan-chan-dev">
+<meta property="article:author" content="ChanChanDev">
 <meta property="article:tag" content="Front-End">
 <meta property="article:tag" content="Browser">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-1/Cover.jpg"><link rel="shortcut icon" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico"><link rel="canonical" href="https://chan-chan-dev.com/Front-End/Browser/inside-browser-1/1810002848/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-R47Z93ZJTM"></script><script>window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-R47Z93ZJTM');
-</script><script>const GLOBAL_CONFIG = { 
-  root: '/',
-  algolia: undefined,
-  localSearch: undefined,
-  translate: undefined,
-  noticeOutdate: undefined,
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
-  copy: {
-    success: '複製成功',
-    error: '複製錯誤',
-    noSupport: '瀏覽器不支援'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: '',
-  date_suffix: {
-    just: '剛剛',
-    min: '分鐘前',
-    hour: '小時前',
-    day: '天前',
-    month: '個月前'
-  },
-  copyright: {"limitCount":50,"languages":{"author":"作者: chan-chan-dev","link":"連結: ","source":"來源: Chan-Chan-Dev 圈圈工程師","info":"著作權歸作者所有。商業轉載請聯絡作者獲得授權，非商業轉載請註明出處。"}},
-  lightbox: 'fancybox',
-  Snackbar: undefined,
-  source: {
-    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
-    justifiedGallery: {
-      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
-      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
-    },
-    fancybox: {
-      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
-      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
-    }
-  },
-  isPhotoFigcaption: true,
-  islazyload: false,
-  isanchor: true
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
-  isPost: true,
-  isHome: false,
-  isHighlightShrink: false,
-  isToc: true,
-  postUpdate: '2021-05-16 18:36:41'
-}</script><noscript><style type="text/css">
-  #nav {
-    opacity: 1
-  }
-  .justified-gallery img {
-    opacity: 1
-  }
+<meta name="twitter:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-1/blank_land.jpg">
 
-  #recent-posts time,
-  #post-meta time {
-    display: inline !important
-  }
-</style></noscript><script>(win=>{
-    win.saveToLocal = {
-      set: function setWithExpiry(key, value, ttl) {
-        if (ttl === 0) return
-        const now = new Date()
-        const expiryDay = ttl * 86400000
-        const item = {
-          value: value,
-          expiry: now.getTime() + expiryDay,
-        }
-        localStorage.setItem(key, JSON.stringify(item))
-      },
+<link rel="canonical" href="https://chanchandev.com/Front-End/Browser/inside-browser-1/1810002848/">
 
-      get: function getWithExpiry(key) {
-        const itemStr = localStorage.getItem(key)
 
-        if (!itemStr) {
-          return undefined
-        }
-        const item = JSON.parse(itemStr)
-        const now = new Date()
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
 
-        if (now.getTime() > item.expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return item.value
-      }
-    }
+  <title>瀏覽器學習筆記 Part 1 - 圖解學習 Process 與 Thread！ | 圈圈工程師</title>
   
-    win.getScript = url => new Promise((resolve, reject) => {
-      const script = document.createElement('script')
-      script.src = url
-      script.async = true
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R47Z93ZJTM"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-R47Z93ZJTM');
       }
-      document.head.appendChild(script)
-    })
-  
-      win.activateDarkMode = function () {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-        }
-      }
-      win.activateLightMode = function () {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-        }
-      }
-      const t = saveToLocal.get('theme')
+    </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">圈圈工程師</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Change Change Developer</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-back-end">
+
+    <a href="/categories/back-end/" rel="section"><i class="fas fa-rocket fa-fw"></i>Back-End</a>
+
+  </li>
+        <li class="menu-item menu-item-sharing">
+
+    <a href="/categories/sharing/" rel="section"><i class="fas fa-star fa-fw"></i>Sharing</a>
+
+  </li>
+        <li class="menu-item menu-item-reading">
+
+    <a href="/categories/reading/" rel="section"><i class="fas fa-book fa-fw"></i>Reading</a>
+
+  </li>
+        <li class="menu-item menu-item-design-pattern">
+
+    <a href="/categories/design-pattern/" rel="section"><i class="fas fa-sitemap fa-fw"></i>Design-Pattern</a>
+
+  </li>
+        <li class="menu-item menu-item-javascript">
+
+    <a href="/categories/js/" rel="section"><i class="fas fa-code fa-fw"></i>Javascript</a>
+
+  </li>
+        <li class="menu-item menu-item-分類">
+
+    <a href="/categories/" rel="section"><i class="fas fa-folder-open fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-歸檔">
+
+    <a href="/archives/" rel="section"><i class="fas fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
     
-          if (t === 'dark') activateDarkMode()
-          else if (t === 'light') activateLightMode()
-        
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        if (asideStatus === 'hide') {
-          document.documentElement.classList.add('hide-aside')
-        } else {
-          document.documentElement.classList.remove('hide-aside')
-        }
-      }
-    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">標籤</div><div class="length-num">15</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分類</div><div class="length-num">22</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/categories/back-end/"><i class="fa-fw fas fa-rocket"></i><span> Back-End</span></a></div><div class="menus_item"><a class="site-page" href="/categories/design-pattern/"><i class="fa-fw fas fas fa-sitemap"></i><span> Design-Pattern</span></a></div><div class="menus_item"><a class="site-page" href="/categories/js/"><i class="fa-fw fas fa-code"></i><span> Javascript</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分類</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 歸檔</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-1/Process_Thread.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Chan-Chan-Dev 圈圈工程師</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/categories/back-end/"><i class="fa-fw fas fa-rocket"></i><span> Back-End</span></a></div><div class="menus_item"><a class="site-page" href="/categories/design-pattern/"><i class="fa-fw fas fas fa-sitemap"></i><span> Design-Pattern</span></a></div><div class="menus_item"><a class="site-page" href="/categories/js/"><i class="fa-fw fas fa-code"></i><span> Javascript</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分類</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 歸檔</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">瀏覽器學習筆記 Part 1 - 圖解學習 Process 與 Thread！</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2021-05-04T13:10:08.000Z" title="發表於 2021-05-04 21:10:08">2021-05-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2021-05-16T10:36:41.034Z" title="更新於 2021-05-16 18:36:41">2021-05-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Front-End/">Front-End</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Front-End/Browser/">Browser</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字數總計:</span><span class="word-count">2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">閱讀時長:</span><span>6分鐘</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">閱讀量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>我們每天都在使用瀏覽器，但是瀏覽器的內部是怎麼運作的呢？小白如我也不知道，直到看了這篇文章後才。。。</p>
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://chanchandev.com/Front-End/Browser/inside-browser-1/1810002848/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+      <meta itemprop="name" content="ChanChanDev">
+      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="圈圈工程師">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          瀏覽器學習筆記 Part 1 - 圖解學習 Process 與 Thread！
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-05-04 21:10:08" itemprop="dateCreated datePublished" datetime="2021-05-04T21:10:08+08:00">2021-05-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-05-16 18:36:41" itemprop="dateModified" datetime="2021-05-16T18:36:41+08:00">2021-05-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Front-End/" itemprop="url" rel="index"><span itemprop="name">Front-End</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Front-End/Browser/" itemprop="url" rel="index"><span itemprop="name">Browser</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">我們每天都在使用瀏覽器，但是瀏覽器的內部是怎麼運作的呢？在那之前讓我們先來認識一下 Process 與 Thread 是什麼東西吧！</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>我們每天都在使用瀏覽器，但是瀏覽器的內部是怎麼運作的呢？小白如我也不知道，直到看了這篇文章後才。。。</p>
 <span id="more"></span>
 
-<div class="note success simple"><p>HIHI～😍  如果你是第一次來的話，『Chan-Chan-Dev』是一個專門用簡單的圖文與故事講解網路程式技術的網站。<br>若你也喜歡用這種方式學習的話，歡迎加入 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.facebook.com/chanchandev">Chan-Chan-Dev Facebook</a> 的粉絲團，在發佈的時候就有比較多機會收到通知喔！😍</p>
-</div>
+<div class="note success simple">
+            <p>HIHI～😍  如果你是第一次來的話，『Chan-Chan-Dev』是一個專門用簡單的圖文與故事講解網路程式技術的網站。<br>若你也喜歡用這種方式學習的話，歡迎加入 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.facebook.com/chanchandev">Chan-Chan-Dev Facebook</a> 的粉絲團，在發佈的時候就有比較多機會收到通知喔！😍</p>
+          </div>
 
 
-<div class="note info simple"><p>這篇的所有內容是來自於原文 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://developers.google.com/web/updates/2018/09/inside-browser-part1">《Inside look at modern web browser》</a> 的第一篇。其實已經講的很淺顯易懂而且又有超級可愛的插圖，私心認爲已經很難有比它寫的更好的文章了 ，因此這篇文章更像是自己學習的筆記。</p>
-<p>另外也因爲它是英文的版本，希望藉由自己的筆記分享可以在讓更多人學習到有幫助的資訊喔！😍 </p>
-</div>
+<div class="note info simple">
+            <p>這篇的所有內容是來自於原文 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://developers.google.com/web/updates/2018/09/inside-browser-part1">《Inside look at modern web browser》</a> 的第一篇。其實已經講的很淺顯易懂而且又有超級可愛的插圖，私心認爲已經很難有比它寫的更好的文章了 ，因此這篇文章更像是自己學習的筆記。</p><p>另外也因爲它是英文的版本，希望藉由自己的筆記分享可以在讓更多人學習到有幫助的資訊喔！😍 </p>
+          </div>
 
 <h1 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h1><p>在《<a href="/js/Async/async-sync-intro/2534378084/" title="Javascript 非同步 &amp; Event Loop！10 分鐘輕鬆圖解學習！">Javascript 非同步 &amp; Event Loop！10 分鐘輕鬆圖解學習！</a>》有提到 <code>Javascript 是單執行緒</code> 的重點。之後也引發自己好奇究竟瀏覽器與 Javascript 的關係，進而才找到這篇很棒的文章。因此今天單純從瀏覽器的角度來看看 <code>執行緒 (Thread)</code> 與 <code>行程 (Process)</code> 吧。</p>
 <h1 id="行程-Process-執行緒-Thread"><a href="#行程-Process-執行緒-Thread" class="headerlink" title="行程 (Process) / 執行緒 (Thread)"></a>行程 (Process) / 執行緒 (Thread)</h1><p>在馬上跳入這麼硬的詞之前，讓我們來看個小圖解吧 😆</p>
@@ -168,8 +287,9 @@ gtag('config', 'G-R47Z93ZJTM');
 <h2 id="Inter-Process-Communication-IPC"><a href="#Inter-Process-Communication-IPC" class="headerlink" title="Inter Process Communication (IPC)"></a>Inter Process Communication (IPC)</h2><p><code>工廠</code>之間也不可能完全沒有聯繫，他們總是會有需要溝通的時候。<code>行程 (Process)</code>也是如此，因此兩個 <code>行程 (Process)</code> 通訊的方式稱爲 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://zh.wikipedia.org/wiki/%E8%A1%8C%E7%A8%8B%E9%96%93%E9%80%9A%E8%A8%8A">Inter Process Communication (IPC)</a></p>
 <h1 id="瀏覽器架構"><a href="#瀏覽器架構" class="headerlink" title="瀏覽器架構"></a>瀏覽器架構</h1><p>瀏覽器常見的有 Chrome、Firefox、IE、Safari … 等等等。本文介紹的主要以 <code>Chrome</code> 爲主喔！</p>
 <p>有的只用一間工廠請好幾個員工（一個<code>行程 (Process)</code>，多個<code>執行緒 (Thread) </code>），有的則是好幾間工廠，每間工廠只請一個員工（多個<code>行程 (Process)</code>，單個<code>執行緒 (Thread) </code>），因此每一個實作的架構都不太一樣。</p>
-<div class="note info simple"><p>以下就統一用英文 <code>Process</code> 與 <code>Thread</code> 來介紹 😀<br>就不再使用中文的翻譯囉。</p>
-</div>
+<div class="note info simple">
+            <p>以下就統一用英文 <code>Process</code> 與 <code>Thread</code> 來介紹 😀<br>就不再使用中文的翻譯囉。</p>
+          </div>
 
 
 <p>以瀏覽器來說會由好幾個不同的 <code>Process</code>一起合作，而 <code>Browser Process</code> 則是負責統合其他 <code>Process)</code>的角色。</p>
@@ -214,13 +334,15 @@ gtag('config', 'G-R47Z93ZJTM');
 <p>Process 也是一樣的道理。若每一個<code>分頁</code>都各自有一個 <code>Renderer Process</code> 負責，所以任一其中的分頁發生問題時，也不會影響到其他分頁的運作，我們只需要開啓一個新的分頁繼續之前的那網頁即可喔 😀</p>
 <h1 id="Site-Isolation"><a href="#Site-Isolation" class="headerlink" title="Site Isolation"></a>Site Isolation</h1><p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://developers.google.com/web/updates/2018/07/site-isolation">Site Isolation</a> 是桌面版 Chrome 67 預設的功能。</p>
 <p>它試圖在允許的情況下讓一個分頁內的每一個 iFrame 擁有自己的 <code>Renderer Process</code>。</p>
-<h2 id="為什麼需要這個功能呢？-🤔"><a href="#為什麼需要這個功能呢？-🤔" class="headerlink" title="為什麼需要這個功能呢？ 🤔"></a>為什麼需要這個功能呢？ 🤔</h2><div class="note success simple"><p>結論：<br><code>安全性</code>的考量。</p>
-</div>
+<h2 id="為什麼需要這個功能呢？-🤔"><a href="#為什麼需要這個功能呢？-🤔" class="headerlink" title="為什麼需要這個功能呢？ 🤔"></a>為什麼需要這個功能呢？ 🤔</h2><div class="note success simple">
+            <p>結論：<br><code>安全性</code>的考量。</p>
+          </div>
 
 <p>讓我們先回到之前的場景，也就是一個分頁由有一個 <code>Renderer Process</code> 負責的情況。</p>
 <p>我們剛剛聊過 <code>Process</code> 與 <code>Process</code> 之間像是一間間獨立的工廠，因此有對外隔絕的資源，因此外部無法存取到內部的記憶體等等的內容，達到保護的效果。</p>
-<div class="note red icon simple"><i class="note-icon fas fa-exclamation-triangle"></i><p>但是這個是在<code>一個分頁只有一個網站</code>的情境下。</p>
-</div>
+<div class="note red fas fa-exclamation-triangle simple">
+            <p>但是這個是在<code>一個分頁只有一個網站</code>的情境下。</p>
+          </div>
 
 <p>使用 iframe 很多時候會在一個網站內去連接到其他的網站。舉例說：有一個 <code>A.com</code> 使用了 iframe 連接到 <code>B.com</code> 與 <code>C.com</code> 的網站。因此，就會形成了一個分頁裡有 3 個網站（A.com、B.com、C.com）的情況。</p>
 <p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-1/Site_isolation.jpg" alt="一個分頁裡有 3 個網站（A.com、B.com、C.com）"></p>
@@ -236,10 +358,208 @@ gtag('config', 'G-R47Z93ZJTM');
 <h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><ul>
 <li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://developers.google.com/web/updates/2018/09/inside-browser-part1">Inside look at modern web browser - Part1</a></li>
 </ul>
-</article><div><p>如果喜歡我的文章，歡迎幫我在下面按 5 下讚！感謝您的鼓勵和支持！ 😍</p><script type="text/javascript">document.write(
-"<iframe scrolling='no' frameborder='0' sandbox='allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-storage-access-by-user-activation' style='height: 212px; width: 100%;' src='https://button.like.co/in/embed/jessie75919/button?referrer=" +
-encodeURIComponent(location.href.split("?")[0].split("#")[0]) + "'></iframe>");</script></div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined" rel="external nofollow noreferrer">chan-chan-dev</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章連結: </span><span class="post-copyright-info"><a href="https://chan-chan-dev.com/Front-End/Browser/inside-browser-1/1810002848/">https://chan-chan-dev.com/Front-End/Browser/inside-browser-1/1810002848/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版權聲明: </span><span class="post-copyright-info">本部落格所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 許可協議。轉載請註明來自 <a href="https://chan-chan-dev.com" target="_blank">Chan-Chan-Dev 圈圈工程師</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Front-End/">Front-End</a><a class="post-meta__tags" href="/tags/Browser/">Browser</a></div><div class="post_share"><div class="social-share" data-image="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-1/Cover.jpg" data-sites="facebook,twitter"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/Front-End/Browser/inside-browser-2/2715917952/"><img class="prev-cover" src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-2/Cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">瀏覽器學習筆記 Part 2 - 當網址被輸入後，發生了什麼事呢？</div></div></a></div><div class="next-post pull-right"><a href="/note/Binary/binary-intro/3766688417/"><img class="next-cover" src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/binary-intro/Cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">二進位圖解入門教學</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相關推薦</span></div><div class="relatedPosts-list"><div><a href="/Front-End/Browser/inside-browser-2/2715917952/" title="瀏覽器學習筆記 Part 2 - 當網址被輸入後，發生了什麼事呢？"><img class="cover" src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-2/Cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-16</div><div class="title">瀏覽器學習筆記 Part 2 - 當網址被輸入後，發生了什麼事呢？</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目錄</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E6%83%85%E6%8F%90%E8%A6%81"><span class="toc-number">1.</span> <span class="toc-text">前情提要</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A1%8C%E7%A8%8B-Process-%E5%9F%B7%E8%A1%8C%E7%B7%92-Thread"><span class="toc-number">2.</span> <span class="toc-text">行程 (Process) &#x2F; 執行緒 (Thread)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Inter-Process-Communication-IPC"><span class="toc-number">2.1.</span> <span class="toc-text">Inter Process Communication (IPC)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%80%8F%E8%A6%BD%E5%99%A8%E6%9E%B6%E6%A7%8B"><span class="toc-number">3.</span> <span class="toc-text">瀏覽器架構</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Chrome-%E7%AF%80%E7%9C%81%E6%9B%B4%E5%A4%9A%E8%A8%98%E6%86%B6%E9%AB%94%E7%9A%84%E5%84%AA%E5%8C%96%E6%96%B9%E5%BC%8F"><span class="toc-number">3.1.</span> <span class="toc-text">Chrome 節省更多記憶體的優化方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Process-%E7%B2%97%E7%95%A5%E5%88%86%E5%B7%A5%EF%BC%9A"><span class="toc-number">3.2.</span> <span class="toc-text">Process 粗略分工：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Browser-Process"><span class="toc-number">3.2.1.</span> <span class="toc-text">Browser Process</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Renderer-Process"><span class="toc-number">3.2.2.</span> <span class="toc-text">Renderer Process</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Plugin-Process"><span class="toc-number">3.2.3.</span> <span class="toc-text">Plugin Process</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-number">3.2.4.</span> <span class="toc-text">其他</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E5%80%8B-Process-%E7%9A%84%E5%A5%BD%E8%99%95"><span class="toc-number">3.3.</span> <span class="toc-text">多個 Process 的好處</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Site-Isolation"><span class="toc-number">4.</span> <span class="toc-text">Site Isolation</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%82%BA%E4%BB%80%E9%BA%BC%E9%9C%80%E8%A6%81%E9%80%99%E5%80%8B%E5%8A%9F%E8%83%BD%E5%91%A2%EF%BC%9F-%F0%9F%A4%94"><span class="toc-number">4.1.</span> <span class="toc-text">為什麼需要這個功能呢？ 🤔</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%B5%90%E8%AB%96"><span class="toc-number">5.</span> <span class="toc-text">結論</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%83%E8%80%83"><span class="toc-number">6.</span> <span class="toc-text">參考</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By chan-chan-dev</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主題 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="閱讀模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="淺色和深色模式轉換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目錄"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到頂部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
-POWERMODE.shake = true;
-POWERMODE.mobile = false;
-document.body.addEventListener('input', POWERMODE);
-</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script>window.addEventListener('scroll', function() {if (window.pageYOffset>100 &&window.pageYOffset<300){(function(w,d, s, id) {w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = 'https://cdn.webpushr.com/app.min.js';fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BKFjvtXkP8OtFFtkqaoV0rFrRjkDe5s2g9SRI8uY2FTgaTMk0d9t-5Uwvz0yOtZjdLNtpY-E3yxlX_zoxsYtZ3A');}});</script></body></html>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Front-End/" rel="tag"># Front-End</a>
+              <a href="/tags/Browser/" rel="tag"># Browser</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Front-End/Browser/inside-browser-2/2715917952/" rel="prev" title="瀏覽器學習筆記 Part 2 - 當網址被輸入後，發生了什麼事呢？">
+      <i class="fa fa-chevron-left"></i> 瀏覽器學習筆記 Part 2 - 當網址被輸入後，發生了什麼事呢？
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/note/Binary/binary-intro/3766688417/" rel="next" title="二進位圖解入門教學">
+      二進位圖解入門教學 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E6%83%85%E6%8F%90%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">前情提要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%8C%E7%A8%8B-Process-%E5%9F%B7%E8%A1%8C%E7%B7%92-Thread"><span class="nav-number">2.</span> <span class="nav-text">行程 (Process) &#x2F; 執行緒 (Thread)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Inter-Process-Communication-IPC"><span class="nav-number">2.1.</span> <span class="nav-text">Inter Process Communication (IPC)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%80%8F%E8%A6%BD%E5%99%A8%E6%9E%B6%E6%A7%8B"><span class="nav-number">3.</span> <span class="nav-text">瀏覽器架構</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chrome-%E7%AF%80%E7%9C%81%E6%9B%B4%E5%A4%9A%E8%A8%98%E6%86%B6%E9%AB%94%E7%9A%84%E5%84%AA%E5%8C%96%E6%96%B9%E5%BC%8F"><span class="nav-number">3.1.</span> <span class="nav-text">Chrome 節省更多記憶體的優化方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Process-%E7%B2%97%E7%95%A5%E5%88%86%E5%B7%A5%EF%BC%9A"><span class="nav-number">3.2.</span> <span class="nav-text">Process 粗略分工：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Browser-Process"><span class="nav-number">3.2.1.</span> <span class="nav-text">Browser Process</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Renderer-Process"><span class="nav-number">3.2.2.</span> <span class="nav-text">Renderer Process</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Plugin-Process"><span class="nav-number">3.2.3.</span> <span class="nav-text">Plugin Process</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">3.2.4.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E5%80%8B-Process-%E7%9A%84%E5%A5%BD%E8%99%95"><span class="nav-number">3.3.</span> <span class="nav-text">多個 Process 的好處</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Site-Isolation"><span class="nav-number">4.</span> <span class="nav-text">Site Isolation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%82%BA%E4%BB%80%E9%BA%BC%E9%9C%80%E8%A6%81%E9%80%99%E5%80%8B%E5%8A%9F%E8%83%BD%E5%91%A2%EF%BC%9F-%F0%9F%A4%94"><span class="nav-number">4.1.</span> <span class="nav-text">為什麼需要這個功能呢？ 🤔</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B5%90%E8%AB%96"><span class="nav-number">5.</span> <span class="nav-text">結論</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%83%E8%80%83"><span class="nav-number">6.</span> <span class="nav-text">參考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ChanChanDev"
+      src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+  <p class="site-author-name" itemprop="name">ChanChanDev</p>
+  <div class="site-description" itemprop="description">圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">標籤</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/chanchandev" title="FaceBook → https:&#x2F;&#x2F;www.facebook.com&#x2F;chanchandev" rel="noopener external nofollow noreferrer" target="_blank"><i class="fab fa-facebook fa-fw"></i>FaceBook</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ChanChanDev</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener external nofollow noreferrer" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

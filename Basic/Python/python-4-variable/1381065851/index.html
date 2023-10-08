@@ -1,149 +1,267 @@
-<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Python 學習 4 : 變數 | Chan-Chan-Dev 圈圈工程師</title><meta name="keywords" content="Python"><meta name="author" content="chan-chan-dev"><meta name="copyright" content="chan-chan-dev"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="我們在 後端語言學習地圖 中內容中，其中有提到一個關鍵字叫做『變數』，所以我們今天就來聊聊『變數』的概念。">
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="mask-icon" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"chanchandev.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":"flat","style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="我們在 後端語言學習地圖 中內容中，其中有提到一個關鍵字叫做『變數』，所以我們今天就來聊聊『變數』的概念。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python 學習 4 : 變數">
-<meta property="og:url" content="https://chan-chan-dev.com/Basic/Python/python-4-variable/1381065851/index.html">
-<meta property="og:site_name" content="Chan-Chan-Dev 圈圈工程師">
+<meta property="og:url" content="https://chanchandev.com/Basic/Python/python-4-variable/1381065851/index.html">
+<meta property="og:site_name" content="圈圈工程師">
 <meta property="og:description" content="我們在 後端語言學習地圖 中內容中，其中有提到一個關鍵字叫做『變數』，所以我們今天就來聊聊『變數』的概念。">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://s3.ap-northeast-1.amazonaws.com/happycoding.production/post_cover/pyhton.jepg.png_1541832388png">
+<meta property="og:image" content="https://jcxcode.files.wordpress.com/2020/04/image-14.png?w=983">
+<meta property="og:image" content="https://jcxcode.files.wordpress.com/2020/04/image-15.png?w=921">
+<meta property="og:image" content="https://jcxcode.files.wordpress.com/2020/04/image-16.png?w=989">
+<meta property="og:image" content="https://jcxcode.files.wordpress.com/2020/04/image-19.png?w=949">
+<meta property="og:image" content="https://jcxcode.files.wordpress.com/2020/04/image-20.png?w=989">
+<meta property="og:image" content="https://jcxcode.files.wordpress.com/2020/04/image-21.png?w=949">
+<meta property="og:image" content="https://jcxcode.files.wordpress.com/2020/04/image-22.png?w=949">
+<meta property="og:image" content="https://jcxcode.files.wordpress.com/2020/04/image-23.png?w=949">
 <meta property="article:published_time" content="2020-04-07T15:10:29.000Z">
 <meta property="article:modified_time" content="2021-04-03T04:13:59.000Z">
-<meta property="article:author" content="chan-chan-dev">
+<meta property="article:author" content="ChanChanDev">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://s3.ap-northeast-1.amazonaws.com/happycoding.production/post_cover/pyhton.jepg.png_1541832388png"><link rel="shortcut icon" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico"><link rel="canonical" href="https://chan-chan-dev.com/Basic/Python/python-4-variable/1381065851/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-R47Z93ZJTM"></script><script>window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-R47Z93ZJTM');
-</script><script>const GLOBAL_CONFIG = { 
-  root: '/',
-  algolia: undefined,
-  localSearch: undefined,
-  translate: undefined,
-  noticeOutdate: undefined,
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
-  copy: {
-    success: '複製成功',
-    error: '複製錯誤',
-    noSupport: '瀏覽器不支援'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: '',
-  date_suffix: {
-    just: '剛剛',
-    min: '分鐘前',
-    hour: '小時前',
-    day: '天前',
-    month: '個月前'
-  },
-  copyright: {"limitCount":50,"languages":{"author":"作者: chan-chan-dev","link":"連結: ","source":"來源: Chan-Chan-Dev 圈圈工程師","info":"著作權歸作者所有。商業轉載請聯絡作者獲得授權，非商業轉載請註明出處。"}},
-  lightbox: 'fancybox',
-  Snackbar: undefined,
-  source: {
-    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
-    justifiedGallery: {
-      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
-      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
-    },
-    fancybox: {
-      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
-      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
-    }
-  },
-  isPhotoFigcaption: true,
-  islazyload: false,
-  isanchor: true
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
-  isPost: true,
-  isHome: false,
-  isHighlightShrink: false,
-  isToc: true,
-  postUpdate: '2021-04-03 12:13:59'
-}</script><noscript><style type="text/css">
-  #nav {
-    opacity: 1
-  }
-  .justified-gallery img {
-    opacity: 1
-  }
+<meta name="twitter:image" content="https://s3.ap-northeast-1.amazonaws.com/happycoding.production/post_cover/pyhton.jepg.png_1541832388png">
 
-  #recent-posts time,
-  #post-meta time {
-    display: inline !important
-  }
-</style></noscript><script>(win=>{
-    win.saveToLocal = {
-      set: function setWithExpiry(key, value, ttl) {
-        if (ttl === 0) return
-        const now = new Date()
-        const expiryDay = ttl * 86400000
-        const item = {
-          value: value,
-          expiry: now.getTime() + expiryDay,
-        }
-        localStorage.setItem(key, JSON.stringify(item))
-      },
+<link rel="canonical" href="https://chanchandev.com/Basic/Python/python-4-variable/1381065851/">
 
-      get: function getWithExpiry(key) {
-        const itemStr = localStorage.getItem(key)
 
-        if (!itemStr) {
-          return undefined
-        }
-        const item = JSON.parse(itemStr)
-        const now = new Date()
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
 
-        if (now.getTime() > item.expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return item.value
-      }
-    }
+  <title>Python 學習 4 : 變數 | 圈圈工程師</title>
   
-    win.getScript = url => new Promise((resolve, reject) => {
-      const script = document.createElement('script')
-      script.src = url
-      script.async = true
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R47Z93ZJTM"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-R47Z93ZJTM');
       }
-      document.head.appendChild(script)
-    })
-  
-      win.activateDarkMode = function () {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-        }
-      }
-      win.activateLightMode = function () {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-        }
-      }
-      const t = saveToLocal.get('theme')
+    </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">圈圈工程師</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Change Change Developer</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-back-end">
+
+    <a href="/categories/back-end/" rel="section"><i class="fas fa-rocket fa-fw"></i>Back-End</a>
+
+  </li>
+        <li class="menu-item menu-item-sharing">
+
+    <a href="/categories/sharing/" rel="section"><i class="fas fa-star fa-fw"></i>Sharing</a>
+
+  </li>
+        <li class="menu-item menu-item-reading">
+
+    <a href="/categories/reading/" rel="section"><i class="fas fa-book fa-fw"></i>Reading</a>
+
+  </li>
+        <li class="menu-item menu-item-design-pattern">
+
+    <a href="/categories/design-pattern/" rel="section"><i class="fas fa-sitemap fa-fw"></i>Design-Pattern</a>
+
+  </li>
+        <li class="menu-item menu-item-javascript">
+
+    <a href="/categories/js/" rel="section"><i class="fas fa-code fa-fw"></i>Javascript</a>
+
+  </li>
+        <li class="menu-item menu-item-分類">
+
+    <a href="/categories/" rel="section"><i class="fas fa-folder-open fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-歸檔">
+
+    <a href="/archives/" rel="section"><i class="fas fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
     
-          if (t === 'dark') activateDarkMode()
-          else if (t === 'light') activateLightMode()
-        
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        if (asideStatus === 'hide') {
-          document.documentElement.classList.add('hide-aside')
-        } else {
-          document.documentElement.classList.remove('hide-aside')
-        }
-      }
-    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">標籤</div><div class="length-num">15</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分類</div><div class="length-num">22</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/categories/back-end/"><i class="fa-fw fas fa-rocket"></i><span> Back-End</span></a></div><div class="menus_item"><a class="site-page" href="/categories/design-pattern/"><i class="fa-fw fas fas fa-sitemap"></i><span> Design-Pattern</span></a></div><div class="menus_item"><a class="site-page" href="/categories/js/"><i class="fa-fw fas fa-code"></i><span> Javascript</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分類</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 歸檔</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s3.ap-northeast-1.amazonaws.com/happycoding.production/post_cover/pyhton.jepg.png_1541832388png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Chan-Chan-Dev 圈圈工程師</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/categories/back-end/"><i class="fa-fw fas fa-rocket"></i><span> Back-End</span></a></div><div class="menus_item"><a class="site-page" href="/categories/design-pattern/"><i class="fa-fw fas fas fa-sitemap"></i><span> Design-Pattern</span></a></div><div class="menus_item"><a class="site-page" href="/categories/js/"><i class="fa-fw fas fa-code"></i><span> Javascript</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分類</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 歸檔</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Python 學習 4 : 變數</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2020-04-07T15:10:29.000Z" title="發表於 2020-04-07 23:10:29">2020-04-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2021-04-03T04:13:59.000Z" title="更新於 2021-04-03 12:13:59">2021-04-03</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Basic/">Basic</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Basic/Python/">Python</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字數總計:</span><span class="word-count">977</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">閱讀時長:</span><span>3分鐘</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">閱讀量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><img src="https://s3.ap-northeast-1.amazonaws.com/happycoding.production/post_cover/pyhton.jepg.png_1541832388png"></p>
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://chanchandev.com/Basic/Python/python-4-variable/1381065851/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+      <meta itemprop="name" content="ChanChanDev">
+      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="圈圈工程師">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python 學習 4 : 變數
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-04-07 23:10:29" itemprop="dateCreated datePublished" datetime="2020-04-07T23:10:29+08:00">2020-04-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-04-03 12:13:59" itemprop="dateModified" datetime="2021-04-03T12:13:59+08:00">2021-04-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Basic/" itemprop="url" rel="index"><span itemprop="name">Basic</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Basic/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://s3.ap-northeast-1.amazonaws.com/happycoding.production/post_cover/pyhton.jepg.png_1541832388png"></p>
 <p>我們在 <a href="/back-end/backend-map/319603614/" title="後端語言學習地圖">後端語言學習地圖</a> 中內容中，其中有提到一個關鍵字叫做『變數』，所以我們今天就來聊聊『變數』的概念。</p>
 <span id="more"></span>
 
@@ -157,25 +275,25 @@ gtag('config', 'G-R47Z93ZJTM');
 <p>這時候當你需要『Email 盒子』的這個資料的時候，你就不知道他在哪個盒子裏面，所以這時候適當的幫這些盒子標記個命名方便之後辨識取用是個好的方法。</p>
 <p><img src="https://jcxcode.files.wordpress.com/2020/04/image-16.png?w=989"></p>
 <p>那如果我們想在 Python 做到這件事情的話要怎麼做呢？</p>
-<p>my_email = “<a href="mailto:&#x6d;&#121;&#x2d;&#101;&#109;&#97;&#105;&#x6c;&#x40;&#103;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#99;&#x6f;&#109;" rel="external nofollow noreferrer">&#x6d;&#121;&#x2d;&#101;&#109;&#97;&#105;&#x6c;&#x40;&#103;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#99;&#x6f;&#109;</a>“</p>
+<p>my_email = “<a href="mailto:&#x6d;&#x79;&#45;&#x65;&#109;&#97;&#105;&#108;&#x40;&#103;&#109;&#97;&#x69;&#x6c;&#46;&#x63;&#x6f;&#109;" rel="external nofollow noreferrer">&#x6d;&#x79;&#45;&#x65;&#109;&#97;&#105;&#108;&#x40;&#103;&#109;&#97;&#x69;&#x6c;&#46;&#x63;&#x6f;&#109;</a>“</p>
 <p><img src="https://jcxcode.files.wordpress.com/2020/04/image-19.png?w=949"></p>
 <h2 id="賦值『-』"><a href="#賦值『-』" class="headerlink" title="賦值『=』"></a>賦值『=』</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my_email = <span class="string">&quot;my-email@gmail.com&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>在上面看到了一個在數學的等於符號 『<code>=』</code>，在我們數學裡的『等於』符號，在程式裏面它卻是『賦值』的意思：賦予變數資料，也就是『把左邊的資料放進去右邊的變數盒子裏面，並且將這個變數盒子命名』，所以其實就是下面這張圖的意思。</p>
 <p><img src="https://jcxcode.files.wordpress.com/2020/04/image-20.png?w=989"></p>
 <h2 id="print"><a href="#print" class="headerlink" title="print()"></a>print()</h2><p>盒子裏面有東西了之後，我們總是會有需要拿出來看的一天（不然存它幹嘛？），所以如果你想看看你 my_email 盒子裏面放什麼內容物，那你可以用 <code>print</code> 這個函數，並且在括弧裡加上變數的名稱，Python 就會告訴你盒子裏面的資料囉。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(my_email)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(my_email)</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://jcxcode.files.wordpress.com/2020/04/image-21.png?w=949"></p>
-<p>但是如果我今天換了新的 Email，想要把 my_email 的變數盒子更新爲 “<a href="mailto:&#109;&#x79;&#x2d;&#x63;&#111;&#111;&#108;&#45;&#x65;&#x6d;&#x61;&#x69;&#108;&#x40;&#103;&#x6d;&#x61;&#x69;&#108;&#x2e;&#99;&#111;&#109;" rel="external nofollow noreferrer">&#109;&#x79;&#x2d;&#x63;&#111;&#111;&#108;&#45;&#x65;&#x6d;&#x61;&#x69;&#108;&#x40;&#103;&#x6d;&#x61;&#x69;&#108;&#x2e;&#99;&#111;&#109;</a>“，那我們可以這樣做：</p>
+<p>但是如果我今天換了新的 Email，想要把 my_email 的變數盒子更新爲 “<a href="mailto:&#109;&#x79;&#x2d;&#x63;&#x6f;&#111;&#x6c;&#x2d;&#x65;&#109;&#x61;&#x69;&#x6c;&#64;&#103;&#109;&#97;&#105;&#x6c;&#46;&#x63;&#111;&#109;" rel="external nofollow noreferrer">&#109;&#x79;&#x2d;&#x63;&#x6f;&#111;&#x6c;&#x2d;&#x65;&#109;&#x61;&#x69;&#x6c;&#64;&#103;&#109;&#97;&#105;&#x6c;&#46;&#x63;&#111;&#109;</a>“，那我們可以這樣做：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my_email = <span class="string">&quot;my-cool-email@gmail.com&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p><img src="https://jcxcode.files.wordpress.com/2020/04/image-22.png?w=949"></p>
 <p>這時候我們在來看一下此刻我們的 my_email 的變數裏面是否有正確的被更新：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(my_email)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(my_email)</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://jcxcode.files.wordpress.com/2020/04/image-23.png?w=949"></p>
-<p>Python 已經告訴我們 my_email 的這個變數盒子內容已經是 『”<a href="mailto:&#x6d;&#x79;&#45;&#99;&#x6f;&#111;&#108;&#45;&#101;&#109;&#97;&#x69;&#108;&#x40;&#103;&#109;&#x61;&#105;&#x6c;&#46;&#x63;&#111;&#109;" rel="external nofollow noreferrer">&#x6d;&#x79;&#45;&#99;&#x6f;&#111;&#108;&#45;&#101;&#109;&#97;&#x69;&#108;&#x40;&#103;&#109;&#x61;&#105;&#x6c;&#46;&#x63;&#111;&#109;</a>“』 囉。</p>
+<p>Python 已經告訴我們 my_email 的這個變數盒子內容已經是 『”<a href="mailto:&#109;&#121;&#x2d;&#x63;&#111;&#111;&#108;&#45;&#x65;&#x6d;&#x61;&#x69;&#108;&#x40;&#103;&#109;&#97;&#x69;&#108;&#46;&#99;&#x6f;&#x6d;" rel="external nofollow noreferrer">&#109;&#121;&#x2d;&#x63;&#111;&#111;&#108;&#45;&#x65;&#x6d;&#x61;&#x69;&#108;&#x40;&#103;&#109;&#97;&#x69;&#108;&#46;&#99;&#x6f;&#x6d;</a>“』 囉。</p>
 <p>所以由此可知如果我們在一個變數盒子 my_email 裏面放了一個 email 資訊，如果我們再對同一個變數盒子 my_email 放新的 email 資訊，舊的那個資訊就會被洗掉覆蓋了，所以 『變數盒子會有一次只能放一個資訊，下一次在放一個新的資訊進來上一個就會不見囉』。</p>
 <p>所以會叫變數的原因就是如同上面的所呈現的，一個變數裏面的資料會一直在程式運作的過程中一直變來變去。</p>
 <p>另外還有一點是：它就是一個記憶體的存放區塊（一個盒子），可以讓開發者『暫時』地存放資料，所以這份資料是無法永久被保存的，如果記憶體沒通電資料就會消失了，所以這份資料最後還是需要會被存在某一個地方（例如：資料庫）喔。</p>
@@ -183,10 +301,207 @@ gtag('config', 'G-R47Z93ZJTM');
 <p>變數的概念就先在這邊告一個段落，剛剛有談到變數被命名才方便之後的使用，在下一個章節我們來聊聊變數該怎麼才是好的命名囉。</p>
 <p>下一章節： <a href="/Basic/Python/python-5-variable-name/2092910160/" title="Python 學習 5: 變數命名">Python 學習 5: 變數命名</a></p>
 <p>最後也感謝你的收看囉 😀。</p>
-</article><div><p>如果喜歡我的文章，歡迎幫我在下面按 5 下讚！感謝您的鼓勵和支持！ 😍</p><script type="text/javascript">document.write(
-"<iframe scrolling='no' frameborder='0' sandbox='allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-storage-access-by-user-activation' style='height: 212px; width: 100%;' src='https://button.like.co/in/embed/jessie75919/button?referrer=" +
-encodeURIComponent(location.href.split("?")[0].split("#")[0]) + "'></iframe>");</script></div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined" rel="external nofollow noreferrer">chan-chan-dev</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章連結: </span><span class="post-copyright-info"><a href="https://chan-chan-dev.com/Basic/Python/python-4-variable/1381065851/">https://chan-chan-dev.com/Basic/Python/python-4-variable/1381065851/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版權聲明: </span><span class="post-copyright-info">本部落格所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 許可協議。轉載請註明來自 <a href="https://chan-chan-dev.com" target="_blank">Chan-Chan-Dev 圈圈工程師</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a></div><div class="post_share"><div class="social-share" data-image="https://s3.ap-northeast-1.amazonaws.com/happycoding.production/post_cover/pyhton.jepg.png_1541832388png" data-sites="facebook,twitter"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/Basic/Python/python-5-variable-name/2092910160/"><img class="prev-cover" src="https://s3.ap-northeast-1.amazonaws.com/happycoding.production/post_cover/pyhton.jepg.png_1541832388png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Python 學習 5: 變數命名</div></div></a></div><div class="next-post pull-right"><a href="/Basic/Python/python-3-type/3256133090/"><img class="next-cover" src="https://s3.ap-northeast-1.amazonaws.com/happycoding.production/post_cover/pyhton.jepg.png_1541832388png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Python 學習 3 : 資料型別</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相關推薦</span></div><div class="relatedPosts-list"><div><a href="/Basic/Python/python-5-variable-name/2092910160/" title="Python 學習 5: 變數命名"><img class="cover" src="https://s3.ap-northeast-1.amazonaws.com/happycoding.production/post_cover/pyhton.jepg.png_1541832388png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-09</div><div class="title">Python 學習 5: 變數命名</div></div></a></div><div><a href="/Basic/Python/python-3-type/3256133090/" title="Python 學習 3 : 資料型別"><img class="cover" src="https://s3.ap-northeast-1.amazonaws.com/happycoding.production/post_cover/pyhton.jepg.png_1541832388png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-05</div><div class="title">Python 學習 3 : 資料型別</div></div></a></div><div><a href="/Basic/Python/python-2-interact-with-python/2447585378/" title="Python 學習 2 : 與 Python 互動"><img class="cover" src="https://s3.ap-northeast-1.amazonaws.com/happycoding.production/post_cover/pyhton.jepg.png_1541832388png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-05</div><div class="title">Python 學習 2 : 與 Python 互動</div></div></a></div><div><a href="/Basic/Python/python-1-install-python/2164399402/" title="Python 學習 1 : 安裝 Python"><img class="cover" src="https://s3.ap-northeast-1.amazonaws.com/happycoding.production/post_cover/pyhton.jepg.png_1541832388png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-04</div><div class="title">Python 學習 1 : 安裝 Python</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目錄</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B3%A6%E5%80%BC%E3%80%8E-%E3%80%8F"><span class="toc-number">1.</span> <span class="toc-text">賦值『&#x3D;』</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#print"><span class="toc-number">2.</span> <span class="toc-text">print()</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By chan-chan-dev</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主題 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="閱讀模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="淺色和深色模式轉換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目錄"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到頂部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
-POWERMODE.shake = true;
-POWERMODE.mobile = false;
-document.body.addEventListener('input', POWERMODE);
-</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script>window.addEventListener('scroll', function() {if (window.pageYOffset>100 &&window.pageYOffset<300){(function(w,d, s, id) {w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = 'https://cdn.webpushr.com/app.min.js';fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BKFjvtXkP8OtFFtkqaoV0rFrRjkDe5s2g9SRI8uY2FTgaTMk0d9t-5Uwvz0yOtZjdLNtpY-E3yxlX_zoxsYtZ3A');}});</script></body></html>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Basic/Python/python-5-variable-name/2092910160/" rel="prev" title="Python 學習 5: 變數命名">
+      <i class="fa fa-chevron-left"></i> Python 學習 5: 變數命名
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/Basic/Python/python-3-type/3256133090/" rel="next" title="Python 學習 3 : 資料型別">
+      Python 學習 3 : 資料型別 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B3%A6%E5%80%BC%E3%80%8E-%E3%80%8F"><span class="nav-number">1.</span> <span class="nav-text">賦值『&#x3D;』</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#print"><span class="nav-number">2.</span> <span class="nav-text">print()</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ChanChanDev"
+      src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+  <p class="site-author-name" itemprop="name">ChanChanDev</p>
+  <div class="site-description" itemprop="description">圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">標籤</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/chanchandev" title="FaceBook → https:&#x2F;&#x2F;www.facebook.com&#x2F;chanchandev" rel="noopener external nofollow noreferrer" target="_blank"><i class="fab fa-facebook fa-fw"></i>FaceBook</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ChanChanDev</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener external nofollow noreferrer" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

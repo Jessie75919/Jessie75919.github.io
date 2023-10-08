@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="mask-icon" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"chanchandev.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":"flat","style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="要提升一個工程師的競爭力，英文是極其被重視的技能，而單字又是英文的基礎，但對於金魚腦的我單字就像過江之鯽一下就忘，因此有了 ChanChan Memory 一個基於遺忘曲線的週期性複習小工具的誕生。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="專屬金魚腦的背單字小工具? ChanChan Memory">
+<meta property="og:url" content="https://chanchandev.com/side-project/chanchanmemory-intro/1876543875/index.html">
+<meta property="og:site_name" content="圈圈工程師">
+<meta property="og:description" content="要提升一個工程師的競爭力，英文是極其被重視的技能，而單字又是英文的基礎，但對於金魚腦的我單字就像過江之鯽一下就忘，因此有了 ChanChan Memory 一個基於遺忘曲線的週期性複習小工具的誕生。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/chanchanmemory-intro/forget_curve.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/chanchanmemory-intro/forget_curve_review.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/chanchanmemory-intro/pages_1.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/chanchanmemory-intro/pages_2.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/chanchanmemory-intro/study_page.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/chanchanmemory-intro/object_relationship.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/chanchanmemory-intro/object_relationship.png">
+<meta property="article:published_time" content="2021-09-09T15:09:06.000Z">
+<meta property="article:modified_time" content="2022-12-11T01:54:33.891Z">
+<meta property="article:author" content="ChanChanDev">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Django">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/chanchanmemory-intro/forget_curve.png">
+
+<link rel="canonical" href="https://chanchandev.com/side-project/chanchanmemory-intro/1876543875/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>專屬金魚腦的背單字小工具? ChanChan Memory | 圈圈工程師</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R47Z93ZJTM"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-R47Z93ZJTM');
+      }
+    </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">圈圈工程師</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Change Change Developer</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-back-end">
+
+    <a href="/categories/back-end/" rel="section"><i class="fas fa-rocket fa-fw"></i>Back-End</a>
+
+  </li>
+        <li class="menu-item menu-item-sharing">
+
+    <a href="/categories/sharing/" rel="section"><i class="fas fa-star fa-fw"></i>Sharing</a>
+
+  </li>
+        <li class="menu-item menu-item-reading">
+
+    <a href="/categories/reading/" rel="section"><i class="fas fa-book fa-fw"></i>Reading</a>
+
+  </li>
+        <li class="menu-item menu-item-design-pattern">
+
+    <a href="/categories/design-pattern/" rel="section"><i class="fas fa-sitemap fa-fw"></i>Design-Pattern</a>
+
+  </li>
+        <li class="menu-item menu-item-javascript">
+
+    <a href="/categories/js/" rel="section"><i class="fas fa-code fa-fw"></i>Javascript</a>
+
+  </li>
+        <li class="menu-item menu-item-分類">
+
+    <a href="/categories/" rel="section"><i class="fas fa-folder-open fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-歸檔">
+
+    <a href="/archives/" rel="section"><i class="fas fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://chanchandev.com/side-project/chanchanmemory-intro/1876543875/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+      <meta itemprop="name" content="ChanChanDev">
+      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="圈圈工程師">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          專屬金魚腦的背單字小工具? ChanChan Memory
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-09-09 23:09:06" itemprop="dateCreated datePublished" datetime="2021-09-09T23:09:06+08:00">2021-09-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2022-12-11 09:54:33" itemprop="dateModified" datetime="2022-12-11T09:54:33+08:00">2022-12-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/side-project/" itemprop="url" rel="index"><span itemprop="name">side-project</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">要提升一個工程師的競爭力，英文是極其被重視的技能，而單字又是英文的基礎，但對於金魚腦的我單字就像過江之鯽一下就忘，因此有了 ChanChan Memory 一個基於遺忘曲線的週期性複習小工具的誕生。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>要提升一個工程師的競爭力，英文是極其被重視的技能，而單字又是英文的基礎，但對於金魚腦的我單字就像過江之鯽一下就忘，因此有了 ChanChan Memory 一個基於遺忘曲線的週期性複習小工具的誕生。</p>
+<span id="more"></span>
+
+<div class="note success simple">
+            <p>HIHI～😍  如果你是第一次來的話，『Chan-Chan-Dev』是一個專門用簡單的圖文與故事講解網路程式技術的網站。若你也喜歡用這種方式學習的話，歡迎加入 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.facebook.com/chanchandev">Chan-Chan-Dev Facebook</a> 的粉絲團，在發佈的時候就有比較多機會收到通知喔！😍</p>
+          </div>
+
+<h1 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h1><p>我們都知道要提升一個工程師的競爭力，<span style="background: rgb(230,252,155); padding: 0 2px"><strong>英文</strong></span>是一個極其被重視的技能，因爲這關係到我們是否可以跟上國外最新的技術、能不能在 Stack Overflow 上找到問題的解答、更甚至關係到有沒有機會在外商公司得到 Offer 。</p>
+<p>英文裡最重要的又是<span style="background: rgb(230,252,155); padding: 0 2px"><strong>單字</strong></span>。</p>
+<p>但不曉得大家有沒有跟金魚腦一樣的我遇到總是單字背了就忘的困擾？😭 😭 😭</p>
+<p>因此自己一直尋找著解決這個問題的方法，直到自己得知了<a target="_blank" rel="noopener external nofollow noreferrer" href="https://zh.wikipedia.org/wiki/%E9%81%97%E5%BF%98%E6%9B%B2%E7%BA%BF">遺忘曲線</a>的概念。</p>
+<p>關於遺忘曲線的實際內容<a target="_blank" rel="noopener external nofollow noreferrer" href="https://zh.wikipedia.org/wiki/%E9%81%97%E5%BF%98%E6%9B%B2%E7%BA%BF">維基百科</a>講的比我詳細 100 倍，但用我金魚腦的翻譯就是：</p>
+<div class="note info simple">
+            <p>我們剛學習的內容會隨著時間的推移，很快地就遺忘掉一大部分 😭 😭 😭 😭</p><p>依據<a target="_blank" rel="noopener external nofollow noreferrer" href="https://zh.wikipedia.org/wiki/%E9%81%97%E5%BF%98%E6%9B%B2%E7%BA%BF">維基百科</a>上的資料可能會呈現這樣子的遺忘趨勢。</p><p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/chanchanmemory-intro/forget_curve.png" alt="圖片來源：https://toments.com/1504944/"></p><table><thead><tr><th></th><th></th><th></th></tr></thead><tbody><tr><td>20分鐘後</td><td>42%被遺忘掉</td><td>58%被記住</td></tr><tr><td>1小時後</td><td>56%被遺忘掉</td><td>44%被記住</td></tr><tr><td>1天後</td><td>74%被遺忘掉</td><td>26%被記住</td></tr><tr><td>1周後</td><td>77%被遺忘掉</td><td>23%被記住</td></tr><tr><td>1個月後</td><td>79%被遺忘掉</td><td>21%被記住</td></tr></tbody></table>
+          </div>
+
+<br>
+
+<p>原來我的金魚腦是有科學根據的！！😅</p>
+<p>因此避免上述遺忘趨勢的方法也許就只能進行所謂的<span style="background: rgb(230,252,155); padding: 0 2px"><strong>週期複習</strong></span></p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/chanchanmemory-intro/forget_curve_review.png" alt="圖片來源：https://memobank.pixnet.net/blog/post/24950161"></p>
+<p>也許我們學一個單字後，在一個小時後複習一次，在一天後複習一次，一週後複習一次，一個月後在複習一次，每一次的複習都會讓原本已經被遺忘的記憶得到提升，進而進入長期記憶。</p>
+<p>但是我自己力行的結果是，如果只背一次單字後就不再繼續背新的單字似乎還滿可行的，但是如果一天背新的 10 個，第二天又背新的 10 個，又要複習第一天的，第三天繼續背新的 10 個，又要繼續複習第二天的，到了第七天後又要背新的 10 個加上第一天的 … </p>
+<p>到最後其實自己有點難追蹤到底要哪個單字該要在哪個時間點複習，搞得我好亂阿！！ 😭 😭 😭 </p>
+<p>因此有了 ChanChan Memory 的誕生。</p>
+<h1 id="什麼是-ChanChan-Memory"><a href="#什麼是-ChanChan-Memory" class="headerlink" title="什麼是 ChanChan Memory"></a>什麼是 ChanChan Memory</h1><p>ChanChan Memory 是基於遺忘曲線所沿伸的週期複習小工具 😆</p>
+<h2 id="功能與頁面需求"><a href="#功能與頁面需求" class="headerlink" title="功能與頁面需求"></a>功能與頁面需求</h2><p>身爲這個工具的唯一使用者，預期這個小工具可以：</p>
+<ul>
+<li>使用者需要登入才可以使用</li>
+<li>使用者打開一個單字列表，將今天需要看到的單字顯示在上面，只要很單純地針對這些單字複習即可，不需要去管理這些單字到底下次什麼時候會在出現。</li>
+<li>使用者可以針對單字複習，系統依據使用者回覆對這個單字熟悉程度，決定下次顯示的時間。</li>
+</ul>
+<p>因此針對這個需求可能需要以下的頁面與功能：</p>
+<ul>
+<li>登入頁面<ul>
+<li>使用者登入功能</li>
+</ul>
+</li>
+<li>新增單字頁面<ul>
+<li>新增單字</li>
+</ul>
+</li>
+<li>瀏覽現有單字頁面<ul>
+<li>今日單字、本週單字、本月單字</li>
+<li>刪除、修改單字</li>
+</ul>
+</li>
+<li>複習單字頁面<ul>
+<li>更新單字學習記憶</li>
+</ul>
+</li>
+</ul>
+<p>因爲自己的使用情境可能會更常在手機裝置使用，因此只有製作手機版的頁面 😆</p>
+<p>頁面的使用流程如下：</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/chanchanmemory-intro/pages_1.png"></p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/chanchanmemory-intro/pages_2.png"></p>
+<br>
+
+<h2 id="單字下次顯示邏輯"><a href="#單字下次顯示邏輯" class="headerlink" title="單字下次顯示邏輯"></a>單字下次顯示邏輯</h2><p>基於維基百科提供的時機點，我做了一點簡單的調整：</p>
+<p>例如我今天新增一個單字 <span style="background: rgb(230,252,155); padding: 0 2px"><strong>hypnosis</strong></span>，它會經歷以下的學習流程：</p>
+<ul>
+<li>Level 1：在 <strong>hypnosis</strong> 被新增後，<span style="background: rgb(230,252,155); padding: 0 2px"><strong>馬上</strong></span>就可以在今日單字清單看到</li>
+<li>Level 2：在 <strong>hypnosis</strong> 上一次複習後的<span style="background: rgb(230,252,155); padding: 0 2px"><strong>1 小時</strong></span>會出現在今日單字</li>
+<li>Level 3：在 <strong>hypnosis</strong> 上一次複習後的<span style="background: rgb(230,252,155); padding: 0 2px"><strong>8 小時</strong></span>會再次出現在今日單字</li>
+<li>Level 4：在 <strong>hypnosis</strong> 上一次複習後的<span style="background: rgb(230,252,155); padding: 0 2px"><strong>24 小時</strong></span>會再次出現在今日單字</li>
+<li>Level 5：在 <strong>hypnosis</strong> 上一次複習後的<span style="background: rgb(230,252,155); padding: 0 2px"><strong>7 天</strong></span>會再次出現在今日單字</li>
+<li>Level 6：在 <strong>hypnosis</strong> 上一次複習後的 <span style="background: rgb(230,252,155); padding: 0 2px"><strong>1 個月</strong></span>會再次出現在今日單字</li>
+</ul>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/chanchanmemory-intro/study_page.png"></p>
+<p>當然因爲複習單字頁面有提供三個選項給使用者回答：<strong>Easy</strong>、<strong>Blurry</strong>、<strong>Forget</strong>。</p>
+<p>如果使用者對 <strong>hypnosis</strong> 選擇了：</p>
+<ul>
+<li>選擇 <strong>Easy</strong> 就會進入到下一個 Level 的狀態</li>
+<li>選擇 <strong>Blurry</strong> 代表可能還沒那麼熟，那不會針對 Level 狀態調整，會繼續在隔天顯示一次</li>
+<li>選擇 <strong>Forget</strong> 代表可能完全忘記了，因此會跳回上一個 Level </li>
+</ul>
+<p>以上大概就是針對 ChanChan Memory 的簡單介紹，接下來要來聊聊開發時的一些細節囉 🙂</p>
+<hr>
+<h1 id="專案使用技術"><a href="#專案使用技術" class="headerlink" title="專案使用技術"></a>專案使用技術</h1><h3 id="後端"><a href="#後端" class="headerlink" title="後端"></a>後端</h3><ul>
+<li>語言：Python / Django / Rest Framework / </li>
+<li>資料庫：MySQL</li>
+<li>Web Server：Nignx</li>
+</ul>
+<h3 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h3><ul>
+<li>Javascript / Vue / Vuex / Router</li>
+<li>Vuetify</li>
+</ul>
+<h1 id="Vue-Vuetify"><a href="#Vue-Vuetify" class="headerlink" title="Vue / Vuetify"></a>Vue / Vuetify</h1><p>因爲這次主要想快速開發個 Prototype，因此就沒有特別在設計畫面了。</p>
+<p>也剛好之前就有聽過 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://vuetifyjs.com/en/">Vuetify</a> 只是一直沒機會使用，Vuetify 已經提供了很多已經完成的 Component，可以套上就可以快速得到 70 分的效果，所以這次就用它撐一下視覺吧 😆</p>
+<h1 id="Django-與-Vue-開發整合"><a href="#Django-與-Vue-開發整合" class="headerlink" title="Django 與 Vue 開發整合"></a>Django 與 Vue 開發整合</h1><p>這次的後端是用 Python 與他的小夥伴 Django 完成的，後端以 API 跟前端進行溝通。</p>
+<p>一般前後端分離的做法通常都需要兩個網址（後端 API 一個，前端網頁一個），在這次開發的過程中思考著有沒有機會讓 Vue Build 出來的 Asset 就直接放在 Django 的 static 資料夾內被讀取，這樣就可以直接用一個網址完成（其實是我懶的用兩個網址這樣 😆）</p>
+<p>研究了一下剛好在網路上找到了這個教學影片 《<a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.youtube.com/watch?v=3eTtVY7duJk">Django Vue.js Integration for Production | Django casts</a> 》，有興趣的大大可以參考一下囉。</p>
+<h1 id="資料物件關係"><a href="#資料物件關係" class="headerlink" title="資料物件關係"></a>資料物件關係</h1><p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/chanchanmemory-intro/object_relationship.png"></p>
+<p>原本想用 <strong>word</strong> 與 <strong>meaning</strong> 來作爲 table 與 class 的名稱，但想想還是決定用更爲抽象的 <span style="background: rgb(230,252,155); padding: 0 2px"><strong>quetsion</strong></span> 與 <span style="background: rgb(230,252,155); padding: 0 2px"><strong>answer</strong></span> 來命名，也許因爲問與答的組合也可以用在非單字以外的用途，只是剛好這個專案自己目前是用來學習記錄單字罷了。</p>
+<p>一個 <span style="background: rgb(230,252,155); padding: 0 2px"><strong>quetsion</strong></span> 可以有多個 <span style="background: rgb(230,252,155); padding: 0 2px"><strong>answer</strong></span>，雖然目前只暫時用到一個，但至少保留了擴充的可能性。</p>
+<p>另外拆出 Stage Table 記錄每個 Level 需要增加的時間。</p>
+<table>
+<thead>
+<tr>
+<th align="center">id</th>
+<th align="center">level</th>
+<th align="center">time_amount</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">2</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">3</td>
+<td align="center">8</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">4</td>
+<td align="center">24</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">5</td>
+<td align="center">144</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">6</td>
+<td align="center">480</td>
+</tr>
+</tbody></table>
+<p>這樣子未來若希望再繼續增加下一個 Level 或者是更改每一個 Level 的時間就相對方便一些囉。</p>
+<h1 id="隱藏敏感資料"><a href="#隱藏敏感資料" class="headerlink" title="隱藏敏感資料"></a>隱藏敏感資料</h1><p>因爲長期用 Laravel 開發，所以很多設定都被自己以爲理所當然，例如環境變數設定的 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://laravel.com/docs/8.x/configuration">Configuration</a>，可以用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/vlucas/phpdotenv">DotEnv</a> 脫離版本控制。</p>
+<p>因此當自己把資料庫從 sqlite3 轉到 MySQL 的時候就發現，MySQL 的帳號密碼居然是要放在 <span style="background: rgb(230,252,155); padding: 0 2px"><strong>settings.py</strong></span> 的檔案裡，這個檔案會跟著 git 一起進入版本控制，因此感覺超級不對勁的！😭</p>
+<p>還好自己不是孤單的，有好心的大大開發  <strong><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/henriquebastos/python-decouple">python-decouple</a></strong> 讓我可以把這些需要隱藏的環境變數放在 <span style="background: rgb(230,252,155); padding: 0 2px"><strong>.env</strong></span> 檔 😆</p>
+<h1 id="假資料"><a href="#假資料" class="headerlink" title="假資料"></a>假資料</h1><p>因爲在 Laravel 開發的時候習慣先快速地產生一些假資料做 API 的測試，在 Laravel 有 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://laravel.com/docs/8.x/database-testing#defining-model-factories">Model Factory</a>，可以快速用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://laravel.com/docs/8.x/seeding#introduction">Seeder</a> 或者是 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://laravel.com/docs/8.x/artisan#introduction">Artisan Command</a> 執行產生資料。</p>
+<p>因此如果完成一樣的效果，自己使用了幾個套件輔助：</p>
+<ul>
+<li><strong><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/Brobin/django-seed">django-seed</a></strong> 針對 Model 設定快速產出假資料</li>
+<li> <strong><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/joke2k/faker">faker</a></strong> 產生隨機資料內容</li>
+</ul>
+<p>然後撰寫 Django 的 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.djangoproject.com/en/3.2/howto/custom-management-commands/">Custom Command</a> 執行產生假資料。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> django.core.management.base <span class="keyword">import</span> BaseCommand, CommandError</span><br><span class="line"><span class="keyword">from</span> django_seed <span class="keyword">import</span> Seed</span><br><span class="line"><span class="keyword">from</span> apis.models <span class="keyword">import</span> Question, Stage, Answer</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Command</span>(<span class="title class_ inherited__">BaseCommand</span>):</span><br><span class="line">    <span class="built_in">help</span> = <span class="string">&#x27;To Generate dummy data&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">add_arguments</span>(<span class="params">self, parser</span>):</span><br><span class="line">        parser.add_argument(<span class="string">&#x27;count&#x27;</span>, nargs=<span class="string">&#x27;+&#x27;</span>, <span class="built_in">type</span>=<span class="built_in">int</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">handle</span>(<span class="params">self, *args, **options</span>):</span><br><span class="line">        count = options[<span class="string">&#x27;count&#x27;</span>][<span class="number">0</span>]</span><br><span class="line">        seeder = Seed.seeder()</span><br><span class="line">        seeder.add_entity(Question, count, &#123;</span><br><span class="line">            <span class="string">&#x27;content&#x27;</span>: <span class="keyword">lambda</span> _: seeder.faker.text(),</span><br><span class="line">            <span class="string">&#x27;stage&#x27;</span>: <span class="keyword">lambda</span> _: Stage.objects.get(pk=random.randint(<span class="number">1</span>, <span class="number">6</span>)),</span><br><span class="line">            <span class="string">&#x27;next_show_at&#x27;</span>: <span class="keyword">lambda</span> _: seeder.faker.date_between(start_date=<span class="string">&#x27;-30d&#x27;</span>, end_date=<span class="string">&#x27;+30d&#x27;</span>),</span><br><span class="line">            <span class="string">&#x27;last_seen_at&#x27;</span>: <span class="keyword">lambda</span> _: seeder.faker.date_between(start_date=<span class="string">&#x27;-30d&#x27;</span>, end_date=<span class="string">&#x27;today&#x27;</span>),</span><br><span class="line">            <span class="string">&#x27;completed_at&#x27;</span>: <span class="keyword">lambda</span> _: <span class="literal">None</span></span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">        seeder.add_entity(Answer, count, &#123;</span><br><span class="line">            <span class="string">&#x27;content&#x27;</span>: <span class="keyword">lambda</span> _: seeder.faker.text(),</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">        seeder.execute()</span><br><span class="line"></span><br><span class="line">        self.stdout.write(self.style.SUCCESS(<span class="string">&#x27;Count Num is &quot;%s&quot;&#x27;</span> % options[<span class="string">&#x27;count&#x27;</span>]))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h1 id="Serializers"><a href="#Serializers" class="headerlink" title="Serializers"></a>Serializers</h1><p>因爲後端主要是純 API 的關係，所以選擇了好像滿多人使用的 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.django-rest-framework.org/">Django REST framework</a>。</p>
+<p>其中滿重要的功能就是 <strong><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.django-rest-framework.org/api-guide/serializers/">Serializer</a></strong> 。它是負責資料傳輸到前端的時候對於資料格式的整理，就像是 Laravel 的 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://laravel.com/docs/8.x/eloquent-resources">API Resources</a> 的功能，但此外又結合了 Validation 的功能！真是令我驚呼還可以這樣子使用，更多時候如果將 Serializer 繼承 <span style="background: rgb(230,252,155); padding: 0 2px"><strong>serializers.ModelSerializer</strong></span> 的話，幾乎不用寫太多的 code 就可以完成了，就可以在基於 Model 上設定的條件做 Validation 了，也太方便了！😀</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">AnswerSerializer</span>(serializers.ModelSerializer):  </span><br><span class="line">   <span class="keyword">class</span> <span class="title class_">Meta</span>:  </span><br><span class="line">     model = Answer  </span><br><span class="line">        fields = (<span class="string">&#x27;id&#x27;</span>, <span class="string">&#x27;content&#x27;</span>, <span class="string">&#x27;created_at&#x27;</span>, <span class="string">&#x27;update_at&#x27;</span>,)</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="優化-Database-Query"><a href="#優化-Database-Query" class="headerlink" title="優化 Database Query"></a>優化 Database Query</h1><p>在 Laravel 有 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://laravel.com/docs/8.x/eloquent-relationships#eager-loading">Eager Loading</a> 避免 <span style="background: rgb(230,252,155); padding: 0 2px"><strong>N + 1</strong></span> 的問題。</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/chanchanmemory-intro/object_relationship.png"></p>
+<p>因爲在設置的物件關聯裡，當使用者要取得一組 <span style="background: rgb(230,252,155); padding: 0 2px"><strong>question</strong></span> 的時候，會因爲在 Serializer 設定的關係一起去取得 <span style="background: rgb(230,252,155); padding: 0 2px"><strong>anwser</strong></span>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">QuestionSerializer</span>(serializers.ModelSerializer):</span><br><span class="line">    answers = AnswerSerializer(many=<span class="literal">True</span>, required=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Meta</span>:</span><br><span class="line">        model = Question</span><br><span class="line">        fields = <span class="string">&#x27;__all__&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+<p>因此在 Django 若想優化 Database 的 Query 可以使用 QuerySet 的 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.djangoproject.com/en/3.2/ref/models/querysets/#select-related">select_related()</a> 或者是 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.djangoproject.com/en/3.2/ref/models/querysets/#prefetch-related">prefetch_related()</a> 來達到減少 Database Query 的效果。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">query_question</span>(<span class="params">user, begin, end</span>):</span><br><span class="line">    <span class="keyword">return</span> Question.objects.<span class="built_in">filter</span>(</span><br><span class="line">        user=user,</span><br><span class="line">        completed_at__isnull=<span class="literal">True</span>,</span><br><span class="line">        next_show_at__range=(begin, end)</span><br><span class="line">    ).prefetch_related(<span class="string">&#x27;answers&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h1 id="JSON-Web-Token-Authentication"><a href="#JSON-Web-Token-Authentication" class="headerlink" title="JSON Web Token Authentication"></a>JSON Web Token Authentication</h1><p>在身份驗證的部分，因爲想要使用<a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.django-rest-framework.org/api-guide/authentication/#json-web-token-authentication">JSON Web Token Authentication</a> 的方式，因此使用官方推薦的 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/davesque/django-rest-framework-simplejwt">djangorestframework-simplejwt</a> 外掛。</p>
+<p>這個外掛預設的情況下是以 <strong>username</strong> 作爲帳號，但是我不知道為什麼就很習慣用 <strong>Email</strong> 當帳號，因此找到了找到了某位大大寫的<a target="_blank" rel="noopener external nofollow noreferrer" href="https://medium.com/%E6%89%8B%E5%AF%AB%E7%AD%86%E8%A8%98/django-rest-framework-simplejwt-login-with-email-and-password-bb9fd2d918f8">技術文章</a>完成以 Email 作爲帳號的設置。</p>
+<p>另外因爲使用 JSON Web Token 需要處理 <span style="background: rgb(230,252,155); padding: 0 2px"><strong>access_token</strong></span> 過期而需要用 <span style="background: rgb(230,252,155); padding: 0 2px"><strong>refresh_token</strong></span> 更新的問題，網路上也有大大寫了這篇很棒的<a target="_blank" rel="noopener external nofollow noreferrer" href="https://dotblogs.com.tw/wasichris/2020/10/25/223728">文章</a>可以參考。</p>
+<p>因此目前的做法也是等到發生 <span style="background: rgb(230,252,155); padding: 0 2px"><strong>401</strong></span> 錯誤的時候，用 <span style="background: rgb(230,252,155); padding: 0 2px"><strong>refresh_token</strong></span> 再去更新一次 <span style="background: rgb(230,252,155); padding: 0 2px"><strong>access_token</strong></span> 後，再將原本因爲 401 而錯誤的請求重新發送一次。</p>
+<h1 id="Deploy"><a href="#Deploy" class="headerlink" title="Deploy"></a>Deploy</h1><p>因爲前後端分離的關係，因此每次要佈版就需要先在前端執行 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure>
+
+<p>然後在把 build 完的內容加入後端的 git 版本控制，自己實在太懶得每次都要手動完成，因此寫了一隻小小的 Deploy bash script 完成這件事情。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash  </span></span><br><span class="line">  </span><br><span class="line"><span class="built_in">cd</span> ../frontend/ || <span class="built_in">exit</span>  </span><br><span class="line">npm run build  </span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Assets are Built !&quot;</span>  </span><br><span class="line">  </span><br><span class="line"><span class="built_in">cd</span> ../backend/ || <span class="built_in">exit</span>  </span><br><span class="line">git add static/ templates/  </span><br><span class="line">git commit -m <span class="string">&quot;build: build for production for deployment&quot;</span>  </span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Git commit added !&quot;</span>  </span><br><span class="line">  </span><br><span class="line">git push  </span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Git push done&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p>Django 在 Server 上的 Deploy 設置從<a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.djangoproject.com/en/3.2/howto/deployment/">官網</a>上看起來好像有滿多選擇的。</p>
+<p>因爲在原本的 Digital Ocean 的機器上就已經有 Nignx 了，因此還是傾向繼續用 Nignx 到 Django 的這個流程。</p>
+<p>只是以前在 PHP 用的是 PHP-FPM。那 Python 呢？那就是用 <strong><a target="_blank" rel="noopener external nofollow noreferrer" href="https://uwsgi.readthedocs.io/en/latest/tutorials/Django_and_nginx.html#concept">WSGI</a></strong> 囉。</p>
+<p>因此請求的流程會如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user &lt;---&gt; Nignx &lt;---&gt; uWSGI &lt;---&gt; Django Project</span><br></pre></td></tr></table></figure>
+
+<p>在官網裡提供了這篇很棒的<a target="_blank" rel="noopener external nofollow noreferrer" href="https://uwsgi.readthedocs.io/en/latest/tutorials/Django_and_nginx.html">教學文章</a>可以跟著一起設置，就可以一步步地跟著將完成的專案架設在 Server 上囉。</p>
+<p>簡單來說就是藉由 uWSGI 在背景開一個 Socket，就可以在 Nginx 設定：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">upstream</span> django &#123;</span><br><span class="line">    <span class="attribute">server</span> unix:///path/to/your/mysite/mysite.sock; <span class="comment"># 👈 Here</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span>      <span class="number">8000</span>;</span><br><span class="line">    <span class="attribute">server_name</span> example.com; <span class="comment"># substitute your machine&#x27;s IP address or FQDN</span></span><br><span class="line">    <span class="attribute">charset</span>     utf-<span class="number">8</span>;</span><br><span class="line"></span><br><span class="line">    <span class="section">location</span> /static &#123;</span><br><span class="line">        <span class="attribute">alias</span> /path/to/your/mysite/static; </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">uwsgi_pass</span>  django; <span class="comment"># 👈 Put Here</span></span><br><span class="line">        <span class="attribute">include</span>     /path/to/your/mysite/uwsgi_params; <span class="comment"># the uwsgi_params file you installed</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>至於怎麼生出這個 Socket 呢？可以簡單地新增自己的 <code>uwsgi.ini</code></p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># uwsgi.ini file</span></span><br><span class="line"><span class="section">[uwsgi]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Django-related settings</span></span><br><span class="line"><span class="comment"># the base directory (full path)</span></span><br><span class="line"><span class="attr">chdir</span>           = /path/to/your/project</span><br><span class="line"><span class="comment"># Django&#x27;s wsgi file</span></span><br><span class="line"><span class="attr">module</span>          = project.wsgi</span><br><span class="line"><span class="comment"># the virtualenv (full path)</span></span><br><span class="line"><span class="attr">home</span>            = /path/to/virtualenv</span><br><span class="line"></span><br><span class="line"><span class="comment"># process-related settings</span></span><br><span class="line"><span class="comment"># master</span></span><br><span class="line"><span class="attr">master</span>          = <span class="literal">true</span></span><br><span class="line"><span class="comment"># maximum number of worker processes</span></span><br><span class="line"><span class="attr">processes</span>       = <span class="number">10</span></span><br><span class="line"><span class="comment"># the socket (use the full path to be safe</span></span><br><span class="line"><span class="attr">socket</span>          = /path/to/your/project/mysite.sock</span><br><span class="line"><span class="comment"># ... with appropriate permissions - may be needed</span></span><br><span class="line"><span class="comment"># chmod-socket  = 664</span></span><br><span class="line"><span class="comment"># clear environment on exit</span></span><br><span class="line"><span class="attr">vacuum</span>          = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>然後再執行以下指令就可以囉。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uwsgi --ini uwsgi.ini </span><br></pre></td></tr></table></figure>
+
+
+<p>但其中有一個設定有點困擾我</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># the virtualenv (full path)</span></span><br><span class="line"><span class="attr">home</span>            = /path/to/virtualenv</span><br></pre></td></tr></table></figure>
+
+<p>因爲自己是使用 <span style="background: rgb(230,252,155); padding: 0 2px"><strong>pipenv</strong></span>，但是網路上看到的很多都是使用 virtualenv 的用法得到這個資料夾，所以自己還真的不知道用 pipenv 的話，這個值需要放什麼 😭</p>
+<p>後來才發現執行 <code>pipenv shell</code> 會得到一個路徑，結果這個路徑就是問題的解答囉。</p>
+<h1 id="後記"><a href="#後記" class="headerlink" title="後記"></a>後記</h1><p>呼！簡單地把開發完比較有記憶點的內容簡單記錄一下，這也是自己的第一個 Django 小專案，也在開發過程或解 Bug 中學習到了滿多的，在中間發現自己對於 QuerySet 似乎還有很多需要學習的地方。</p>
+<p>這篇文章的記錄的成分居多，如果你居然有看到這裡的話，真的是十分感謝你的捧場！</p>
+<p>若文章的內容有錯誤的地方，也歡迎隨時一起討論交流。😘</p>
+<p>最後感謝你的閱讀囉，我們下次見！Bye ～</p>
+<hr>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/Django/" rel="tag"># Django</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Cafe/yuki-coffee/3870946320/" rel="prev" title="雪咖啡 Yuki Coffee">
+      <i class="fa fa-chevron-left"></i> 雪咖啡 Yuki Coffee
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/side-project/chanchanweight-intro/1130968268/" rel="next" title="圈圈•量量初登場！一起來記錄身體狀態吧！">
+      圈圈•量量初登場！一起來記錄身體狀態吧！ <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E6%83%85%E6%8F%90%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">前情提要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF-ChanChan-Memory"><span class="nav-number">2.</span> <span class="nav-text">什麼是 ChanChan Memory</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E8%88%87%E9%A0%81%E9%9D%A2%E9%9C%80%E6%B1%82"><span class="nav-number">2.1.</span> <span class="nav-text">功能與頁面需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%96%AE%E5%AD%97%E4%B8%8B%E6%AC%A1%E9%A1%AF%E7%A4%BA%E9%82%8F%E8%BC%AF"><span class="nav-number">2.2.</span> <span class="nav-text">單字下次顯示邏輯</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%88%E6%A1%88%E4%BD%BF%E7%94%A8%E6%8A%80%E8%A1%93"><span class="nav-number">3.</span> <span class="nav-text">專案使用技術</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%8C%E7%AB%AF"><span class="nav-number">3.0.1.</span> <span class="nav-text">後端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF"><span class="nav-number">3.0.2.</span> <span class="nav-text">前端</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue-Vuetify"><span class="nav-number">4.</span> <span class="nav-text">Vue &#x2F; Vuetify</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Django-%E8%88%87-Vue-%E9%96%8B%E7%99%BC%E6%95%B4%E5%90%88"><span class="nav-number">5.</span> <span class="nav-text">Django 與 Vue 開發整合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B3%87%E6%96%99%E7%89%A9%E4%BB%B6%E9%97%9C%E4%BF%82"><span class="nav-number">6.</span> <span class="nav-text">資料物件關係</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9A%B1%E8%97%8F%E6%95%8F%E6%84%9F%E8%B3%87%E6%96%99"><span class="nav-number">7.</span> <span class="nav-text">隱藏敏感資料</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%81%87%E8%B3%87%E6%96%99"><span class="nav-number">8.</span> <span class="nav-text">假資料</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Serializers"><span class="nav-number">9.</span> <span class="nav-text">Serializers</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%84%AA%E5%8C%96-Database-Query"><span class="nav-number">10.</span> <span class="nav-text">優化 Database Query</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JSON-Web-Token-Authentication"><span class="nav-number">11.</span> <span class="nav-text">JSON Web Token Authentication</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Deploy"><span class="nav-number">12.</span> <span class="nav-text">Deploy</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BE%8C%E8%A8%98"><span class="nav-number">13.</span> <span class="nav-text">後記</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ChanChanDev"
+      src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+  <p class="site-author-name" itemprop="name">ChanChanDev</p>
+  <div class="site-description" itemprop="description">圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">標籤</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/chanchandev" title="FaceBook → https:&#x2F;&#x2F;www.facebook.com&#x2F;chanchandev" rel="noopener external nofollow noreferrer" target="_blank"><i class="fab fa-facebook fa-fw"></i>FaceBook</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ChanChanDev</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener external nofollow noreferrer" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
