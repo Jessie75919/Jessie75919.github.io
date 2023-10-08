@@ -30,13 +30,6 @@
   </url>
   
   <url>
-    <loc>https://chanchandev.com/Cafe/yuki-coffee/3870946320/</loc>
-    
-    <lastmod>2023-10-07</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://chanchandev.com/design-pattern/Strategy/Strategy%20%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/2415029893/</loc>
     
     <lastmod>2023-10-07</lastmod>
@@ -242,13 +235,6 @@
 
   
   <url>
-    <loc>https://chanchandev.com/tags/Cafe/</loc>
-    <lastmod>2023-10-08</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://chanchandev.com/tags/Javascript/</loc>
     <lastmod>2023-10-08</lastmod>
     <changefreq>daily</changefreq>
@@ -277,7 +263,7 @@
   </url>
   
   <url>
-    <loc>https://chanchandev.com/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/</loc>
+    <loc>https://chanchandev.com/tags/Softwares/</loc>
     <lastmod>2023-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -291,7 +277,7 @@
   </url>
   
   <url>
-    <loc>https://chanchandev.com/tags/Softwares/</loc>
+    <loc>https://chanchandev.com/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/</loc>
     <lastmod>2023-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -312,14 +298,14 @@
   </url>
   
   <url>
-    <loc>https://chanchandev.com/tags/%E4%BA%8C%E9%80%B2%E4%BD%8D/</loc>
+    <loc>https://chanchandev.com/tags/Hexo/</loc>
     <lastmod>2023-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://chanchandev.com/tags/Hexo/</loc>
+    <loc>https://chanchandev.com/tags/%E4%BA%8C%E9%80%B2%E4%BD%8D/</loc>
     <lastmod>2023-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -334,13 +320,6 @@
   
   <url>
     <loc>https://chanchandev.com/tags/github-actions/</loc>
-    <lastmod>2023-10-08</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://chanchandev.com/tags/side-project/</loc>
     <lastmod>2023-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -368,6 +347,13 @@
   </url>
   
   <url>
+    <loc>https://chanchandev.com/tags/side-project/</loc>
+    <lastmod>2023-10-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://chanchandev.com/tags/Backend/</loc>
     <lastmod>2023-10-08</lastmod>
     <changefreq>daily</changefreq>
@@ -383,6 +369,20 @@
   
   <url>
     <loc>https://chanchandev.com/tags/Cache/</loc>
+    <lastmod>2023-10-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://chanchandev.com/tags/Front-End/</loc>
+    <lastmod>2023-10-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://chanchandev.com/tags/Browser/</loc>
     <lastmod>2023-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -409,28 +409,7 @@
     <priority>0.6</priority>
   </url>
   
-  <url>
-    <loc>https://chanchandev.com/tags/Front-End/</loc>
-    <lastmod>2023-10-08</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://chanchandev.com/tags/Browser/</loc>
-    <lastmod>2023-10-08</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
 
-  
-  <url>
-    <loc>https://chanchandev.com/categories/Cafe/</loc>
-    <lastmod>2023-10-08</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
   
   <url>
     <loc>https://chanchandev.com/categories/js/</loc>
@@ -454,14 +433,14 @@
   </url>
   
   <url>
-    <loc>https://chanchandev.com/categories/Sharing/</loc>
+    <loc>https://chanchandev.com/categories/Softwares/</loc>
     <lastmod>2023-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://chanchandev.com/categories/Softwares/</loc>
+    <loc>https://chanchandev.com/categories/Sharing/</loc>
     <lastmod>2023-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -482,13 +461,6 @@
   </url>
   
   <url>
-    <loc>https://chanchandev.com/categories/side-project/</loc>
-    <lastmod>2023-10-08</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://chanchandev.com/categories/Readability/</loc>
     <lastmod>2023-10-08</lastmod>
     <changefreq>daily</changefreq>
@@ -496,7 +468,7 @@
   </url>
   
   <url>
-    <loc>https://chanchandev.com/categories/Sharing/%E5%A6%82%E6%9E%9C%E6%97%A9%E7%9F%A5%E9%81%93/</loc>
+    <loc>https://chanchandev.com/categories/side-project/</loc>
     <lastmod>2023-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -510,21 +482,14 @@
   </url>
   
   <url>
+    <loc>https://chanchandev.com/categories/Sharing/%E5%A6%82%E6%9E%9C%E6%97%A9%E7%9F%A5%E9%81%93/</loc>
+    <lastmod>2023-10-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://chanchandev.com/categories/HTTP/</loc>
-    <lastmod>2023-10-08</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://chanchandev.com/categories/js/Async/</loc>
-    <lastmod>2023-10-08</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://chanchandev.com/categories/js/Function/</loc>
     <lastmod>2023-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -545,7 +510,14 @@
   </url>
   
   <url>
-    <loc>https://chanchandev.com/categories/Basic/</loc>
+    <loc>https://chanchandev.com/categories/js/Async/</loc>
+    <lastmod>2023-10-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://chanchandev.com/categories/js/Function/</loc>
     <lastmod>2023-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -559,7 +531,7 @@
   </url>
   
   <url>
-    <loc>https://chanchandev.com/categories/design-pattern/SRP/</loc>
+    <loc>https://chanchandev.com/categories/Basic/</loc>
     <lastmod>2023-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -573,7 +545,7 @@
   </url>
   
   <url>
-    <loc>https://chanchandev.com/categories/note/Binary/</loc>
+    <loc>https://chanchandev.com/categories/design-pattern/SRP/</loc>
     <lastmod>2023-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -587,6 +559,13 @@
   </url>
   
   <url>
+    <loc>https://chanchandev.com/categories/note/Binary/</loc>
+    <lastmod>2023-10-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://chanchandev.com/categories/note/Github-Action/</loc>
     <lastmod>2023-10-08</lastmod>
     <changefreq>daily</changefreq>
@@ -594,7 +573,7 @@
   </url>
   
   <url>
-    <loc>https://chanchandev.com/categories/HTTP/Cache/</loc>
+    <loc>https://chanchandev.com/categories/back-end/Session/</loc>
     <lastmod>2023-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -608,7 +587,7 @@
   </url>
   
   <url>
-    <loc>https://chanchandev.com/categories/back-end/Session/</loc>
+    <loc>https://chanchandev.com/categories/HTTP/Cache/</loc>
     <lastmod>2023-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
