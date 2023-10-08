@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="mask-icon" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"chanchandev.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":"flat","style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="State 設計模式是一種行爲設計模式，只要內部的狀態改變時，就會改變外部的行爲">
+<meta property="og:type" content="article">
+<meta property="og:title" content="State 設計模式">
+<meta property="og:url" content="https://chanchandev.com/design-pattern/State/state-design-pattern/1543189824/index.html">
+<meta property="og:site_name" content="圈圈工程師">
+<meta property="og:description" content="State 設計模式是一種行爲設計模式，只要內部的狀態改變時，就會改變外部的行爲">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/state-design-pattern/uml.png">
+<meta property="article:published_time" content="2023-10-08T02:03:01.000Z">
+<meta property="article:modified_time" content="2023-10-08T11:44:14.224Z">
+<meta property="article:author" content="ChanChanDev">
+<meta property="article:tag" content="設計模式">
+<meta property="article:tag" content="Design-Pattern">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/state-design-pattern/uml.png">
+
+<link rel="canonical" href="https://chanchandev.com/design-pattern/State/state-design-pattern/1543189824/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>State 設計模式 | 圈圈工程師</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R47Z93ZJTM"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-R47Z93ZJTM');
+      }
+    </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">圈圈工程師</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Change Change Developer</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-back-end">
+
+    <a href="/categories/back-end/" rel="section"><i class="fas fa-rocket fa-fw"></i>Back-End</a>
+
+  </li>
+        <li class="menu-item menu-item-sharing">
+
+    <a href="/categories/sharing/" rel="section"><i class="fas fa-star fa-fw"></i>Sharing</a>
+
+  </li>
+        <li class="menu-item menu-item-reading">
+
+    <a href="/categories/reading/" rel="section"><i class="fas fa-book fa-fw"></i>Reading</a>
+
+  </li>
+        <li class="menu-item menu-item-design-pattern">
+
+    <a href="/categories/design-pattern/" rel="section"><i class="fas fa-sitemap fa-fw"></i>Design-Pattern</a>
+
+  </li>
+        <li class="menu-item menu-item-javascript">
+
+    <a href="/categories/js/" rel="section"><i class="fas fa-code fa-fw"></i>Javascript</a>
+
+  </li>
+        <li class="menu-item menu-item-分類">
+
+    <a href="/categories/" rel="section"><i class="fas fa-folder-open fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-歸檔">
+
+    <a href="/archives/" rel="section"><i class="fas fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://chanchandev.com/design-pattern/State/state-design-pattern/1543189824/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+      <meta itemprop="name" content="ChanChanDev">
+      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="圈圈工程師">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          State 設計模式
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2023-10-08 10:03:01 / 修改時間：19:44:14" itemprop="dateCreated datePublished" datetime="2023-10-08T10:03:01+08:00">2023-10-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/design-pattern/" itemprop="url" rel="index"><span itemprop="name">Design-Pattern</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/design-pattern/State/" itemprop="url" rel="index"><span itemprop="name">State</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">State 設計模式是一種行爲設計模式，只要內部的狀態改變時，就會改變外部的行爲</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>在好久之前有寫過一篇文章上介紹 <a href="./design-pattern/Strategy/Strategy%20%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/2415029893">Strategy 設計模式</a>的，但那時候還不清楚它與 State  設計模式有什麼不同。</p>
+<p>它們其實很像，但根據 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://refactoringguru.cn/design-patterns/strategy">Refactoring Guru</a> 的解釋，Strategy 與 State 最大的差別是在與：</p>
+<blockquote>
+<ul>
+<li>Strategy 彼此之間的<strong>策略對象是完全獨立，它們並不會知道彼此存在</strong> ，就像是在 <a href="./design-pattern/Strategy/Strategy%20%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/2415029893">Strategy 設計模式</a> 大衛的女朋友們</li>
+<li>State 沒有限制這些狀態對象之間的依賴關係</li>
+</ul>
+</blockquote>
+<h1 id="State-設計模式是什麼？"><a href="#State-設計模式是什麼？" class="headerlink" title="State 設計模式是什麼？"></a>State 設計模式是什麼？</h1><p>State 設計模式是一種行爲設計模式，只要內部的狀態改變時，就會改變外部的行爲</p>
+<h1 id="沒有使用-State-設計模式會怎麼樣嗎？-🤯"><a href="#沒有使用-State-設計模式會怎麼樣嗎？-🤯" class="headerlink" title="沒有使用 State 設計模式會怎麼樣嗎？ 🤯"></a>沒有使用 State 設計模式會怎麼樣嗎？ 🤯</h1><p>這次一樣用個故事來瞭解 State 設計模式的使用方式，這次要講的是人格分裂的湯姆的故事。</p>
+<p><strong>湯姆角色設定</strong><br>湯姆從小發現自己擁有三個人格，分別是：</p>
+<ul>
+<li>外向人格</li>
+<li>自閉人格</li>
+<li>暴力人格</li>
+</ul>
+<p>因此不同人格的特質就會顯示在湯姆的這幾個行爲上：</p>
+<ul>
+<li>吃飯</li>
+<li>跟朋友聚會</li>
+<li>睡覺</li>
+</ul>
+<p>對了，這三個人格會在湯姆睡著時輪班。</p>
+<p><strong>人格彼此間的私怨</strong></p>
+<ul>
+<li>「外向人格」討厭「自閉人格」，因此只會把控制權交給「暴力人格」</li>
+<li>「自閉人格」也討厭「外向人格」，因此只會把控制權交給「暴力人格」</li>
+<li>「暴力人格」跟「外向人格」、「內向人格」都沒有恩怨，所以輪班的時候就會隨機把控制權跟任一個</li>
+</ul>
+<p><strong>三種人格行爲</strong><br>外向人格的行爲：</p>
+<ul>
+<li>吃飯：去 Buffet ～ 🍕</li>
+<li>跟朋友聚會：跟一大群朋友開心聊天到時間</li>
+<li>睡覺：輪班：明天換暴力傾向人格上班了</li>
+</ul>
+<p>自閉人格的行爲：</p>
+<ul>
+<li>吃飯：我都沒有朋友，吃什麼，餓死算了。。😮‍💨</li>
+<li>跟朋友聚會：朋友是什麼？我想空氣就是我最好的朋友。。。</li>
+<li>睡覺：輪班：恩。。明天換暴力傾向人格了。。。</li>
+</ul>
+<p>暴力人格的行爲：</p>
+<ul>
+<li>吃飯：吃飯總是吃到翻桌！🤬</li>
+<li>跟朋友聚會：沒跟朋友打起來才叫人意外！</li>
+<li>睡覺：隨便選一個啦！</li>
+</ul>
+<h1 id="沒有-State-設計模式的程式碼"><a href="#沒有-State-設計模式的程式碼" class="headerlink" title="沒有 State 設計模式的程式碼"></a>沒有 State 設計模式的程式碼</h1><p><em>以下用 golang 作爲範例</em></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;math/rand&quot;</span></span><br><span class="line">	<span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	OutgoingCharacterType = <span class="literal">iota</span></span><br><span class="line">	ASDCharacterType</span><br><span class="line">	ViolenceTendencyCharacterType</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Tom <span class="keyword">struct</span> &#123;</span><br><span class="line">	character <span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *Tom)</span></span> eating() &#123;</span><br><span class="line">	<span class="comment">// 如果外向人格</span></span><br><span class="line">	<span class="keyword">if</span> m.character == OutgoingCharacterType &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;外向人格 - 吃飯：去 Buffet ～&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 如果是自閉人格</span></span><br><span class="line">	<span class="keyword">if</span> m.character == ASDCharacterType &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;自閉人格 - 吃飯：我都沒有朋友，吃什麼，餓死算了。。&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 如果是暴力人格</span></span><br><span class="line">	<span class="keyword">if</span> m.character == ViolenceTendencyCharacterType &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;暴力傾向人格 - 吃飯：吃飯總是吃到翻桌！&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *Tom)</span></span> gatherWithFriends() &#123;</span><br><span class="line">	<span class="comment">// 如果外向人格</span></span><br><span class="line">	<span class="keyword">if</span> m.character == OutgoingCharacterType &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;外向人格 - 跟朋友相聚：跟一大群朋友開心聊天到時間&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 如果是自閉人格</span></span><br><span class="line">	<span class="keyword">if</span> m.character == ASDCharacterType &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;自閉人格 - 跟朋友相聚：朋友是什麼？我想空氣就是我最好的朋友。。。&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 如果是暴力人格</span></span><br><span class="line">	<span class="keyword">if</span> m.character == ViolenceTendencyCharacterType &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;暴力傾向人格 - 跟朋友相聚：沒跟朋友打起來才叫人意外！&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *Tom)</span></span> sleeping() &#123;</span><br><span class="line">	<span class="comment">// 如果外向人格</span></span><br><span class="line">	<span class="keyword">if</span> m.character == OutgoingCharacterType &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;外向人格 - 輪班：明天換暴力傾向人格上班了&quot;</span>)</span><br><span class="line">		m.changedCharacter(ViolenceTendencyCharacterType)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 如果是自閉人格</span></span><br><span class="line">	<span class="keyword">if</span> m.character == ASDCharacterType &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;自閉人格 - 輪班：恩。。明天換暴力傾向人格了。。。&quot;</span>)</span><br><span class="line">		m.changedCharacter(ViolenceTendencyCharacterType)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 如果是暴力人格</span></span><br><span class="line">	<span class="keyword">if</span> m.character == ViolenceTendencyCharacterType &#123;</span><br><span class="line">		<span class="comment">// 隨便選出下一個</span></span><br><span class="line">		characters := []<span class="type">int</span>&#123;OutgoingCharacterType, ASDCharacterType&#125;</span><br><span class="line">		rand.Seed(time.Now().UnixNano())</span><br><span class="line">		i := rand.Intn(<span class="number">2</span>)</span><br><span class="line">		next := characters[i]</span><br><span class="line">		<span class="keyword">if</span> next == OutgoingCharacterType &#123;</span><br><span class="line">			fmt.Println(<span class="string">&quot;暴力傾向人格 - 輪班：明天居然是外向人格，嘖嘖&quot;</span>)</span><br><span class="line">			m.changedCharacter(next)</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> next == ASDCharacterType &#123;</span><br><span class="line">			fmt.Println(<span class="string">&quot;暴力傾向人格 - 輪班：哼，明天居然是那個懦弱的自閉人格！嘖嘖！&quot;</span>)</span><br><span class="line">			m.changedCharacter(next)</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *Tom)</span></span> changedCharacter(c <span class="type">int</span>) &#123;</span><br><span class="line">	m.character = c</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	tom := &amp;Tom&#123;character: OutgoingCharacterType&#125;</span><br><span class="line">	fmt.Println(<span class="string">&quot;第 1 天&quot;</span>)</span><br><span class="line">	tom.eating()</span><br><span class="line">	tom.gatherWithFriends()</span><br><span class="line">	tom.sleeping()</span><br><span class="line">	fmt.Println(<span class="string">&quot;第 2 天&quot;</span>)</span><br><span class="line">	tom.eating()</span><br><span class="line">	tom.gatherWithFriends()</span><br><span class="line">	tom.sleeping()</span><br><span class="line">	fmt.Println(<span class="string">&quot;第 3 天&quot;</span>)</span><br><span class="line">	tom.eating()</span><br><span class="line">	tom.gatherWithFriends()</span><br><span class="line">	tom.sleeping()</span><br><span class="line">	fmt.Println(<span class="string">&quot;第 4 天&quot;</span>)</span><br><span class="line">	tom.eating()</span><br><span class="line">	tom.gatherWithFriends()</span><br><span class="line">	tom.sleeping()</span><br><span class="line">	fmt.Println(<span class="string">&quot;第 5 天&quot;</span>)</span><br><span class="line">	tom.eating()</span><br><span class="line">	tom.gatherWithFriends()</span><br><span class="line">	tom.sleeping()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">第 <span class="number">1</span> 天</span><br><span class="line">外向人格 - 吃飯：去 Buffet ～</span><br><span class="line">外向人格 - 跟朋友相聚：跟一大群朋友開心聊天到時間</span><br><span class="line">外向人格 - 輪班：明天換暴力傾向人格上班了</span><br><span class="line">第 <span class="number">2</span> 天</span><br><span class="line">暴力傾向人格 - 吃飯：吃飯總是吃到翻桌！</span><br><span class="line">暴力傾向人格 - 跟朋友相聚：沒跟朋友打起來才叫人意外！</span><br><span class="line">暴力傾向人格 - 輪班：明天居然是外向人格，嘖嘖</span><br><span class="line">第 <span class="number">3</span> 天</span><br><span class="line">外向人格 - 吃飯：去 Buffet ～</span><br><span class="line">外向人格 - 跟朋友相聚：跟一大群朋友開心聊天到時間</span><br><span class="line">外向人格 - 輪班：明天換暴力傾向人格上班了</span><br><span class="line">第 <span class="number">4</span> 天</span><br><span class="line">暴力傾向人格 - 吃飯：吃飯總是吃到翻桌！</span><br><span class="line">暴力傾向人格 - 跟朋友相聚：沒跟朋友打起來才叫人意外！</span><br><span class="line">暴力傾向人格 - 輪班：哼，明天居然是那個懦弱的自閉人格！嘖嘖！</span><br><span class="line">第 <span class="number">5</span> 天</span><br><span class="line">自閉人格 - 吃飯：我都沒有朋友，吃什麼，餓死算了。。</span><br><span class="line">自閉人格 - 跟朋友相聚：朋友是什麼？我想空氣就是我最好的朋友。。。</span><br><span class="line">自閉人格 - 輪班：恩。。明天換暴力傾向人格了。。。</span><br><span class="line">暴力傾向人格 - 輪班：明天居然是外向人格，嘖嘖</span><br></pre></td></tr></table></figure>
+
+<h2 id="問題：判斷式因爲不同的狀態而增加-🥲"><a href="#問題：判斷式因爲不同的狀態而增加-🥲" class="headerlink" title="問題：判斷式因爲不同的狀態而增加 🥲"></a>問題：判斷式因爲不同的狀態而增加 🥲</h2><p>上面的問題跟 <a href="./design-pattern/Strategy/Strategy%20%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/2415029893">Strategy 設計模式</a> 差不多，都會因爲狀態而增加。</p>
+<p>用這個例子來看，湯姆目前只有分裂成三個人格（狀態），每個行爲的內容又很單純，因此看起來好像還可以接受；然而如果隨著人格（狀態）的增加與行爲變得複雜，那就會很難以維護了 🤯</p>
+<p>因此我們就看看看 State 可以怎麼改善這個問題吧！</p>
+<h1 id="State-Pattern-組成"><a href="#State-Pattern-組成" class="headerlink" title="State Pattern 組成"></a>State Pattern 組成</h1><table>
+<thead>
+<tr>
+<th>成員</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Context (interface）</td>
+<td>一個介面外部持有狀態的載體，可以改變狀態</td>
+</tr>
+<tr>
+<td>ConcreteContext</td>
+<td>實作 Context 介面，以這個故事來說就是湯姆</td>
+</tr>
+<tr>
+<td>State (interface)</td>
+<td>一個介面，用來封裝不同狀態所對應的行爲</td>
+</tr>
+<tr>
+<td>ConcreteState</td>
+<td>實作 State 介面，以故事來說就是不同的人格</td>
+</tr>
+</tbody></table>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/state-design-pattern/uml.png" alt="UML"></p>
+<p>我們來看一下套用 State 設計模式後的調整吧～</p>
+<p>建立 Context interface</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Context interface</span></span><br><span class="line"><span class="keyword">type</span> Boy <span class="keyword">interface</span> &#123;</span><br><span class="line">	eating()</span><br><span class="line">	gatherWithFriends()</span><br><span class="line">	sleeping()</span><br><span class="line">	changedCharacter(c Character)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>建立 Context 實作（湯姆）</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Context implementation - Tom</span></span><br><span class="line"><span class="keyword">type</span> TomBoy <span class="keyword">struct</span> &#123;</span><br><span class="line">	character Character</span><br><span class="line">	day       <span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *TomBoy)</span></span> eating() &#123;</span><br><span class="line">	m.character.eating()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *TomBoy)</span></span> gatherWithFriends() &#123;</span><br><span class="line">	m.character.gatherWithFriends()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *TomBoy)</span></span> sleeping() &#123;</span><br><span class="line">	m.character.sleeping()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *TomBoy)</span></span> changedCharacter(c Character) &#123;</span><br><span class="line">	m.day += <span class="number">1</span></span><br><span class="line">	m.character = c</span><br><span class="line">	fmt.Printf(<span class="string">&quot;第 %v 天 ================ \n&quot;</span>, m.day)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>建立 State 的 interface（人格）</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// State interface</span></span><br><span class="line"><span class="keyword">type</span> Character <span class="keyword">interface</span> &#123;</span><br><span class="line">	eating()</span><br><span class="line">	gatherWithFriends()</span><br><span class="line">	sleeping()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>建立 State 的 interface（不同的人格）</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// State implementation - 外向</span></span><br><span class="line"><span class="keyword">type</span> OutgoingCharacter <span class="keyword">struct</span> &#123;</span><br><span class="line">	boy Boy</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *OutgoingCharacter)</span></span> eating() &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;外向人格 - 吃飯：去 Buffet ～&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *OutgoingCharacter)</span></span> gatherWithFriends() &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;外向人格 - 跟朋友相聚：跟一大群朋友開心聊天到時間&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *OutgoingCharacter)</span></span> sleeping() &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;外向人格 - 輪班：明天換暴力傾向人格上班了&quot;</span>)</span><br><span class="line">	c.boy.changedCharacter(&amp;ViolenceTendencyCharacter&#123;boy: c.boy&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// state implementation - 自閉</span></span><br><span class="line"><span class="keyword">type</span> ASDCharacter <span class="keyword">struct</span> &#123;</span><br><span class="line">	boy Boy</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *ASDCharacter)</span></span> eating() &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;自閉人格 - 吃飯：我都沒有朋友，吃什麼，餓死算了。。&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *ASDCharacter)</span></span> gatherWithFriends() &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;自閉人格 - 跟朋友相聚：朋友是什麼？我想空氣就是我最好的朋友。。。&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *ASDCharacter)</span></span> sleeping() &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;自閉人格 - 輪班：恩。。明天換暴力傾向人格了。。。&quot;</span>)</span><br><span class="line">	c.boy.changedCharacter(&amp;ViolenceTendencyCharacter&#123;boy: c.boy&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// state implementation - 暴力傾向</span></span><br><span class="line"><span class="keyword">type</span> ViolenceTendencyCharacter <span class="keyword">struct</span> &#123;</span><br><span class="line">	boy Boy</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *ViolenceTendencyCharacter)</span></span> eating() &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;暴力傾向人格 - 吃飯：吃飯總是吃到翻桌！&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *ViolenceTendencyCharacter)</span></span> gatherWithFriends() &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;暴力傾向人格 - 跟朋友相聚：沒跟朋友打起來才叫人意外！&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *ViolenceTendencyCharacter)</span></span> sleeping() &#123;</span><br><span class="line">	next := nextCharactor()</span><br><span class="line">	<span class="keyword">if</span> next == OutgoingCharacterType &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;暴力傾向人格 - 輪班：明天居然是外向人格，嘖嘖&quot;</span>)</span><br><span class="line">		c.boy.changedCharacter(&amp;OutgoingCharacter&#123;boy: c.boy&#125;)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> next == ASDCharacterType &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;暴力傾向人格 - 輪班：哼，居然是那個懦弱的自閉人格，真是看不習慣！&quot;</span>)</span><br><span class="line">		c.boy.changedCharacter(&amp;ASDCharacter&#123;boy: c.boy&#125;)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>套用 State 設計模式的完整程式碼</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;math/rand&quot;</span></span><br><span class="line">	<span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	OutgoingCharacterType = <span class="literal">iota</span></span><br><span class="line">	ASDCharacterType</span><br><span class="line">	ViolenceTendencyCharacterType</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">nextCharactor</span><span class="params">()</span></span> <span class="type">int</span> &#123;</span><br><span class="line">	characters := []<span class="type">int</span>&#123;OutgoingCharacterType, ASDCharacterType&#125;</span><br><span class="line">	rand.Seed(time.Now().UnixNano())</span><br><span class="line">	i := rand.Intn(<span class="number">2</span>)</span><br><span class="line">	<span class="keyword">return</span> characters[i]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// State interface</span></span><br><span class="line"><span class="keyword">type</span> Character <span class="keyword">interface</span> &#123;</span><br><span class="line">	eating()</span><br><span class="line">	gatherWithFriends()</span><br><span class="line">	sleeping()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// State implementation - 外向</span></span><br><span class="line"><span class="keyword">type</span> OutgoingCharacter <span class="keyword">struct</span> &#123;</span><br><span class="line">	boy Boy</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *OutgoingCharacter)</span></span> eating() &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;外向人格 - 吃飯：去 Buffet ～&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *OutgoingCharacter)</span></span> gatherWithFriends() &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;外向人格 - 跟朋友相聚：跟一大群朋友開心聊天到時間&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *OutgoingCharacter)</span></span> sleeping() &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;外向人格 - 輪班：明天換暴力傾向人格上班了&quot;</span>)</span><br><span class="line">	c.boy.changedCharacter(&amp;ViolenceTendencyCharacter&#123;boy: c.boy&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// state implementation - 自閉</span></span><br><span class="line"><span class="keyword">type</span> ASDCharacter <span class="keyword">struct</span> &#123;</span><br><span class="line">	boy Boy</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *ASDCharacter)</span></span> eating() &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;自閉人格 - 吃飯：我都沒有朋友，吃什麼，餓死算了。。&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *ASDCharacter)</span></span> gatherWithFriends() &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;自閉人格 - 跟朋友相聚：朋友是什麼？我想空氣就是我最好的朋友。。。&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *ASDCharacter)</span></span> sleeping() &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;自閉人格 - 輪班：恩。。明天換暴力傾向人格了。。。&quot;</span>)</span><br><span class="line">	c.boy.changedCharacter(&amp;ViolenceTendencyCharacter&#123;boy: c.boy&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// state implementation - 暴力傾向</span></span><br><span class="line"><span class="keyword">type</span> ViolenceTendencyCharacter <span class="keyword">struct</span> &#123;</span><br><span class="line">	boy Boy</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *ViolenceTendencyCharacter)</span></span> eating() &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;暴力傾向人格 - 吃飯：吃飯總是吃到翻桌！&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *ViolenceTendencyCharacter)</span></span> gatherWithFriends() &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;暴力傾向人格 - 跟朋友相聚：沒跟朋友打起來才叫人意外！&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *ViolenceTendencyCharacter)</span></span> sleeping() &#123;</span><br><span class="line">	next := nextCharactor()</span><br><span class="line">	<span class="keyword">if</span> next == OutgoingCharacterType &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;暴力傾向人格 - 輪班：明天居然是外向人格，嘖嘖&quot;</span>)</span><br><span class="line">		c.boy.changedCharacter(&amp;OutgoingCharacter&#123;boy: c.boy&#125;)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> next == ASDCharacterType &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;暴力傾向人格 - 輪班：哼，居然是那個懦弱的自閉人格，真是看不習慣！&quot;</span>)</span><br><span class="line">		c.boy.changedCharacter(&amp;ASDCharacter&#123;boy: c.boy&#125;)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Context interface</span></span><br><span class="line"><span class="keyword">type</span> Boy <span class="keyword">interface</span> &#123;</span><br><span class="line">	eating()</span><br><span class="line">	gatherWithFriends()</span><br><span class="line">	sleeping()</span><br><span class="line">	changedCharacter(c Character)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Context implementation - Tom</span></span><br><span class="line"><span class="keyword">type</span> TomBoy <span class="keyword">struct</span> &#123;</span><br><span class="line">	character Character</span><br><span class="line">	day       <span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *TomBoy)</span></span> eating() &#123;</span><br><span class="line">	m.character.eating()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *TomBoy)</span></span> gatherWithFriends() &#123;</span><br><span class="line">	m.character.gatherWithFriends()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *TomBoy)</span></span> sleeping() &#123;</span><br><span class="line">	m.character.sleeping()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *TomBoy)</span></span> changedCharacter(c Character) &#123;</span><br><span class="line">	m.day += <span class="number">1</span></span><br><span class="line">	m.character = c</span><br><span class="line">	fmt.Printf(<span class="string">&quot;第 %v 天 ================ \n&quot;</span>, m.day)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">	tomBoy := &amp;TomBoy&#123;&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 第 1 天</span></span><br><span class="line">	tomBoy.character = &amp;OutgoingCharacter&#123;boy: tomBoy&#125; <span class="comment">// 從外向人格開始</span></span><br><span class="line">	tomBoy.eating()</span><br><span class="line">	tomBoy.gatherWithFriends()</span><br><span class="line">	tomBoy.sleeping()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 第 2 天</span></span><br><span class="line">	tomBoy.eating()</span><br><span class="line">	tomBoy.gatherWithFriends()</span><br><span class="line">	tomBoy.sleeping()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 第 3 天</span></span><br><span class="line">	tomBoy.eating()</span><br><span class="line">	tomBoy.gatherWithFriends()</span><br><span class="line">	tomBoy.sleeping()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 第 4 天</span></span><br><span class="line">	tomBoy.eating()</span><br><span class="line">	tomBoy.gatherWithFriends()</span><br><span class="line">	tomBoy.sleeping()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 第 5 天</span></span><br><span class="line">	tomBoy.eating()</span><br><span class="line">	tomBoy.gatherWithFriends()</span><br><span class="line">	tomBoy.sleeping()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用 State 設計模式後，我們可以看到在 Tom 的 method 裏，已經去除了針對不同狀態判斷的一大堆 <code>if</code> 的判斷，變成直接呼叫內部的 state 相對應的 method 去執行：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Before</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *Tom)</span></span> eating() &#123;</span><br><span class="line">	<span class="comment">// 如果外向人格</span></span><br><span class="line">	<span class="keyword">if</span> m.character == OutgoingCharacterType &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;外向人格 - 吃飯：去 Buffet ～&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 如果是自閉人格</span></span><br><span class="line">	<span class="keyword">if</span> m.character == ASDCharacterType &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;自閉人格 - 吃飯：我都沒有朋友，吃什麼，餓死算了。。&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 如果是暴力人格</span></span><br><span class="line">	<span class="keyword">if</span> m.character == ViolenceTendencyCharacterType &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;暴力傾向人格 - 吃飯：吃飯總是吃到翻桌！&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// After</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *TomBoy)</span></span> eating() &#123;</span><br><span class="line">	m.character.eating()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果有新的人格（狀態）要增加的話，我們只需要在新增一個有實作 <code>Character</code> 介面的人格（狀態），在需要切換的時候執行 <code>changedCharacter</code> 替換就可以執行了，就不用在調整 Tom 類別內的程式碼囉！</p>
+<p>比起在一堆 <code>if</code> 的情況想辦法再新增一個 <code>if</code> 去增加判斷，我想使用 State 設計模式的方式更好維護 🙂</p>
+<h1 id="State-設計模式優缺點"><a href="#State-設計模式優缺點" class="headerlink" title="State 設計模式優缺點"></a>State 設計模式優缺點</h1><h2 id="優點"><a href="#優點" class="headerlink" title="優點"></a>優點</h2><ul>
+<li>🎉 單一職責原則，把各自不同的 State 放在各自的類別裡</li>
+<li>🎉 減少在 Context 裡狀態條件的複雜的判斷</li>
+<li>🎉 封閉開放原則，有新的 State 加入也不需要在調整到 Context 物件</li>
+</ul>
+<h2 id="缺點"><a href="#缺點" class="headerlink" title="缺點"></a>缺點</h2><ul>
+<li>😬 如果狀態不多或邏輯不複雜，容易變成過度設計</li>
+<li>😬 因爲會需要把 State 拆成獨立的類別，檔案數量會變多</li>
+</ul>
+<h1 id="State-設計模式使用時機"><a href="#State-設計模式使用時機" class="headerlink" title="State 設計模式使用時機"></a>State 設計模式使用時機</h1><blockquote>
+<p>如果一個物件會因爲不同的狀態表現出不同的行爲，這些狀態彼此又有相依（知道彼此）的狀況，那也許就會是適合使用 State 設計模式的好時機。</p>
+</blockquote>
+<h1 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h1><p>以上就是 State 設計模式介紹，上述的程式碼是用 golang 完成的，如果需要其他語言的範例，歡迎參考 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://refactoringguru.cn/design-patterns/state">Refactoring Guru - State</a>。<br>最後感謝你的收看！🎉 🎉 🎉</p>
+<h1 id="參考："><a href="#參考：" class="headerlink" title="參考："></a>參考：</h1><ul>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://refactoringguru.cn/design-patterns/state">https://refactoringguru.cn/design-patterns/state</a></li>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://ianjustin39.github.io/ianlife/design-pattern/state-pattern/">https://ianjustin39.github.io/ianlife/design-pattern/state-pattern/</a></li>
+</ul>
+<p>```</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/" rel="tag"># 設計模式</a>
+              <a href="/tags/Design-Pattern/" rel="tag"># Design-Pattern</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/dsa/dsa-problem-maximum-subarray/4106250428/" rel="next" title="Maximum Subarray - Leetcode 圖解演算法">
+      Maximum Subarray - Leetcode 圖解演算法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#State-%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F%E6%98%AF%E4%BB%80%E9%BA%BC%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">State 設計模式是什麼？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B2%92%E6%9C%89%E4%BD%BF%E7%94%A8-State-%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F%E6%9C%83%E6%80%8E%E9%BA%BC%E6%A8%A3%E5%97%8E%EF%BC%9F-%F0%9F%A4%AF"><span class="nav-number">2.</span> <span class="nav-text">沒有使用 State 設計模式會怎麼樣嗎？ 🤯</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B2%92%E6%9C%89-State-%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F%E7%9A%84%E7%A8%8B%E5%BC%8F%E7%A2%BC"><span class="nav-number">3.</span> <span class="nav-text">沒有 State 設計模式的程式碼</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%95%8F%E9%A1%8C%EF%BC%9A%E5%88%A4%E6%96%B7%E5%BC%8F%E5%9B%A0%E7%88%B2%E4%B8%8D%E5%90%8C%E7%9A%84%E7%8B%80%E6%85%8B%E8%80%8C%E5%A2%9E%E5%8A%A0-%F0%9F%A5%B2"><span class="nav-number">3.1.</span> <span class="nav-text">問題：判斷式因爲不同的狀態而增加 🥲</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#State-Pattern-%E7%B5%84%E6%88%90"><span class="nav-number">4.</span> <span class="nav-text">State Pattern 組成</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#State-%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F%E5%84%AA%E7%BC%BA%E9%BB%9E"><span class="nav-number">5.</span> <span class="nav-text">State 設計模式優缺點</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%84%AA%E9%BB%9E"><span class="nav-number">5.1.</span> <span class="nav-text">優點</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E9%BB%9E"><span class="nav-number">5.2.</span> <span class="nav-text">缺點</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#State-%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F%E4%BD%BF%E7%94%A8%E6%99%82%E6%A9%9F"><span class="nav-number">6.</span> <span class="nav-text">State 設計模式使用時機</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B8%BD%E7%B5%90"><span class="nav-number">7.</span> <span class="nav-text">總結</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%83%E8%80%83%EF%BC%9A"><span class="nav-number">8.</span> <span class="nav-text">參考：</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ChanChanDev"
+      src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+  <p class="site-author-name" itemprop="name">ChanChanDev</p>
+  <div class="site-description" itemprop="description">圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">標籤</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/chanchandev" title="FaceBook → https:&#x2F;&#x2F;www.facebook.com&#x2F;chanchandev" rel="noopener external nofollow noreferrer" target="_blank"><i class="fab fa-facebook fa-fw"></i>FaceBook</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ChanChanDev</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener external nofollow noreferrer" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
