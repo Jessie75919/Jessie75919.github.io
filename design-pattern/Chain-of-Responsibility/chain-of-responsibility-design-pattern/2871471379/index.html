@@ -29,7 +29,7 @@
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/chain-of-responsibility-design-pattern/uml.png">
 <meta property="article:published_time" content="2023-10-09T01:49:14.000Z">
-<meta property="article:modified_time" content="2023-10-09T07:17:59.255Z">
+<meta property="article:modified_time" content="2023-10-09T07:26:40.517Z">
 <meta property="article:author" content="ChanChanDev">
 <meta property="article:tag" content="設計模式">
 <meta property="article:tag" content="Design-Pattern">
@@ -222,7 +222,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2023-10-09 09:49:14 / 修改時間：15:17:59" itemprop="dateCreated datePublished" datetime="2023-10-09T09:49:14+08:00">2023-10-09</time>
+              <time title="創建時間：2023-10-09 09:49:14 / 修改時間：15:26:40" itemprop="dateCreated datePublished" datetime="2023-10-09T09:49:14+08:00">2023-10-09</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -291,7 +291,7 @@
 <h2 id="🤯-上述程式碼的問題："><a href="#🤯-上述程式碼的問題：" class="headerlink" title="🤯 上述程式碼的問題："></a>🤯 上述程式碼的問題：</h2><ol>
 <li>在 <code>interveiw()</code> 裏面  <code>if</code> 跟 <code>else</code> 的複雜的判斷邏輯混雜在一起</li>
 <li>在 <code>interveiw()</code> 裏面的判斷式無法共用，例如 <code>engineer</code> 跟 <code>designer</code> 最後都需要經過 CEO 的面試，但卻要因爲不同的狀況要分別寫在兩處</li>
-<li>在 <code>interveiw()</code> 裏面已經這麼混亂的情況下，如果要再新增一個 `HR`` 的職位面試判斷，想必是一場災難。。。 🤯</li>
+<li>在 <code>interveiw()</code> 裏面已經這麼混亂的情況下，如果要再新增一個 <code>HR</code> 的職位面試判斷，想必是一場災難。。。 🤯</li>
 </ol>
 <p>例如： HR 只需要給 CEO 面試過關即可。</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">interview</span>(<span class="params">Interviewee <span class="variable">$interviewee</span></span>): <span class="title">bool</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;HR 電話初步面試: Start&quot;</span> . PHP_EOL;</span><br><span class="line">        <span class="comment">// HR 電話初步面試</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$interviewee</span>-&gt;performance &gt; <span class="number">5</span>) &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;HR 電話初步面試: Pass&quot;</span> . PHP_EOL;</span><br><span class="line">            <span class="comment">// if Engineer </span></span><br><span class="line">            <span class="keyword">if</span> (<span class="variable">$interviewee</span>-&gt;position == POSITION_TYPE_ENGINEER) &#123;</span><br><span class="line">              <span class="comment">// 工程師的面試流程 ... 略</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// if Designer</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="variable">$interviewee</span>-&gt;position == POSITION_TYPE_DESIGNER) &#123;</span><br><span class="line">               <span class="comment">// 設計師的面試流程 ... 略</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// if HR</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="variable">$interviewee</span>-&gt;position == POSITION_TYPE_HR) &#123;</span><br><span class="line">                <span class="comment">// 到公司與 CEO 的 1 on 1 面試</span></span><br><span class="line">                <span class="keyword">echo</span> <span class="string">&quot;到公司與 CEO 的 1 on 1 面試: Start&quot;</span> . PHP_EOL;</span><br><span class="line">                <span class="keyword">if</span> (<span class="variable">$interviewee</span>-&gt;performance &gt; <span class="number">90</span>) &#123;</span><br><span class="line">                    <span class="keyword">echo</span> <span class="string">&quot;到公司與 CEO 的 1 on 1 面試: Pass&quot;</span> . PHP_EOL;</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">echo</span> <span class="string">&quot;到公司與 CEO 的 1 on 1 面試: Failed&quot;</span> . PHP_EOL;</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;HR 電話初步面試: Failed&quot;</span> . PHP_EOL;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
@@ -397,7 +397,9 @@
 <h1 id="責任鏈設計模式優缺點"><a href="#責任鏈設計模式優缺點" class="headerlink" title="責任鏈設計模式優缺點"></a>責任鏈設計模式優缺點</h1><h2 id="優點"><a href="#優點" class="headerlink" title="優點"></a>優點</h2><ul>
 <li>🎉 單一職責原則把不同的驗證放在各自的類別裏面</li>
 <li>🎉 驗證的類別被拆開了，因此更方便調整組合順序與新增組合</li>
-<li>🎉 若需要增加額外的驗證，只需最小幅度調整即可，例如上述的 HR 面試流程<h2 id="缺點"><a href="#缺點" class="headerlink" title="缺點"></a>缺點</h2></li>
+<li>🎉 若需要增加額外的驗證，只需最小幅度調整即可，例如上述的 HR 面試流程</li>
+</ul>
+<h2 id="缺點"><a href="#缺點" class="headerlink" title="缺點"></a>缺點</h2><ul>
 <li>😬 檔案數量變得很多 XD</li>
 </ul>
 <h1 id="責任鏈設計模式使用時機"><a href="#責任鏈設計模式使用時機" class="headerlink" title="責任鏈設計模式使用時機"></a>責任鏈設計模式使用時機</h1><blockquote>
