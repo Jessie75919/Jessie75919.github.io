@@ -20,24 +20,25 @@
     var CONFIG = {"hostname":"chanchandev.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":"flat","style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="HIHI～😍  如果你是第一次來的話，『Chan-Chan-Dev』是一個專門用簡單的圖文與故事講解網路程式技術的網站。若你也喜歡用這種方式學習的話，歡迎加入 Chan-Chan-Dev Facebook 的粉絲團，在發佈的時候就有比較多機會收到通知喔！😍              設計模式有很多種，但自己都是處於一知半解，所以在學習的過程也做些筆記與思考，希望幫助自">
+  <meta name="description" content="我們可能會遇到因爲物件有不同的變型，而造成組成出來的類別衆多的困擾，例如汽車與機車，都分別有藍色與白色，就有四種排列組合：藍色汽車、白色汽車、藍色機車、白色機車，隨著交通工具的總類與顏色變多，可以組合出來的數量就會爆炸性地增加。如果你也有這個困擾，那就一起來看看如何使用 Bridge 設計模式來解決吧！">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Bridge 設計模式">
 <meta property="og:url" content="https://chanchandev.com/design-pattern/Bridge/Bridge-Intro/2482019753/index.html">
 <meta property="og:site_name" content="圈圈工程師">
-<meta property="og:description" content="HIHI～😍  如果你是第一次來的話，『Chan-Chan-Dev』是一個專門用簡單的圖文與故事講解網路程式技術的網站。若你也喜歡用這種方式學習的話，歡迎加入 Chan-Chan-Dev Facebook 的粉絲團，在發佈的時候就有比較多機會收到通知喔！😍              設計模式有很多種，但自己都是處於一知半解，所以在學習的過程也做些筆記與思考，希望幫助自">
+<meta property="og:description" content="我們可能會遇到因爲物件有不同的變型，而造成組成出來的類別衆多的困擾，例如汽車與機車，都分別有藍色與白色，就有四種排列組合：藍色汽車、白色汽車、藍色機車、白色機車，隨著交通工具的總類與顏色變多，可以組合出來的數量就會爆炸性地增加。如果你也有這個困擾，那就一起來看看如何使用 Bridge 設計模式來解決吧！">
 <meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/800/1*aKv69F-H150JS66lUqojGQ.png">
 <meta property="og:image" content="https://cdn-images-1.medium.com/max/800/1*7hSr2wkjSu3bsXAkFj0RVw.png">
 <meta property="og:image" content="https://cdn-images-1.medium.com/max/800/1*T4BBQolgvEWyvHVXHODyJw.png">
 <meta property="og:image" content="https://cdn-images-1.medium.com/max/800/1*Np6Zkt2CXA0xm4HaYT9Hlg.png">
 <meta property="og:image" content="https://cdn-images-1.medium.com/max/1200/1*F5Uwm__ZGa_dEkTq5r0rtA.png">
 <meta property="article:published_time" content="2020-08-30T02:40:31.000Z">
-<meta property="article:modified_time" content="2021-04-06T16:02:39.000Z">
+<meta property="article:modified_time" content="2023-10-09T01:04:18.519Z">
 <meta property="article:author" content="ChanChanDev">
 <meta property="article:tag" content="設計模式">
 <meta property="article:tag" content="Design-Pattern">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn-images-1.medium.com/max/800/1*7hSr2wkjSu3bsXAkFj0RVw.png">
+<meta name="twitter:image" content="https://cdn-images-1.medium.com/max/800/1*aKv69F-H150JS66lUqojGQ.png">
 
 <link rel="canonical" href="https://chanchandev.com/design-pattern/Bridge/Bridge-Intro/2482019753/">
 
@@ -137,6 +138,11 @@
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
 
   </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
         <li class="menu-item menu-item-back-end">
 
     <a href="/categories/back-end/" rel="section"><i class="fas fa-rocket fa-fw"></i>Back-End</a>
@@ -231,7 +237,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-04-07 00:02:39" itemprop="dateModified" datetime="2021-04-07T00:02:39+08:00">2021-04-07</time>
+                <time title="修改時間：2023-10-09 09:04:18" itemprop="dateModified" datetime="2023-10-09T09:04:18+08:00">2023-10-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -258,7 +264,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <div class="note success simple">
+        <p><img src="https://cdn-images-1.medium.com/max/800/1*aKv69F-H150JS66lUqojGQ.png"></p>
+<p>我們可能會遇到因爲物件有不同的變型，而造成組成出來的類別衆多的困擾，例如汽車與機車，都分別有藍色與白色，就有四種排列組合：藍色汽車、白色汽車、藍色機車、白色機車，隨著交通工具的總類與顏色變多，可以組合出來的數量就會爆炸性地增加。如果你也有這個困擾，那就一起來看看如何使用 Bridge 設計模式來解決吧！</p>
+<span id="more"></span>
+
+<div class="note success simple">
             <p>HIHI～😍  如果你是第一次來的話，『Chan-Chan-Dev』是一個專門用簡單的圖文與故事講解網路程式技術的網站。<br>若你也喜歡用這種方式學習的話，歡迎加入 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.facebook.com/chanchandev">Chan-Chan-Dev Facebook</a> 的粉絲團，在發佈的時候就有比較多機會收到通知喔！😍</p>
           </div>
 
@@ -461,7 +471,8 @@
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives">
+          <a href="/archives/">
+        
           <span class="site-state-item-count">32</span>
           <span class="site-state-item-name">文章</span>
         </a>
@@ -503,15 +514,13 @@
 
 <div class="copyright">
   
-  &copy; 
+  &copy; 2020 – 
   <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">ChanChanDev</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener external nofollow noreferrer" target="_blank">NexT.Gemini</a> 強力驅動
-  </div>
 
         
 
