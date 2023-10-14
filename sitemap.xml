@@ -37,7 +37,7 @@
   </url>
   
   <url>
-    <loc>https://chanchandev.com/Sharing/%E5%A6%82%E6%9E%9C%E6%97%A9%E7%9F%A5%E9%81%93/how-to-learn-code-better/3657051226/</loc>
+    <loc>https://chanchandev.com/Softwares/alfred-1/93627219/</loc>
     
     <lastmod>2023-10-09</lastmod>
     
@@ -51,7 +51,7 @@
   </url>
   
   <url>
-    <loc>https://chanchandev.com/Softwares/alfred-1/93627219/</loc>
+    <loc>https://chanchandev.com/Sharing/%E5%A6%82%E6%9E%9C%E6%97%A9%E7%9F%A5%E9%81%93/how-to-learn-code-better/3657051226/</loc>
     
     <lastmod>2023-10-09</lastmod>
     
@@ -114,13 +114,6 @@
   </url>
   
   <url>
-    <loc>https://chanchandev.com/note/Binary/binary-intro/3766688417/</loc>
-    
-    <lastmod>2023-10-09</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://chanchandev.com/design-pattern/State/state-design-pattern/1543189824/</loc>
     
     <lastmod>2023-10-09</lastmod>
@@ -128,7 +121,7 @@
   </url>
   
   <url>
-    <loc>https://chanchandev.com/design-pattern/SRP/single-responsibility-principle/2543391104/</loc>
+    <loc>https://chanchandev.com/note/Binary/binary-intro/3766688417/</loc>
     
     <lastmod>2023-10-09</lastmod>
     
@@ -136,6 +129,13 @@
   
   <url>
     <loc>https://chanchandev.com/design-pattern/Chain-of-Responsibility/chain-of-responsibility-design-pattern/2871471379/</loc>
+    
+    <lastmod>2023-10-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chanchandev.com/design-pattern/SRP/single-responsibility-principle/2543391104/</loc>
     
     <lastmod>2023-10-09</lastmod>
     
@@ -205,14 +205,14 @@
   </url>
   
   <url>
-    <loc>https://chanchandev.com/Front-End/Browser/inside-browser-1/1810002848/</loc>
+    <loc>https://chanchandev.com/back-end/Session/session-intro/1577685640/</loc>
     
     <lastmod>2023-10-09</lastmod>
     
   </url>
   
   <url>
-    <loc>https://chanchandev.com/back-end/Session/session-intro/1577685640/</loc>
+    <loc>https://chanchandev.com/Front-End/Browser/inside-browser-1/1810002848/</loc>
     
     <lastmod>2023-10-09</lastmod>
     
@@ -305,7 +305,7 @@
   </url>
   
   <url>
-    <loc>https://chanchandev.com/tags/Sharing/</loc>
+    <loc>https://chanchandev.com/tags/Softwares/</loc>
     <lastmod>2023-10-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -319,7 +319,7 @@
   </url>
   
   <url>
-    <loc>https://chanchandev.com/tags/Softwares/</loc>
+    <loc>https://chanchandev.com/tags/Sharing/</loc>
     <lastmod>2023-10-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -375,13 +375,6 @@
   </url>
   
   <url>
-    <loc>https://chanchandev.com/tags/side-project/</loc>
-    <lastmod>2023-10-14</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://chanchandev.com/tags/Python/</loc>
     <lastmod>2023-10-14</lastmod>
     <changefreq>daily</changefreq>
@@ -390,6 +383,20 @@
   
   <url>
     <loc>https://chanchandev.com/tags/Django/</loc>
+    <lastmod>2023-10-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://chanchandev.com/tags/side-project/</loc>
+    <lastmod>2023-10-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://chanchandev.com/tags/Backend/</loc>
     <lastmod>2023-10-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -418,13 +425,6 @@
   
   <url>
     <loc>https://chanchandev.com/tags/Cache/</loc>
-    <lastmod>2023-10-14</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://chanchandev.com/tags/Backend/</loc>
     <lastmod>2023-10-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -475,14 +475,14 @@
   </url>
   
   <url>
-    <loc>https://chanchandev.com/categories/Sharing/</loc>
+    <loc>https://chanchandev.com/categories/Softwares/</loc>
     <lastmod>2023-10-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://chanchandev.com/categories/Softwares/</loc>
+    <loc>https://chanchandev.com/categories/Sharing/</loc>
     <lastmod>2023-10-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -503,13 +503,6 @@
   </url>
   
   <url>
-    <loc>https://chanchandev.com/categories/Sharing/%E5%A6%82%E6%9E%9C%E6%97%A9%E7%9F%A5%E9%81%93/</loc>
-    <lastmod>2023-10-14</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://chanchandev.com/categories/Readability/</loc>
     <lastmod>2023-10-14</lastmod>
     <changefreq>daily</changefreq>
@@ -524,6 +517,20 @@
   </url>
   
   <url>
+    <loc>https://chanchandev.com/categories/back-end/</loc>
+    <lastmod>2023-10-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://chanchandev.com/categories/Sharing/%E5%A6%82%E6%9E%9C%E6%97%A9%E7%9F%A5%E9%81%93/</loc>
+    <lastmod>2023-10-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://chanchandev.com/categories/Front-End/</loc>
     <lastmod>2023-10-14</lastmod>
     <changefreq>daily</changefreq>
@@ -532,13 +539,6 @@
   
   <url>
     <loc>https://chanchandev.com/categories/HTTP/</loc>
-    <lastmod>2023-10-14</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://chanchandev.com/categories/back-end/</loc>
     <lastmod>2023-10-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -587,6 +587,13 @@
   </url>
   
   <url>
+    <loc>https://chanchandev.com/categories/design-pattern/Chain-of-Responsibility/</loc>
+    <lastmod>2023-10-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://chanchandev.com/categories/design-pattern/Observer/</loc>
     <lastmod>2023-10-14</lastmod>
     <changefreq>daily</changefreq>
@@ -601,7 +608,7 @@
   </url>
   
   <url>
-    <loc>https://chanchandev.com/categories/design-pattern/Chain-of-Responsibility/</loc>
+    <loc>https://chanchandev.com/categories/design-pattern/State/</loc>
     <lastmod>2023-10-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -609,13 +616,6 @@
   
   <url>
     <loc>https://chanchandev.com/categories/note/Binary/</loc>
-    <lastmod>2023-10-14</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://chanchandev.com/categories/design-pattern/State/</loc>
     <lastmod>2023-10-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -636,20 +636,6 @@
   </url>
   
   <url>
-    <loc>https://chanchandev.com/categories/Front-End/Browser/</loc>
-    <lastmod>2023-10-14</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://chanchandev.com/categories/HTTP/Cache/</loc>
-    <lastmod>2023-10-14</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://chanchandev.com/categories/back-end/Cookies/</loc>
     <lastmod>2023-10-14</lastmod>
     <changefreq>daily</changefreq>
@@ -658,6 +644,20 @@
   
   <url>
     <loc>https://chanchandev.com/categories/back-end/Session/</loc>
+    <lastmod>2023-10-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://chanchandev.com/categories/Front-End/Browser/</loc>
+    <lastmod>2023-10-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://chanchandev.com/categories/HTTP/Cache/</loc>
     <lastmod>2023-10-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
