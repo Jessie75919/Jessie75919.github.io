@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="mask-icon" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"chanchandev.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":"flat","style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="圖解步驟解釋如何用雙指針的方法解題 Trapping Rain Water (Hard) 🙂">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Leetcode 筆記 - 圖解解題 Trapping Rain Water (Hard)">
+<meta property="og:url" content="https://chanchandev.com/dsa/Trapping-Rain-Water/1842380024/index.html">
+<meta property="og:site_name" content="圈圈工程師">
+<meta property="og:description" content="圖解步驟解釋如何用雙指針的方法解題 Trapping Rain Water (Hard) 🙂">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/Trapping-Rain-Water/exmpale.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/Trapping-Rain-Water/https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/Container-With-Most-Water/water-height.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/Trapping-Rain-Water/left-right-comparison1.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/Trapping-Rain-Water/left-right-comparison2.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/Trapping-Rain-Water/leftMaxHeights.gif">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/Trapping-Rain-Water/RightMaxHeight.gif">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/Trapping-Rain-Water/MinHeight.gif">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/Trapping-Rain-Water/optimise1.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/Trapping-Rain-Water/optim2.gif">
+<meta property="article:published_time" content="2023-10-16T02:37:34.000Z">
+<meta property="article:modified_time" content="2023-10-16T01:06:42.239Z">
+<meta property="article:author" content="ChanChanDev">
+<meta property="article:tag" content="data-structure-algorithm">
+<meta property="article:tag" content="leetcode">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/Trapping-Rain-Water/exmpale.png">
+
+<link rel="canonical" href="https://chanchandev.com/dsa/Trapping-Rain-Water/1842380024/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>Leetcode 筆記 - 圖解解題 Trapping Rain Water (Hard) | 圈圈工程師</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R47Z93ZJTM"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-R47Z93ZJTM');
+      }
+    </script>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1099644779788326" crossorigin="anonymous"></script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">圈圈工程師</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Change Change Developer</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+        <li class="menu-item menu-item-back-end">
+
+    <a href="/categories/back-end/" rel="section"><i class="fas fa-rocket fa-fw"></i>Back-End</a>
+
+  </li>
+        <li class="menu-item menu-item-sharing">
+
+    <a href="/categories/Sharing/" rel="section"><i class="fas fa-star fa-fw"></i>Sharing</a>
+
+  </li>
+        <li class="menu-item menu-item-reading">
+
+    <a href="/categories/Reading/" rel="section"><i class="fas fa-book fa-fw"></i>Reading</a>
+
+  </li>
+        <li class="menu-item menu-item-design-pattern">
+
+    <a href="/categories/design-pattern/" rel="section"><i class="fas fa-sitemap fa-fw"></i>Design-Pattern</a>
+
+  </li>
+        <li class="menu-item menu-item-javascript">
+
+    <a href="/categories/js/" rel="section"><i class="fas fa-code fa-fw"></i>Javascript</a>
+
+  </li>
+        <li class="menu-item menu-item-分類">
+
+    <a href="/categories/" rel="section"><i class="fas fa-folder-open fa-fw"></i>分類</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://chanchandev.com/dsa/Trapping-Rain-Water/1842380024/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+      <meta itemprop="name" content="ChanChanDev">
+      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="圈圈工程師">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Leetcode 筆記 - 圖解解題 Trapping Rain Water (Hard)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2023-10-16 10:37:34 / 修改時間：09:06:42" itemprop="dateCreated datePublished" datetime="2023-10-16T10:37:34+08:00">2023-10-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/dsa/" itemprop="url" rel="index"><span itemprop="name">dsa</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">圖解步驟解釋如何用雙指針的方法解題 Trapping Rain Water (Hard) 🙂</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <span id="more"></span>
+<br>
+
+<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://leetcode.com/problems/trapping-rain-water/">Leetcode 題目網址 🚐</a></p>
+<p>Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.</p>
+<blockquote>
+<p><strong>翻譯年糕</strong><br>給予一組正整數代表高度的地圖，<br>其中每一個寬度都是 1，<br>計算在下雨過後會有多少積水</p>
+</blockquote>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/Trapping-Rain-Water/exmpale.png"><br>Input: height = [0,1,0,2,1,0,1,3,2,1,2,1]<br>Output: 6<br>Explanation: The above elevation map (black section) is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. In this case, 6 units of rain water (blue section) are being trapped.</p>
+<blockquote>
+<p>Input: height = [1,8,6,2,5,4,8,3,7]<br>Output: 49<br>Explanation: The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7]. In this case, the max area of water (blue section) the container can contain is 49.</p>
+</blockquote>
+<h1 id="解題關鍵-1"><a href="#解題關鍵-1" class="headerlink" title="解題關鍵 1"></a>解題關鍵 1</h1><blockquote>
+<p>水位高度只會到最小的高度，<br>超過最小高度就會從另外一邊溢出，<br>因此取得<strong>左邊與右邊的最小高度</strong>，<br>即 <code>min(leftHeight, rightHeight)</code><br><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/Trapping-Rain-Water/https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/Container-With-Most-Water/water-height.png"></p>
+</blockquote>
+<br>
+
+<h1 id="「左邊的最大高度」與「右邊的最大高度」"><a href="#「左邊的最大高度」與「右邊的最大高度」" class="headerlink" title="「左邊的最大高度」與「右邊的最大高度」"></a>「<strong>左邊的最大高度</strong>」與「<strong>右邊的最大高度</strong>」</h1><p>上述的左邊與右邊的最小高度的「左邊」與「右邊」，<br>必須是那「<strong>左邊的最大高度</strong>」與「<strong>右邊的最大高度</strong>」來做比較</p>
+<br>
+
+<p>🤯：「為什麼呢？」</p>
+<p>例如以 <code>i = 3</code> 的這個情況來看：</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/Trapping-Rain-Water/left-right-comparison1.png"></p>
+<p>左側最大的高度是 <code>1</code>，<br>右側最大的高度是 <code>3</code>，<br><code>i = 3</code> 本身的高度（<code>2</code>）已經超過了 <code>1</code> (<code>min(leftHeight, rightHeight)</code>)，<br>因此不會有積水產生。</p>
+<br>
+
+<p>🤯：「為什麼 <code>i = 3</code> 的時候，<br>左側的最高高度是 <code>1</code> ，<br>而不是 <code>i = 3</code> 的高度 <code>2</code> 呢？」</p>
+<p>🙂：「因爲當 <code>i</code> 走到 <code>3</code> 的時候，<br>會先做完是否有積水的判斷，<br>然後在做 <code>max(leftHeight, height[i])</code> 的動作。」</p>
+<br>
+
+<p>我們在以 <code>i = 4</code> 的情況來看：</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/Trapping-Rain-Water/left-right-comparison2.png"></p>
+<p>左側最大的高度是 <code>2</code>，<br>右側最大的高度是 <code>3</code>，<br><code>i = 4</code> 本身的高度（<code>1</code>）比 <code>2</code> (<code>min(leftHeight, rightHeight)</code>) 還小，<br>因此會產生 1 個單位的積水量。</p>
+<br>
+
+<p>因此我們知道了必須是「<strong>左邊的最大高度</strong>」與「<strong>右邊的最大高度</strong>」來做比較。</p>
+<br>
+
+<h1 id="計算積水量的方法"><a href="#計算積水量的方法" class="headerlink" title="計算積水量的方法"></a>計算積水量的方法</h1><p>於是我們就可以推出計算積水量的方法：</p>
+<div class="note success simple">
+            <p>min(leftMaxHeight, rightMaxHeight) - height[i]</p>
+          </div>
+
+
+<p>🙂：「帶著這個理解，我們可以準備來解題囉。」</p>
+<br>
+
+<h1 id="如何找到每一個-i-的-min-leftMaxHeight-rightMaxHeight-的值？"><a href="#如何找到每一個-i-的-min-leftMaxHeight-rightMaxHeight-的值？" class="headerlink" title="如何找到每一個 i 的 min(leftMaxHeight, rightMaxHeight) 的值？"></a>如何找到每一個 <code>i</code> 的 <code>min(leftMaxHeight, rightMaxHeight)</code> 的值？</h1><p>🤯：「不過現在有個小問題，我們要怎麼知道每一個 <code>i</code> 的 <code>min(leftMaxHeight, rightMaxHeight)</code> 的值是什麼呢？ 」</p>
+<p>我們可以先<strong>由左到右</strong>先找出每個 <code>i</code> 的左側最大高度：（動態圖裡更換最大高度時用箭頭表示）</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/Trapping-Rain-Water/leftMaxHeights.gif"></p>
+<p>再<strong>由右到左</strong>找出每個 <code>i</code> 在右側的最大高度：（動態圖裡更換最大高度時用箭頭表示）</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/Trapping-Rain-Water/RightMaxHeight.gif"></p>
+<p>之後在針對左側與右側的最大高度找出最小值即可 🎉</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/Trapping-Rain-Water/MinHeight.gif"></p>
+<p>上述的操作就可以讓我們找到每一個 <code>i</code> 的 <code>min(leftMaxHeight, rightMaxHeight)</code> 放在 <code>minHeights</code>。</p>
+<p>接下來我們只需要一次 for 迴圈，把 <code>minHeights[i] - height[i]</code> 的結果累加起來就可以囉！</p>
+<div class="note info simple">
+            <p>如果 <code>minHeights[i] - height[i]</code> 爲負值，則用 0 取代，畢竟積水不會爲負的。</p>
+          </div>
+
+<h2 id="程式碼"><a href="#程式碼" class="headerlink" title="程式碼"></a>程式碼</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">trap</span>(<span class="params">self, height: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> height:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        maxLeftHeights = [<span class="number">0</span>] * <span class="built_in">len</span>(height)</span><br><span class="line">        maxLeft = <span class="number">0</span> </span><br><span class="line">        <span class="comment"># 由左往右找出左側的最大高度</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(height)):</span><br><span class="line">            maxLeftHeights[i] = maxLeft</span><br><span class="line">            maxLeft = <span class="built_in">max</span>(height[i], maxLeft)				</span><br><span class="line">				</span><br><span class="line">        maxRightHeights = [<span class="number">0</span>] * <span class="built_in">len</span>(height)</span><br><span class="line">        maxRight = <span class="number">0</span></span><br><span class="line">        <span class="comment"># 由右往左找出右側的最大高度</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(height) - <span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">            maxRightHeights[i] = maxRight</span><br><span class="line">            maxRight = <span class="built_in">max</span>(height[i], maxRight)				</span><br><span class="line"></span><br><span class="line">        mins = []</span><br><span class="line">        <span class="comment"># 找出 min(leftHeight, rightHeight)</span></span><br><span class="line">        <span class="keyword">for</span> i, maxLeft <span class="keyword">in</span> <span class="built_in">enumerate</span>(maxLeftHeights):</span><br><span class="line">            mins.append(<span class="built_in">min</span>(maxLeft, maxRightHeights[i]))</span><br><span class="line"></span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i, h <span class="keyword">in</span> <span class="built_in">enumerate</span>(height):</span><br><span class="line">            res += <span class="built_in">max</span>(<span class="number">0</span>, mins[i] - h) <span class="comment"># 如果結果爲負值，用 0 取代</span></span><br><span class="line">									</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<p>快速看一下上述的解法的複雜度：</p>
+<ul>
+<li>時間複雜度： <code>O(N)</code> <ul>
+<li>因爲只會跑 4 x N 次迴圈</li>
+</ul>
+</li>
+<li>空間複雜度：<code>O(N)</code><ul>
+<li>因爲要用陣列儲存 <code>leftHeights</code>、<code>rightHeights</code>、<code>minHeights</code> 等內容</li>
+</ul>
+</li>
+</ul>
+<br>
+<br>
+
+<p>😬：「還可以在更好嗎？」</p>
+<br>
+
+<p>🙂：「可以的。」</p>
+<br>
+
+<h1 id="空間複雜度-O-1-解法"><a href="#空間複雜度-O-1-解法" class="headerlink" title="空間複雜度 O(1) 解法"></a>空間複雜度 O(1) 解法</h1><p>除了上面的解法，我們還可以用雙指針的方式來優化這題的解法。</p>
+<h1 id="解題關鍵-2"><a href="#解題關鍵-2" class="headerlink" title="解題關鍵 2"></a>解題關鍵 2</h1><p>我們可以設定左指標 <code>L</code> 指著第一個元素，右指標 <code>R</code> 指著最後一個元素，<br>新增「左側最大高度」與「右側最大高度」的變數。</p>
+<blockquote>
+<p>以下用 <code>L</code> 代表左指標、 <code>R</code> 代表右指標</p>
+</blockquote>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/Trapping-Rain-Water/optimise1.png"></p>
+<blockquote>
+<p>如果「左側的最大高度」小於「右側的最大高度」，<br>那 <code>L</code> 就可以往左走一步，<br>那我們就可以直接用「左側的最大高度」減去目前 <code>L</code> 所在的高度了。</p>
+<p>反之「左側的最大高度」大於等於「右側的最大高度」，<br>那 <code>R</code> 就可以往右走一步，<br>那我們就可以直接用「右側的最大高度」減去目前 <code>R</code> 所在的高度了。</p>
+</blockquote>
+<br>
+<br>
+
+<p>🤯：「聽起來很棒，但爲啥呀？ 」</p>
+<p>🙂：「還記得我們剛剛提過的計算積水的算法嗎？」</p>
+<div class="note success simple">
+            <p>min(leftMaxHeight, rightMaxHeight) - height[i]</p>
+          </div>
+
+<p>如果「左側的最大高度」小於「右側的最大高度」的情況，<br>是不是就代表著 <code>min(leftMaxHeight, rightMaxHeight)</code> 會得到 <code>leftMaxHeight</code> 值了？<br>所以就抓起來減去目前 <code>L</code> 的高度了啦！</p>
+<p>反之「左側的最大高度」大於等於「右側的最大高度」的情況，<br>在 <code>min(leftMaxHeight, rightMaxHeight)</code> 會得到 <code>rightMaxHeight</code> 值了？<br>所以就抓起來減去目前 <code>R</code> 的高度了啦！</p>
+<br>
+<br>
+
+<p>🤯：「那為什麼 <code>L</code> 或 <code>R</code> 要先走一步之後，在執行 <code>min(leftMaxHeight, rightMaxHeight) - height[i]</code> ?」</p>
+<p>🙂：「因爲周圍的最左邊或最右邊，只有可能沒有高度或有高度兩種可能，是不會有積水的！」</p>
+<br>
+<br>
+
+<p>🤯：「那什麼時候會執行結束呢？ 」</p>
+<p>🙂：「如果 <code>L</code> 不再小於 <code>R</code> 就結束執行囉。」</p>
+<br>
+* * * <br>
+<br>
+
+<p>帶著這個理解之後，我們就可以開始寫程式囉！</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">trap</span>(<span class="params">self, height: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> height:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        L, R = <span class="number">0</span>, <span class="built_in">len</span>(height) - <span class="number">1</span></span><br><span class="line">        leftMax, rightMax = height[L], height[R]</span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> L &lt; R:</span><br><span class="line">            <span class="keyword">if</span> leftMax &lt; rightMax:</span><br><span class="line">                L += <span class="number">1</span></span><br><span class="line">                leftMax = <span class="built_in">max</span>(leftMax, height[L])</span><br><span class="line">                res += leftMax - height[L]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                R -= <span class="number">1</span></span><br><span class="line">                rightMax = <span class="built_in">max</span>(rightMax, height[R])</span><br><span class="line">                res += rightMax - height[R]</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>🤯：「咦？為什麼會有 <code>max(leftMax, height[L])</code> 的情況呢？」</p>
+<p>🙂：「這樣做一樣是爲了避免會產生負數的狀況，<br>所以如果最大的高度小於目前的高度，<br>那先把目前的高度取代最大高度，<br>就可以在後來的相減得到 0 的結果囉。」</p>
+<p>最後來看一下圖解上述步驟的過程囉：</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/Trapping-Rain-Water/optim2.gif"></p>
+<p>最後看一下上述的解法的複雜度：</p>
+<ul>
+<li>時間複雜度： <code>O(N)</code> </li>
+<li>空間複雜度：<code>O(1)</code></li>
+</ul>
+<h1 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h1><p>這題真的滿多概念需要掌握才能理解解法 😬，<br>不愧是 Hard 的題目！<br>希望用圖解過程可以幫助路過的你，<br>也感謝你的收看！🎉</p>
+<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><ul>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.youtube.com/watch?v=ZI2z5pq0TqA">https://www.youtube.com/watch?v=ZI2z5pq0TqA</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/data-structure-algorithm/" rel="tag"><i class="fa fa-tag"></i> data-structure-algorithm</a>
+              <a href="/tags/leetcode/" rel="tag"><i class="fa fa-tag"></i> leetcode</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/design-pattern/Observer/observer-design-pattern/2118150761/" rel="next" title="觀察者設計模式（Observer Design Pattern）">
+      觀察者設計模式（Observer Design Pattern） <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%8C%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">題目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AF%84%E4%BE%8B"><span class="nav-number">2.</span> <span class="nav-text">範例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E9%A1%8C%E9%97%9C%E9%8D%B5-1"><span class="nav-number">3.</span> <span class="nav-text">解題關鍵 1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E3%80%8C%E5%B7%A6%E9%82%8A%E7%9A%84%E6%9C%80%E5%A4%A7%E9%AB%98%E5%BA%A6%E3%80%8D%E8%88%87%E3%80%8C%E5%8F%B3%E9%82%8A%E7%9A%84%E6%9C%80%E5%A4%A7%E9%AB%98%E5%BA%A6%E3%80%8D"><span class="nav-number">4.</span> <span class="nav-text">「左邊的最大高度」與「右邊的最大高度」</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A8%88%E7%AE%97%E7%A9%8D%E6%B0%B4%E9%87%8F%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">5.</span> <span class="nav-text">計算積水量的方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%89%BE%E5%88%B0%E6%AF%8F%E4%B8%80%E5%80%8B-i-%E7%9A%84-min-leftMaxHeight-rightMaxHeight-%E7%9A%84%E5%80%BC%EF%BC%9F"><span class="nav-number">6.</span> <span class="nav-text">如何找到每一個 i 的 min(leftMaxHeight, rightMaxHeight) 的值？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%8B%E5%BC%8F%E7%A2%BC"><span class="nav-number">6.1.</span> <span class="nav-text">程式碼</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A9%BA%E9%96%93%E8%A4%87%E9%9B%9C%E5%BA%A6-O-1-%E8%A7%A3%E6%B3%95"><span class="nav-number">7.</span> <span class="nav-text">空間複雜度 O(1) 解法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E9%A1%8C%E9%97%9C%E9%8D%B5-2"><span class="nav-number">8.</span> <span class="nav-text">解題關鍵 2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B5%90%E8%AB%96"><span class="nav-number">9.</span> <span class="nav-text">結論</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%83%E8%80%83"><span class="nav-number">10.</span> <span class="nav-text">參考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ChanChanDev"
+      src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+  <p class="site-author-name" itemprop="name">ChanChanDev</p>
+  <div class="site-description" itemprop="description">圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">標籤</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/chanchandev" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;chanchandev" rel="noopener external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/chanchandev" title="FaceBook → https:&#x2F;&#x2F;www.facebook.com&#x2F;chanchandev" rel="noopener external nofollow noreferrer" target="_blank"><i class="fab fa-facebook fa-fw"></i>FaceBook</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ChanChanDev</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '5cc00853735d25bd22f3',
+      clientSecret: '42c46caebd1f91cd54924e2ad6c3dc6fec94f37e',
+      repo        : 'Jessie75919.github.io',
+      owner       : 'Jessie75919',
+      admin       : ['Jessie75919'],
+      id          : '28c71cd3b58df066537dddc1c651d8a9',
+        language: 'zh-TW',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
