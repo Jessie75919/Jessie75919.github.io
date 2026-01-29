@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="mask-icon" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"chanchandev.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"onmobile":false},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null,"show_result":"flat"},"fold":{"enable":false,"height":500},"language":false,"highlight_theme":"normal"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"找到 ${hits} 個搜索結果（用時 ${time} 毫秒）","hits":"找到 ${hits} 個搜索結果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="大衛總是因爲不同女友而要表現的行爲都有所不同，而搞得自己暈頭轉向，但後來學習了 Strategy 設計模式後，他就更有組織地管理他的女友們了，女友們也變得更滿意了，一起來看看他怎麼做到的吧！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Strategy 設計模式">
+<meta property="og:url" content="https://chanchandev.com/design-pattern/Strategy/Strategy%20%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/2415029893/index.html">
+<meta property="og:site_name" content="圈圈工程師">
+<meta property="og:description" content="大衛總是因爲不同女友而要表現的行爲都有所不同，而搞得自己暈頭轉向，但後來學習了 Strategy 設計模式後，他就更有組織地管理他的女友們了，女友們也變得更滿意了，一起來看看他怎麼做到的吧！">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/Strategy-Intro/Untitled.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/Strategy-Intro/Untitled1.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/Strategy-Intro/Untitled2.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/Strategy-Intro/Untitled3.png">
+<meta property="article:published_time" content="2021-03-04T15:47:22.000Z">
+<meta property="article:modified_time" content="2026-01-28T12:40:17.310Z">
+<meta property="article:author" content="ChanChanDev">
+<meta property="article:tag" content="設計模式">
+<meta property="article:tag" content="Design-Pattern">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/Strategy-Intro/Untitled.png">
+
+
+<link rel="canonical" href="https://chanchandev.com/design-pattern/Strategy/Strategy%20%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/2415029893/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://chanchandev.com/design-pattern/Strategy/Strategy%20%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/2415029893/","path":"design-pattern/Strategy/Strategy 設計模式/2415029893/","title":"Strategy 設計模式"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Strategy 設計模式 | 圈圈工程師</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R47Z93ZJTM"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-R47Z93ZJTM","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">圈圈工程師</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Change Change Developer</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-back-end"><a href="/categories/back-end/" rel="section"><i class="fas fa-rocket fa-fw"></i>Back-End</a></li><li class="menu-item menu-item-sharing"><a href="/categories/Sharing/" rel="section"><i class="fas fa-star fa-fw"></i>Sharing</a></li><li class="menu-item menu-item-reading"><a href="/categories/Reading/" rel="section"><i class="fas fa-book fa-fw"></i>Reading</a></li><li class="menu-item menu-item-design-pattern"><a href="/categories/design-pattern/" rel="section"><i class="fas fa-sitemap fa-fw"></i>Design-Pattern</a></li><li class="menu-item menu-item-javascript"><a href="/categories/js/" rel="section"><i class="fas fa-code fa-fw"></i>Javascript</a></li><li class="menu-item menu-item-分類"><a href="/categories/" rel="section"><i class="fas fa-folder-open fa-fw"></i>分類</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Strategy-%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F%E6%98%AF%E4%BB%80%E9%BA%BC%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">Strategy 設計模式是什麼？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E6%B2%92%E7%94%A8-Strategy-%E6%9C%83%E6%80%8E%E6%A8%A3%E5%97%8E%EF%BC%9F%F0%9F%A7%90"><span class="nav-number">2.</span> <span class="nav-text">如果沒用 Strategy 會怎樣嗎？🧐</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#David-Class"><span class="nav-number">2.1.</span> <span class="nav-text">David Class</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Main-Class"><span class="nav-number">2.2.</span> <span class="nav-text">Main Class</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%95%8F%E9%A1%8C%EF%BC%9A%E5%88%A4%E6%96%B7%E5%BC%8F%E6%9C%83%E5%9B%A0%E7%88%B2%E4%B8%8D%E5%90%8C%E7%9A%84%E6%83%85%E6%B3%81%E5%A2%9E%E5%8A%A0-%F0%9F%98%AD"><span class="nav-number">3.</span> <span class="nav-text">問題：判斷式會因爲不同的情況增加 😭</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%AE%9A%E7%BE%A9%E5%9C%A8%E4%B8%8D%E5%90%8C%E6%83%85%E6%B3%81%E4%B8%8B%E5%9F%B7%E8%A1%8C%E7%9A%84%E8%A1%8C%E7%88%B2%EF%BC%88%E7%AD%96%E7%95%A5%EF%BC%89%E7%95%8C%E9%9D%A2"><span class="nav-number">3.1.</span> <span class="nav-text">1. 定義在不同情況下執行的行爲（策略）界面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%B0%87%E6%AF%8F%E5%80%8B%E6%83%85%E6%B3%81%EF%BC%88%E5%A5%B3%E5%8F%8B%EF%BC%89%E6%8A%BD%E6%88%90%E4%B8%80%E5%80%8B%E7%8D%A8%E7%AB%8B%E7%9A%84-class-%EF%BC%8C%E4%B8%A6%E4%B8%94%E5%AF%A6%E4%BD%9C%E4%B8%8A%E8%BF%B0%E4%B8%8D%E5%90%8C%E6%83%85%E6%B3%81%E4%B8%8B%E5%9F%B7%E8%A1%8C%E7%9A%84%E8%A1%8C%E7%88%B2%EF%BC%88%E7%AD%96%E7%95%A5%EF%BC%89%E7%95%8C%E9%9D%A2"><span class="nav-number">3.2.</span> <span class="nav-text">2. 將每個情況（女友）抽成一個獨立的 class ，並且實作上述不同情況下執行的行爲（策略）界面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mary-class"><span class="nav-number">3.3.</span> <span class="nav-text">Mary class</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Babe-class"><span class="nav-number">3.4.</span> <span class="nav-text">Babe class</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linda-class"><span class="nav-number">3.5.</span> <span class="nav-text">Linda class</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%9C%A8-David-%E4%B8%AD%E5%B0%87-girlFriend-%E5%B1%AC%E6%80%A7%E8%AE%8A%E6%88%90%E4%B8%80%E7%A8%AE%E5%A5%B3%E5%8F%8B%EF%BC%88%E7%AD%96%E7%95%A5%EF%BC%89%E7%89%A9%E4%BB%B6%E5%8F%83%E8%80%83"><span class="nav-number">3.6.</span> <span class="nav-text">3. 在 David 中將 girlFriend 屬性變成一種女友（策略）物件參考</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%9C%A8-David-%E7%9A%84%E6%89%80%E6%9C%89%E8%A1%8C%E7%88%B2%EF%BC%8C%E9%83%BD%E7%9B%B4%E6%8E%A5%E5%91%BC%E5%8F%AB%E5%A5%B3%E5%8F%8B%EF%BC%88%E7%AD%96%E7%95%A5%EF%BC%89%E7%89%A9%E4%BB%B6%E5%AE%9A%E7%BE%A9%E7%9A%84%E6%96%B9%E6%B3%95%E5%8D%B3%E5%8F%AF"><span class="nav-number">3.7.</span> <span class="nav-text">4. 在 David 的所有行爲，都直接呼叫女友（策略）物件定義的方法即可</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Main-Class-1"><span class="nav-number">3.8.</span> <span class="nav-text">Main Class</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#June-class"><span class="nav-number">3.9.</span> <span class="nav-text">June class</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Main-class"><span class="nav-number">3.9.1.</span> <span class="nav-text">Main class</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ChanChanDev"
+      src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+  <p class="site-author-name" itemprop="name">ChanChanDev</p>
+  <div class="site-description" itemprop="description">圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">標籤</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/chanchandev" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;chanchandev" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/chanchandev" title="FaceBook → https:&#x2F;&#x2F;www.facebook.com&#x2F;chanchandev" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-facebook fa-fw"></i>FaceBook</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://chanchandev.com/design-pattern/Strategy/Strategy%20%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/2415029893/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+      <meta itemprop="name" content="ChanChanDev">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="圈圈工程師">
+      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Strategy 設計模式 | 圈圈工程師">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Strategy 設計模式
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2021-03-04 23:47:22" itemprop="dateCreated datePublished" datetime="2021-03-04T23:47:22+08:00">2021-03-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2026-01-28 20:40:17" itemprop="dateModified" datetime="2026-01-28T20:40:17+08:00">2026-01-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/design-pattern/" itemprop="url" rel="index"><span itemprop="name">Design-Pattern</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/design-pattern/Strategy/" itemprop="url" rel="index"><span itemprop="name">Strategy</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/Strategy-Intro/Untitled.png"></p>
+<p>大衛總是因爲不同女友而要表現的行爲都有所不同，而搞得自己暈頭轉向，但後來學習了 Strategy 設計模式後，他就更有組織地管理他的女友們了，女友們也變得更滿意了，一起來看看他怎麼做到的吧！</p>
+<span id="more"></span>
+
+<br>
+
+<details class="note success" open><summary><p>simple</p>
+</summary>
+<p>HIHI～😍  如果你是第一次來的話，『Chan-Chan-Dev』是一個專門用簡單的圖文與故事講解網路程式技術的網站。<br>若你也喜歡用這種方式學習的話，歡迎加入 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.facebook.com/chanchandev">Chan-Chan-Dev Facebook</a> 的粉絲團，在發佈的時候就有比較多機會收到通知喔！😍</p>
+
+</details>
+
+<hr>
+<p>在寫程式的過程中，一定很常遇到需要很多不同情況而有不同行爲(策略)的功能。</p>
+<p>這樣子例子在生活中其實滿常見的，例如天氣變冷了，我們受到 Natural call 就會不自覺地想要吃火鍋，而天氣變熱了，我們就會覺得吃涼麵比較清爽，明明都是『吃』的行爲，但是卻因爲『氣溫』的情況不同，就會讓這個『吃』的行爲（策略）而有所不同。</p>
+<p>所以如果要達到上述的不同情況有不同的行爲，那條件語句是邏輯判斷的過程中無可避免的必須，但隨著情況增長，條件語句也會跟着變多，很快地就會難以維護了。</p>
+<p>因此很多不同的情況下，要如何用更少的 if else 更有結構與更有效率地來完成一樣的功能呢？ </p>
+<p>Strategy 設計模式提供了一套棒的解法，讓我們用個小故事來輕鬆地學習如何將 Strategy 設計模式運用在我們日常的開發當中吧 😍</p>
+<h1 id="Strategy-設計模式是什麼？"><a href="#Strategy-設計模式是什麼？" class="headerlink" title="Strategy 設計模式是什麼？"></a>Strategy 設計模式是什麼？</h1><p>Strategy 是一種行爲類的設計模式，讓一個物件因爲情況的改變，進而改變行爲（策略）。</p>
+<h1 id="如果沒用-Strategy-會怎樣嗎？🧐"><a href="#如果沒用-Strategy-會怎樣嗎？🧐" class="headerlink" title="如果沒用 Strategy 會怎樣嗎？🧐"></a>如果沒用 Strategy 會怎樣嗎？🧐</h1><p>讓我們一樣用一個故事來當起手式，這次要講講花心劈腿男大衛的故事，大衛是個花心的劈腿渣男，但是他卻很得意的自喻爲自己是 2020 年的現代韋小寶，他的夢想就是備齊他的十二金釵，過著十二女友同時在線且人人稱羨的幸福快樂的日子。只是他距離這個夢想還有點遙遠，因爲他目前只交到到三個女朋友，分別是：Mary、Babe、Linda。</p>
+<p>三個女朋友各有自己興趣、喜歡吃的東西、親密的暱稱，以及他騙那些女朋友他目前自己的職業是什麼，以下簡單地圖解整理一下：</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/Strategy-Intro/Untitled1.png"></p>
+<p>所以每次大衛要跟他們出去約會的時候，就要記得他女朋友的每個資訊細節，而且需要針對不同的女友（策略）表現出正確的行爲。如果不小心把 Mary 叫成北鼻，或者是跟 Linda 說，我這個禮拜要在營區留守的話，他的劈腿大計就會馬上就會識被了。所以他要針對這些不同女朋友（策略）而去改變他的稱呼方法（行爲）。</p>
+<p>所以在還沒學過 Strategy 設計模式的大衛會怎麼管理他的女友們呢？</p>
+<h2 id="David-Class"><a href="#David-Class" class="headerlink" title="David Class"></a>David Class</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">David</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String girlFriend;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">David</span><span class="params">(String girlFriend)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;目前在陪的女朋友：&quot;</span> + girlFriend);</span><br><span class="line">        <span class="built_in">this</span>.girlFriend = girlFriend;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">changeGirlFriend</span><span class="params">(String girlFriend)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;-----------------------&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;目前在陪的女朋友：&quot;</span> + girlFriend);</span><br><span class="line">        <span class="built_in">this</span>.girlFriend = girlFriend;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 問女友想要吃什麼？</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">askWhatToEet</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (girlFriend.equals(<span class="string">&quot;Mary&quot;</span>)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;要不要去吃韓式烤肉？&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (girlFriend.equals(<span class="string">&quot;Babe&quot;</span>)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;要不要去吃漢堡王？&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (girlFriend.equals(<span class="string">&quot;Linda&quot;</span>)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;要不要去吃法國菜？&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 問女友想要哪裏？</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">askWantToGo</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (girlFriend.equals(<span class="string">&quot;Mary&quot;</span>)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;我這邊有多一張免費的電影票，要不要去看電影呀？&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (girlFriend.equals(<span class="string">&quot;Babe&quot;</span>)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;最近好像有新開一個 Outlet，要不要去看看？&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (girlFriend.equals(<span class="string">&quot;Linda&quot;</span>)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;我們要不要去誠品看看有什麼新書嗎？&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 跟女友打招呼</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sayHello</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (girlFriend.equals(<span class="string">&quot;Mary&quot;</span>)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;豬豬，想不想我？&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (girlFriend.equals(<span class="string">&quot;Babe&quot;</span>)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;我好愛你喔，北鼻 😍&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (girlFriend.equals(<span class="string">&quot;Linda&quot;</span>)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;親愛的，你今天想我了嗎？&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 找藉口不能陪女友</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">findExcuseToEscape</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (girlFriend.equals(<span class="string">&quot;Mary&quot;</span>)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;豬豬，我這個週末被連長留下來留守，所以不能陪你了，哭哭。&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (girlFriend.equals(<span class="string">&quot;Babe&quot;</span>)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;北鼻，這個禮拜老闆剛好派我到地中海去出差，所以可能這週無法陪你，要想我喔。&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (girlFriend.equals(<span class="string">&quot;Linda&quot;</span>)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;親愛的，這個禮拜要陪教授開研討會，你要自己堅強喔。&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Main-Class"><a href="#Main-Class" class="headerlink" title="Main Class"></a>Main Class</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">David</span> <span class="variable">david</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">David</span>(<span class="string">&quot;Mary&quot;</span>);<span class="comment">// 目前在陪的女朋友：Mary</span></span><br><span class="line">        david.sayHello(); <span class="comment">// 豬豬，想不想我？</span></span><br><span class="line">        david.askWantToGo(); <span class="comment">// 我這邊有多一張免費的電影票，要不要去看電影呀？</span></span><br><span class="line">        david.askWhatToEet(); <span class="comment">// 要不要去吃韓式烤肉？</span></span><br><span class="line">        david.findExcuseToEscape(); <span class="comment">// 豬豬，我這個週末被連長留下來留守，所以不能陪你了，哭哭。</span></span><br><span class="line"></span><br><span class="line">        david.changeGirlFriend(<span class="string">&quot;Babe&quot;</span>); <span class="comment">// 目前在陪的女朋友：Babe</span></span><br><span class="line">        david.sayHello(); <span class="comment">// 我好愛你喔，北鼻 😍</span></span><br><span class="line">        david.askWantToGo(); <span class="comment">// 最近好像有新開一個 Outlet，要不要去看看？</span></span><br><span class="line">        david.askWhatToEet(); <span class="comment">// 要不要去吃漢堡王？</span></span><br><span class="line">        david.findExcuseToEscape(); <span class="comment">// 北鼻，這個禮拜老闆剛好派我到地中海去出差，所以可能這週無法陪你，要想我喔。</span></span><br><span class="line"></span><br><span class="line">        david.changeGirlFriend(<span class="string">&quot;Linda&quot;</span>); <span class="comment">// 目前在陪的女朋友：Linda</span></span><br><span class="line">        david.sayHello(); <span class="comment">// 親愛的，你今天想我了嗎？</span></span><br><span class="line">        david.askWantToGo(); <span class="comment">// 我們要不要去誠品看看有什麼新書嗎？</span></span><br><span class="line">        david.askWhatToEet(); <span class="comment">// 要不要去吃法國菜？</span></span><br><span class="line">        david.findExcuseToEscape(); <span class="comment">// 親愛的，這個禮拜要陪教授開研討會，你要自己堅強喔。</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>而最近 David 又與他的夢想拉近一點距離了，因爲他在酒吧成功地把到一位新的混血女友 June，而她的資訊如下：</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/Strategy-Intro/Untitled2.png"></p>
+<p>所以就會需要在每一個不同的行爲內在新增新的女友 June 的判斷條件：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 問女友想要吃什麼？</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">askWhatToEet</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 同上省略 ....</span></span><br><span class="line">        <span class="comment">// ....</span></span><br><span class="line">        <span class="comment">// ....</span></span><br><span class="line">        <span class="keyword">if</span> (girlFriend.equals(<span class="string">&quot;June&quot;</span>)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;要不要去逛饒河夜市&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 問女友想要哪裏？</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">askWantToGo</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 同上省略 ....</span></span><br><span class="line">        <span class="comment">// ....</span></span><br><span class="line">        <span class="comment">// ....</span></span><br><span class="line">        <span class="keyword">if</span> (girlFriend.equals(<span class="string">&quot;June&quot;</span>)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;我們今天要來看 Netflix 上有什麼好看的嗎？&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 跟女友打招呼</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sayHello</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 同上省略 ....</span></span><br><span class="line">        <span class="comment">// ....</span></span><br><span class="line">        <span class="comment">// ....</span></span><br><span class="line">        <span class="keyword">if</span> (girlFriend.equals(<span class="string">&quot;June&quot;</span>)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;哈尼，我不能沒有你！&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 找藉口不能陪女友</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">findExcuseToEscape</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 同上省略 ....</span></span><br><span class="line">        <span class="comment">// ....</span></span><br><span class="line">        <span class="comment">// ....</span></span><br><span class="line">        <span class="keyword">if</span> (girlFriend.equals(<span class="string">&quot;June&quot;</span>)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;哈尼，醫院要值班留守，所以可能無法陪你喔&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="問題：判斷式會因爲不同的情況增加-😭"><a href="#問題：判斷式會因爲不同的情況增加-😭" class="headerlink" title="問題：判斷式會因爲不同的情況增加 😭"></a>問題：判斷式會因爲不同的情況增加 😭</h1><p>由 David class 可以看出所有的要行爲都需要判斷目前的女友是哪一位，然後進行在這個女友的情況下的合理行爲，所以隨著 David 的女朋友變多，每一個行為的判斷式就會越多，就像是新增 June 一樣需要在每一個行爲新增判斷式。所以可想而知的是：</p>
+<blockquote>
+<p>有 12 個女友可能就會需要 12 個判斷式來符合把每個女朋友安撫地服服貼貼的需求。在這種架構之下，很難讓新增女友這件事情可以被規模化！ 😆</p>
+</blockquote>
+<p>所以 David 去上了女友管理學線上課程，學習到了 Strategy 的設計模式，以下是他學習後的筆記內容。</p>
+<h2 id="1-定義在不同情況下執行的行爲（策略）界面"><a href="#1-定義在不同情況下執行的行爲（策略）界面" class="headerlink" title="1. 定義在不同情況下執行的行爲（策略）界面"></a>1. 定義在不同情況下執行的行爲（策略）界面</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">IGirlFriend</span> &#123;</span><br><span class="line">    <span class="comment">// 問女友想要吃什麼？</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">askWhatToEet</span><span class="params">()</span>;</span><br><span class="line">    <span class="comment">// 問女友想要哪裏？</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">askWantToGo</span><span class="params">()</span> ;</span><br><span class="line">    <span class="comment">// 跟女友打招呼</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sayHello</span><span class="params">()</span>;</span><br><span class="line">    <span class="comment">// 找藉口不能陪女友</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">findExcuseToEscape</span><span class="params">()</span>;</span><br><span class="line">    <span class="comment">// 顯示女友名字</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">showName</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-將每個情況（女友）抽成一個獨立的-class-，並且實作上述不同情況下執行的行爲（策略）界面"><a href="#2-將每個情況（女友）抽成一個獨立的-class-，並且實作上述不同情況下執行的行爲（策略）界面" class="headerlink" title="2. 將每個情況（女友）抽成一個獨立的 class ，並且實作上述不同情況下執行的行爲（策略）界面"></a>2. 將每個情況（女友）抽成一個獨立的 class ，並且實作上述不同情況下執行的行爲（策略）界面</h2><p>所以我們會得到以下的女友（策略） class</p>
+<h2 id="Mary-class"><a href="#Mary-class" class="headerlink" title="Mary class"></a>Mary class</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Mary</span> <span class="keyword">implements</span> <span class="title class_">IGirlFriend</span> &#123;</span><br><span class="line">    <span class="comment">// 問女友想要吃什麼？</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">askWhatToEet</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;要不要去吃韓式烤肉？&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 問女友想要哪裏？</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">askWantToGo</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;我這邊有多一張免費的電影票，要不要去看電影呀？&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 跟女友打招呼</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sayHello</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;豬豬，想不想我？&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 找藉口不能陪女友</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">findExcuseToEscape</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;豬豬，我這個週末被連長留下來留守，所以不能陪你了，哭哭。&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 顯示女友名字</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">showName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Mary&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Babe-class"><a href="#Babe-class" class="headerlink" title="Babe class"></a>Babe class</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Babe</span> <span class="keyword">implements</span> <span class="title class_">IGirlFriend</span> &#123;</span><br><span class="line">    <span class="comment">// 問女友想要吃什麼？</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">askWhatToEet</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;要不要去吃漢堡王？&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 問女友想要哪裏？</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">askWantToGo</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;最近好像有新開一個 Outlet，要不要去看看？&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 跟女友打招呼</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sayHello</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;我好愛你喔，北鼻 😍&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 找藉口不能陪女友</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">findExcuseToEscape</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;北鼻，這個禮拜老闆剛好派我到地中海去出差，所以可能這週無法陪你，要想我喔。&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 顯示女友名字</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">showName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Babe&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Linda-class"><a href="#Linda-class" class="headerlink" title="Linda class"></a>Linda class</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Linda</span> <span class="keyword">implements</span> <span class="title class_">IGirlFriend</span> &#123;</span><br><span class="line">    <span class="comment">// 問女友想要吃什麼？</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">askWhatToEet</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;要不要去吃法國菜？&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 問女友想要哪裏？</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">askWantToGo</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;我們要不要去誠品看看有什麼新書嗎？&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 跟女友打招呼</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sayHello</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;親愛的，你今天想我了嗎？&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 找藉口不能陪女友</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">findExcuseToEscape</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;親愛的，這個禮拜要陪教授開研討會，你要自己堅強喔。&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 顯示女友名字</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">showName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Linda&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>經過以上調整後的 class，可以更一眼看到在這個女友之下，會需要做的行爲分別是什麼。</p>
+<p>以單一職責的角度來說，這個 class 也專門負責這個女友的所有行爲，而不需要去管其他女友（其他策略）發生什麼事情。</p>
+<p>如果對於單一職責的概念不太熟悉的朋友，也可以參考這篇 <a href="/design-pattern/SRP/single-responsibility-principle/2543391104/" title="Single Responsibility Principle（單一職責）">Single Responsibility Principle（單一職責）</a><br>快速地簡單瞭解一下喔 😊。</p>
+<h2 id="3-在-David-中將-girlFriend-屬性變成一種女友（策略）物件參考"><a href="#3-在-David-中將-girlFriend-屬性變成一種女友（策略）物件參考" class="headerlink" title="3. 在 David 中將 girlFriend 屬性變成一種女友（策略）物件參考"></a>3. 在 David 中將 girlFriend 屬性變成一種女友（策略）物件參考</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">David</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> IGirlFriend girlFriend;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">David</span><span class="params">(IGirlFriend girlFriend)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;目前在陪的女朋友：&quot;</span> + girlFriend.showName());</span><br><span class="line">        <span class="built_in">this</span>.girlFriend = girlFriend;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">changeGirlFriend</span><span class="params">(IGirlFriend girlFriend)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;-----------------------&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;目前在陪的女朋友：&quot;</span> +  girlFriend.showName());</span><br><span class="line">        <span class="built_in">this</span>.girlFriend = girlFriend;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 以下省略 ....</span></span><br><span class="line">    <span class="comment">// 以下省略 ....</span></span><br><span class="line">    <span class="comment">// 以下省略 ....</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-在-David-的所有行爲，都直接呼叫女友（策略）物件定義的方法即可"><a href="#4-在-David-的所有行爲，都直接呼叫女友（策略）物件定義的方法即可" class="headerlink" title="4. 在 David 的所有行爲，都直接呼叫女友（策略）物件定義的方法即可"></a>4. 在 David 的所有行爲，都直接呼叫女友（策略）物件定義的方法即可</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 問女友想要吃什麼？</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">askWhatToEet</span><span class="params">()</span> &#123;</span><br><span class="line">      girlFriend.askWhatToEet();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 問女友想要哪裏？</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">askWantToGo</span><span class="params">()</span> &#123;</span><br><span class="line">      girlFriend.askWantToGo();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 跟女友打招呼</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sayHello</span><span class="params">()</span> &#123;</span><br><span class="line">      girlFriend.sayHello();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 找藉口不能陪女友</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">findExcuseToEscape</span><span class="params">()</span> &#123;</span><br><span class="line">      girlFriend.findExcuseToEscape();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Main-Class-1"><a href="#Main-Class-1" class="headerlink" title="Main Class"></a>Main Class</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">David</span> <span class="variable">david</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">David</span>(<span class="keyword">new</span> <span class="title class_">Mary</span>()); <span class="comment">// 目前在陪的女朋友：Mary</span></span><br><span class="line">        david.sayHello(); <span class="comment">// 豬豬，想不想我？</span></span><br><span class="line">        david.askWantToGo(); <span class="comment">// 我這邊有多一張免費的電影票，要不要去看電影呀？</span></span><br><span class="line">        david.askWhatToEet(); <span class="comment">// 要不要去吃韓式烤肉？</span></span><br><span class="line">        david.findExcuseToEscape(); <span class="comment">// 豬豬，我這個週末被連長留下來留守，所以不能陪你了，哭哭。</span></span><br><span class="line"></span><br><span class="line">        david.changeGirlFriend(<span class="keyword">new</span> <span class="title class_">Babe</span>()); <span class="comment">// 目前在陪的女朋友：Babe</span></span><br><span class="line">        david.sayHello(); <span class="comment">// 我好愛你喔，北鼻 😍</span></span><br><span class="line">        david.askWantToGo(); <span class="comment">// 最近好像有新開一個 Outlet，要不要去看看？</span></span><br><span class="line">        david.askWhatToEet(); <span class="comment">// 要不要去吃漢堡王？</span></span><br><span class="line">        david.findExcuseToEscape(); <span class="comment">// 北鼻，這個禮拜老闆剛好派我到地中海去出差，所以可能這週無法陪你，要想我喔。</span></span><br><span class="line"></span><br><span class="line">        david.changeGirlFriend(<span class="keyword">new</span> <span class="title class_">Linda</span>()); <span class="comment">// 目前在陪的女朋友：Linda</span></span><br><span class="line">        david.sayHello(); <span class="comment">// 親愛的，你今天想我了嗎？</span></span><br><span class="line">        david.askWantToGo(); <span class="comment">// 我們要不要去誠品看看有什麼新書嗎？</span></span><br><span class="line">        david.askWhatToEet(); <span class="comment">// 要不要去吃法國菜？</span></span><br><span class="line">        david.findExcuseToEscape(); <span class="comment">// 親愛的，這個禮拜要陪教授開研討會，你要自己堅強喔。</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>David class 調整過後，Main Class 調整的幅度不大，只是將這些策略從字串改爲物件的方式使用，但是可以從調整過後的 David class 看到，藉由 Strategy 的方式已經成功地將 David class 內需要針對每個女友（策略）所設定的條件判斷全部移除，而只是單純地呼叫女友（策略）物件內所定義的方法而已。</p>
+<p>所以如果我們今天一樣多了一個新的混血女友 June 的話，我們會怎麼增加呢？我們只需要新增一個 June class，而 David class 根本不需要做任何的調整，我們就可以在 Main class 開心的使用 June 的女友（策略）物件囉！</p>
+<h2 id="June-class"><a href="#June-class" class="headerlink" title="June class"></a>June class</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">June</span> <span class="keyword">implements</span> <span class="title class_">IGirlFriend</span> &#123;</span><br><span class="line">    <span class="comment">// 問女友想要吃什麼？</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">askWhatToEet</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;要不要去逛饒河夜市&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 問女友想要哪裏？</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">askWantToGo</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;我們今天要來看 Netflix 上有什麼好看得嗎？&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 跟女友打招呼</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sayHello</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;哈尼，我不能沒有你！&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 找藉口不能陪女友</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">findExcuseToEscape</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;哈尼，醫院要值班留守，所以可能無法陪你喔&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 顯示女友名字</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">showName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;June&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Main-class"><a href="#Main-class" class="headerlink" title="Main class"></a>Main class</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 以上省略 ....</span></span><br><span class="line">      <span class="comment">// 以上省略 ....</span></span><br><span class="line">      <span class="comment">// 以上省略 ....</span></span><br><span class="line"></span><br><span class="line">        david.changeGirlFriend(<span class="keyword">new</span> <span class="title class_">June</span>()); <span class="comment">// 目前在陪的女朋友：June</span></span><br><span class="line">        david.sayHello(); <span class="comment">// 哈尼，我不能沒有你！</span></span><br><span class="line">        david.askWantToGo(); <span class="comment">// 我們今天要來看 Netflix 上有什麼好看得嗎？</span></span><br><span class="line">        david.askWhatToEet(); <span class="comment">// 要不要去逛饒河夜市</span></span><br><span class="line">        david.findExcuseToEscape(); <span class="comment">// 哈尼，醫院要值班留守，所以可能無法陪你喔</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最後來看看調整之後的架構狀態 😊</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/Strategy-Intro/Untitled3.png"></p>
+<p>這樣做是不是要擴充其他女友更爲方便了呢？ 自從 David 學會了 Strategy 管理大法之後，他也更容易少發生不小心叫錯名字，或者是搞錯女朋友興趣的出包狀況，每個女朋友對他也更滿意了，也介紹了更多身邊的好閨蜜給 David 當女朋友，讓 David 很快就達到他的夢想了，甚至過沒多久就超越他的夢想了，一切都是 Strategy 的功勞呀！（這到底是什麼神展開 🤣）</p>
+<p>所以男孩們！也夢想像人生勝利組 David 一樣管理好自己的女友們（策略們）嗎？那 Strategy 設計模式將會是你人生的必修課囉！</p>
+<p>如果有任何問題都歡迎在底下留言，或者是哪裡有不小心講錯的地方也歡迎一起討論 ，最後感謝你收看到這裏囉 😍</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/" rel="tag"><i class="fa fa-tag"></i> 設計模式</a>
+              <a href="/tags/Design-Pattern/" rel="tag"><i class="fa fa-tag"></i> Design-Pattern</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Sharing/%E5%A6%82%E6%9E%9C%E6%97%A9%E7%9F%A5%E9%81%93/early-return/3835460171/" rel="prev" title="儘早 Return 函數：讓 if 邏輯條件判斷不再一層又一層！">
+                  <i class="fa fa-angle-left"></i> 儘早 Return 函數：讓 if 邏輯條件判斷不再一層又一層！
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/design-pattern/Bridge/Bridge-Intro/2482019753/" rel="next" title="Bridge 設計模式">
+                  Bridge 設計模式 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ChanChanDev</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"Jessie75919","repo":"Jessie75919.github.io","client_id":"5cc00853735d25bd22f3","client_secret":"42c46caebd1f91cd54924e2ad6c3dc6fec94f37e","admin_user":"Jessie75919","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-TW","body":null,"labels":"Gitalk","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"7983a65c1af244994c29bf5f01161f59"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

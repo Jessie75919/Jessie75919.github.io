@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="mask-icon" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"chanchandev.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"onmobile":false},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null,"show_result":"flat"},"fold":{"enable":false,"height":500},"language":false,"highlight_theme":"normal"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"找到 ${hits} 個搜索結果（用時 ${time} 毫秒）","hits":"找到 ${hits} 個搜索結果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Http Cache 是什麼？為什麼需要 Cache 呢？今天就來點 Cache 相關的小學習吧！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP Cache 是什麼呢？用小故事圖解來學習 Cache 吧！">
+<meta property="og:url" content="https://chanchandev.com/HTTP/Cache/cache-intro/1156542307/index.html">
+<meta property="og:site_name" content="圈圈工程師">
+<meta property="og:description" content="Http Cache 是什麼？為什麼需要 Cache 呢？今天就來點 Cache 相關的小學習吧！">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/cache-intro/Cover.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/cache-intro/main-01.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/cache-intro/chef-master.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/cache-intro/receipt.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/session-cookie-intro/Http.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/cache-intro/req_resp_global_map.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/cache-intro/no-cache.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/cache-intro/with-cache.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/cache-intro/chef-master-2.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/cache-intro/Google-Logo-Max-Age.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/cache-intro/Cache-Max-Age-Workflow.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/cache-intro/e-tag.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/cache-intro/if-none-match.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/cache-intro/chef-master-3.jpg">
+<meta property="og:image" content="https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching/http_revved_fix_typo.png">
+<meta property="article:published_time" content="2021-04-07T14:32:23.000Z">
+<meta property="article:modified_time" content="2026-01-28T12:40:17.308Z">
+<meta property="article:author" content="ChanChanDev">
+<meta property="article:tag" content="HTTP">
+<meta property="article:tag" content="Cache">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/cache-intro/Cover.jpg">
+
+
+<link rel="canonical" href="https://chanchandev.com/HTTP/Cache/cache-intro/1156542307/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://chanchandev.com/HTTP/Cache/cache-intro/1156542307/","path":"HTTP/Cache/cache-intro/1156542307/","title":"HTTP Cache 是什麼呢？用小故事圖解來學習 Cache 吧！"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>HTTP Cache 是什麼呢？用小故事圖解來學習 Cache 吧！ | 圈圈工程師</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R47Z93ZJTM"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-R47Z93ZJTM","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">圈圈工程師</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Change Change Developer</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-back-end"><a href="/categories/back-end/" rel="section"><i class="fas fa-rocket fa-fw"></i>Back-End</a></li><li class="menu-item menu-item-sharing"><a href="/categories/Sharing/" rel="section"><i class="fas fa-star fa-fw"></i>Sharing</a></li><li class="menu-item menu-item-reading"><a href="/categories/Reading/" rel="section"><i class="fas fa-book fa-fw"></i>Reading</a></li><li class="menu-item menu-item-design-pattern"><a href="/categories/design-pattern/" rel="section"><i class="fas fa-sitemap fa-fw"></i>Design-Pattern</a></li><li class="menu-item menu-item-javascript"><a href="/categories/js/" rel="section"><i class="fas fa-code fa-fw"></i>Javascript</a></li><li class="menu-item menu-item-分類"><a href="/categories/" rel="section"><i class="fas fa-folder-open fa-fw"></i>分類</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%9D%E7%95%99%E7%B4%99%E6%9C%AC%E9%A3%9F%E8%AD%9C%E5%9C%A8%E9%A3%9F%E8%AD%9C%E6%9C%AC%E6%9C%AC-Cache"><span class="nav-number">1.</span> <span class="nav-text">保留紙本食譜在食譜本本(Cache)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%82%BA%E4%BB%80%E9%BA%BC%E9%9C%80%E8%A6%81-Cache"><span class="nav-number">2.</span> <span class="nav-text">為什麼需要 Cache?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF-Cache%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">什麼是 Cache？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B2%92%E6%9C%89%E4%BD%BF%E7%94%A8-Cache"><span class="nav-number">3.0.1.</span> <span class="nav-text">沒有使用 Cache</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-Cache"><span class="nav-number">3.0.2.</span> <span class="nav-text">使用 Cache</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cache-Control"><span class="nav-number">4.</span> <span class="nav-text">Cache-Control</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chef-Master-%E6%9B%B4%E6%96%B0%E6%96%99%E7%90%86%E5%81%9A%E6%B3%95"><span class="nav-number">4.1.</span> <span class="nav-text">Chef Master 更新料理做法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cache-%E6%9C%89%E6%95%88%E6%9C%9F%E9%99%90-max-age"><span class="nav-number">5.</span> <span class="nav-text">Cache 有效期限 (max-age)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Expires"><span class="nav-number">5.0.1.</span> <span class="nav-text">Expires</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Etag-If-None-Match"><span class="nav-number">6.</span> <span class="nav-text">Etag &#x2F; If-None-Match</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Etag"><span class="nav-number">6.1.</span> <span class="nav-text">Etag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#If-None-Match"><span class="nav-number">6.2.</span> <span class="nav-text">If-None-Match</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cache-Eviction"><span class="nav-number">7.</span> <span class="nav-text">Cache Eviction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E5%8C%96%E6%AA%94%E5%90%8D"><span class="nav-number">8.</span> <span class="nav-text">版本化檔名</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cache-%E7%9A%84%E7%A8%AE%E9%A1%9E"><span class="nav-number">9.</span> <span class="nav-text">Cache 的種類</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B5%90%E8%AB%96"><span class="nav-number">10.</span> <span class="nav-text">結論</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E6%96%87%E7%AB%A0"><span class="nav-number">10.0.1.</span> <span class="nav-text">參考文章</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ChanChanDev"
+      src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+  <p class="site-author-name" itemprop="name">ChanChanDev</p>
+  <div class="site-description" itemprop="description">圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">標籤</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/chanchandev" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;chanchandev" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/chanchandev" title="FaceBook → https:&#x2F;&#x2F;www.facebook.com&#x2F;chanchandev" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-facebook fa-fw"></i>FaceBook</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://chanchandev.com/HTTP/Cache/cache-intro/1156542307/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+      <meta itemprop="name" content="ChanChanDev">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="圈圈工程師">
+      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="HTTP Cache 是什麼呢？用小故事圖解來學習 Cache 吧！ | 圈圈工程師">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HTTP Cache 是什麼呢？用小故事圖解來學習 Cache 吧！
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2021-04-07 22:32:23" itemprop="dateCreated datePublished" datetime="2021-04-07T22:32:23+08:00">2021-04-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2026-01-28 20:40:17" itemprop="dateModified" datetime="2026-01-28T20:40:17+08:00">2026-01-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/HTTP/" itemprop="url" rel="index"><span itemprop="name">HTTP</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/HTTP/Cache/" itemprop="url" rel="index"><span itemprop="name">Cache</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/cache-intro/Cover.jpg"></p>
+<p>Http Cache 是什麼？為什麼需要 Cache 呢？今天就來點 Cache 相關的小學習吧！</p>
+<span id="more"></span>
+
+<br>
+
+<details class="note success" open><summary><p>simple</p>
+</summary>
+<p>HIHI～😍  如果你是第一次來的話，『Chan-Chan-Dev』是一個專門用簡單的圖文與故事講解網路程式技術的網站。<br>若你也喜歡用這種方式學習的話，歡迎加入 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.facebook.com/chanchandev">Chan-Chan-Dev Facebook</a> 的粉絲團，在發佈的時候就有比較多機會收到通知喔！😍</p>
+
+</details>
+
+<p>我們進入正片囉 😆</p>
+<p>在學習網頁開發的過程中，多多少少都會耳聞 <code>快取</code> 或者是 <code>Cache</code> 這個關鍵字，但是他究竟是用來幹嘛的呢？</p>
+<p>在進入 Cache 的主題前，我們一樣先來個小故事當作起手式。</p>
+<p>這次來說說小明跟料理大師 Chef Master 拜師學藝後自己經營餐館的故事囉！</p>
+<hr>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/cache-intro/main-01.jpg" alt="小明"><br>小明從小就夢想著自己經營著一家餐館，想像著端出熱騰騰的美食到客人面前，客人因爲吃到美食的那刻銷魂的神情，光想到這裏他就感到十分地嚮往。</p>
+<p>無奈他目前的工作都跟美食搭不上邊，於是他終於在 30 歲的時候下定決心要成爲特級廚師 😅，所以就 Google 了一下，在陽明山裡找到曾經也是特級廚師的 Chef Master。<br><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/cache-intro/chef-master.jpg" alt="Chef-Master 別問為什麼他會爆肌 😆"><br>經過了半年辛苦的密及訓練，Chef Master 終於同意他可以下山開一家屬於自己的餐廳了。</p>
+<p>只是他有個但書：</p>
+<details class="note info" open><summary><p>simple</p>
+</summary>
+<p>爲了怕小明的餐廳砸了他 Chef Master 的招牌，所以餐廳裡的食譜一律由他自己親自設計。</p>
+
+</details>
+
+<p>當小明的店風風光光開幕的那一天，因爲大家都還不知道這家店的存在，所以總共只有 3 個人來消費，但即使如此在第一天結束後，小明就發現他自己已經累了半死了，這究竟是為什麼呢？</p>
+<p>第一天開店的時候是這樣子的：</p>
+<blockquote>
+<p>因爲 Chef Master 說食譜要由他親自設計準備，所以當第一個客人點了『蛋炒飯』的時候，小明請客人等等，自己就馬上出發到陽明山跟 Chef Master 要『蛋炒飯』的食譜，等 Chef Master 設計完並且<code>口頭</code> 告訴小明怎麼料理之後，他才又氣喘吁吁地趕回到店裏，依照著印象中上面開始製作『蛋炒飯』料理，等這盤炒飯端上桌到客人面前已經是 30 分鐘之後了。</p>
+</blockquote>
+<blockquote>
+<p>第二個客人則點了『炒烏龍麵』，於是小明又馬上去陽明山跟 Chef Master 問『炒烏龍麵』的做法後，才又回來準備料理這道『炒烏龍麵』，只是回來的時候發現客人早已不在了。</p>
+</blockquote>
+<blockquote>
+<p>第三個客人一樣是點了『蛋炒飯』，但是此時的小明已經忘記剛剛『蛋炒飯』的做法了，於是又得跑一趟陽明山去詢問 Chef Master 『蛋炒飯』的做法，然後在一路趕回來。</p>
+</blockquote>
+<details class="note danger" open><summary><p>simple</p>
+</summary>
+<p>問題點：每次客人點了什麼料理，都要跑陽明山一次，即使點了料理一樣，也會因爲已經忘記做法一樣得上一次陽明山 😭</p>
+
+</details>
+
+
+
+<h1 id="保留紙本食譜在食譜本本-Cache"><a href="#保留紙本食譜在食譜本本-Cache" class="headerlink" title="保留紙本食譜在食譜本本(Cache)"></a>保留紙本食譜在食譜本本(Cache)</h1><p>在第一天的晚上小明驚覺這樣子餐廳根本無法經營下去，於是隔天跟 Chef Master 商量說：「Chef Master，能不能下次你設計好的食譜就寫在紙上，然後讓我帶回去 <code>留存一份</code>，這樣下次遇到一樣的料理我就不用再跑一趟了？」，Chef Master 點頭表示同意。</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/cache-intro/receipt.jpg" alt="食譜本本登場！！"></p>
+<p>因爲調整為上述 <code>保留紙本食譜在店裏</code> 的做法後，第一次客人點了『蛋炒飯』，雖然第一次總是得跑去跟 Chef Master 要『蛋炒飯』的食譜，但是在之後就可以把『蛋炒飯』的食譜放入 <code>食譜本本</code>裡。因此只要之後有任何一個客人再點了『蛋炒飯』的話，小明馬上就可以從 <code>食譜本本</code> 找到『蛋炒飯』的食譜，除了可以 <code>節省每次都要跑陽明山的舟車勞頓</code> 以外， <code>客人終於也可以快速地吃到『蛋炒飯』了</code>。</p>
+<p>因爲這本 <code>食譜本本</code> 的功勞，小明店裏出菜的速度有了大幅度的進化，讓他的生意開始越來越好。</p>
+<p>從上述小故事我們簡單地瞭解到：</p>
+<details class="note warning" open><summary><p>simple</p>
+</summary>
+<p>一份資料每次都要去經過長途跋涉的距離大老遠拿回來之後，在之後即使是同一份資料還是得去拿一次，似乎是很沒有效率的做法，就如同故事裏的『口述的料理做法』</p>
+
+</details>
+
+
+<p>聰明的你一定會想說：</p>
+<details class="note success" open><summary><p>simple</p>
+</summary>
+<p>身邊留一份備份的資料就好了阿 😆</p>
+
+</details>
+
+<p>沒錯，這就是 Cache 的作用，他像故事裏的 <code>食譜本本</code> 一樣，<code>存放了曾經下載過的檔案備份</code>。</p>
+<p>現在，讓我們現在把鏡頭交給棚內主播 🎥</p>
+<hr>
+<p>HTTP 因爲是 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://zh.wikipedia.org/wiki/%E4%B8%BB%E5%BE%9E%E5%BC%8F%E6%9E%B6%E6%A7%8B">Client 與 Server 的架構</a>，所以每次 Client 端需要什麼資料都必須發送一個 <code>Request</code> 給 Server 端，並且由 Server 那邊回覆一個 <code>Response</code> 把資料傳遞回來。</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/session-cookie-intro/Http.jpg" alt="請求與回覆示意圖"></p>
+<p>雖然上圖看起來好像很近，但是他實際的地理位置的距離可能是這個樣子的：</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/cache-intro/req_resp_global_map.jpg" alt="實際使用者與伺服器之間的地理位置距離"></p>
+<p>因此想像一下每次使用者需要從我們的伺服器取得資料都要經過這個距離的傳輸，而瀏覽器卻要等這些資料回來才能顯示在網頁上，可能會讓使用者使用的體驗不佳。</p>
+<p>如果使用者按了瀏覽器上的『重新整理』按鈕，同樣的傳輸流程就需要在跑一次。</p>
+<p>這些檔案之前已經下載在自己的電腦裡過一次了，就還需要 <code>重新下載</code> 所有的檔案。</p>
+<p>對於使用手機有限網路流量的使用者極度的不友善，因爲他只要重新整理幾次我們的網站，他的網路流量扣打就馬上被吃光光了 😭</p>
+<h1 id="為什麼需要-Cache"><a href="#為什麼需要-Cache" class="headerlink" title="為什麼需要 Cache?"></a>為什麼需要 Cache?</h1><p>講了這麼久 Cache 到底有什麼好處呢？</p>
+<ul>
+<li>減少延遲與網路傳輸（讓非網路吃到飽的使用者節省網路流量的費用）😊</li>
+<li>減少網站顯示前的等待時間（如果已經瀏覽過這個網頁，可以大幅加速網頁內容的呈現）🚀</li>
+<li>讓網站變得更即時（因爲下載過的檔案可以直接從 Cache 裏面拿）⭐️</li>
+<li>減緩了伺服器的需要給每個 Client 回應的負擔（因爲減少了再去找伺服器要資料，所以伺服器也可以輕鬆一點囉）😎</li>
+</ul>
+<h1 id="什麼是-Cache？"><a href="#什麼是-Cache？" class="headerlink" title="什麼是 Cache？"></a>什麼是 Cache？</h1><p>依據 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://zh.wikipedia.org/wiki/Web%E7%BC%93%E5%AD%98">wiki</a> 的定義如下：</p>
+<details class="note success" open><summary><p>simple</p>
+</summary>
+<p>Web快取（或HTTP快取）是用於臨時儲存（快取）Web文件（如HTML頁面和圖像），以減少伺服器延遲的一種資訊科技。Web快取系統會儲存下通過這套系統的文件的副本；如果滿足某些條件，則可以由快取滿足後續請求。[1] Web快取系統既可以指裝置，也可以指電腦程式。</p>
+
+</details>
+
+
+
+<p>我們簡單地來看一下有沒有 Cache 的 <code>Reqeust</code> 與 <code>Response</code> 的差異吧。</p>
+<h3 id="沒有使用-Cache"><a href="#沒有使用-Cache" class="headerlink" title="沒有使用 Cache"></a>沒有使用 Cache</h3><p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/cache-intro/no-cache.jpg" alt="沒有使用 Cache"></p>
+<h3 id="使用-Cache"><a href="#使用-Cache" class="headerlink" title="使用 Cache"></a>使用 Cache</h3><p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/cache-intro/with-cache.jpg" alt="使用 Cache"></p>
+<h1 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h1><p>我們可以 <code>Reqeust</code> 或 <code>Response</code> 的 header 找到 <code>Cache-Control</code> 的設定，<code>Cache-Control</code>是 <code>HTTP/1.1 </code>之後才有的標頭，專門用來控制 Cache 相關的機制，他可以有幾種不同的寫法，就來簡單地看一下吧～</p>
+<table>
+<thead>
+<tr>
+<th align="center">完全不使用 Cache</th>
+<th align="center">使用 Cache<br />但是每次都要重新檢查一次</th>
+<th align="center">私人 Cache</th>
+<th align="center">公開 Cache</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Cache-Control: no-store</td>
+<td align="center">Cache-Control: no-cache</td>
+<td align="center">Cache-Control: private</td>
+<td align="center">Cache-Control: public</td>
+</tr>
+</tbody></table>
+<p>有了 Cache 真的是好棒棒 ！但是故事真的就這樣子幸福快樂了嗎？讓我們看下去吧～</p>
+<hr>
+<h2 id="Chef-Master-更新料理做法"><a href="#Chef-Master-更新料理做法" class="headerlink" title="Chef Master 更新料理做法"></a>Chef Master 更新料理做法</h2><p>隨著店裏生意越來越好，Chef Master 在陽明山下都聽到他得意門生的美名，於是他親自下山來祝賀他的得意門生，到店裏後馬上叫他上一盤『蛋炒飯』來測試一下他的能力。</p>
+<p>等熱騰騰冒着香濃鍋氣的『蛋炒飯』上桌後，Chef Master 馬上嚐了一口，本來慈眉善目的神情突然立刻大變，讓侍立在旁的小明嚇到馬上跪下來。</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/cache-intro/chef-master-2.jpg" alt="Chef Master 眼睛睜開了！？"></p>
+<p>「你怎麼會用這麼鹹，『蛋炒飯』的做法我早就改成用 <code>半湯匙</code> 的醬油了，你這應該還是<code>一湯匙</code>的量吧？」Chef Master 嚴厲地問著。</p>
+<p>小明跪著拿出 <code>食譜本本</code> 上『蛋炒飯』的食譜，上頭的確記錄著是用<code>一湯匙</code>的醬油。</p>
+<details class="note danger" open><summary><p>simple</p>
+</summary>
+<p>問題點：若食譜已經收錄到 <code>食譜本本</code> 後，Chef Master 對於菜色的設計有任何的更動，小明店內的 <code>食譜本本</code> 無法被即時更新 😫</p>
+
+</details>
+
+
+
+<p>於是小明跟 Chef Master 討論了一個調整做法，就是在食譜上標示這張食譜的 <code>『最大壽命 (max-age)』</code>。</p>
+<details class="note success" open><summary><p>simple</p>
+</summary>
+<p>最大壽命的意思就是從這張食譜下山開始，過了多久之後這張食譜就會失效了。若食譜失效的話小明又要上陽明山拿取新版本的食譜，避免上述的問題再次發生。</p>
+
+</details>
+
+
+
+<h1 id="Cache-有效期限-max-age"><a href="#Cache-有效期限-max-age" class="headerlink" title="Cache 有效期限 (max-age)"></a>Cache 有效期限 (max-age)</h1><p>上述的故事情境也是會上演在</p>
+<div class="note success danger"><p>當伺服器已經更新了某些檔案，但是瀏覽器的 Cache 卻依然還是舊版的內容</p>
+</div>
+
+<p>因此我們在 <code>Cache-Control</code> 可以用 <code>max-age</code> 的參數設定這個 Cache 的 <code>最大有效期限</code>，單位爲 <code>秒</code>。<br>若不常更換的檔案，也許我們可以設定 <code>1年</code> 的有效期限： 60(秒) * 60(分) * 24(小時) * 365(天) = 31536000(秒)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cache-Control: max-age=31536000</span><br></pre></td></tr></table></figure>
+<p>例如 Google 搜尋頁面的 Logo，也許他們預期不會一直頻繁地更換，所以設定了 <code>max-age=31536000</code></p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/cache-intro/Google-Logo-Max-Age.jpg" alt="Google Logo Cache max-age"></p>
+<p>MDN 上面關於 <code>max-age</code> 的流程已經圖解的很棒了，所以稍微調整一下 For 目前的 Case 直接使用囉。</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/cache-intro/Cache-Max-Age-Workflow.jpg" alt="Image From MDN"></p>
+<details class="note info" open><summary><p>simple</p>
+</summary>
+<h3 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h3><p><code>Expires</code> 是 HTTP/1.0 的標頭，跟 <code>max-age</code> 不一樣的是，他裏面的值是日期的內容。</p>
+<p>他是用來判斷在這個日期之後的內容應該被判定爲 <code>stale</code> 過期狀態，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Expires: Wed, 21 Oct 2015 07:28:00 GMT</span><br></pre></td></tr></table></figure>
+
+<p>但有一點要注意的是，若 <code>Cache-Control</code> 已經有定義了 <code>max-age</code> 的話，那 <code>Expires</code> 的值就會被忽略掉囉，反之，就會以他作爲這個內容是否過期的判斷。</p>
+
+</details>
+
+<h1 id="Etag-If-None-Match"><a href="#Etag-If-None-Match" class="headerlink" title="Etag / If-None-Match"></a>Etag / If-None-Match</h1><p>食譜上有了 <code>max-age</code> 有效期限雖然很棒，但是如果當時後 Chef Master 在 <code>max-age</code> 寫了 <code>432000 秒（5天)</code>，到了 5 天之後發現過期了，小明依然要跑一趟陽明山。到了山上問了 Chef Master 後才發現『蛋炒飯』的料理方法，繼上次改過之後就沒有在動過了，Chef Master 爲了確保小明的 <code>食譜本本</code> 是最新的，於是還是叫小明拿着 <code>一模一樣</code> 的『蛋炒飯』食譜回到店裏。</p>
+<details class="note danger" open><summary><p>simple</p>
+</summary>
+<p>問題點：等食譜失效後，跑了一趟老遠才發現，食譜依然沒有更改過，卻又要帶一份一模一樣的食譜回來</p>
+
+</details>
+
+<p>於是小明提出了一個新的解法：</p>
+<details class="note success" open><summary><p>simple</p>
+</summary>
+<p>當每次他從山上拿食譜回來的時候，Chef Master 會再多給他這個食譜的 <code>版本號碼</code> ，例如 <code>W/v1</code> 。下次如果發現這個食譜過期的話，小明就順手地帶上這組 <code>W/v1</code>的版本號碼，跟山上的 Chef Master 核對食譜的版本號碼是否一樣，如果一樣的話，就不用在帶一份一樣的食譜下山了，這不就可以 <code>解決帶一份一模一樣的食譜回來</code> 的問題了嗎？ 😍</p>
+
+</details>
+
+<p>但是等食譜過期後，上一次陽明山確認版本是免不了的過程，但跟 Chef Master 確認版本的號碼沒有更動之後，就可以不用再帶一樣的東西回來囉 😆</p>
+<h2 id="Etag"><a href="#Etag" class="headerlink" title="Etag"></a>Etag</h2><p><code>Etag</code> 就像是上述講的這份資料的 <code>版號</code>，可以在伺服器回覆的 <code>Response</code> 裡頭找到，例如：<a target="_blank" rel="noopener external nofollow noreferrer" href="https://developer.mozilla.org/zh-CN/">MDN</a> 的首頁</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/cache-intro/e-tag.jpg" alt="E-Tag"></p>
+<h2 id="If-None-Match"><a href="#If-None-Match" class="headerlink" title="If-None-Match"></a>If-None-Match</h2><p>當在第一次的回覆(Response)帶有 <code>Etag</code> 的時候，下次若已經超過了 <code>max-age</code> 的期限的話，瀏覽器就會帶著 <code>Etag</code> 的值 <code>W/&quot;cb80fdf89ab2bcac3be8a431229f0ef8&quot;</code>，並且放在 <code>if-none-match</code> 的欄位裡，跟著請求一起送出。</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/cache-intro/if-none-match.jpg" alt="If-None-Match"></p>
+<p>若伺服器發現這個版號沒有更改，就會回覆 <code>304 (Not Modified)</code> 的回覆，所以就不需要在帶同樣一份的資料回來，也大大地減少了檔案的傳輸量喔 😍</p>
+<h1 id="Cache-Eviction"><a href="#Cache-Eviction" class="headerlink" title="Cache Eviction"></a>Cache Eviction</h1><p>因為客人點菜的料理五花八門，這本 <code>食譜本本</code> 也越來越厚，都快要從一樓疊到二樓這麼高了。</p>
+<p>因爲每頁食譜有了 <code>max-age 有效期限</code> ，所以小明都會花點時間檢查哪些食譜沒有過期，如果沒有過期就會標記爲 <code>fresh</code> ，若過期的話就會標記爲 <code>stale</code>。</p>
+<p>對於那些過期的食譜，小明也不會馬上丟棄掉，還記得每張食譜都有<code>版本號碼</code>了嗎？</p>
+<p>因此小明一樣可以帶著這個食譜的 <code>版本號碼</code> 去山上問 Chef Master 是否有更新，若沒有更新的話就不需要帶一樣的食譜下山，只是下山之後要記得更新那張食譜的 <code>age</code>資訊，讓他標記爲 <code>fresh</code> 的狀態即可。</p>
+<h1 id="版本化檔名"><a href="#版本化檔名" class="headerlink" title="版本化檔名"></a>版本化檔名</h1><p>就這樣經過上述的流程調整，小明的店經過好長一段時間的成長期。直到一天 Chef Master 發生了一個意外。</p>
+<p>2 天前當小明上山來跟 Chef Master 要『鮭魚炒飯』的食譜的時候，Chef Master 似乎是因爲昨天沒睡好，不小心把『鮭魚』寫成『章魚』。這是何等天大的錯誤，怎麼會發生在 Chef Master 身上呢？</p>
+<p>於是 Chef Master 在發現後，立馬更改了食譜上的內容，只是那張食譜上的 <code>max-age 有效期限</code> 寫著是 3 天之後，也就是明天！也就是說小明明天才會上山來確認『鮭魚炒飯』的食譜是否有更新。OMG！OMG！OMG！ Chef Master 像熱鍋上的螞蟻地想要 <code>修正這個錯誤</code> ，一想到他多年來辛苦建立的名聲，只因為一字之差就要化為灰燼，他就無比地焦慮。</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/cache-intro/chef-master-3.jpg" alt="Chef Master 完全體爆發？"></p>
+<details class="note danger" open><summary><p>simple</p>
+</summary>
+<p>問題點：若想要在 <code>有效期限內</code> <code>更新</code> 食譜的話，之前的做法似乎都無法達到這個效果。</p>
+<p>因爲在<code>有效期限內</code> 小明就會直接拿店內裡的 <code>食譜本本</code>直接來用了，而不會再上山一次問 Chef Master 是否有更新 😅</p>
+
+</details>
+
+
+
+<p>等到隔日小明上山之後，Chef Master 才趕緊跟他說修正這個錯誤，也好險在那之前沒有人點了『鮭魚炒飯』，所以 Chef Master 的招牌被 hold 住了！</p>
+<p>於是他們一起想了這個問題的解決方案，經過了 3 天 3 夜終於想到解法了！</p>
+<details class="note success" open><summary><p>simple</p>
+</summary>
+<p>就是將小明店裏面的菜單上的招牌由 Chef Master 遠端操控顯示。例如本來小明的菜單上寫著『鮭魚炒飯』，後來因爲 Chef Master 有更改這道食譜後，他就直接透過遠端操控的方式，將招牌上『鮭魚炒飯』改成『鮭魚炒飯●改』。</p>
+<p>因此客人看到『鮭魚炒飯●改』的時候就會跟小明點菜，小明一發現在 <code>食譜本本</code> 裏面沒有這道『鮭魚炒飯●改』的食譜的時候，他就知道必須上山一趟取得最新的『鮭魚炒飯●改』的食譜了。</p>
+
+</details>
+
+<details class="note " open><summary><p>blue fas fa-question-circle simple</p>
+</summary>
+<p>如果之後又有更新『鮭魚炒飯●改』的時候怎麼辦呢？</p>
+
+</details>
+
+<p>沒錯，就是把菜單上改成『鮭魚炒飯●改v2』、『鮭魚炒飯●改v3』的做法。</p>
+<p>這樣做法連帶有一個好處，就是可以把 <code>max-age 有效期限</code> 拉得很長，例如 <code>31536000 (一年)</code>，所以大部分的時間食譜都沒有更新的話，就可以不用上山拿新的版本的食譜。</p>
+<p>若有更新的話，會在菜名直接更新後面的內容，例如 <code>●改v1</code>、<code>●改v2</code>、<code>●改v3</code>之類的，小明就知道要更新了。</p>
+<details class="note " open><summary><p>blue fas fa-question-circle simple</p>
+</summary>
+<p>原本的那些舊的食譜怎麼辦呢？</p>
+
+</details>
+
+<p>還記得每張食譜上有 <code>max-age 有效期限</code> 嗎？ 一等到過期小明被小明發現了，又發現上面的<code>版本號碼</code>不一樣的時候，就會被小明丟掉啦～</p>
+<p>好的，我們現在把鏡頭交給棚內！ 🎥</p>
+<hr>
+<p>上述的故事情境比較容易發生在 <code>css</code> 或者是 <code>js</code> 的檔案之中。</p>
+<p>若今天好不容易修正了一個 bug，卻因爲 <code>max-age 有效期限</code> 尚未過期而無法更新，只能看著 bug 掛在線上無能爲力，身爲一個開發者應該會跟 Chef Master 一樣著急的吧？</p>
+<p>於是我們可以在每次的 <code>css</code> 或 <code>js</code> 的檔名上做點手腳，幫他後面加上一個像是 <code>版號</code> 或者一串類似簽名(Fingerprint) 的亂碼。</p>
+<p>因此當 <code>html</code> 內引用的檔名從一開始的 <code>app.v1.js</code> 變成 <code>app.v2.js</code> 之後，瀏覽器無法在 Cache 找到 <code>app.v2.js</code> 的資料，所以就會在發一次請求到伺服器取得 <code>app.v2.js</code> 的資料，確保使用的 <code>js</code> 檔爲最新的版本。</p>
+<p>因爲 MDN 也有很棒的圖解，所以我也順便貼上來囉！</p>
+<p><img src="https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching/http_revved_fix_typo.png" alt="Image From MDN"></p>
+<p>這個方法雖然很不錯，但每次都要自己手動處理上述版本卻是有他的麻煩之處，因此 Webpack 提供了<a target="_blank" rel="noopener external nofollow noreferrer" href="https://webpack.js.org/guides/caching/#output-filenames">自動化流程</a>的做法，因爲跟這篇的主題較不相干，所以就留給有需要的大大囉！</p>
+<h1 id="Cache-的種類"><a href="#Cache-的種類" class="headerlink" title="Cache 的種類"></a>Cache 的種類</h1><p>其實剛剛上述講的所有情境都是假設 Cache 是放在<code>個人的瀏覽器端</code>的情況下，也就是<code>private cache</code> 的情境，但是 Cache 真的只能放在瀏覽器嗎？</p>
+<p>據 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching#different_kinds_of_caches">MDN</a> 的解釋，Cache 分成兩大類：</p>
+<ul>
+<li>private cache 私人快取</li>
+<li>shared cache 共享快取</li>
+</ul>
+<p><code>private cache</code> 顧名思義就是不會與他人共享的，因此會存放在每個使用者的瀏覽器裡； <code>shared cache</code> 則是可以大多使用者可以共享的資料，又可以分成 <code>gateway caches</code>、 <code>CDN</code>、<code>proxy caches</code> 等等不同階段的 Cache。</p>
+<h1 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h1><p>上述 Cache 的內容概念大多都是參考 MDN HTTP Caching 的內容，除了故事跟<del>用來測試筆刷的</del>塗鴉不是 🤣</p>
+<p>Cache 從一開始的想法是基於 <code>『同樣的一份檔案不需要重新傳輸一次』</code> 的思考下出發。</p>
+<p>當達成這個效果的時候也發現了衍伸的問題：<code>新鮮度</code> 是否過期的問題。因此有了 <code>max-age</code>、<code>etag</code>、<code>if-none-match</code> 等等的配套做法。</p>
+<p>Cache 也有分很多不同的類型，而上述大多討論的是瀏覽器端的 Cache 內容。但 Cache 不僅止於此，例如伺服器也有記憶體 Cache 之類的，不過那又是另外一個故事了。</p>
+<p>Cache 的部分就差不多聊到這裡囉，簡單地介紹了 Cache 是什麼與使用情境，希望用故事的方法能夠幫助大家更簡單地理解概念。😀</p>
+<hr>
+<p>最後，如果覺得喜歡這種圖文介紹的文章的話，歡迎加入 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.facebook.com/chanchandev">Chan-Chan-Dev Facebook</a> 的粉絲團，在發佈的時候就有比較多機會收到通知喔！😍</p>
+<p>最後也感謝你的閱讀，下次再見囉 😍</p>
+<h3 id="參考文章"><a href="#參考文章" class="headerlink" title="參考文章"></a>參考文章</h3><ul>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching">HTTP caching</a></li>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://web.dev/http-cache/#versioned-urls">Prevent unnecessary network requests with the HTTP Cache</a></li>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.techbridge.cc/2017/06/17/cache-introduction/">循序漸進理解 HTTP Cache 機制</a></li>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://medium.com/frochu/http-caching-3382037ab06f#0a18">新手坑：讓人又愛又恨的 HTTP Caching</a></li>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://notfalse.net/54/http-cache">HTTP 快取 (Cache)</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/HTTP/" rel="tag"><i class="fa fa-tag"></i> HTTP</a>
+              <a href="/tags/Cache/" rel="tag"><i class="fa fa-tag"></i> Cache</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/js/Async/async-sync-intro/2534378084/" rel="prev" title="Javascript 非同步 &amp; Event Loop！10 分鐘輕鬆圖解學習！">
+                  <i class="fa fa-angle-left"></i> Javascript 非同步 & Event Loop！10 分鐘輕鬆圖解學習！
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/back-end/Session/session-intro/1577685640/" rel="next" title="Session &amp; Cookie 傻傻分不清楚：Session 篇">
+                  Session & Cookie 傻傻分不清楚：Session 篇 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ChanChanDev</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"Jessie75919","repo":"Jessie75919.github.io","client_id":"5cc00853735d25bd22f3","client_secret":"42c46caebd1f91cd54924e2ad6c3dc6fec94f37e","admin_user":"Jessie75919","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-TW","body":null,"labels":"Gitalk","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"4b694aa48ff319fdacde6d4c1c73c9d6"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

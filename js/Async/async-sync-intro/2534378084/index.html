@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="mask-icon" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"chanchandev.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"onmobile":false},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null,"show_result":"flat"},"fold":{"enable":false,"height":500},"language":false,"highlight_theme":"normal"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"找到 ${hits} 個搜索結果（用時 ${time} 毫秒）","hits":"找到 ${hits} 個搜索結果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="有聽過 Javascript 是個『非同步』的語言嗎？為什麼它可以做到『非同步』的效果呢？一起用圖解的方式來學習 Javascript 的『同步』與『非同步』吧！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript 非同步 &amp; Event Loop！10 分鐘輕鬆圖解學習！">
+<meta property="og:url" content="https://chanchandev.com/js/Async/async-sync-intro/2534378084/index.html">
+<meta property="og:site_name" content="圈圈工程師">
+<meta property="og:description" content="有聽過 Javascript 是個『非同步』的語言嗎？為什麼它可以做到『非同步』的效果呢？一起用圖解的方式來學習 Javascript 的『同步』與『非同步』吧！">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/Cover.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/little-min.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/tasks.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/Async.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/web-sync.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/web-async.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/event-loop.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/CallStack-1.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/CallStack-2.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/CallStack-3.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/CallStack-4.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/CallStack-5.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/CallStack-6.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/CallStack-7.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/CallStack-8.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/CallStack-9.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/CallStack-10.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/CallStack-11.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/CallStack-12.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/CallStack-13.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/LIFO.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/web-api-2.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/web-api-3.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/web-api-4.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/web-api-5.jpg">
+<meta property="article:published_time" content="2021-04-19T12:40:11.000Z">
+<meta property="article:modified_time" content="2026-01-28T12:40:17.308Z">
+<meta property="article:author" content="ChanChanDev">
+<meta property="article:tag" content="Javascript">
+<meta property="article:tag" content="Async">
+<meta property="article:tag" content="Event Loop">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/Cover.jpg">
+
+
+<link rel="canonical" href="https://chanchandev.com/js/Async/async-sync-intro/2534378084/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://chanchandev.com/js/Async/async-sync-intro/2534378084/","path":"js/Async/async-sync-intro/2534378084/","title":"Javascript 非同步 & Event Loop！10 分鐘輕鬆圖解學習！"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Javascript 非同步 & Event Loop！10 分鐘輕鬆圖解學習！ | 圈圈工程師</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R47Z93ZJTM"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-R47Z93ZJTM","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">圈圈工程師</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Change Change Developer</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-back-end"><a href="/categories/back-end/" rel="section"><i class="fas fa-rocket fa-fw"></i>Back-End</a></li><li class="menu-item menu-item-sharing"><a href="/categories/Sharing/" rel="section"><i class="fas fa-star fa-fw"></i>Sharing</a></li><li class="menu-item menu-item-reading"><a href="/categories/Reading/" rel="section"><i class="fas fa-book fa-fw"></i>Reading</a></li><li class="menu-item menu-item-design-pattern"><a href="/categories/design-pattern/" rel="section"><i class="fas fa-sitemap fa-fw"></i>Design-Pattern</a></li><li class="menu-item menu-item-javascript"><a href="/categories/js/" rel="section"><i class="fas fa-code fa-fw"></i>Javascript</a></li><li class="menu-item menu-item-分類"><a href="/categories/" rel="section"><i class="fas fa-folder-open fa-fw"></i>分類</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5-Sync"><span class="nav-number">1.</span> <span class="nav-text">同步 (Sync)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5%EF%BC%9A%E4%B8%80%E4%BB%B6%E4%BA%8B%E6%83%85%E5%AE%8C%E6%88%90%E5%BE%8C%EF%BC%8C%E5%9C%A8%E7%B9%BC%E7%BA%8C%E5%9F%B7%E8%A1%8C%E4%B8%8B%E4%B8%80%E4%BB%B6%E4%BA%8B%E6%83%85"><span class="nav-number">1.1.</span> <span class="nav-text">同步：一件事情完成後，在繼續執行下一件事情</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Javascript-%E5%90%8C%E6%AD%A5"><span class="nav-number">2.</span> <span class="nav-text">Javascript 同步</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%9E%E5%90%8C%E6%AD%A5-Async"><span class="nav-number">3.</span> <span class="nav-text">非同步 (Async)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E5%90%8C%E6%AD%A5%EF%BC%9A%E4%B8%80%E6%AC%A1%E5%90%8C%E6%99%82%E5%81%9A%E5%A5%BD%E5%B9%BE%E4%BB%B6%E7%9A%84%E4%BA%8B%E6%83%85"><span class="nav-number">3.1.</span> <span class="nav-text">非同步：一次同時做好幾件的事情</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%82%BA%E4%BB%80%E9%BA%BC-Javascript-%E9%9C%80%E8%A6%81%E9%9D%9E%E5%90%8C%E6%AD%A5%E5%91%A2-%F0%9F%A4%94"><span class="nav-number">4.</span> <span class="nav-text">為什麼 Javascript 需要非同步呢 🤔</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E5%90%8C%E6%AD%A5%E8%AB%8B%E6%B1%82"><span class="nav-number">4.1.</span> <span class="nav-text">非同步請求</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Javascript-%E7%88%B2%E5%96%AE%E4%B8%80%E5%9F%B7%E8%A1%8C%E7%B7%92"><span class="nav-number">5.</span> <span class="nav-text">Javascript 爲單一執行緒</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Web-APIs"><span class="nav-number">6.</span> <span class="nav-text">Web APIs</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#setTimeout"><span class="nav-number">6.1.</span> <span class="nav-text">setTimeout</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Event-Loop"><span class="nav-number">7.</span> <span class="nav-text">Event Loop</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Call-Stack"><span class="nav-number">7.1.</span> <span class="nav-text">Call Stack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Call-Stack-%E9%81%8E%E7%A8%8B%E5%88%86%E8%A7%A3%E5%9C%96"><span class="nav-number">7.2.</span> <span class="nav-text">Call Stack 過程分解圖</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%8C%E9%80%B2%E5%85%88%E5%87%BA-Last-In-First-Out-LIFO"><span class="nav-number">7.2.1.</span> <span class="nav-text">後進先出 (Last-In-First-Out LIFO)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web-APIs-amp-Callback-Queue"><span class="nav-number">7.3.</span> <span class="nav-text">Web APIs &amp; Callback Queue</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%88%E9%80%B2%E5%85%88%E5%87%BA-First-In-First-Out-FIFO"><span class="nav-number">7.3.1.</span> <span class="nav-text">先進先出 First-In-First-Out FIFO</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%B7%E8%A1%8C%E9%A0%86%E5%BA%8F%E8%A7%A3%E7%AD%94"><span class="nav-number">8.</span> <span class="nav-text">執行順序解答</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B5%90%E8%AB%96"><span class="nav-number">9.</span> <span class="nav-text">結論</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%83%E8%80%83"><span class="nav-number">10.</span> <span class="nav-text">參考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ChanChanDev"
+      src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+  <p class="site-author-name" itemprop="name">ChanChanDev</p>
+  <div class="site-description" itemprop="description">圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">標籤</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/chanchandev" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;chanchandev" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/chanchandev" title="FaceBook → https:&#x2F;&#x2F;www.facebook.com&#x2F;chanchandev" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-facebook fa-fw"></i>FaceBook</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://chanchandev.com/js/Async/async-sync-intro/2534378084/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+      <meta itemprop="name" content="ChanChanDev">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="圈圈工程師">
+      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Javascript 非同步 &amp; Event Loop！10 分鐘輕鬆圖解學習！ | 圈圈工程師">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Javascript 非同步 & Event Loop！10 分鐘輕鬆圖解學習！
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2021-04-19 20:40:11" itemprop="dateCreated datePublished" datetime="2021-04-19T20:40:11+08:00">2021-04-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2026-01-28 20:40:17" itemprop="dateModified" datetime="2026-01-28T20:40:17+08:00">2026-01-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/js/" itemprop="url" rel="index"><span itemprop="name">Javascript</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/js/Async/" itemprop="url" rel="index"><span itemprop="name">Async</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/Cover.jpg"><br>有聽過 Javascript 是個『非同步』的語言嗎？為什麼它可以做到『非同步』的效果呢？一起用圖解的方式來學習 Javascript 的『同步』與『非同步』吧！</p>
+<span id="more"></span>
+
+<br>
+
+<details class="note success" open><summary><p>simple</p>
+</summary>
+<p>HIHI～😍  如果你是第一次來的話，『Chan-Chan-Dev』是一個專門用簡單的圖文與故事講解網路程式技術的網站。<br>若你也喜歡用這種方式學習的話，歡迎加入 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.facebook.com/chanchandev">Chan-Chan-Dev Facebook</a> 的粉絲團，在發佈的時候就有比較多機會收到通知喔！😍</p>
+
+</details>
+
+<p>在學習 Javascript 過程中，應該多少都會耳聞過 Javascript <code>非同步</code> 的特性，在聊聊 <code>非同步</code> 的特性之前，也許我們要先知道何爲 <code>同步</code> 囉 😆。</p>
+<h1 id="同步-Sync"><a href="#同步-Sync" class="headerlink" title="同步 (Sync)"></a>同步 (Sync)</h1><p>我們用小明早上起床出門上班前的小例子來學習這兩者的差別吧 😀<br><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/little-min.jpg" alt="他是小明 👆"><br>假如小明從起床到上班出門前他需要完成以下幾件事情：</p>
+<blockquote>
+<ul>
+<li>刷牙、洗臉 （10 分鐘）</li>
+<li>用義式咖啡機泡咖啡（10 分鐘）</li>
+<li>用電鍋準備午餐（10 分鐘）</li>
+</ul>
+</blockquote>
+<p>若今天小明 <code>一件事情完成後，在繼續執行下一件事情</code>。</p>
+<p>例如：<code>刷牙、洗臉 （10 分鐘）</code> 完接著用 <code>用義式咖啡機泡咖啡（10 分鐘）</code> ，然後 <code>用電鍋準備午餐（10 分鐘）</code>，最後出門。我們可以說小明上述的步驟爲 <code>同步（Sync）</code> 的執行每一件事情，所以總共所花的時間是 <code>30</code> 分鐘。</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/tasks.jpg" alt="同步執行總共花了 30 分鐘"></p>
+<details class="note info" open><summary><p>simple</p>
+</summary>
+<p>上述的 <code>同步</code> 不等於 <code>同時</code>，一開始接觸到學習的時候很容易將 <code>同步</code> 與 <code>同時</code> 劃上等號，這邊要特別注意是不一樣的意思喔 😀</p>
+
+</details>
+
+<details class="note success" open><summary><p>simple</p>
+</summary>
+<h2 id="同步：一件事情完成後，在繼續執行下一件事情"><a href="#同步：一件事情完成後，在繼續執行下一件事情" class="headerlink" title="同步：一件事情完成後，在繼續執行下一件事情"></a>同步：一件事情完成後，在繼續執行下一件事情</h2>
+</details>
+
+<h1 id="Javascript-同步"><a href="#Javascript-同步" class="headerlink" title="Javascript 同步"></a>Javascript 同步</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;a&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;b&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;c&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>在『一般』的情況下，Javascript 是以 <code>同步</code> 的方式執行程式碼，因此上述的程式碼會<code>依序地一個執行完之後在執行下一個</code>：</p>
+<ol>
+<li> 執行第 1 行，在 console 呈現 a</li>
+<li> 執行第 3 行，在 console 呈現 b</li>
+<li> 執行第 5 行，在 console 呈現 c</li>
+</ol>
+<p>因此在 console 會呈現：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">10    // a</span><br><span class="line">20    // b</span><br><span class="line">30    // c</span><br></pre></td></tr></table></figure>
+
+<p>那至於什麼是『非同步』呢？讓我們看下去囉 😆</p>
+<h1 id="非同步-Async"><a href="#非同步-Async" class="headerlink" title="非同步 (Async)"></a>非同步 (Async)</h1><p>每次出門的都要花上 30 分鐘也沒有不好，只是小明最近剛好看到一本時間管理的書，教你如何有效率的利用時間！其中有提到一點可以<code>把事情同時進行</code>，也就是說 <code>一次可以同時做好幾件的事情，不需要等前面的事情完成後，才能做後面的任務</code>。</p>
+<p>經過啓發後的小明就很開心地將 <code>一次可以同時做好幾件的事情</code> 的方式套用在他出門前的準備事項。</p>
+<p>於是他可以去刷牙前，先按下咖啡的按鈕、又按下電鍋的按鈕，他就可以跑去刷牙了。所以 <code>刷牙</code>、<code>泡咖啡</code>、<code>準備午餐</code> 三件事情在 <code>同一時間內一起進行</code> 。因此原本要花 <code>30</code> 分鐘時間，一瞬間就可以縮短爲 <code>10</code> 分鐘就完成了 😍</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/Async.jpg" alt="非同步執行總共花了 10 分鐘"></p>
+<details class="note success" open><summary><p>simple</p>
+</summary>
+<h2 id="非同步：一次同時做好幾件的事情"><a href="#非同步：一次同時做好幾件的事情" class="headerlink" title="非同步：一次同時做好幾件的事情"></a>非同步：一次同時做好幾件的事情</h2>
+</details>
+
+<hr>
+<h1 id="為什麼-Javascript-需要非同步呢-🤔"><a href="#為什麼-Javascript-需要非同步呢-🤔" class="headerlink" title="為什麼 Javascript 需要非同步呢 🤔"></a>為什麼 Javascript 需要非同步呢 🤔</h1><p>我們剛剛說過 <code>同步</code> 就是 <code>一次完成一件事情，不管後面有幾件事情，都需等待上一件事情的完成才能依序執行</code>。</p>
+<p>至於為什麼 Javascript 需要非同步呢？也許帶入情境會更有感覺：</p>
+<blockquote>
+<p>小明在公司午休的時候邊吃他早上用電鍋蒸好的中餐，邊瀏覽網站。</p>
+</blockquote>
+<p>在 Javascript <code>『同步』</code> 的情境下，在電腦上的操作都需要等待前一件事情的完成，所以會是怎麼樣的情況呢？讓我們用簡單來模擬一下吧 😀</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/web-sync.jpg" alt="網頁同步狀況瀏覽"></p>
+<p>上面的例子當然是有點誇張了 😅 </p>
+<p>若使用同步的方式向伺服器端發出請求的話，<code>使用者就會被強迫等待伺服器處理完，並且回傳資料回來的這段時間，而這段時間網頁可能會呈現使用者任何的操作都沒有反應的狀態，因此會讓使用者誤會以爲是當機了</code>，直到資料送回來的任務已經完成後，網頁才恢復有反應的狀態。</p>
+<details class="note danger" open><summary><p>simple</p>
+</summary>
+<p>問題點：Javascript 是一個在瀏覽器執行的語言（先不聊 Node.js 啦 😆），讓使用者必須強迫等待上一個任務執行完畢之後，網頁才會有反應的話，會造成極差的使用者體驗！😭</p>
+
+</details>
+
+<p>因此預期想要達到的效果是：</p>
+<details class="note success" open><summary><p>simple</p>
+</summary>
+<p>當一個任務需要花一段時間的時候（例如向伺服器發出請求取得資料），讓使用者不需要等待也可以繼續地使用網頁，等待資料回來之後，在顯示在使用者眼前，不會因此而中斷使用體驗。</p>
+
+</details>
+
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/web-async.jpg" alt="網頁非同步狀況瀏覽"></p>
+<p>還記得非同步嗎？ 因爲非同步可以<code>一次同時做好幾件的事情</code> ，讓瀏覽器可以在發出請求的同時，一樣可以繼續回應使用者的操作，並不會因此而讓使用者無法操作網頁 😍</p>
+<details class="note " open><summary><p>blue fas fa-question-circle simple</p>
+</summary>
+<h2 id="非同步請求"><a href="#非同步請求" class="headerlink" title="非同步請求"></a>非同步請求</h2><p>上述的情境其實就是 <code>非同步請求（Ajax Asynchronous JavaScript and XML）</code> 的使用情境。若對 Ajax 的用法有興趣的大大，請先參考 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.w3schools.com/xml/ajax_intro.asp">W3school 的教學</a>，未來有機會在撰寫一篇 Ajax 的介紹文囉 😆</p>
+
+</details>
+
+<h1 id="Javascript-爲單一執行緒"><a href="#Javascript-爲單一執行緒" class="headerlink" title="Javascript 爲單一執行緒"></a>Javascript 爲單一執行緒</h1><p>意思就是 Javascript <code>一次只能做一件事情，等上一件事情完成才能執行下一件事情</code>，就如同上述的 <code>同步</code> 的樣子。</p>
+<p>那 Javascript 為什麼可以做到 <code>非同步</code> 的效果呢？ 🤔</p>
+<h1 id="Web-APIs"><a href="#Web-APIs" class="headerlink" title="Web APIs"></a>Web APIs</h1><p>當我們撰寫網頁程式碼時候，有很多常用方便的功能瀏覽器已經替我們提供好了，他們統稱叫做 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://developer.mozilla.org/en-US/docs/Web/API">Web APIs</a>。<br>例如：<a target="_blank" rel="noopener external nofollow noreferrer" href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model">Dom 物件的操作</a>、Ajax 相關的 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest">XMLHTTPRequest</a>、<a target="_blank" rel="noopener external nofollow noreferrer" href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch API</a>，以及時常被使用到的 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout">setTimeout</a> 等等。</p>
+<p>在呼叫 Web APIs 時，很常會使用 <code>非同步的方式</code> 處理 。</p>
+<p>我們簡單用 <code>setTimeout</code> 看看非同步的效果吧。</p>
+<details class="note " open><summary><p>blue fas fa-question-circle simple</p>
+</summary>
+<h2 id="setTimeout"><a href="#setTimeout" class="headerlink" title="setTimeout"></a>setTimeout</h2><p>setTimeout() 可以爲一段程式碼設定一個記時計，預計在一段時間後在執行這段程式碼。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span> <span class="comment">/* 要執行的 callback function */</span>, delay <span class="comment">/* 延遲時間 (毫秒) */</span>);</span><br></pre></td></tr></table></figure>
+
+<p>以下的程式碼就會在 3000 毫秒（3秒）過後，才跳出 <code>hihihi~</code>的 alert 訊息。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="title function_">alert</span>(<span class="string">&#x27;hihihi ~&#x27;</span>);</span><br><span class="line">&#125;, <span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+</details>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;a&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 我們將 console.log(&#x27;b&#x27;) 放入 setTimeout 的程式碼裏面，等待 0 秒</span></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;b in setTimeout&#x27;</span>);</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;c&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a</span><br><span class="line">c</span><br><span class="line">b in setTimeout</span><br></pre></td></tr></table></figure>
+
+<p>上面程式碼執行的順序因爲非同步的關係變成以下：</p>
+<ol>
+<li> 執行第 1 行，在 console 呈現 a</li>
+<li> 執行第 8 行，在 console 呈現 c</li>
+<li> 執行第 5 行，在 console 呈現 b  👈  最後執行</li>
+</ol>
+<details class="note " open><summary><p>orange fas fa-question-circle simple</p>
+</summary>
+<p>現在知道了使用 Web APIs 可以達到<code>非同步</code>的效果，但是為什麼會是上述的這個結果呢？ 🥸</p>
+
+</details>
+
+<h1 id="Event-Loop"><a href="#Event-Loop" class="headerlink" title="Event Loop"></a>Event Loop</h1><p>在回答上述的問題前，請容許我外插一個 Event Loop 的話題，我們先來看個大概的流程圖吧 😆<br><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/event-loop.jpg" alt="Event Loop 架構與流程圖"></p>
+<p>我們可以從上面觀察到三大區塊，分別是：<code>Call Stack</code>、<code>Web APIs</code>、<code>Callback Queue</code></p>
+<details class="note success" open><summary><p>simple</p>
+</summary>
+<p>由上面的順序，我們會看到 <code>Call Stack</code> 會呼叫 <code>Web APIs</code>，<code>Web APIs</code> 等到完成後，會將完成後要執行的 <code>callback function</code> 丟到 <code>Callback Queue</code> 內排隊，等待 <code>Call Stack</code> 若是空的狀態的話，就可以將要執行的 <code>callback function</code> 在 <code>Call Stack</code> 執行。</p>
+
+</details>
+
+<p>瞭解大概的順序後，我們就來一個個瞭解這些 Keyword 吧 😆</p>
+<h2 id="Call-Stack"><a href="#Call-Stack" class="headerlink" title="Call Stack"></a>Call Stack</h2><p>在我們撰寫 Javascript 的 function 並且<code>呼叫</code>的時候，都有默默地使用到 <code>Call Stack</code> ，只是我們不知道原來我們用過的機制。</p>
+<details class="note info" open><summary><p>simple</p>
+</summary>
+<p>Call Stack 是一種 Javascript 用來追蹤 Function 執行狀態的機制，他有著 <code>『後進先出（Last-In-First-Out, LIFO）』</code> 的特性。</p>
+
+</details>
+
+<p>假如一段簡單的小程式：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">A</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;A Start&#x27;</span>);</span><br><span class="line">  <span class="title function_">B</span>();</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;A End&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">B</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;B Start&#x27;</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;B End&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">A</span>(); <span class="comment">// 呼叫 function A</span></span><br></pre></td></tr></table></figure>
+
+<p>我們就會在 Console 看到一下的輸出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">A Start</span><br><span class="line">B Start</span><br><span class="line">B End</span><br><span class="line">A End</span><br></pre></td></tr></table></figure>
+
+<h2 id="Call-Stack-過程分解圖"><a href="#Call-Stack-過程分解圖" class="headerlink" title="Call Stack 過程分解圖"></a>Call Stack 過程分解圖</h2><p>接著我們來用慢動作示意圖分解看一下在這段程式碼的過程發生了什麼事情吧 😆</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/CallStack-1.jpg" alt="到 12 行，執行 A()，並且將 A() 放入 Call Stack 內"><br><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/CallStack-2.jpg" alt="到 2 行，執行 console.log(&#39;A Start&#39;)，並且將它放入 Call Stack 內"><br><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/CallStack-3.jpg" alt="執行完 console.log(&#39;A Start&#39;)，並且將內容顯示在 Console 上，將 console.log(&#39;A Start&#39;) 從 Call Stack 中移除"><br><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/CallStack-4.jpg" alt="到 3 行，執行 B()，並且將 B() 放入 Call Stack 內"><br><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/CallStack-5.jpg" alt="到 8 行，執行 console.log(&#39;B Start&#39;)，並且將它放入 Call Stack 內"><br><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/CallStack-6.jpg" alt="執行完 console.log(&#39;B Start&#39;)，並且將內容顯示在 Console 上，將 console.log(&#39;B Start&#39;) 從 Call Stack 中移除"><br><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/CallStack-7.jpg" alt="到 9 行，執行 console.log(&#39;B End&#39;)，並且將它放入 Call Stack 內"><br><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/CallStack-8.jpg" alt="執行完 console.log(&#39;B End&#39;)，並且將內容顯示在 Console 上，將 console.log(&#39;B End&#39;) 從 Call Stack 中移除"><br><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/CallStack-9.jpg" alt="執行完 B()，並且從 Call Stack 中移除"><br><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/CallStack-10.jpg" alt="到 4 行，執行 console.log(&#39;A End&#39;)，並且將它放入 Call Stack 內"><br><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/CallStack-11.jpg" alt="執行完 console.log(&#39;A End&#39;)，並且將內容顯示在 Console 上，將 console.log(&#39;A End&#39;) 從 Call Stack 中移除"><br><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/CallStack-12.jpg" alt="執行完 A()，並且從 Call Stack 中移除"><br><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/CallStack-13.jpg" alt="以上的程式碼全部執行完畢啦！"></p>
+<p>從上面的圖解過程就可以簡單發現一件事情，Call Stack 依循着 <code>『後進先出（Last-In-First-Out, LIFO）』</code> 的特性在記錄並且執行函數的狀態，<code>A()</code> 在第一張圖最先跳進 Call Stack 內，卻在倒數第二張圖才被移出來。</p>
+<details class="note success" open><summary><p>simple</p>
+</summary>
+<p>以上是用圖解的方式呈現，若想看動態的執行的話，可以在 <a target="_blank" rel="noopener external nofollow noreferrer" href="http://latentflip.com/loupe/?code=ZnVuY3Rpb24gQSgpewogIGNvbnNvbGUubG9nKCdBIFN0YXJ0Jyk7CiAgQigpOwogIGNvbnNvbGUubG9nKCdBIEVuZCcpOwp9CgpmdW5jdGlvbiBCKCl7CiAgY29uc29sZS5sb2coJ0IgU3RhcnQnKTsKICBjb25zb2xlLmxvZygnQiBFbmQnKTsKfQoKQSgpOwo=!!!PGJ1dHRvbj5DbGljayBtZSE8L2J1dHRvbj4=">loupe</a> 看到即時的執行呈現喔 😍</p>
+
+</details>
+
+
+<details class="note " open><summary><p>blue fas fa-question-circle simple</p>
+</summary>
+<h3 id="後進先出-Last-In-First-Out-LIFO"><a href="#後進先出-Last-In-First-Out-LIFO" class="headerlink" title="後進先出 (Last-In-First-Out LIFO)"></a>後進先出 (Last-In-First-Out LIFO)</h3><p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/LIFO.jpg" alt="Last-In-First-Out, LIFO"><br>想像手上有一疊撲克牌，在手上的由上到下順序是 <code>1, 2, 3, 4</code>，第一張抽出的爲 <code>1</code>，並且將 <code>1</code> 放在桌面，接著繼續抽出 <code>2</code> 放在 <code>1</code> 的上面，接著將 <code>3</code> 疊在 <code>2</code> 的上面，接著放 <code>4</code> 在 <code>3</code> 的上面。因爲 <code>4</code> 是最後才被放上去的，所以在最上面，因此當要從桌面取牌的時候，第一張會拿到的爲 <code>4</code>，接著爲 <code>3</code>、<code>2</code>、<code>1</code></p>
+
+</details>
+
+
+<h2 id="Web-APIs-amp-Callback-Queue"><a href="#Web-APIs-amp-Callback-Queue" class="headerlink" title="Web APIs &amp; Callback Queue"></a>Web APIs &amp; Callback Queue</h2><p>剛剛有提到 setTimeout 爲 Web APIs 的功能，因此當執行這段程式碼的時候會走以下的流程</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;a&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 我們將 console.log(&#x27;b&#x27;) 放入 setTimeout 的程式碼裏面，等待 0 秒</span></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;b in setTimeout&#x27;</span>);</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;c&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/web-api-2.jpg" alt="當執行到第 4 行的時候，會將這段程式碼移動到 Web APIs 的區塊內，等待 0 秒"><br><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/web-api-3.jpg" alt="將 setTimeout 的 Callback Function 放入 Callback Queue 內排隊"><br><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/web-api-4.jpg" alt="若 Call Stack 爲空的狀態"><br><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/web-api-5.jpg" alt="就將 Callback Queue 的 Callback Function 推到 Call Stack 執行"></p>
+<p>相對於 Call Stack 的<code>『後進先出（Last-In-First-Out, LIFO)』</code>， Callback Queue 卻是<code>先進先出（First-In-First-Out, FIFO)</code>的運作模式。</p>
+<details class="note " open><summary><p>blue fas fa-question-circle simple</p>
+</summary>
+<h3 id="先進先出-First-In-First-Out-FIFO"><a href="#先進先出-First-In-First-Out-FIFO" class="headerlink" title="先進先出 First-In-First-Out FIFO"></a>先進先出 First-In-First-Out FIFO</h3><p>最簡單的解釋就是用 <code>排隊吃飯</code> 概念的概念來理解：越早排隊的人，應當最早進入餐廳，最後排隊的人，則是最後進入。不照著這個規則大家會生氣氣喔！</p>
+
+</details>
+
+
+<h1 id="執行順序解答"><a href="#執行順序解答" class="headerlink" title="執行順序解答"></a>執行順序解答</h1><p>因此我們終於可以來回答在 <code>Web APIs </code> 的問題，為什麼會呈現以下的順序呢？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;a&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 我們將 console.log(&#x27;b&#x27;) 放入 setTimeout 的程式碼裏面，等待 0 秒</span></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;b in setTimeout&#x27;</span>);</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;c&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a</span><br><span class="line">c</span><br><span class="line">b in setTimeout</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li> 在第 1 行 <code>console.log(&#39;a&#39;)</code> 被推入 <code>Call Stack</code> 之後，馬上被執行，因此 Console 印出 <code>a</code>。</li>
+<li> 在第 4 行執行 <code>setTimeout</code> API 方法後，將這段程式碼丟進 <code>Web APIs</code> 的區塊內</li>
+<li> 在第 8 行 <code>console.log(&#39;c&#39;)</code> 被推入 <code>Call Stack</code> 之後，馬上被執行，因此 Console 印出 <code>c</code>。</li>
+<li> 等 <code>setTimeout</code> 在 Web APIs 等待時間失效後（等待 0 秒）， Callback Function 被丟入 <code>Callback Queue</code> 排隊，等到 <code>Call Stack</code> 有空檔的時候，在將在<code>Callback Queue</code> 排隊的第一個 Function（也就是 <code> console.log(&#39;b in setTimeout&#39;);</code>）丟進 <code>Call Stack</code> 執行。</li>
+<li> 最後才在 Console 印出 <code>b in setTimeout</code></li>
+</ol>
+<details class="note success" open><summary><p>simple</p>
+</summary>
+<p>上述的步驟若想看動態的執行的話，可以在 <a target="_blank" rel="noopener external nofollow noreferrer" href="http://latentflip.com/loupe/?code=Y29uc29sZS5sb2coJ2EnKTsKCnNldFRpbWVvdXQoZnVuY3Rpb24gQkluU2V0VGltZW91dCgpewogIGNvbnNvbGUubG9nKCdiIGluIHNldFRpbWVvdXQnKTsKfSwgMCk7Cgpjb25zb2xlLmxvZygnYycpOwo=!!!PGJ1dHRvbj5DbGljayBtZSE8L2J1dHRvbj4=">loupe</a> 看到即時的執行呈現喔 😍</p>
+
+</details>
+
+
+<h1 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h1><p>這篇其實本來只是想針對介紹 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a> 之前的前情提要介紹文，結果寫著寫著發現好像又牽扯出 <code>Event Loop</code> 這個話題才能回答上述的問題，本來還想聊聊 Javascript 的 Async Callback 的話題，但看看文章的長度還是另開一篇好了 😆</p>
+<p>我們從一開始先瞭解 Javascript 的同步所帶來的不方便，來瞭解非同步的好處，在一路沿伸探討到 Javascript 可以非同步原因，用 Event Loop 模型作爲解答。</p>
+<p>而本文介紹的 Event Loop 的概念也是來自於這篇 Talk <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.youtube.com/watch?v=8aGhZQkoFbQ&list=WL&index=43&t=32s">《What The Heck is The Event Loop Anyway》</a>，並且使用了這個講者開發的 <a target="_blank" rel="noopener external nofollow noreferrer" href="http://latentflip.com/loupe/?code=JC5vbignYnV0dG9uJywgJ2NsaWNrJywgZnVuY3Rpb24gb25DbGljaygpIHsKICAgIHNldFRpbWVvdXQoZnVuY3Rpb24gdGltZXIoKSB7CiAgICAgICAgY29uc29sZS5sb2coJ1lvdSBjbGlja2VkIHRoZSBidXR0b24hJyk7ICAgIAogICAgfSwgMjAwMCk7Cn0pOwoKY29uc29sZS5sb2coIkhpISIpOwoKc2V0VGltZW91dChmdW5jdGlvbiB0aW1lb3V0KCkgewogICAgY29uc29sZS5sb2coIkNsaWNrIHRoZSBidXR0b24hIik7Cn0sIDUwMDApOwoKY29uc29sZS5sb2coIldlbGNvbWUgdG8gbG91cGUuIik7!!!PGJ1dHRvbj5DbGljayBtZSE8L2J1dHRvbj4=">loupe</a> 協助理解。</p>
+<hr>
+<p>最後感謝你願意看到這裏，希望這篇文章對你有所幫助。</p>
+<p>若你想到身邊有需要這篇文章內容的朋友，也請你幫他一個忙把這篇文章分享給他 😍</p>
+<p>若文章的內容有錯誤的地方，也歡迎隨時一起討論交流。😘 </p>
+<p>最後感謝你的閱讀囉，我們下次見！Bye ～ 🚀</p>
+<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><ul>
+<li><p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous">Asynchronous JavaScript</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop">Concurrency model and the event loop</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.alexdevero.com/memory-life-cycle-heap-stack-javascript/">Memory Life cycle, Heap, Stack and Call Stack in JavaScript</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://5xruby.tw/posts/how-js-synchronous-works">無痛理解 JS | 非同步怎麼運作？</a></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Javascript/" rel="tag"><i class="fa fa-tag"></i> Javascript</a>
+              <a href="/tags/Async/" rel="tag"><i class="fa fa-tag"></i> Async</a>
+              <a href="/tags/Event-Loop/" rel="tag"><i class="fa fa-tag"></i> Event Loop</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/js/Function/function-intro/2954858119/" rel="prev" title="Javascript Function 超基礎入門！老司機勿入！">
+                  <i class="fa fa-angle-left"></i> Javascript Function 超基礎入門！老司機勿入！
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/HTTP/Cache/cache-intro/1156542307/" rel="next" title="HTTP Cache 是什麼呢？用小故事圖解來學習 Cache 吧！">
+                  HTTP Cache 是什麼呢？用小故事圖解來學習 Cache 吧！ <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ChanChanDev</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"Jessie75919","repo":"Jessie75919.github.io","client_id":"5cc00853735d25bd22f3","client_secret":"42c46caebd1f91cd54924e2ad6c3dc6fec94f37e","admin_user":"Jessie75919","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-TW","body":null,"labels":"Gitalk","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"50de4015bb092f64bee2ff8c777f8aac"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

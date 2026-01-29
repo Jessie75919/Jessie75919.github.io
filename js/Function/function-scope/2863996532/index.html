@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="mask-icon" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"chanchandev.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"onmobile":false},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null,"show_result":"flat"},"fold":{"enable":false,"height":500},"language":false,"highlight_theme":"normal"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"找到 ${hits} 個搜索結果（用時 ${time} 毫秒）","hits":"找到 ${hits} 個搜索結果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="當我們學會了 Javascript 的 Function 怎麼使用後，有沒有常常因爲參數、變數、全域變數傻傻分不清楚的問題呢？今天我們就來聊聊 Javascript 的 Function Scope 吧！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript Function 作用域！一起用小明開分身的故事學習作用域！">
+<meta property="og:url" content="https://chanchandev.com/js/Function/function-scope/2863996532/index.html">
+<meta property="og:site_name" content="圈圈工程師">
+<meta property="og:description" content="當我們學會了 Javascript 的 Function 怎麼使用後，有沒有常常因爲參數、變數、全域變數傻傻分不清楚的問題呢？今天我們就來聊聊 Javascript 的 Function Scope 吧！">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-scope/Cover.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-scope/continent.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-scope/ban.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-scope/min-a.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-scope/continent-to-code.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-scope/min-b.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-scope/continent-with-mins.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-scope/min-c.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-scope/continent-with-mins-2.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-scope/search-rule.jpg">
+<meta property="article:published_time" content="2021-04-24T15:25:02.000Z">
+<meta property="article:modified_time" content="2026-01-28T12:40:17.308Z">
+<meta property="article:author" content="ChanChanDev">
+<meta property="article:tag" content="Javascript">
+<meta property="article:tag" content="Function">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-scope/Cover.jpg">
+
+
+<link rel="canonical" href="https://chanchandev.com/js/Function/function-scope/2863996532/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://chanchandev.com/js/Function/function-scope/2863996532/","path":"js/Function/function-scope/2863996532/","title":"Javascript Function 作用域！一起用小明開分身的故事學習作用域！"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Javascript Function 作用域！一起用小明開分身的故事學習作用域！ | 圈圈工程師</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R47Z93ZJTM"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-R47Z93ZJTM","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">圈圈工程師</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Change Change Developer</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-back-end"><a href="/categories/back-end/" rel="section"><i class="fas fa-rocket fa-fw"></i>Back-End</a></li><li class="menu-item menu-item-sharing"><a href="/categories/Sharing/" rel="section"><i class="fas fa-star fa-fw"></i>Sharing</a></li><li class="menu-item menu-item-reading"><a href="/categories/Reading/" rel="section"><i class="fas fa-book fa-fw"></i>Reading</a></li><li class="menu-item menu-item-design-pattern"><a href="/categories/design-pattern/" rel="section"><i class="fas fa-sitemap fa-fw"></i>Design-Pattern</a></li><li class="menu-item menu-item-javascript"><a href="/categories/js/" rel="section"><i class="fas fa-code fa-fw"></i>Javascript</a></li><li class="menu-item menu-item-分類"><a href="/categories/" rel="section"><i class="fas fa-folder-open fa-fw"></i>分類</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Function-%E5%89%8D%E6%83%85%E6%8F%90%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">Function 前情提要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Function-Scope-%E5%87%BD%E6%95%B8%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">2.</span> <span class="nav-text">Function Scope 函數作用域</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%81%BF%E5%85%8D%E5%91%BD%E5%90%8D%E8%A1%9D%E7%AA%81"><span class="nav-number">3.</span> <span class="nav-text">避免命名衝突</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%A6%E4%B8%80%E5%80%8B-function-%E7%9A%84%E5%8D%80%E5%9F%9F%E8%AE%8A%E6%95%B8%E5%90%8C%E5%90%8D%E7%9A%84%E7%8B%80%E6%B3%81"><span class="nav-number">3.1.</span> <span class="nav-text">另一個 function 的區域變數同名的狀況</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#function-%E5%A4%96%E7%9A%84%E5%90%8C%E5%90%8D%E8%AE%8A%E6%95%B8%E7%8B%80%E6%B3%81"><span class="nav-number">3.2.</span> <span class="nav-text">function 外的同名變數狀況</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E9%83%A8%E8%90%BD%E8%A3%A1%E6%B2%92%E6%9C%89%E9%80%99%E5%80%8B%E4%BA%BA%E2%80%A6"><span class="nav-number">3.2.1.</span> <span class="nav-text">如果部落裡沒有這個人…</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A2%E7%8B%80-function-%E7%8B%80%E6%B3%81"><span class="nav-number">3.3.</span> <span class="nav-text">巢狀 function 狀況</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%83%E6%95%B8"><span class="nav-number">4.</span> <span class="nav-text">參數</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Block-Scope-%E5%8D%80%E5%A1%8A%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">5.</span> <span class="nav-text">Block Scope 區塊作用域</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B5%90%E8%AB%96"><span class="nav-number">6.</span> <span class="nav-text">結論</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%83%E8%80%83"><span class="nav-number">7.</span> <span class="nav-text">參考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ChanChanDev"
+      src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+  <p class="site-author-name" itemprop="name">ChanChanDev</p>
+  <div class="site-description" itemprop="description">圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">標籤</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/chanchandev" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;chanchandev" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/chanchandev" title="FaceBook → https:&#x2F;&#x2F;www.facebook.com&#x2F;chanchandev" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-facebook fa-fw"></i>FaceBook</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://chanchandev.com/js/Function/function-scope/2863996532/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+      <meta itemprop="name" content="ChanChanDev">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="圈圈工程師">
+      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Javascript Function 作用域！一起用小明開分身的故事學習作用域！ | 圈圈工程師">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Javascript Function 作用域！一起用小明開分身的故事學習作用域！
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2021-04-24 23:25:02" itemprop="dateCreated datePublished" datetime="2021-04-24T23:25:02+08:00">2021-04-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2026-01-28 20:40:17" itemprop="dateModified" datetime="2026-01-28T20:40:17+08:00">2026-01-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/js/" itemprop="url" rel="index"><span itemprop="name">Javascript</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/js/Function/" itemprop="url" rel="index"><span itemprop="name">Function</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-scope/Cover.jpg"><br>當我們學會了 Javascript 的 Function 怎麼使用後，有沒有常常因爲參數、變數、全域變數傻傻分不清楚的問題呢？今天我們就來聊聊 Javascript 的 Function Scope 吧！</p>
+<span id="more"></span>
+<br>
+<details class="note success" open><summary><p>simple</p>
+</summary>
+<p>HIHI～😍  如果你是第一次來的話，『Chan-Chan-Dev』是一個專門用簡單的圖文與故事講解網路程式技術的網站。<br>若你也喜歡用這種方式學習的話，歡迎加入 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.facebook.com/chanchandev">Chan-Chan-Dev Facebook</a> 的粉絲團，在發佈的時候就有比較多機會收到通知喔！😍</p>
+
+</details>
+
+
+<h1 id="Function-前情提要"><a href="#Function-前情提要" class="headerlink" title="Function 前情提要"></a>Function 前情提要</h1><p>在上一篇 <a href="/js/Function/function-intro/2954858119/" title="Javascript Function 超基礎入門！老司機勿入！">Javascript Function 超基礎入門！老司機勿入！</a> 提到 Function 的最基礎用法，若錯過的朋友可以先花個簡單的幾分鐘瀏覽一下喔 😀</p>
+<h1 id="Function-Scope-函數作用域"><a href="#Function-Scope-函數作用域" class="headerlink" title="Function Scope 函數作用域"></a>Function Scope 函數作用域</h1><p>什麼是 Function Scope 函數作用域呢？ </p>
+<p>在回答這個問題之前，讓我們一樣來個小故事吧 😆</p>
+<p>從前從前從前在一塊元古的大陸上，這塊大陸上有著好幾個大大小小的原始的部落。</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-scope/continent.jpg" alt="原始的部落想像圖 (請原諒我沒有精稿 XDD)"></p>
+<p>這些部落裡中有個不成文且流傳已久的奇怪規定，就是<code>『任何一個從這個部落出生的人，終其一生都不可以跨越邊界』</code>，因此每個部落的首領下令用粗壯的樹幹圍出部落的<code>邊界</code>，並且禁止部落的人到外頭去。</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-scope/ban.jpg" alt="首領：「任何一個從這個部落出生的人，終其一生都不可以跨越邊界！」"></p>
+<p>小明是出生在<code>部落 A</code>的小孩，因此你在<code>部落 A</code>呼喊『小明』的名字，你就可以找到<code>部落 A</code>的小明。</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-scope/min-a.jpg" alt="他是部落 A 小明"></p>
+<p>相反地，如果你在<code>部落 A</code>以外的地方呼喚『小明』的名字，<code>部落 A</code>以外的人就會對你黑人問號，不知道你在找誰，跟你說這裏沒有這個人啦 😵</p>
+<p>我們把鏡頭還給棚內 ！</p>
+<hr>
+<p>我們可以把整個 <code>&lt;script&gt;....&lt;/script&gt;</code> 之間的區域假想爲一塊<code>大陸</code>，在實際宣告 function 的時候也會因爲那一對 <code>&#123;&#125;</code> 圍出一個 <code>區域</code> ，而這個區域就叫做 <code>Scope 作用域</code>。就像是圍出一個個不同的<code>部落</code>。</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-scope/continent-to-code.jpg"></p>
+<p>function 所圍出的<code>邊界</code>就像是 <code>電網</code> 一樣，因此若是在這個<code>區域</code>裏面出生的孩子（例如：宣告的變數、參數）都被告知絕對<code>不可以走出這個區域以外</code> 的地方 😭</p>
+<p>也因為他們只能活在這對<code>&#123;&#125;</code> 所形成的區域內，因此被稱爲 <code>區域變數 Local Variables</code>。</p>
+<p>簡單地來看一下這段程式範例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">a</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> min = <span class="string">&quot;部落 A 小明&quot;</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(min);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">a</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(min);</span><br></pre></td></tr></table></figure>
+<p>在執行過後，就會發現 Console 印出：</p>
+<details class="note danger" open><summary><p>simple</p>
+</summary>
+<p>部落 A 小明   👈 由第 3 行印出<br>Uncaught ReferenceError: min is not defined 👈 執行第 6 行發生錯誤</p>
+
+</details>
+
+<p>在第二行的 <code>min</code> 是在 <code>a</code> function 裏面宣告的，因此它的 <code>scope (作用域 / 生存範圍)</code> 就只能在第 2 ～ 3 之間。</p>
+<p>也因為如此，當我們在 <code>a</code> function <code>&#123;&#125;</code> 以外的範圍，試圖地取用 <code>min</code> 這個變數時，就會像是在<code>部落 A</code>外頭呼叫小明的名字一樣，因為沒有人認識，所以就會得到 <code>min is not defined</code> 的錯誤囉 😆</p>
+<h1 id="避免命名衝突"><a href="#避免命名衝突" class="headerlink" title="避免命名衝突"></a>避免命名衝突</h1><h2 id="另一個-function-的區域變數同名的狀況"><a href="#另一個-function-的區域變數同名的狀況" class="headerlink" title="另一個 function 的區域變數同名的狀況"></a>另一個 function 的區域變數同名的狀況</h2><p>就是這麼巧，因為<code>小明</code>是一個菜市場名！</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-scope/min-b.jpg" alt="他是部落 B 小明"></p>
+<p>在另外一個<code>部落 B</code>剛好也有一個小明，如果在<code>部落 A</code>裡呼喚小明的話，你只會找到<code>部落 A</code>裡的小明，你不會找到<code>部落 B</code>的小明，因為<code>部落 B</code>的小明根本不在<code>部落 A</code>阿！</p>
+<p>反之，在<code>部落 B</code>的話，是只會找到<code>部落 B</code>的小明的，不會找錯找到<code>部落 A</code>的小明。</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-scope/continent-with-mins.jpg"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">a</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">const</span> min = <span class="string">&quot;部落 A 小明&quot;</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(min); <span class="comment">// 👈 部落 A 小明</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">b</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">const</span> min = <span class="string">&quot;部落 B 小明&quot;</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(min); <span class="comment">// 👈 部落 B 小明</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">a</span>(); </span><br><span class="line"><span class="title function_">b</span>();</span><br></pre></td></tr></table></figure>
+
+<details class="note success" open><summary><p>simple</p>
+</summary>
+<p>因此，function 有像是部落的邊界作爲隔絕的話，就可以像上述一樣避免命名衝突的問題了。<br>我們可以看到 <code>a</code>、<code>b</code> 有一樣命名的變數 <code>min</code>，但是因爲是在不同的 function 內存取，因此就不會有互相撞名衝突的問題囉！</p>
+
+</details>
+
+
+
+<h2 id="function-外的同名變數狀況"><a href="#function-外的同名變數狀況" class="headerlink" title="function 外的同名變數狀況"></a>function 外的同名變數狀況</h2><p>小明因爲太菜市場名了！出現了一個出生在大陸上的小明，<code>他不屬於任何部落</code>，就自己漂流在這片大陸上，那。。那會發生什麼事情呢？<br><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-scope/min-c.jpg" alt="他是漂流大陸的小明"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">const</span> min = <span class="string">&quot;漂流大陸的小明&quot;</span>;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>相較於宣告在 function 的<code>區域變數</code>，若他不是宣告在 function 內的話，則會稱作<code>全域變數</code>，就像是上面宣告在最外層的 <code>min</code> 變數一樣。</p>
+<p>如果我們一樣在<code>部落 A</code>的呼喊『小明』的名字，因爲<code>部落 A</code>的人只認識<code>部落 A</code>的小明，因此你還是可以找到<code>部落 A</code>的小明。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> min = <span class="string">&quot;漂流大陸的小明&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">a</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">const</span> min = <span class="string">&quot;部落 A 小明&quot;</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(min);  <span class="comment">// 👈 &quot;部落 A 小明&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">a</span>();</span><br></pre></td></tr></table></figure>
+
+<p>如果這時候你在<code>部落 A</code>以外的地方呼喊『小明』的名字，大陸上的居民只認識<code>漂流大陸</code>的小明，因此你就可以找到<code>漂流大陸</code>的小明，你不會找到<code>任何一個部落</code>裡的小明。</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-scope/continent-with-mins-2.jpg"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> min = <span class="string">&quot;漂流大陸的小明&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">a</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">const</span> min = <span class="string">&quot;部落 A 小明&quot;</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(min);  <span class="comment">// 👈 &quot;部落 A 小明&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(min);  <span class="comment">// 👈 &quot;漂流大陸的小明&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="如果部落裡沒有這個人…"><a href="#如果部落裡沒有這個人…" class="headerlink" title="如果部落裡沒有這個人…"></a>如果部落裡沒有這個人…</h3><p>如果今天後山的<code>部落 C 根本沒有小明</code>這個人，但是我們卻在<code>部落 C</code>呼喊『小明』的名字，我們會找的到小明嗎？就算有找到的話會找到哪一個小明呢？</p>
+<p>尋人的步驟是這個樣子的：</p>
+<details class="note " open><summary><p>red fas fa-rocket simple</p>
+</summary>
+<p>若<code>部落</code>裡有你要找的人，你就可以找到的到這個人。</p>
+<p>但如果發現沒有你要找的這個人，就會派渡鴉到<code>部落以外一層</code>去尋找你要找的人囉。</p>
+
+</details>
+
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-scope/search-rule.jpg"></p>
+<p>因爲<code>部落 C</code> 建立在大陸上，因此你在<code>部落 C</code>呼喊『小明』的名字，部落沒有小明這個人的話，就會往外找到<code>漂流大陸</code>的小明囉！</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> min = <span class="string">&quot;漂流大陸的小明&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">c</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(min);  <span class="comment">// 👈 &quot;漂流大陸的小明&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">c</span>();</span><br></pre></td></tr></table></figure>
+
+<h2 id="巢狀-function-狀況"><a href="#巢狀-function-狀況" class="headerlink" title="巢狀 function 狀況"></a>巢狀 function 狀況</h2><p>我們把上述的程式碼稍微調整一下，改爲以下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">a</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">const</span> min = <span class="string">&quot;部落 A 小明&quot;</span>;</span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">c</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(min);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">c</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">a</span>();</span><br></pre></td></tr></table></figure>
+
+<p>若把 <code>c</code> function 改放進 <code>a</code> function 內的話，這時候的 <code>min</code> 變數會是誰呢？ </p>
+<p>還記得這個尋人邏輯嗎？</p>
+<details class="note " open><summary><p>red fas fa-rocket simple</p>
+</summary>
+<p>若<code>部落</code>裡有你要找的人，你就可以找到的到這個人。</p>
+<p>但如果發現沒有你要找的這個人，就會派渡鴉到<code>部落以外一層</code>去尋找你要找的人囉。</p>
+
+</details>
+
+<p>可以稍微用上面的尋人邏輯去想想看答案喔 😀</p>
+<p>到底是哪個小明呢！?</p>
+<blockquote>
+<p>“部落 A 小明”！ 因爲 a function 爲 c function 的外層，因此若往外找到 a function 內有 min 這個變數就會直接使用囉！ 相信聰明的你一定猜對了吧！</p>
+</blockquote>
+<h1 id="參數"><a href="#參數" class="headerlink" title="參數"></a>參數</h1><p>我們在 <a href="/js/Function/function-intro/2954858119/" title="Javascript Function 超基礎入門！老司機勿入！">Javascript Function 超基礎入門！老司機勿入！</a> 有提到 <code>參數</code> 是用來作爲 <code>function 輸入</code>。</p>
+<p>那他究竟是<code>區域變數</code>還是<code>全域變數</code>呢？</p>
+<p>執行底下程式碼會得到 <code>min is not defined</code> 的錯誤！</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">a</span>(<span class="params">min</span>)&#123;</span><br><span class="line">  <span class="comment">// .... </span></span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(min);</span><br></pre></td></tr></table></figure>
+<p>區域變數”！ 因此他 Scope 作用域也只會作用在在這個 function 內喔！</p>
+<p>我們知道<code>參數</code>爲<code>區域變數</code>後，我們也一起來猜猜底下第 5 行的 <code>min</code> 變數究竟是誰吧 😆</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> min = <span class="string">&quot;漂流大陸的小明&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">a</span>(<span class="params">min</span>)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(min);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">a</span>(<span class="string">&quot;部落 A 小明&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>到底是哪個小明 ?</p>
+<blockquote>
+<p>答案是：”部落 A 小明”！ 因爲 a function 沒有 min 這個區域變數，因此若有參數的情況下，會找找看是否有這個 <code>min</code> 的參數，若有找到就會直接使用囉！ 相信聰明的你一定猜對了吧！</p>
+</blockquote>
+<h1 id="Block-Scope-區塊作用域"><a href="#Block-Scope-區塊作用域" class="headerlink" title="Block Scope 區塊作用域"></a>Block Scope 區塊作用域</h1><p>咦？那例如 <code>if</code> 或者是 <code>for</code> 等等的語法也有一對 <code>&#123;&#125;</code>，這樣也會有 <code>Scope 作用域</code> 嗎？</p>
+<p>沒錯！他們也是 <code>Scope 作用域</code> 的一種，叫做 <code>區塊作用域 Block Scope</code>。</p>
+<p>不過前提是變數的宣告是要使用 ES6 的 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let">let</a> 與 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const">const</a> 方式喔！若是使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var">var</a> 的方式除了 function 以外的 <code>&#123;&#125;</code> 就沒有作用域可言了 😭</p>
+<p>我們稍微拿 <code>if</code> 來比較一下吧</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">  <span class="keyword">var</span> min1 = <span class="string">&quot;var 小明&quot;</span>;</span><br><span class="line">  <span class="keyword">const</span> min2 = <span class="string">&quot;const 小明&quot;</span>;</span><br><span class="line">  <span class="keyword">let</span> min3 = <span class="string">&quot;let 小明&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(min1);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(min2);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(min3);</span><br></pre></td></tr></table></figure>
+<p>執行後會發現 <code>min1</code> 居然在第 7 行，也就是 <code>if</code> 之外居然還可以被存取到！</p>
+<p>剩下的 <code>min2</code>、<code>min3</code> 因爲無法在 if 的作用域之外被存取，而會產生 <code>min2 is not defined</code> 的錯誤囉！</p>
+<h1 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h1><p>爲了講個 Scope 居然得畫這麼多個小明加上場景（而且畫風還有點不一樣 😆）</p>
+<p>在這篇文章我們講解了 Javascript 的 function 作用域是什麼，以及為什麼需要他。</p>
+<p>最常遇到的是 function 變數撞名衝突後，因爲對於 function 作用域的沒有完全地理解而造成預期以外的 Bug。</p>
+<p>希望這篇文章用一個瞎掰的小故事可以幫助到大家對於 function 作用域更瞭解一些。</p>
+<hr>
+<p>最後感謝你願意看到這裏，希望這篇文章對你有所幫助。</p>
+<p>若你想到身邊有需要這篇文章內容的朋友，也請你幫他一個忙把這篇文章分享給他 😍</p>
+<p>若文章的內容有錯誤的地方，也歡迎隨時一起討論交流。😘</p>
+<p>最後感謝你的閱讀囉，我們下次見！Bye ～ 🚀</p>
+<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><ul>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions">MDN Functions</a></li>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://cythilya.github.io/2018/10/19/function-vs-block-scope/">你懂 JavaScript 嗎？#12 函式範疇與區塊範疇（Function vs Block Scope）</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Javascript/" rel="tag"><i class="fa fa-tag"></i> Javascript</a>
+              <a href="/tags/Function/" rel="tag"><i class="fa fa-tag"></i> Function</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/note/Binary/binary-intro/3766688417/" rel="prev" title="二進位圖解入門教學">
+                  <i class="fa fa-angle-left"></i> 二進位圖解入門教學
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/js/Function/function-intro/2954858119/" rel="next" title="Javascript Function 超基礎入門！老司機勿入！">
+                  Javascript Function 超基礎入門！老司機勿入！ <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ChanChanDev</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"Jessie75919","repo":"Jessie75919.github.io","client_id":"5cc00853735d25bd22f3","client_secret":"42c46caebd1f91cd54924e2ad6c3dc6fec94f37e","admin_user":"Jessie75919","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-TW","body":null,"labels":"Gitalk","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"4227957f7ca51aa275db15d42ab3a661"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

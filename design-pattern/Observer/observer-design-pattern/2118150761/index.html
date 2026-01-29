@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="mask-icon" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"chanchandev.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"onmobile":false},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null,"show_result":"flat"},"fold":{"enable":false,"height":500},"language":false,"highlight_theme":"normal"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"找到 ${hits} 個搜索結果（用時 ${time} 毫秒）","hits":"找到 ${hits} 個搜索結果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="觀察者模式 aka 訂閱者模式，說到「訂閱」我想大家都不陌生，今天就用財富自由的米其林三星廚師詹姆的小故事，來一起學習觀察者設計模式吧！🎉">
+<meta property="og:type" content="article">
+<meta property="og:title" content="觀察者設計模式（Observer Design Pattern）">
+<meta property="og:url" content="https://chanchandev.com/design-pattern/Observer/observer-design-pattern/2118150761/index.html">
+<meta property="og:site_name" content="圈圈工程師">
+<meta property="og:description" content="觀察者模式 aka 訂閱者模式，說到「訂閱」我想大家都不陌生，今天就用財富自由的米其林三星廚師詹姆的小故事，來一起學習觀察者設計模式吧！🎉">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/observer-design-pattern/uml.jpg">
+<meta property="article:published_time" content="2023-10-14T08:24:54.000Z">
+<meta property="article:modified_time" content="2026-01-28T12:40:17.310Z">
+<meta property="article:author" content="ChanChanDev">
+<meta property="article:tag" content="設計模式">
+<meta property="article:tag" content="Design-Pattern">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/observer-design-pattern/uml.jpg">
+
+
+<link rel="canonical" href="https://chanchandev.com/design-pattern/Observer/observer-design-pattern/2118150761/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://chanchandev.com/design-pattern/Observer/observer-design-pattern/2118150761/","path":"design-pattern/Observer/observer-design-pattern/2118150761/","title":"觀察者設計模式（Observer Design Pattern）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>觀察者設計模式（Observer Design Pattern） | 圈圈工程師</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R47Z93ZJTM"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-R47Z93ZJTM","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">圈圈工程師</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Change Change Developer</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-back-end"><a href="/categories/back-end/" rel="section"><i class="fas fa-rocket fa-fw"></i>Back-End</a></li><li class="menu-item menu-item-sharing"><a href="/categories/Sharing/" rel="section"><i class="fas fa-star fa-fw"></i>Sharing</a></li><li class="menu-item menu-item-reading"><a href="/categories/Reading/" rel="section"><i class="fas fa-book fa-fw"></i>Reading</a></li><li class="menu-item menu-item-design-pattern"><a href="/categories/design-pattern/" rel="section"><i class="fas fa-sitemap fa-fw"></i>Design-Pattern</a></li><li class="menu-item menu-item-javascript"><a href="/categories/js/" rel="section"><i class="fas fa-code fa-fw"></i>Javascript</a></li><li class="menu-item menu-item-分類"><a href="/categories/" rel="section"><i class="fas fa-folder-open fa-fw"></i>分類</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%80%E5%AF%9F%E8%80%85%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F%E6%98%AF%E4%BB%80%E9%BA%BC%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">觀察者設計模式是什麼？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%83%8C%E6%99%AF%E8%A8%AD%E5%AE%9A"><span class="nav-number">2.</span> <span class="nav-text">背景設定</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%80%E5%AF%9F%E8%80%85%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F%E7%B5%84%E6%88%90"><span class="nav-number">3.</span> <span class="nav-text">觀察者設計模式組成</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%A7%80%E5%AF%9F%E8%80%85%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%8C%E6%95%B4%E7%A8%8B%E5%BC%8F%E7%A2%BC"><span class="nav-number">4.</span> <span class="nav-text">使用觀察者設計模式的完整程式碼</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%99%E6%A8%A3%E5%AF%AB%E7%9A%84%E5%A5%BD%E8%99%95%E6%98%AF%E4%BB%80%E9%BA%BC%EF%BC%9F"><span class="nav-number">5.</span> <span class="nav-text">這樣寫的好處是什麼？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%80%E5%AF%9F%E8%80%85%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F%E5%84%AA%E7%BC%BA%E9%BB%9E"><span class="nav-number">6.</span> <span class="nav-text">觀察者設計模式優缺點</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%84%AA%E9%BB%9E"><span class="nav-number">6.1.</span> <span class="nav-text">優點</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E9%BB%9E"><span class="nav-number">6.2.</span> <span class="nav-text">缺點</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%80%E5%AF%9F%E8%80%85%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F%E4%BD%BF%E7%94%A8%E6%99%82%E6%A9%9F"><span class="nav-number">7.</span> <span class="nav-text">觀察者設計模式使用時機</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B8%BD%E7%B5%90"><span class="nav-number">8.</span> <span class="nav-text">總結</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%83%E8%80%83"><span class="nav-number">9.</span> <span class="nav-text">參考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ChanChanDev"
+      src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+  <p class="site-author-name" itemprop="name">ChanChanDev</p>
+  <div class="site-description" itemprop="description">圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">標籤</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/chanchandev" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;chanchandev" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/chanchandev" title="FaceBook → https:&#x2F;&#x2F;www.facebook.com&#x2F;chanchandev" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-facebook fa-fw"></i>FaceBook</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://chanchandev.com/design-pattern/Observer/observer-design-pattern/2118150761/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+      <meta itemprop="name" content="ChanChanDev">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="圈圈工程師">
+      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="觀察者設計模式（Observer Design Pattern） | 圈圈工程師">
+      <meta itemprop="description" content="觀察者模式 aka 訂閱者模式，說到「訂閱」我想大家都不陌生，今天就用財富自由的米其林三星廚師詹姆的小故事，來一起學習觀察者設計模式吧！🎉">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          觀察者設計模式（Observer Design Pattern）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2023-10-14 16:24:54" itemprop="dateCreated datePublished" datetime="2023-10-14T16:24:54+08:00">2023-10-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2026-01-28 20:40:17" itemprop="dateModified" datetime="2026-01-28T20:40:17+08:00">2026-01-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/design-pattern/" itemprop="url" rel="index"><span itemprop="name">Design-Pattern</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/design-pattern/Observer/" itemprop="url" rel="index"><span itemprop="name">Observer</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">觀察者模式 aka 訂閱者模式，說到「訂閱」我想大家都不陌生，今天就用財富自由的米其林三星廚師詹姆的小故事，來一起學習觀察者設計模式吧！🎉</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><span id="more"></span>
+<br>
+
+<p>Hi 👋 ~ 今天跟大家聊聊<strong>觀察者設計模式（Observer Design Pattern）</strong> aka「訂閱者模式」。</p>
+<blockquote>
+<p>「記得按讚、訂閱、加分享！！」</p>
+</blockquote>
+<p>我想有看過 YouTube 影片的人對這句話都不陌生，<br>這樣 YouTuber 在上新片的時候，<br>我們才能收到新片通知，他們才有點閱率 😅</p>
+<h1 id="觀察者設計模式是什麼？"><a href="#觀察者設計模式是什麼？" class="headerlink" title="觀察者設計模式是什麼？"></a>觀察者設計模式是什麼？</h1><blockquote>
+<ul>
+<li>觀察者是一種行爲設計模式</li>
+<li>能夠產生「訂閱機制」的功能，發佈者（YouTuber）接受其他物件（觀衆）的訂閱後，讓發佈者（YouTuber）可以發佈通知給有訂閱的對象（觀衆），讓這些對象（觀衆）作出相對應的動作（例如：看新片）</li>
+</ul>
+</blockquote>
+<hr>
+<p>這次我們一樣用個小故事來瞭解觀察者模式吧 🙂</p>
+<h1 id="背景設定"><a href="#背景設定" class="headerlink" title="背景設定"></a>背景設定</h1><p>這次的主角是財富自由的米其林三星廚師 - 詹姆。</p>
+<p>詹姆自從中了樂透之後，<br>就過著財富自由的人生。<br>但無所事事又不知道幹嘛，<br>於是他決定在家鄉開了一間餐廳 。</p>
+<p>餐廳的營業時間都是看他心情而定，<br>有可能一個月都沒有營業也是常有的事情，<br>因爲他還在巴厘島上度假。</p>
+<p>因爲受到媒體報導後，<br>大家衝著米其林三星的光環慕名而來。<br>但卻因爲營業時間總是不確定，<br>所以往往總是撲空，<br>要吃到詹姆的料理都快要比中樂透的機率還低了 😭</p>
+<p>然而詹姆雖然開店的時間很任性，<br>心底也是個善良的好人，<br>不想要讓很多客人總是撲空，<br>於是他開了一個 Line 群組，<br>請想要收到「今日的營業時間」通知的客人加入這個群組。</p>
+<p>這樣就可以在他想到要營業的時候，<br>在發送訊息通知客人，<br>就不用在讓他們在外頭苦苦等待了 🎉</p>
+<h1 id="觀察者設計模式組成"><a href="#觀察者設計模式組成" class="headerlink" title="觀察者設計模式組成"></a>觀察者設計模式組成</h1><table>
+<thead>
+<tr>
+<th align="left">成員</th>
+<th align="left">Function</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Publisher</td>
+<td align="left">* addSubscriber(s Subscriber)<br>* removeSubscribers(s Subscriber)<div>* notifySubscribers()</div></td>
+</tr>
+<tr>
+<td align="left">Subscriber</td>
+<td align="left">* update(context)</td>
+</tr>
+</tbody></table>
+<p>以這個故事爲例：</p>
+<ul>
+<li>湯姆就是 <code>Publisher</code> 的角色，而客人就是 <code>Subscriber</code> 的角色</li>
+<li><code>Subscriber</code> 可以把自己加入 <code>Publisher</code> 的通知清單（Line 群組）</li>
+<li><code>Publisher</code> 會通知 <code>Subscriber</code> 事件（今日的營業時間）</li>
+<li><code>Subscriber</code> 就會針對這個事情作出相對應的動作（針對營業時間決定是否要到餐廳吃飯或無法參加）</li>
+</ul>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/observer-design-pattern/uml.jpg"></p>
+<p>那接下來我們就來看看怎麼用程式碼來呈現吧！<br><em>以下用 <code>golang</code> 作爲範例</em></p>
+<p>我們可以先設定 Publiser interface</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Publisher interface ---------------------------</span></span><br><span class="line"><span class="keyword">type</span> Publisher <span class="keyword">interface</span> &#123;</span><br><span class="line">	addSubscriber(Subscriber)</span><br><span class="line">	removeSubscriber(Subscriber)</span><br><span class="line">	notifySubscribers(<span class="type">int</span>, <span class="type">int</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以下是詹姆對於 Publiser interface 的實作</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Publisher Implementation ---------------------------</span></span><br><span class="line"><span class="keyword">type</span> James <span class="keyword">struct</span> &#123;</span><br><span class="line">	name      <span class="type">string</span></span><br><span class="line">	lineGroup []Subscriber</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(j *James)</span></span> addSubscriber(s Subscriber) &#123;</span><br><span class="line">	j.lineGroup = <span class="built_in">append</span>(j.lineGroup, s)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(j *James)</span></span> removeSubscriber(s Subscriber) &#123;</span><br><span class="line">	<span class="keyword">for</span> i, _s := <span class="keyword">range</span> j.lineGroup &#123;</span><br><span class="line">		<span class="keyword">if</span> _s.getName() == s.getName() &#123;</span><br><span class="line">			j.lineGroup = <span class="built_in">append</span>(j.lineGroup[:i], j.lineGroup[i+<span class="number">1</span>:]...)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(j *James)</span></span> notifySubscribers(businessOpenHour, businessClosedHour <span class="type">int</span>) &#123;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;✅ Line 群組通知 =&gt; \n%v: 今天開始營業時間是： %v:00 到 %v:00 喔！歡迎大家來！ \n&quot;</span>, j.name, businessOpenHour, businessClosedHour)</span><br><span class="line">	<span class="keyword">for</span> _, s := <span class="keyword">range</span> j.lineGroup &#123;</span><br><span class="line">		s.update(businessOpenHour, businessClosedHour)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下來是 Subscriber interface</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Subscriber interface ---------------------------</span></span><br><span class="line"><span class="keyword">type</span> Subscriber <span class="keyword">interface</span> &#123;</span><br><span class="line">	update(businessOpenHour, businessClosedHour <span class="type">int</span>)</span><br><span class="line">	getName() <span class="type">string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>客人對於 Subscriber interface 的實作</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Customer <span class="keyword">struct</span> &#123;</span><br><span class="line">	name               <span class="type">string</span></span><br><span class="line">	availableHourStart <span class="type">int</span></span><br><span class="line">	availableHourEnd   <span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Customer)</span></span> update(businessOpenHour, businessClosedHour <span class="type">int</span>) &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;___________________&quot;</span>)</span><br><span class="line">	fmt.Printf(<span class="string">&quot;%v: 我們可以的時間是： %v:00 - %v:00 \n&quot;</span>, c.name, c.availableHourStart, c.availableHourEnd)</span><br><span class="line">	<span class="keyword">if</span> c.availableHourStart &gt;= businessOpenHour &amp;&amp; c.availableHourEnd &lt;= businessClosedHour &#123;</span><br><span class="line">		fmt.Println(c.name + <span class="string">&quot;: 時間可以，我們去詹姆的餐廳吃飯吧！&quot;</span>)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		fmt.Println(c.name + <span class="string">&quot;: 時間無法配合。。，下次再去好了。。。&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Customer)</span></span> getName() <span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> c.name</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>實際執行</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// Subscriber</span></span><br><span class="line">	david := &amp;Customer&#123;name: <span class="string">&quot;David&quot;</span>, availableHourStart: <span class="number">20</span>, availableHourEnd: <span class="number">22</span>&#125;</span><br><span class="line">	olivia := &amp;Customer&#123;name: <span class="string">&quot;Olivia&quot;</span>, availableHourStart: <span class="number">18</span>, availableHourEnd: <span class="number">20</span>&#125;</span><br><span class="line">	tom := &amp;Customer&#123;name: <span class="string">&quot;Tom&quot;</span>, availableHourStart: <span class="number">21</span>, availableHourEnd: <span class="number">24</span>&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Publisher</span></span><br><span class="line">	james := &amp;James&#123;name: <span class="string">&quot;James&quot;</span>&#125;</span><br><span class="line">	james.addSubscriber(david)</span><br><span class="line">	james.addSubscriber(olivia)</span><br><span class="line">	james.addSubscriber(tom)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 第 1 次營業通知</span></span><br><span class="line">	james.notifySubscribers(<span class="number">19</span>, <span class="number">24</span>)</span><br><span class="line">	<span class="comment">// 第 2 次營業通知</span></span><br><span class="line">	james.notifySubscribers(<span class="number">20</span>, <span class="number">21</span>)</span><br><span class="line">	<span class="comment">// 第 3 次營業通知</span></span><br><span class="line">	james.notifySubscribers(<span class="number">18</span>, <span class="number">20</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">✅ Line 群組通知 =&gt; </span><br><span class="line">James: 今天開始營業時間是： <span class="number">19</span>:<span class="number">00</span> 到 <span class="number">24</span>:<span class="number">00</span> 喔！歡迎大家來！ </span><br><span class="line">___________________</span><br><span class="line">David: 我們可以的時間是： <span class="number">20</span>:<span class="number">00</span> - <span class="number">22</span>:<span class="number">00</span> </span><br><span class="line">David: 時間可以，我們去詹姆的餐廳吃飯吧！</span><br><span class="line">___________________</span><br><span class="line">Olivia: 我們可以的時間是： <span class="number">18</span>:<span class="number">00</span> - <span class="number">20</span>:<span class="number">00</span> </span><br><span class="line">Olivia: 時間無法配合。。，下次再去好了。。。</span><br><span class="line">___________________</span><br><span class="line">Tom: 我們可以的時間是： <span class="number">21</span>:<span class="number">00</span> - <span class="number">24</span>:<span class="number">00</span> </span><br><span class="line">Tom: 時間可以，我們去詹姆的餐廳吃飯吧！</span><br><span class="line"></span><br><span class="line">✅ Line 群組通知 =&gt; </span><br><span class="line">James: 今天開始營業時間是： <span class="number">20</span>:<span class="number">00</span> 到 <span class="number">21</span>:<span class="number">00</span> 喔！歡迎大家來！ </span><br><span class="line">___________________</span><br><span class="line">David: 我們可以的時間是： <span class="number">20</span>:<span class="number">00</span> - <span class="number">22</span>:<span class="number">00</span> </span><br><span class="line">David: 時間無法配合。。，下次再去好了。。。</span><br><span class="line">___________________</span><br><span class="line">Olivia: 我們可以的時間是： <span class="number">18</span>:<span class="number">00</span> - <span class="number">20</span>:<span class="number">00</span> </span><br><span class="line">Olivia: 時間無法配合。。，下次再去好了。。。</span><br><span class="line">___________________</span><br><span class="line">Tom: 我們可以的時間是： <span class="number">21</span>:<span class="number">00</span> - <span class="number">24</span>:<span class="number">00</span> </span><br><span class="line">Tom: 時間無法配合。。，下次再去好了。。。</span><br><span class="line"></span><br><span class="line">✅ Line 群組通知 =&gt; </span><br><span class="line">James: 今天開始營業時間是： <span class="number">18</span>:<span class="number">00</span> 到 <span class="number">20</span>:<span class="number">00</span> 喔！歡迎大家來！ </span><br><span class="line">___________________</span><br><span class="line">David: 我們可以的時間是： <span class="number">20</span>:<span class="number">00</span> - <span class="number">22</span>:<span class="number">00</span> </span><br><span class="line">David: 時間無法配合。。，下次再去好了。。。</span><br><span class="line">___________________</span><br><span class="line">Olivia: 我們可以的時間是： <span class="number">18</span>:<span class="number">00</span> - <span class="number">20</span>:<span class="number">00</span> </span><br><span class="line">Olivia: 時間可以，我們去詹姆的餐廳吃飯吧！</span><br><span class="line">___________________</span><br><span class="line">Tom: 我們可以的時間是： <span class="number">21</span>:<span class="number">00</span> - <span class="number">24</span>:<span class="number">00</span> </span><br><span class="line">Tom: 時間無法配合。。，下次再去好了。。。</span><br></pre></td></tr></table></figure>
+
+<h1 id="使用觀察者設計模式的完整程式碼"><a href="#使用觀察者設計模式的完整程式碼" class="headerlink" title="使用觀察者設計模式的完整程式碼"></a>使用觀察者設計模式的完整程式碼</h1><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Publisher interface ---------------------------</span></span><br><span class="line"><span class="keyword">type</span> Publisher <span class="keyword">interface</span> &#123;</span><br><span class="line">	addSubscriber(Subscriber)</span><br><span class="line">	removeSubscriber(Subscriber)</span><br><span class="line">	notifySubscribers(<span class="type">int</span>, <span class="type">int</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Publisher Implementation ---------------------------</span></span><br><span class="line"><span class="keyword">type</span> James <span class="keyword">struct</span> &#123;</span><br><span class="line">	name      <span class="type">string</span></span><br><span class="line">	lineGroup []Subscriber</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(j *James)</span></span> addSubscriber(s Subscriber) &#123;</span><br><span class="line">	j.lineGroup = <span class="built_in">append</span>(j.lineGroup, s)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(j *James)</span></span> removeSubscriber(s Subscriber) &#123;</span><br><span class="line">	<span class="keyword">for</span> i, _s := <span class="keyword">range</span> j.lineGroup &#123;</span><br><span class="line">		<span class="keyword">if</span> _s.getName() == s.getName() &#123;</span><br><span class="line">			j.lineGroup = <span class="built_in">append</span>(j.lineGroup[:i], j.lineGroup[i+<span class="number">1</span>:]...)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(j *James)</span></span> notifySubscribers(businessOpenHour, businessClosedHour <span class="type">int</span>) &#123;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;✅ Line 群組通知 =&gt; \n%v: 今天開始營業時間是： %v:00 到 %v:00 喔！歡迎大家來！ \n&quot;</span>, j.name, businessOpenHour, businessClosedHour)</span><br><span class="line">	<span class="keyword">for</span> _, s := <span class="keyword">range</span> j.lineGroup &#123;</span><br><span class="line">		s.update(businessOpenHour, businessClosedHour)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Subscriber interface ---------------------------</span></span><br><span class="line"><span class="keyword">type</span> Subscriber <span class="keyword">interface</span> &#123;</span><br><span class="line">	update(businessOpenHour, businessClosedHour <span class="type">int</span>)</span><br><span class="line">	getName() <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Customer <span class="keyword">struct</span> &#123;</span><br><span class="line">	name               <span class="type">string</span></span><br><span class="line">	availableHourStart <span class="type">int</span></span><br><span class="line">	availableHourEnd   <span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Customer)</span></span> update(businessOpenHour, businessClosedHour <span class="type">int</span>) &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;___________________&quot;</span>)</span><br><span class="line">	fmt.Printf(<span class="string">&quot;%v: 我們可以的時間是： %v:00 - %v:00 \n&quot;</span>, c.name, c.availableHourStart, c.availableHourEnd)</span><br><span class="line">	<span class="keyword">if</span> c.availableHourStart &gt;= businessOpenHour &amp;&amp; c.availableHourEnd &lt;= businessClosedHour &#123;</span><br><span class="line">		fmt.Println(c.name + <span class="string">&quot;: 時間可以，我們去詹姆的餐廳吃飯吧！&quot;</span>)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		fmt.Println(c.name + <span class="string">&quot;: 時間無法配合。。，下次再去好了。。。&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Customer)</span></span> getName() <span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> c.name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// Subscriber</span></span><br><span class="line">	david := &amp;Customer&#123;name: <span class="string">&quot;David&quot;</span>, availableHourStart: <span class="number">20</span>, availableHourEnd: <span class="number">22</span>&#125;</span><br><span class="line">	olivia := &amp;Customer&#123;name: <span class="string">&quot;Olivia&quot;</span>, availableHourStart: <span class="number">18</span>, availableHourEnd: <span class="number">20</span>&#125;</span><br><span class="line">	tom := &amp;Customer&#123;name: <span class="string">&quot;Tom&quot;</span>, availableHourStart: <span class="number">21</span>, availableHourEnd: <span class="number">24</span>&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Publisher</span></span><br><span class="line">	james := &amp;James&#123;name: <span class="string">&quot;James&quot;</span>&#125;</span><br><span class="line">	james.addSubscriber(david)</span><br><span class="line">	james.addSubscriber(olivia)</span><br><span class="line">	james.addSubscriber(tom)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 第 1 次營業通知</span></span><br><span class="line">	james.notifySubscribers(<span class="number">19</span>, <span class="number">24</span>)</span><br><span class="line">	<span class="comment">// 第 2 次營業通知</span></span><br><span class="line">	james.notifySubscribers(<span class="number">20</span>, <span class="number">21</span>)</span><br><span class="line">	<span class="comment">// 第 3 次營業通知</span></span><br><span class="line">	james.notifySubscribers(<span class="number">18</span>, <span class="number">20</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="這樣寫的好處是什麼？"><a href="#這樣寫的好處是什麼？" class="headerlink" title="這樣寫的好處是什麼？"></a>這樣寫的好處是什麼？</h1><details class="note success" open><summary><p>simple</p>
+</summary>
+<p>降低發佈者與訂閱者之間的耦合關係。</p>
+
+</details>
+
+
+
+<p>想像一下如果沒有使用觀察者設計模式(詹姆沒有使用 Line 群組通知)，<br>詹姆必須要知道 David、Olivia 這些人的話，<br>就會在詹姆通知邏輯裡發生每個人狀況的判斷，例如：</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(j *James)</span></span> notify(businessOpenHour, businessClosedHour <span class="type">int</span>) &#123;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;✅ \n%v: 今天開始營業時間是： %v:00 到 %v:00 喔！歡迎大家來！ \n&quot;</span>, j.name, businessOpenHour, businessClosedHour)</span><br><span class="line">	david := &amp;Customer&#123;name: <span class="string">&quot;David&quot;</span>, availableHourStart: <span class="number">20</span>, availableHourEnd: <span class="number">22</span>&#125;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;%v: 我們可以的時間是： %v:00 - %v:00 \n&quot;</span>, c.name, c.availableHourStart, c.availableHourEnd)</span><br><span class="line">	<span class="keyword">if</span> david.availableHourStart &gt;= businessOpenHour &amp;&amp; david.availableHourEnd &lt;= businessClosedHour &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;Daivd: 時間可以，我們去詹姆的餐廳吃飯吧！&quot;</span>)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;Daivd: 時間無法配合。。，下次再去好了。。。&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	olivia := &amp;Customer&#123;name: <span class="string">&quot;Olivia&quot;</span>, availableHourStart: <span class="number">18</span>, availableHourEnd: <span class="number">20</span>&#125;</span><br><span class="line">	<span class="keyword">if</span> olivia.availableHourStart &gt;= businessOpenHour &amp;&amp; olivia.availableHourEnd &lt;= businessClosedHour &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;Olivia: 時間可以，我們去詹姆的餐廳吃飯吧！&quot;</span>)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;Olivia: 時間無法配合。。，下次再去好了。。。&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	tom := &amp;Customer&#123;name: <span class="string">&quot;Tom&quot;</span>, availableHourStart: <span class="number">21</span>, availableHourEnd: <span class="number">24</span>&#125;</span><br><span class="line">	<span class="keyword">if</span> tom.availableHourStart &gt;= businessOpenHour &amp;&amp; tom.availableHourEnd &lt;= businessClosedHour &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;Tom: 時間可以，我們去詹姆的餐廳吃飯吧！&quot;</span>)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;Tom: 時間無法配合。。，下次再去好了。。。&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>改成觀察者模式使用像 Line 群組這樣的通知功能後，<br>除了降低耦合關係以外，<br>之後有人要加入這個 Line 群組，也是十分容易的：</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">func main() &#123;</span><br><span class="line">        david := &amp;Customer&#123;name: &quot;David&quot;, availableHourStart: 20, availableHourEnd: 22&#125;</span><br><span class="line">        olivia := &amp;Customer&#123;name: &quot;Olivia&quot;, availableHourStart: 18, availableHourEnd: 20&#125;</span><br><span class="line">        tom := &amp;Customer&#123;name: &quot;Tom&quot;, availableHourStart: 21, availableHourEnd: 24&#125;</span><br><span class="line"><span class="addition">+       peter := &amp;Customer&#123;name: &quot;Peter&quot;, availableHourStart: 22, availableHourEnd: 24&#125;</span></span><br><span class="line"> </span><br><span class="line">        // Publisher</span><br><span class="line">        james := &amp;James&#123;name: &quot;James&quot;&#125;</span><br><span class="line">        james.addSubscriber(david)</span><br><span class="line">        james.addSubscriber(olivia)</span><br><span class="line">        james.addSubscriber(tom)</span><br><span class="line"><span class="addition">+       james.addSubscriber(peter)</span></span><br><span class="line"> </span><br><span class="line">        // 第 1 次營業通知</span><br><span class="line">        james.notifySubscribers(19, 24)</span><br></pre></td></tr></table></figure>
+
+<h1 id="觀察者設計模式優缺點"><a href="#觀察者設計模式優缺點" class="headerlink" title="觀察者設計模式優缺點"></a>觀察者設計模式優缺點</h1><h2 id="優點"><a href="#優點" class="headerlink" title="優點"></a>優點</h2><ul>
+<li>🎉 降低發佈者與訂閱者之間的耦合關係</li>
+</ul>
+<h2 id="缺點"><a href="#缺點" class="headerlink" title="缺點"></a>缺點</h2><ul>
+<li>😬 通知的順序是隨機的</li>
+</ul>
+<h1 id="觀察者設計模式使用時機"><a href="#觀察者設計模式使用時機" class="headerlink" title="觀察者設計模式使用時機"></a>觀察者設計模式使用時機</h1><blockquote>
+<p>當某一個物件的動作，會影響另一群對象的行爲，那也許就可以考慮引入觀察者設計模式</p>
+</blockquote>
+<h1 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h1><p>以上就是觀察者設計模式的介紹，感謝你的收看～！</p>
+<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><ul>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://refactoringguru.cn/design-patterns/observer">https://refactoringguru.cn/design-patterns/observer</a></li>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://ianjustin39.github.io/ianlife/design-pattern/observer-pattern/">https://ianjustin39.github.io/ianlife/design-pattern/observer-pattern/</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/" rel="tag"><i class="fa fa-tag"></i> 設計模式</a>
+              <a href="/tags/Design-Pattern/" rel="tag"><i class="fa fa-tag"></i> Design-Pattern</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/side-project/raycast-transcribe/2026012801/" rel="prev" title="我只想打嘴砲！如何用 Vibe Coding 解放雙手！打造語音轉文字小幫手 Voice Polish！">
+                  <i class="fa fa-angle-left"></i> 我只想打嘴砲！如何用 Vibe Coding 解放雙手！打造語音轉文字小幫手 Voice Polish！
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/dsa/Container-With-Most-Water/858250619/" rel="next" title="Leetcode 筆記 - 圖解解題 Container With Most Water">
+                  Leetcode 筆記 - 圖解解題 Container With Most Water <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ChanChanDev</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"Jessie75919","repo":"Jessie75919.github.io","client_id":"5cc00853735d25bd22f3","client_secret":"42c46caebd1f91cd54924e2ad6c3dc6fec94f37e","admin_user":"Jessie75919","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-TW","body":null,"labels":"Gitalk","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"550e7894b8b1ff1dac4f44247832b022"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="mask-icon" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"chanchandev.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"onmobile":false},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null,"show_result":"flat"},"fold":{"enable":false,"height":500},"language":false,"highlight_theme":"normal"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"找到 ${hits} 個搜索結果（用時 ${time} 毫秒）","hits":"找到 ${hits} 個搜索結果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="什麼是二進位呢？為什麼又需要二進位？它跟我們有什麼關係？讓我們簡單地用圖解來一起學習二進位吧！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二進位圖解入門教學">
+<meta property="og:url" content="https://chanchandev.com/note/Binary/binary-intro/3766688417/index.html">
+<meta property="og:site_name" content="圈圈工程師">
+<meta property="og:description" content="什麼是二進位呢？為什麼又需要二進位？它跟我們有什麼關係？讓我們簡單地用圖解來一起學習二進位吧！">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/binary-intro/Cover.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/binary-intro/1_PVhy6PGgt7N-MadcpEAFLw.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/binary-intro/1_QCpiFYtQ6j2pfSxFwFE7Fg.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/binary-intro/1_AIIpmtIKyJEcgCT9SrIVPA.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/binary-intro/1_I4q6kLZ88RTDQHQYryOcCg.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/binary-intro/1_HjxQcND7u6BII7N6jzHR-Q.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/binary-intro/1_rViLAWMeOD5BgeUCK_VgzQ.png">
+<meta property="article:published_time" content="2021-04-25T01:30:30.000Z">
+<meta property="article:modified_time" content="2026-01-28T12:40:17.311Z">
+<meta property="article:author" content="ChanChanDev">
+<meta property="article:tag" content="二進位">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/binary-intro/Cover.jpg">
+
+
+<link rel="canonical" href="https://chanchandev.com/note/Binary/binary-intro/3766688417/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://chanchandev.com/note/Binary/binary-intro/3766688417/","path":"note/Binary/binary-intro/3766688417/","title":"二進位圖解入門教學"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>二進位圖解入門教學 | 圈圈工程師</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R47Z93ZJTM"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-R47Z93ZJTM","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">圈圈工程師</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Change Change Developer</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-back-end"><a href="/categories/back-end/" rel="section"><i class="fas fa-rocket fa-fw"></i>Back-End</a></li><li class="menu-item menu-item-sharing"><a href="/categories/Sharing/" rel="section"><i class="fas fa-star fa-fw"></i>Sharing</a></li><li class="menu-item menu-item-reading"><a href="/categories/Reading/" rel="section"><i class="fas fa-book fa-fw"></i>Reading</a></li><li class="menu-item menu-item-design-pattern"><a href="/categories/design-pattern/" rel="section"><i class="fas fa-sitemap fa-fw"></i>Design-Pattern</a></li><li class="menu-item menu-item-javascript"><a href="/categories/js/" rel="section"><i class="fas fa-code fa-fw"></i>Javascript</a></li><li class="menu-item menu-item-分類"><a href="/categories/" rel="section"><i class="fas fa-folder-open fa-fw"></i>分類</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%81%E9%80%B2%E4%BD%8D"><span class="nav-number">1.</span> <span class="nav-text">十進位</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E9%80%B2%E4%BD%8D"><span class="nav-number">2.</span> <span class="nav-text">二進位</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E5%8F%AA%E5%89%A9%E4%B8%8B%E4%BA%8C%E9%80%B2%E4%BD%8D%E2%80%A6"><span class="nav-number">3.</span> <span class="nav-text">如果只剩下二進位…</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E9%80%B2%E4%BD%8D%E6%AA%94%E6%A1%88"><span class="nav-number">4.</span> <span class="nav-text">二進位檔案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E9%80%B2%E4%BD%8D%E7%9A%84%E6%A6%82%E5%BF%B5%E5%B0%8F%E7%B8%BD%E7%B5%90"><span class="nav-number">4.1.</span> <span class="nav-text">二進位的概念小總結</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E9%80%B2%E4%BD%8D%E8%A1%8D%E7%94%9F%E5%96%AE%E4%BD%8D"><span class="nav-number">5.</span> <span class="nav-text">二進位衍生單位</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%B4%BB%E4%B8%AD%E5%B0%8F%E4%BE%8B%E5%AD%90"><span class="nav-number">5.1.</span> <span class="nav-text">生活中小例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Take-Away-%E5%B0%8F%E6%95%B4%E7%90%86"><span class="nav-number">6.</span> <span class="nav-text">Take Away 小整理</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ChanChanDev"
+      src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+  <p class="site-author-name" itemprop="name">ChanChanDev</p>
+  <div class="site-description" itemprop="description">圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">標籤</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/chanchandev" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;chanchandev" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/chanchandev" title="FaceBook → https:&#x2F;&#x2F;www.facebook.com&#x2F;chanchandev" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-facebook fa-fw"></i>FaceBook</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://chanchandev.com/note/Binary/binary-intro/3766688417/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+      <meta itemprop="name" content="ChanChanDev">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="圈圈工程師">
+      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="二進位圖解入門教學 | 圈圈工程師">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          二進位圖解入門教學
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2021-04-25 09:30:30" itemprop="dateCreated datePublished" datetime="2021-04-25T09:30:30+08:00">2021-04-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2026-01-28 20:40:17" itemprop="dateModified" datetime="2026-01-28T20:40:17+08:00">2026-01-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/note/Binary/" itemprop="url" rel="index"><span itemprop="name">Binary</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/binary-intro/Cover.jpg"><br>什麼是二進位呢？為什麼又需要二進位？它跟我們有什麼關係？讓我們簡單地用圖解來一起學習二進位吧！</p>
+<span id="more"></span>
+<br>
+<details class="note success" open><summary><p>simple</p>
+</summary>
+<p>HIHI ～ 😍 如果你是第一次來的話，『Chan-Chan-Dev』是一個專門用簡單的圖文與故事講解網路程式技術的網站。<br>若你也喜歡用這種方式學習的話，歡迎加入 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.facebook.com/chanchandev">Chan-Chan-Dev Facebook</a> 的粉絲團，在發佈的時候就有比較多機會收到通知喔！😍</p>
+
+</details>
+
+<hr>
+<details class="note info" open><summary><p>simple</p>
+</summary>
+<p>這篇文章之前已於 <code>2020/01/05</code> 發佈在 Medium，因爲已經不再維護 Medium，因此將這篇文章搬回來囉！ 😆</p>
+
+</details>
+
+<p>在理解二進位之前，也許可以先從我們最習慣的『十進位』開始出發。</p>
+<p>我們開始吧！😆</p>
+<h1 id="十進位"><a href="#十進位" class="headerlink" title="十進位"></a>十進位</h1><p>假如有人叫我們從 0 數到 10，我們習慣的數數方式大概會是這樣：『 0, 1, 2, 3, 4, 5, 6, 7, 8, 9』，從 0 一路數到 9，下一個數字遇到了 10，因為是<code>十進位</code>的關係，所以<code>遇到 10 就會自動的進位</code>。</p>
+<details class="note " open><summary><p>simple</p>
+</summary>
+<p>所謂的『近位』也就是右邊的個位數字歸 0（下圖藍色的 0 ），而在左邊的數字 +1 （下圖紅色的 1）的意思。</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/binary-intro/1_PVhy6PGgt7N-MadcpEAFLw.png" alt="0 ~ 10 的進位"></p>
+
+</details>
+
+<p>0 ~ 10  的進位至於到了 90 ~ 99 的時候，下一個數字 <code>個位數</code> 的 9 + 1 等於 10 ，於是需要進位：</p>
+<details class="note " open><summary><p>simple</p>
+</summary>
+<p><code>個位數</code>歸 0，<code>十位數</code>要加上 1，此時的<code>十位數</code>的數字是 9，所以 9 + 1 等於 10，所以<code>十位數</code>也需要進位：<code>十位數</code> 歸 0，<code>百位數</code>要加上 1，所以就會變成 <code>100</code>。</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/binary-intro/1_QCpiFYtQ6j2pfSxFwFE7Fg.png" alt="90 ~ 99的進位"></p>
+
+</details>
+
+<h1 id="二進位"><a href="#二進位" class="headerlink" title="二進位"></a>二進位</h1><p>如果我們從上述知道十進位的意思其實就是<code>遇到數字 10 就把就數字歸 0 並且往下一個位數加上 1</code>，那二進位呢？</p>
+<p>其實就是<code>遇到數字 2 就把就數字歸 0 並且往下一個位數加上 1 </code>的意思，完全跟上述的十進位的方法一模一樣 😆</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/binary-intro/1_AIIpmtIKyJEcgCT9SrIVPA.png" alt="0 ~ 1 的進位"></p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/binary-intro/1_I4q6kLZ88RTDQHQYryOcCg.png" alt="11 的進位"></p>
+<details class="note " open><summary><p>red fas fa-exclamation-circle simple</p>
+</summary>
+<p>只是這裡要注意的是，當用二進位的時候，就<code>無法帶著十進位的觀點來看</code>。</p>
+<p>例如：二進位的 11，雖然看起來很像十進位的 11，但是因為它是用二進位來計算的，所以<code>二進位</code>的 <code>11</code> 其實是<code>十進位</code>的 <code>3</code>，如下圖。</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/binary-intro/1_HjxQcND7u6BII7N6jzHR-Q.png"></p>
+
+</details>
+
+<p>因此，二進位與十進位一樣，都是可以用來表示<code>某一個數字</code>的方法。</p>
+<p>隨著數字越來越大二進位的<code>『位數』</code>也會越來越多，例如十進位的 <code>255</code>，用二進位來表示的話就會是： <code>1111111</code>，必須要用 <code>8</code> 個位數才能表達十進位的 <code>255</code> 。</p>
+<h1 id="如果只剩下二進位…"><a href="#如果只剩下二進位…" class="headerlink" title="如果只剩下二進位…"></a>如果只剩下二進位…</h1><p>想像一下如果日常生活中所用的數字變成二進位的話會變成什麼樣子：</p>
+<details class="note " open><summary><p>simple</p>
+</summary>
+<p>ex: 最新的 iphone 售價是 <code>0110000101000100</code> 元（十進位爲 <code>24,900</code>）</p>
+<p>ex: 去歐洲旅遊的旅費大概是 <code>0001100001101010000</code> 左右吧（十進位爲 <code>100,000</code>）</p>
+
+</details>
+
+<details class="note " open><summary><p>orange fas fa-question-circle simple</p>
+</summary>
+<p>既然二進位的那麼多位數在日常生活中是很不方便的，但是為什麼又會需要二進位呢？</p>
+
+</details>
+
+<p>因爲雖然人類很不擅長用二進位的方式來思考，但剛好這是電腦的強項，電腦的資料（圖片、影片、聲音檔等等）都是以二進位的方式來做儲存，因此被稱作爲 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://zh.wikipedia.org/wiki/%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6">二進位檔案</a>。</p>
+<h1 id="二進位檔案"><a href="#二進位檔案" class="headerlink" title="二進位檔案"></a>二進位檔案</h1><p>電腦把所有的資訊都用<code>「數字」</code>來表示，更精準一點的來說，是用<code>「二進位的數字」</code>來表示，所以在電腦裡的世界就是只有 <code>0</code> 與 <code>1</code>，就算是連我們習慣看到的十進位的數字 24900，其實它還是以<code>二進位</code>的資料被儲存了下來。</p>
+<p>所以如果以剛剛的十進位的 <code>255</code>，用二進位來表達就是 <code>11111111</code> ，每一個「位數」（每一個 1 ），以電腦的資料的角度來看就是<code> 1 個位元 (bit)</code>，而 <code>8 個位元</code>組成 1 組，所以稱之爲<code>位元組( byte )</code>。<br><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/binary-intro/1_rViLAWMeOD5BgeUCK_VgzQ.png"></p>
+<h2 id="二進位的概念小總結"><a href="#二進位的概念小總結" class="headerlink" title="二進位的概念小總結"></a>二進位的概念小總結</h2><details class="note success" open><summary><p>simple</p>
+</summary>
+<ul>
+<li>1 bit(位元) = <code>0</code> 或 <code>1</code> 的兩種可能</li>
+<li>1 byte(位元組) = <code>8</code> 個位元</li>
+</ul>
+
+</details>
+
+<h1 id="二進位衍生單位"><a href="#二進位衍生單位" class="headerlink" title="二進位衍生單位"></a>二進位衍生單位</h1><p>剛剛上面有提到說二進位資料，舉凡文件、音樂、電影、圖片等等在電腦上看得到的內容是上述的二進位資料的範圍內。音樂、圖片、或電影經過「數位化」的方式被儲存（被用 0 或 1 的方式儲存在電腦裡）。這些檔案本身是有內容的，因此被用數位化的方式儲存起來就會有所謂的<code>資料的大小</code>。</p>
+<p>想像一部魔戒 3 小時長電影如果要用 <code>bit 位元</code>單位來顯示它的影片大小的話，那也許會是用很多很多數字的長度呈現，看來想要 <code>bit 位元</code>單位來形容這部電影的容量大小可能是一件滿不容易的事情。</p>
+<p>因此在位元 bit 與位元組 byte 的單位中，又發展出了以下幾種的單位：</p>
+<details class="note " open><summary><p>simple</p>
+</summary>
+<ul>
+<li>1 <code>bit(位元)</code> = <code>0</code> 或 <code>1</code> 的這兩種可能, 用小寫的 <code>b</code> 作爲縮寫代表</li>
+<li>1 <code>byte(位元組)</code> = <code>8 個位元(bit)</code>，用大寫的 <code>B</code> 作爲縮寫代表</li>
+<li>1 <code>Kilobyte</code> = 1024 個<code>位元組(byte)</code>，用 <code>KiB</code> 作爲縮寫代表</li>
+<li>1 <code>Megabyte</code> = 1024 個 <code>Kilobyte</code>，用 <code>MiB</code> 作爲縮寫代表</li>
+<li>1 <code>Gigabyte</code> = 1024 個 <code>Megabyte</code>，用 <code>GiB</code> 作爲縮寫代表</li>
+<li>1 <code>Terabyte</code> = 1024 個 <code>Gigabyte</code>，用 <code>TiB</code> 作爲縮寫代表</li>
+</ul>
+
+</details>
+
+<blockquote>
+<p>註：十分感謝 <a target="_blank" rel="noopener external nofollow noreferrer" href="http://wiki.csie.ncku.edu.tw/User/jserv">jserv</a> 大神對於 Binary prefix 的提醒：『為了區別 K=1000 (SI Prefix)，KB 與 MB 應寫作 KiB, MiB (即 Binary prefix) 』😍</p>
+</blockquote>
+<p>所以有了這些衍生的單位後，也許我們敘述一部魔戒 3 小時長的電影就可以用 <code>Gigabyte</code> 的單位來形容說會有 2 GiB 多那麼大。</p>
+<p>當然我們也可以用 <code>Megabyte</code> 的單位來敘述說有 2,048MiB 多那麼大，當然硬要用 Kilobyte 的單位來形容說是 <code>2,097,152</code>（2,048MiB x 1,024KiB） KiB 那麼大也沒有不行，只是聽得人可能對於它實際上有多大的概念更爲模糊 😆</p>
+<details class="note " open><summary><p>simple</p>
+</summary>
+<p>2GiB =&gt; 1GiB 等於 1024 個 Megabyte =&gt; 2GiB x 1024MiB = 2048MiB<br>2048MiB =&gt; 1MiB 等於 1024 個 Kilobyte =&gt; 2048MiB x 1024KiB = 2,097,152KiB</p>
+
+</details>
+
+<p>我們用 KiB 來形容這部電影的大小已經有 <code>2,097,152</code> 的數字，如果要在用 bit 的單位來形容有興趣的同學可以自行計算看看囉，大概就會知道為什麼用 bit 位元單位來形容電影的容量大小可能是一件滿有挑戰的事情囉。</p>
+<h2 id="生活中小例子"><a href="#生活中小例子" class="headerlink" title="生活中小例子"></a>生活中小例子</h2><p>此外其實資料容量的觀念其實是生活中滿常會接觸到的事情，例如：</p>
+<ul>
+<li>最新的 iphone 居然有 512G 那麼大的容量耶，我的照片不用怕裝不下了 😍</li>
+<li>499 元的網路資費一個月可以下載 6G 的數據流量 🤔</li>
+</ul>
+<p>也許可以用數字的概念來想像如果今天沒有「千」、「萬」、「億」作爲數字的單位的話，對於要形容 <code>9,000,000,000</code> 這個數字，要我們無法用「9 億」的單位，只能用「百」的單位來形容它也許也會是滿不方便的一件事情吧。</p>
+<hr>
+<h1 id="Take-Away-小整理"><a href="#Take-Away-小整理" class="headerlink" title="Take Away 小整理"></a>Take Away 小整理</h1><ul>
+<li>二進位的最小單位爲 <code>bit 位元</code>，<code>8bits</code> 爲 1 個 <code>byte 位元組</code></li>
+<li>任何數位檔案都是用<code>二進位</code>的方式被儲存的</li>
+<li>因爲檔案或容量的大小用 bit 或者 byte 來當單位會造成數字很多的問題，所以發展出更大的單位，例如：KiB、MiB、GiB、TiB 等等</li>
+</ul>
+<p>這大概就是二進位的基礎觀念，當然還有其他的進位，例如<code>八進位</code>、<code>十六進位</code>等等的，也許未來有機會在針對他們進行討論囉 ！</p>
+<hr>
+<p>最後感謝你願意看到這裏，希望這篇文章對你有所幫助。</p>
+<p>若你想到身邊有需要這篇文章內容的朋友，也請你幫他一個忙把這篇文章分享給他 😍</p>
+<p>若文章的內容有錯誤的地方，也歡迎隨時一起討論交流。😘</p>
+<p>最後感謝你的閱讀囉，我們下次見！Bye ～ 🚀</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E4%BA%8C%E9%80%B2%E4%BD%8D/" rel="tag"><i class="fa fa-tag"></i> 二進位</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Front-End/Browser/inside-browser-1/1810002848/" rel="prev" title="瀏覽器學習筆記 Part 1 - 圖解學習 Process 與 Thread！">
+                  <i class="fa fa-angle-left"></i> 瀏覽器學習筆記 Part 1 - 圖解學習 Process 與 Thread！
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/js/Function/function-scope/2863996532/" rel="next" title="Javascript Function 作用域！一起用小明開分身的故事學習作用域！">
+                  Javascript Function 作用域！一起用小明開分身的故事學習作用域！ <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ChanChanDev</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"Jessie75919","repo":"Jessie75919.github.io","client_id":"5cc00853735d25bd22f3","client_secret":"42c46caebd1f91cd54924e2ad6c3dc6fec94f37e","admin_user":"Jessie75919","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-TW","body":null,"labels":"Gitalk","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"c5b5e0de6d227bec57d24e57cd89c331"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

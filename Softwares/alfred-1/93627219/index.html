@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="mask-icon" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"chanchandev.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"onmobile":false},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null,"show_result":"flat"},"fold":{"enable":false,"height":500},"language":false,"highlight_theme":"normal"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"找到 ${hits} 個搜索結果（用時 ${time} 毫秒）","hits":"找到 ${hits} 個搜索結果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="無止盡的效率最大化是工程師一生要不斷學習的功課，如果你剛好也是 Mac User，那就一起來看看如何在加速工作效率吧！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Alfred - Mac 專屬的效率神器！提早下班就靠它了！">
+<meta property="og:url" content="https://chanchandev.com/Softwares/alfred-1/93627219/index.html">
+<meta property="og:site_name" content="圈圈工程師">
+<meta property="og:description" content="無止盡的效率最大化是工程師一生要不斷學習的功課，如果你剛好也是 Mac User，那就一起來看看如何在加速工作效率吧！">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/top-image.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221217064049.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221217070546.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221217070821.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221217065915.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221217070143.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221217071349.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221217071422.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218085741.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218090445.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218091540.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218093037.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218093619.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218094247.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218094634.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218094954.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218095317.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218095501.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218100228.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218100317.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218100702.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218100954.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218101020.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218102131.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218103553.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218103729.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218103919.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218112751.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218113001.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218113113.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218113440.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218113847.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218114032.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218114215.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218115341.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218204246.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218205140.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218205426.png">
+<meta property="article:published_time" content="2022-12-25T22:10:00.000Z">
+<meta property="article:modified_time" content="2026-01-28T12:40:17.314Z">
+<meta property="article:author" content="ChanChanDev">
+<meta property="article:tag" content="Softwares">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/top-image.jpg">
+
+
+<link rel="canonical" href="https://chanchandev.com/Softwares/alfred-1/93627219/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://chanchandev.com/Softwares/alfred-1/93627219/","path":"Softwares/alfred-1/93627219/","title":"Alfred - Mac 專屬的效率神器！提早下班就靠它了！"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Alfred - Mac 專屬的效率神器！提早下班就靠它了！ | 圈圈工程師</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R47Z93ZJTM"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-R47Z93ZJTM","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">圈圈工程師</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Change Change Developer</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-back-end"><a href="/categories/back-end/" rel="section"><i class="fas fa-rocket fa-fw"></i>Back-End</a></li><li class="menu-item menu-item-sharing"><a href="/categories/Sharing/" rel="section"><i class="fas fa-star fa-fw"></i>Sharing</a></li><li class="menu-item menu-item-reading"><a href="/categories/Reading/" rel="section"><i class="fas fa-book fa-fw"></i>Reading</a></li><li class="menu-item menu-item-design-pattern"><a href="/categories/design-pattern/" rel="section"><i class="fas fa-sitemap fa-fw"></i>Design-Pattern</a></li><li class="menu-item menu-item-javascript"><a href="/categories/js/" rel="section"><i class="fas fa-code fa-fw"></i>Javascript</a></li><li class="menu-item menu-item-分類"><a href="/categories/" rel="section"><i class="fas fa-folder-open fa-fw"></i>分類</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E6%83%85%E6%8F%90%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">前情提要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Alfred-%E5%88%9D%E6%AC%A1%E8%A6%8B%E9%9D%A2"><span class="nav-number">2.</span> <span class="nav-text">Alfred 初次見面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%83%85%E5%A2%831-%E9%96%8B%E5%95%93%E4%B8%80%E5%A4%A7%E5%A0%86%E8%BB%9F%E9%AB%94"><span class="nav-number">3.</span> <span class="nav-text">情境1.  開啓一大堆軟體</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%83%85%E5%A2%832-%E4%B8%80%E5%A4%A7%E5%A0%86-Google-%E6%90%9C%E5%B0%8B"><span class="nav-number">4.</span> <span class="nav-text">情境2.   一大堆 Google 搜尋</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%83%85%E5%A2%833-%E6%89%93%E9%96%8B%E6%9F%90%E4%B8%80%E5%80%8B%E7%80%8F%E8%A6%BD%E5%99%A8%E4%B8%8A%E7%9A%84%E6%9B%B8%E7%B1%A4"><span class="nav-number">5.</span> <span class="nav-text">情境3.   打開某一個瀏覽器上的書籤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E5%96%AE%E5%AD%97"><span class="nav-number">5.0.1.</span> <span class="nav-text">查單字</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%83%85%E5%A2%834-%E8%A4%87%E8%A3%BD%E6%9F%90%E4%BA%9B%E6%9D%B1%E8%A5%BF%E4%B9%8B%E5%BE%8C%EF%BC%8C%E7%AA%81%E7%84%B6%E5%8F%88%E9%9C%80%E8%A6%81%E4%B9%8B%E5%89%8D%E6%89%80%E8%A4%87%E8%A3%BD%E9%81%8E%E7%9A%84%E8%B3%87%E6%96%99"><span class="nav-number">6.</span> <span class="nav-text">情境4. 複製某些東西之後，突然又需要之前所複製過的資料</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%83%85%E5%A2%835-%E9%9C%80%E8%A6%81%E8%BC%B8%E5%85%A5%E4%B8%80%E6%AE%B5%E5%9B%BA%E5%AE%9A%E7%9A%84%E5%85%A7%E5%AE%B9"><span class="nav-number">7.</span> <span class="nav-text">情境5.   需要輸入一段固定的內容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E-Collectoin"><span class="nav-number">7.0.1.</span> <span class="nav-text">新增 Collectoin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A-Snippet"><span class="nav-number">7.0.2.</span> <span class="nav-text">設定 Snippet</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%83%85%E5%A2%836-%E5%BF%AB%E9%80%9F%E7%9A%84%E6%95%B8%E5%AD%97%E8%A8%88%E7%AE%97"><span class="nav-number">8.</span> <span class="nav-text">情境6.   快速的數字計算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%83%85%E5%A2%837-%E5%BF%AB%E9%80%9F%E5%9C%B0%E9%8E%96%E4%B8%8A-Mac-%E6%88%96%E8%AE%93-Mac-%E7%9D%A1%E7%9C%A0"><span class="nav-number">9.</span> <span class="nav-text">情境7.   快速地鎖上 Mac 或讓 Mac 睡眠</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Final"><span class="nav-number">10.</span> <span class="nav-text">Final</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ChanChanDev"
+      src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+  <p class="site-author-name" itemprop="name">ChanChanDev</p>
+  <div class="site-description" itemprop="description">圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">標籤</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/chanchandev" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;chanchandev" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/chanchandev" title="FaceBook → https:&#x2F;&#x2F;www.facebook.com&#x2F;chanchandev" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-facebook fa-fw"></i>FaceBook</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://chanchandev.com/Softwares/alfred-1/93627219/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+      <meta itemprop="name" content="ChanChanDev">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="圈圈工程師">
+      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Alfred - Mac 專屬的效率神器！提早下班就靠它了！ | 圈圈工程師">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Alfred - Mac 專屬的效率神器！提早下班就靠它了！
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2022-12-26 06:10:00" itemprop="dateCreated datePublished" datetime="2022-12-26T06:10:00+08:00">2022-12-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2026-01-28 20:40:17" itemprop="dateModified" datetime="2026-01-28T20:40:17+08:00">2026-01-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Softwares/" itemprop="url" rel="index"><span itemprop="name">Softwares</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/top-image.jpg"><br>無止盡的效率最大化是工程師一生要不斷學習的功課，如果你剛好也是 Mac User，那就一起來看看如何在加速工作效率吧！</p>
+<span id="more"></span>
+
+<h1 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h1><p>身爲一個工程師，我自己平常工作上使用的是 Mac，而每天的工作可能的情境會有：</p>
+<ul>
+<li>情境1. 開啓一大堆軟體<ul>
+<li>我得到 Lauchpad 打開軟體列表，然後從裏面慢慢找自己要開啓的軟體</li>
+</ul>
+</li>
+<li>情境2. 一大堆 Google 搜尋<ul>
+<li>我得先把畫面移到瀏覽器才能輸入關鍵字搜尋</li>
+</ul>
+</li>
+<li>情境3. 打開某一個瀏覽器上的書籤<ul>
+<li>我得先把畫面移到瀏覽器，在從我衆多的書籤中，找到這個書籤並且打開</li>
+</ul>
+</li>
+<li>情境4. 複製某些東西之後，突然又需要之前所複製過的資料<ul>
+<li>我得想辦法回到一開始複製的地方，然後再次複製</li>
+</ul>
+</li>
+<li>情境5. 需要輸入一段固定的內容<ul>
+<li>每次都得把這些內容重打一次</li>
+</ul>
+</li>
+<li>情境6. 快速的數字計算<ul>
+<li>打開計算機或者是瀏覽器上的搜尋列計算</li>
+</ul>
+</li>
+<li>情境7. 快速地鎖上 Mac 或讓 Mac 睡眠<ul>
+<li>把滑鼠遊標移到左上角的 Apple Logo Icon 點擊打開下拉選單，選擇 Lock Screen</li>
+</ul>
+</li>
+</ul>
+<p>上面的這些動作會不斷地在一整天發生，但需要「把畫面移到某一個地方」、或者是「重打固定的內容」都需要花幾秒鐘的時間，因此累積下來的時間感覺滿可觀的，但其實這些動作對於生產力是沒有幫助的，因此自己開始有了想要尋找縮短這些時間的方法。</p>
+<p>這也就是今天要介紹的主角：<a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.alfredapp.com/">Alfred</a>。</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221217064049.png"></p>
+<p>就來看看這個效率神器怎麼加速我平常工作所遇到的困擾吧！</p>
+<details class="note info" open><summary><p>simple</p>
+</summary>
+<ul>
+<li>Alfred 完整版的功能是需要付費的，但它提供免費的版本也已經足夠好用囉！</li>
+<li>撰稿的時候，目前（2022-12-26）最新的版本是 5，因此本文會以這個版本介紹。</li>
+</ul>
+
+</details>
+
+
+<h1 id="Alfred-初次見面"><a href="#Alfred-初次見面" class="headerlink" title="Alfred 初次見面"></a>Alfred 初次見面</h1><p>安裝 Alfred 之後，最一開始會出現的畫面，這邊可以在「Alfred Hotkey」這邊設定自己習慣的快捷鍵，我自己是習慣使用 <code>cmd 鍵 + 空白鍵</code></p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221217070546.png"></p>
+<p>當你按下自己設定的 Alfred Hotkey 就會跳出這個輸入框～</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221217070821.png"></p>
+<br/>
+
+
+
+<h1 id="情境1-開啓一大堆軟體"><a href="#情境1-開啓一大堆軟體" class="headerlink" title="情境1.  開啓一大堆軟體"></a>情境1.  開啓一大堆軟體</h1><p>在工作上自己常常會需要開啓 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://code.visualstudio.com/">Visual Studio Code</a>、<a target="_blank" rel="noopener external nofollow noreferrer" href="https://git-fork.com/">Fork</a> 、<a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.postman.com/">PostMan</a> 、<a target="_blank" rel="noopener external nofollow noreferrer" href="https://iterm2.com/">Iterm2</a>、<a target="_blank" rel="noopener external nofollow noreferrer" href="https://line.me/zh-hant/">Line</a>… 等等，所以自己如果要開啓這些軟體常常需要的就是「<strong>到 Lauchpad 打開軟體列表，然後從裏面慢慢找自己要開啓的軟體</strong>」 🥲</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221217065915.png"></p>
+<p>咦？你說什麼，你說為什麼不放在 Mac 的 Dock 這邊嗎？我可能有點潔癖，覺得沒用到全部列在底下有點太多了，習慣把他們隱藏起來 😆</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221217070143.png"></p>
+<p>這邊以開啓 Fork 來舉例，在 Alfred 的輸入框輸入：Fork，在輸入的過程中 Alfred 就會幫你 Auto Complete，選項包含軟體、之前設定過的內容、還有可以操作的動作等等，例如我打到「for」的時候，就會跳出底下的選項：</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221217071349.png"></p>
+<p>直到我變成「fork」就會只剩下 Fork 的軟體了，Enter 就可以開啓它囉～</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221217071422.png"></p>
+<p>因此不管你的畫面在哪裡，在瀏覽器上、IDE 上、Terminal 上，你都可以用 Alfred Key 快速地打開你想要開啓的軟體囉～</p>
+<p>不過好啦，我知道這個功能 Mac 原生的 Spotlight Search 也有提供，只不過是後來才知道的 XD，但下面的功能 Spotlight Search 可能就追不上了～</p>
+<br/>
+
+<h1 id="情境2-一大堆-Google-搜尋"><a href="#情境2-一大堆-Google-搜尋" class="headerlink" title="情境2.   一大堆 Google 搜尋"></a>情境2.   一大堆 Google 搜尋</h1><p>一定有這種情況，寫 code 的時候，突然需要某一個語法，但自己卻實際的參數怎麼下了。</p>
+<p>例如：需要在 JS 的時候排序 array，那我們就要從 IDE 的畫面離開，並且打開瀏覽器，然後在輸入關鍵字：</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218085741.png"></p>
+<p>但如果今天是用 Alfred 的情境的話，就可以用隨時直接用 Alfred Hotkey 叫出 Alfred 輸入框，丟入要查詢的關鍵字 Enter，Alfred 就會幫你打開瀏覽器並且用 google 搜尋！這樣我就可以省下「<strong>打開瀏覽器，並且把滑鼠遊標放到瀏覽器的搜尋列</strong>」的這段時間囉！😆</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218090445.png"></p>
+<br/>
+
+<h1 id="情境3-打開某一個瀏覽器上的書籤"><a href="#情境3-打開某一個瀏覽器上的書籤" class="headerlink" title="情境3.   打開某一個瀏覽器上的書籤"></a>情境3.   打開某一個瀏覽器上的書籤</h1><p>在開發的時候，一個專案可能會有不同的環境，專案網址可能有 dev、stage、production 的網址、不同的環境可能又會有不同看 Log 的地方，因此光一個專案可能就會有六個網址，如果一次多 Cover 幾個專案，就會需要乘上 n 個 6。</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218091540.png"></p>
+<p>假如我現在需要到 Project A 的 stage 上的網站的話，我得要先「<strong>打開瀏覽器以外，我還需要一個個展開資料夾一路這樣找到它</strong>」：</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218093037.png"></p>
+<p>那如果今天是使用 Alfred 的話，可以怎樣加速這個流程呢？只需要一點小小的設定就可以囉！</p>
+<p>在 Alfred 底下，選擇最左邊的 <code>Features</code> 內的 <code>Web Search</code> (因爲有自己的的設定太害羞了，所以碼了一下 😆)，點選 <code>Add Custom Search</code></p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218093619.png"></p>
+<p>我們可以在 Search URL 輸入剛剛的 project A stage 的 url，設定 Title 方便自己未來辨識，以及設定 Keyword ，就是到時候在 Alfred 輸入框要輸入的內容，最後 Save 它！</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218094247.png"></p>
+<p>因此只要在 Alfred 輸入框輸入剛剛設定的 Keyword：<code>proa</code> 就會出現囉，Enter 就會幫你打開網頁了～</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218094634.png"></p>
+<p>因此我通常會把同一個 Project 的設定爲同一個 Keyword，例如底下是 stage project 的 Log 網址的 keyword 也是設定爲 <code>proa</code>。</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218094954.png"></p>
+<p>也可以在設定 Project A 的其他環境～</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218095317.png"></p>
+<p>當都設定好了之後，就可以在 Alfred 輸入框打上 keyword <code>proa</code>，就可以出現網址任君挑選囉～</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218095501.png"></p>
+<br/>
+
+<h3 id="查單字"><a href="#查單字" class="headerlink" title="查單字"></a>查單字</h3><p>身爲工程師一定會有遇到某一個不太清楚單字時候，所以「<strong>我們可能會打開線上的英文詞典，然後丟入英文的單字搜尋</strong>」。如果你居然還可以看到這邊了，就知道我無法忍受這個節奏 😆</p>
+<p>所以我們來看看如何用 Alfred 來加速這段流程吧！這邊用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dictionary.cambridge.org/">Cambridge Dictionary</a> 來做範例。</p>
+<p>我們先順手查幾個單字來觀察：</p>
+<p><code>test</code></p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218100228.png"></p>
+<p><code>develop</code></p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218100317.png"></p>
+<p>我們發現好像可以在網址的最後面的單字做點手腳，所以我們來看看如何在 Alfred 上面設定這個吧～</p>
+<p>我們把原本的單字用 <code>&#123;query&#125;</code> 取代，剩下的設定跟之前的差不多，Save 收尾！</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218100702.png"></p>
+<p>我們就可以用剛剛設定的 <code>word</code> 關鍵字，加上空格之後就可以輸入想要找的單字，這邊用 <code>data</code> 作爲示範。</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218100954.png"></p>
+<p>Alfred 就可以幫你打開到你想要查單字頁面囉！是不是就順手多了呢～</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218101020.png"></p>
+<br/>
+
+<h1 id="情境4-複製某些東西之後，突然又需要之前所複製過的資料"><a href="#情境4-複製某些東西之後，突然又需要之前所複製過的資料" class="headerlink" title="情境4. 複製某些東西之後，突然又需要之前所複製過的資料"></a>情境4. 複製某些東西之後，突然又需要之前所複製過的資料</h1><details class="note info" open><summary><p>simple</p>
+</summary>
+<p>這個是 Alfred 的付費功能，也是我覺得我工作流程上不能沒有的功能，沒有之一 😆</p>
+
+</details>
+
+
+<p>身爲工程師常常會有需要使用到之前複製過的資料，不是邊苦思剛剛到底在哪裏複製到那個內容，不然就是在東翻西找的路上 🙈</p>
+<p>假如收到了一張 Customer Issue 的 Jira Ticket，上面寫著要處理這五個 User 的 Email 所遇到的 Issue：</p>
+<ul>
+<li><a href="mailto:&#90;&#x46;&#121;&#x53;&#89;&#88;&#110;&#114;&#x43;&#x38;&#85;&#71;&#x40;&#x65;&#x78;&#97;&#x6d;&#x70;&#108;&#101;&#46;&#99;&#111;&#x6d;" rel="external nofollow noreferrer">&#90;&#x46;&#121;&#x53;&#89;&#88;&#110;&#114;&#x43;&#x38;&#85;&#71;&#x40;&#x65;&#x78;&#97;&#x6d;&#x70;&#108;&#101;&#46;&#99;&#111;&#x6d;</a></li>
+<li><a href="mailto:&#80;&#114;&#x39;&#86;&#x36;&#x64;&#121;&#73;&#x4e;&#122;&#81;&#x6d;&#x6b;&#64;&#x65;&#x78;&#97;&#109;&#x70;&#108;&#x65;&#x2e;&#x63;&#111;&#x6d;" rel="external nofollow noreferrer">&#80;&#114;&#x39;&#86;&#x36;&#x64;&#121;&#73;&#x4e;&#122;&#81;&#x6d;&#x6b;&#64;&#x65;&#x78;&#97;&#109;&#x70;&#108;&#x65;&#x2e;&#x63;&#111;&#x6d;</a></li>
+<li><a href="mailto:&#x61;&#x46;&#56;&#x4e;&#87;&#x59;&#x74;&#x74;&#71;&#x79;&#x52;&#78;&#80;&#64;&#101;&#120;&#x61;&#x6d;&#112;&#108;&#x65;&#46;&#99;&#x6f;&#x6d;" rel="external nofollow noreferrer">&#x61;&#x46;&#56;&#x4e;&#87;&#x59;&#x74;&#x74;&#71;&#x79;&#x52;&#78;&#80;&#64;&#101;&#120;&#x61;&#x6d;&#112;&#108;&#x65;&#46;&#99;&#x6f;&#x6d;</a></li>
+<li><a href="mailto:&#71;&#x62;&#x71;&#x35;&#114;&#74;&#56;&#72;&#x4e;&#x74;&#x5a;&#x75;&#x64;&#x40;&#x65;&#x78;&#97;&#109;&#112;&#108;&#101;&#x2e;&#99;&#x6f;&#109;" rel="external nofollow noreferrer">&#71;&#x62;&#x71;&#x35;&#114;&#74;&#56;&#72;&#x4e;&#x74;&#x5a;&#x75;&#x64;&#x40;&#x65;&#x78;&#97;&#109;&#112;&#108;&#101;&#x2e;&#99;&#x6f;&#109;</a></li>
+<li><a href="mailto:&#74;&#115;&#x38;&#69;&#80;&#x39;&#70;&#x73;&#88;&#68;&#102;&#81;&#87;&#64;&#101;&#x78;&#x61;&#109;&#112;&#x6c;&#101;&#x2e;&#x63;&#x6f;&#109;" rel="external nofollow noreferrer">&#74;&#115;&#x38;&#69;&#80;&#x39;&#70;&#x73;&#88;&#68;&#102;&#81;&#87;&#64;&#101;&#x78;&#x61;&#109;&#112;&#x6c;&#101;&#x2e;&#x63;&#x6f;&#109;</a></li>
+</ul>
+<p>我們可能會一樣複製上述的 user email 然後一個個進行處理，對吧？ </p>
+<p>如果處理完畢之後要跟主管訊息回報已經完成了這幾個 user email 的處理，「<strong>我們就得要在回到 Jira Ticket 上複製這些 User 的 Email</strong>」，然後在貼在對話視窗裡。</p>
+<p>是否又聞到：「要到哪裏 ___ ，才能 ___ 」的這個 Pattern 呢？😆 </p>
+<p>我希望可以在「彈指之間」就找到這些 User 的 Email，既然剛剛都已經複製過了，是不是在複製的 History 找就好了！只是 Mac 原生好像沒有 Support 這個功能（如果有請告訴我 QQ）</p>
+<p>所以我們來看 Alfred 要怎麼加速這個情境的流程吧！</p>
+<p>我們可以先在 Alfred 內設定彈出 Clipboard History 的 Hotkey，我自己習慣設定的是 <code>option 鍵 + space 鍵</code></p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218102131.png"></p>
+<p>按下上面設定的快捷鍵之後就會彈出跟原本的 Alfred 輸入框不太一樣的 Panel。</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218103553.png"></p>
+<p>所以當你開始 Copy 之後裏面就會出現內容了，它除了文字以外，如果你有複製圖片的話，也會出現在裏面歐！</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218103729.png"></p>
+<p>所以回到我們的情境，如果我們想找到剛剛複製的 User Email，我們可以在最上面的搜尋框輸入可能的關鍵字，這邊用 <code>example.com</code> 搜尋，就可以「一個瞬間」找到剛剛所複製的 user Email 囉！！</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218103919.png"></p>
+<p>Clipboard History 可以用到的情境超多，這邊只是我隨便瞎掰的一個情境。</p>
+<p>自己看到滿多同事遇到這種狀況，不是爲了找某個內容東翻西找的（還要回想剛剛是在哪裏複製的 😆 ），或者是這些資訊先放在一個暫時的記事本檔案。，只是這個流程還是得花上「先到哪裏 ___ ，才能得到 ___ 」的時間，如果有這個功能就可以大大省下這些時間囉～～</p>
+<br/>
+
+<h1 id="情境5-需要輸入一段固定的內容"><a href="#情境5-需要輸入一段固定的內容" class="headerlink" title="情境5.   需要輸入一段固定的內容"></a>情境5.   需要輸入一段固定的內容</h1><details class="note info" open><summary><p>simple</p>
+</summary>
+<p>這個是 Alfred 的付費功能，也是我覺得我工作流程上不能沒有的功能，沒有之一 😆</p>
+
+</details>
+
+<p>自己上常常會有一些需要輸入的同樣內容，例如：</p>
+<ul>
+<li>某一段需要很常打但卻又需要花點時間完成的文字：<ul>
+<li><code>sorry for the inconvenience, Thanks for your cooperation</code> (出包的時候很常用 😭 )</li>
+<li>常用的地址、email</li>
+</ul>
+</li>
+<li>不好記住的內容：<ul>
+<li>工作上測試用的區塊鏈錢包地址：<code>0x23551AFD9EFd121e5F93447c1596E70B6975f384</code></li>
+<li>健保卡號碼</li>
+</ul>
+</li>
+</ul>
+<p>這些內容不是自己一個字一個字的 key，就是一樣地符合要「到某處找到，才能輸入或複製貼上」的 Pattern。我們來看看 Alfred 的 Snippets 功能怎麼加速上面的流程吧。</p>
+<p>在 Alfred 裏面的 <code>Snippets</code> 內，我們可以設定 <code>Viewer Hotkey</code> 或者是設定 <code>Snippet Keyword</code> 兩種方式（我自己是習慣前者）</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218112751.png"></p>
+<p>用 <code>Viewer Hotkey</code> 開啓：</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218113001.png"></p>
+<p>用使用 <code>Snippet Keyword</code> 搜尋，需輸入設定的關鍵字，例如上面我設定的爲 <code>sp</code></p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218113113.png"></p>
+<p>這邊用設定工作上測試用的區塊鏈錢包地址 <code>0x23551AFD9EFd121e5F93447c1596E70B6975f384</code> 來作爲範例。</p>
+<h3 id="新增-Collectoin"><a href="#新增-Collectoin" class="headerlink" title="新增 Collectoin"></a>新增 Collectoin</h3><p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218113440.png"></p>
+<h3 id="設定-Snippet"><a href="#設定-Snippet" class="headerlink" title="設定 Snippet"></a>設定 Snippet</h3><p>我希望輸入 <code>wallet</code> 關鍵字，就可以出現測試錢包地址的內容，所以就可以設定如下：</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218113847.png"></p>
+<p>所以當我用 <code>Viewer Hotkey</code> 把 Panel 叫出來之後，輸入 <code>wallet</code> 就可以跳出來我們上面設定的內容，按下 Enter 即可！</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218114032.png"></p>
+<p>如果是用使用 <code>Snippet Keyword</code> 搜尋也是一樣的用法，只是要先在 Alfred 輸入框輸入設定好的 <code>Snippet Keyword</code>，例如：<code>sp</code>，再輸入我們剛剛設定的關鍵字 <code>wallet</code>，然後輸入 Enter 即可！</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218114215.png"></p>
+<p>還有一些 Alfred 提供的 Collections 可以使用，更多資訊可以點擊這邊：</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218115341.png"></p>
+<br/>
+
+<h1 id="情境6-快速的數字計算"><a href="#情境6-快速的數字計算" class="headerlink" title="情境6.   快速的數字計算"></a>情境6.   快速的數字計算</h1><p>當我們需要快速做些計算的時候（例如：999 x 785），本能地就會打開計算機來計算。但如果是你剛好也有安裝 Alfred 的話（如果都看到了這裏你還沒安裝，等下記得玩玩看 😆），你就可以用 Alfred Hotkey 叫出 Alfred 輸入框，然後直接輸入 <code>999 * 785</code>，就會得到計算結果了。不要再開計算機或瀏覽器了，等它們開好我都算好並且喝了一口香濃的咖啡了（好嗆 🤣</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218204246.png"></p>
+<br/>
+
+<h1 id="情境7-快速地鎖上-Mac-或讓-Mac-睡眠"><a href="#情境7-快速地鎖上-Mac-或讓-Mac-睡眠" class="headerlink" title="情境7.   快速地鎖上 Mac 或讓 Mac 睡眠"></a>情境7.   快速地鎖上 Mac 或讓 Mac 睡眠</h1><p>在 Alfred 的 System 設定裡，有預設很多不同系統動作的關鍵字，我自己最常使用的是 <code>Sleep</code> 與 <code>Lock</code>，並且把 Confirm 取消勾選。</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218205140.png"></p>
+<p>因此如果我離開電腦前，我就會快速地用叫出 Alfred 輸入框輸入 <code>kk</code> ，然後 Enter， Mac 的畫面就會被鎖定囉。</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/alfred-1/20221218205426.png"></p>
+<br/>
+
+<h1 id="Final"><a href="#Final" class="headerlink" title="Final"></a>Final</h1><p>呼，以上就是自己比較常使用到 Alfred 的功能，其實還有一個滿強大的功能沒有介紹到 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.alfredapp.com/workflows/">Workflow</a>，但文章到此好像已經有點長了，不知道有多少人看到這裏，下次有機會會在補充介紹啦！😆</p>
+<br/>
+
+<hr>
+<p>最後感謝你願意看到這裏，希望這篇文章對你有所幫助。</p>
+<p>若你想到身邊有需要這篇文章內容的朋友，也請你幫他一個忙把這篇文章分享給他 😍</p>
+<p>若文章的內容有錯誤的地方，也歡迎隨時一起討論交流。😘 </p>
+<p>最後感謝你的閱讀囉，我們下次見！Bye ～ </p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Softwares/" rel="tag"><i class="fa fa-tag"></i> Softwares</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Softwares/improve-productivity-3-apps/462194405/" rel="prev" title="Mac 工程師必備的 3 個效率提升 Apps">
+                  <i class="fa fa-angle-left"></i> Mac 工程師必備的 3 個效率提升 Apps
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/side-project/chanchanmemory-intro/1876543875/" rel="next" title="專屬金魚腦的背單字小工具? ChanChan Memory">
+                  專屬金魚腦的背單字小工具? ChanChan Memory <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ChanChanDev</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"Jessie75919","repo":"Jessie75919.github.io","client_id":"5cc00853735d25bd22f3","client_secret":"42c46caebd1f91cd54924e2ad6c3dc6fec94f37e","admin_user":"Jessie75919","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-TW","body":null,"labels":"Gitalk","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"02543c0d6d21407cb86eeb10c1d38606"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

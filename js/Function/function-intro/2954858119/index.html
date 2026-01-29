@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="mask-icon" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"chanchandev.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"onmobile":false},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null,"show_result":"flat"},"fold":{"enable":false,"height":500},"language":false,"highlight_theme":"normal"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"找到 ${hits} 個搜索結果（用時 ${time} 毫秒）","hits":"找到 ${hits} 個搜索結果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Javascript Function 是什麼？這篇 Function 超入門是寫給初學者的介紹文，用簡單的幾分鐘一起圖解學習 function 的基礎吧！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript Function 超基礎入門！老司機勿入！">
+<meta property="og:url" content="https://chanchandev.com/js/Function/function-intro/2954858119/index.html">
+<meta property="og:site_name" content="圈圈工程師">
+<meta property="og:description" content="Javascript Function 是什麼？這篇 Function 超入門是寫給初學者的介紹文，用簡單的幾分鐘一起圖解學習 function 的基礎吧！">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-intro-1/Cover.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-intro-1/coffee-machine-to-coffee.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-intro-1/input-run-ouput-2.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-intro-1/input-run-ouput-1.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-intro-1/input-run-ouput-3.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-intro-1/function-simulation.jpg">
+<meta property="article:published_time" content="2021-04-21T14:44:06.000Z">
+<meta property="article:modified_time" content="2026-01-28T12:40:17.308Z">
+<meta property="article:author" content="ChanChanDev">
+<meta property="article:tag" content="Javascript">
+<meta property="article:tag" content="Function">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-intro-1/Cover.jpg">
+
+
+<link rel="canonical" href="https://chanchandev.com/js/Function/function-intro/2954858119/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://chanchandev.com/js/Function/function-intro/2954858119/","path":"js/Function/function-intro/2954858119/","title":"Javascript Function 超基礎入門！老司機勿入！"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Javascript Function 超基礎入門！老司機勿入！ | 圈圈工程師</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R47Z93ZJTM"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-R47Z93ZJTM","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">圈圈工程師</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Change Change Developer</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-back-end"><a href="/categories/back-end/" rel="section"><i class="fas fa-rocket fa-fw"></i>Back-End</a></li><li class="menu-item menu-item-sharing"><a href="/categories/Sharing/" rel="section"><i class="fas fa-star fa-fw"></i>Sharing</a></li><li class="menu-item menu-item-reading"><a href="/categories/Reading/" rel="section"><i class="fas fa-book fa-fw"></i>Reading</a></li><li class="menu-item menu-item-design-pattern"><a href="/categories/design-pattern/" rel="section"><i class="fas fa-sitemap fa-fw"></i>Design-Pattern</a></li><li class="menu-item menu-item-javascript"><a href="/categories/js/" rel="section"><i class="fas fa-code fa-fw"></i>Javascript</a></li><li class="menu-item menu-item-分類"><a href="/categories/" rel="section"><i class="fas fa-folder-open fa-fw"></i>分類</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%96%B1%E8%AE%80%E5%B0%8D%E8%B1%A1"><span class="nav-number">1.</span> <span class="nav-text">閱讀對象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%82%BA%E4%BB%80%E9%BA%BC%E9%9C%80%E8%A6%81-function%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">為什麼需要 function？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8B%95%E5%92%96%E5%95%A1%E6%A9%9F%E6%B3%A1%E5%92%96%E5%95%A1"><span class="nav-number">2.0.1.</span> <span class="nav-text">自動咖啡機泡咖啡</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF-function%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">什麼是 function？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BC%B8%E5%85%A5%E6%9D%90%E6%96%99-%E2%86%92-%E5%9F%B7%E8%A1%8C%E9%81%8B%E7%AE%97-%E2%86%92-%E8%BC%B8%E5%87%BA%E7%B5%90%E6%9E%9C"><span class="nav-number">4.</span> <span class="nav-text">輸入材料 → 執行運算 → 輸出結果</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%A3%E5%91%8A-function"><span class="nav-number">5.</span> <span class="nav-text">宣告 function</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E5%90%8D"><span class="nav-number">5.1.</span> <span class="nav-text">命名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E6%95%B8%EF%BC%88%E8%BC%B8%E5%85%A5%EF%BC%89"><span class="nav-number">5.2.</span> <span class="nav-text">參數（輸入）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9E%E5%82%B3%EF%BC%88%E8%BC%B8%E5%87%BA%EF%BC%89"><span class="nav-number">5.3.</span> <span class="nav-text">回傳（輸出）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%91%BC%E5%8F%AB%EF%BC%88%E5%9F%B7%E8%A1%8C%EF%BC%89function"><span class="nav-number">6.</span> <span class="nav-text">呼叫（執行）function</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%AF%E5%9F%B7%E8%A1%8C-function-%E7%AF%84%E4%BE%8B"><span class="nav-number">7.</span> <span class="nav-text">可執行 function 範例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B5%90%E8%AB%96"><span class="nav-number">8.</span> <span class="nav-text">結論</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%83%E8%80%83"><span class="nav-number">9.</span> <span class="nav-text">參考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ChanChanDev"
+      src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+  <p class="site-author-name" itemprop="name">ChanChanDev</p>
+  <div class="site-description" itemprop="description">圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">標籤</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/chanchandev" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;chanchandev" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/chanchandev" title="FaceBook → https:&#x2F;&#x2F;www.facebook.com&#x2F;chanchandev" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-facebook fa-fw"></i>FaceBook</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://chanchandev.com/js/Function/function-intro/2954858119/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+      <meta itemprop="name" content="ChanChanDev">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="圈圈工程師">
+      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Javascript Function 超基礎入門！老司機勿入！ | 圈圈工程師">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Javascript Function 超基礎入門！老司機勿入！
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2021-04-21 22:44:06" itemprop="dateCreated datePublished" datetime="2021-04-21T22:44:06+08:00">2021-04-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2026-01-28 20:40:17" itemprop="dateModified" datetime="2026-01-28T20:40:17+08:00">2026-01-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/js/" itemprop="url" rel="index"><span itemprop="name">Javascript</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/js/Function/" itemprop="url" rel="index"><span itemprop="name">Function</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-intro-1/Cover.jpg"><br>Javascript Function 是什麼？這篇 Function 超入門是寫給初學者的介紹文，用簡單的幾分鐘一起圖解學習 function 的基礎吧！</p>
+<span id="more"></span>
+<br>
+
+<details class="note success" open><summary><p>simple</p>
+</summary>
+<p>HIHI～😍  如果你是第一次來的話，『Chan-Chan-Dev』是一個專門用簡單的圖文與故事講解網路程式技術的網站。<br>若你也喜歡用這種方式學習的話，歡迎加入 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.facebook.com/chanchandev">Chan-Chan-Dev Facebook</a> 的粉絲團，在發佈的時候就有比較多機會收到通知喔！😍</p>
+
+</details>
+
+<h1 id="閱讀對象"><a href="#閱讀對象" class="headerlink" title="閱讀對象"></a>閱讀對象</h1><p>這篇是寫給當初新手小白剛學 Javascript 那個懵懵懂懂的自己，也希望能夠幫助新手階段想要學習 function 的你。</p>
+<p>若已經是老司機的你（欸）… 還是可以快速看過啦！ 😆</p>
+<p>那我們開始囉 😊</p>
+<hr>
+<h1 id="為什麼需要-function？"><a href="#為什麼需要-function？" class="headerlink" title="為什麼需要 function？"></a>為什麼需要 function？</h1><p><code>function (函數)</code> 是 Javascript 最基本的程式組成區塊之一。</p>
+<p>不過在繼續學習之前，我們用先來問一個很簡單的問題？</p>
+<details class="note " open><summary><p>blue fas fa-question-circle simple</p>
+</summary>
+<p>你今天早上有喝咖啡嗎？ 😆</p>
+
+</details>
+
+<p>OS：「屙？有阿，但跟 function 的關係是啥？🤣」</p>
+<p>有的！其實我們已經默默地都在生活中使用 <code>function</code> 了，只是也許我們沒有意會到這件事情罷了！</p>
+<p>讓我們想像一下，眼前有一臺『自動咖啡機』， <code>『泡咖啡』</code> 需要經過哪些步驟才能作出一杯咖啡呢？ </p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-intro-1/coffee-machine-to-coffee.jpg" alt="自動咖啡機作出咖啡"></p>
+<p>我們來看看 <code>從自動咖啡機的角度</code>，我們會怎麼作出那杯咖啡：</p>
+<details class="note default" open><summary><p>flat</p>
+</summary>
+<h3 id="自動咖啡機泡咖啡"><a href="#自動咖啡機泡咖啡" class="headerlink" title="自動咖啡機泡咖啡"></a>自動咖啡機泡咖啡</h3><ol>
+<li><code>接受（被輸入）</code> 裝入的咖啡豆</li>
+<li>碾壓磨碎咖啡豆變成咖啡粉</li>
+<li>用熱水沖泡剛剛完成的咖啡粉</li>
+<li>將咖啡 <code>輸出</code> 到咖啡杯上</li>
+</ol>
+
+</details>
+
+<p>讓我們想像一下：</p>
+<details class="note " open><summary><p>red fas fa-exclamation-circle simple</p>
+</summary>
+<p>若 <code>不能</code> 使用<code>『自動咖啡機』</code>來幫我們執行上述這 4 個步驟的話，那我們的生活是不是會變得很不方便呢？ 每次當我們需要的時候，我們就得自己『手動』執行上述的步驟才能得到一杯咖啡 😵</p>
+
+</details>
+
+<div style="font-size:20px;">
+<details class="note " open><summary><p>green far fa-lightbulb simple</p>
+</summary>
+<p>因此 <code>『泡咖啡』</code> 本身就是代表著這些 <code>『一組執行的步驟』</code>，而有了 <code>『自動咖啡機』</code> 就可以讓我們省去每次都要自己執行這些步驟了 </p>
+
+</details>
+</div>
+
+<p>我們生活中充斥著各式各樣幫我們 <code>執行的一組步驟</code> 的工具，例如：吐司機、電鍋、微波爐等等 😀</p>
+<h1 id="什麼是-function？"><a href="#什麼是-function？" class="headerlink" title="什麼是 function？"></a>什麼是 function？</h1><details class="note " open><summary><p>blue fas fa-rocket simple</p>
+</summary>
+<p><code>function</code> 就像是上述提到的 <code>『自動咖啡機』</code> 幫我們完成 <code>一組需執行的步驟</code>，當有需要的時候就可以 <code>呼叫</code> <code>『自動咖啡機』</code> 來執行， <code>避免每次要執行這些步驟的時候，都要在重複寫一次</code>（就像是讓我們不用每次都要自己在手動泡一次咖啡）。</p>
+
+</details>
+
+<h1 id="輸入材料-→-執行運算-→-輸出結果"><a href="#輸入材料-→-執行運算-→-輸出結果" class="headerlink" title="輸入材料 → 執行運算 → 輸出結果"></a>輸入材料 → 執行運算 → 輸出結果</h1><p>我們繼續回到<code>自動咖啡機泡咖啡</code> 的步驟：</p>
+<details class="note default" open><summary><p>flat</p>
+</summary>
+<p><span style="background: #e97d3f; color: white; padding:3px; border-radius: 6px;">輸入材料</span> <code>接受（被輸入）</code> 裝入的咖啡豆<br><span style="background: #00bdac; color: white; padding:3px; border-radius: 6px;">執行運算 ✴</span> 碾壓磨碎咖啡豆變成咖啡粉<br><span style="background: #00bdac; color: white; padding:3px; border-radius: 6px;">執行運算 ✴</span> 用熱水沖泡剛剛完成的咖啡粉<br><span style="background: #ac268c; color: white; padding:3px; border-radius: 6px;">輸出結果</span> 將咖啡 <code>輸出</code> 到咖啡杯上</p>
+
+</details>
+
+<p>我們會發現<code>自動咖啡機泡咖啡</code>在執行的動作會經過<code>輸入材料</code>、<code>執行運算</code>、<code>輸出結果</code>這三個階段。<br><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-intro-1/input-run-ouput-2.jpg" alt="咖啡豆輸入 -&gt; 泡咖啡 -&gt; 產出咖啡"><br><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-intro-1/input-run-ouput-1.jpg" alt="輸入 -&gt; 執行運算 -&gt; 輸出"></p>
+<p>但一定必須要全部經過這些階段嗎？ </p>
+<p>其實只有 <code>執行運算</code> 的階段爲必須，而 <code>輸入材料</code>、<code>輸出結果</code> 則是非必須的狀態。<br><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-intro-1/input-run-ouput-3.jpg" alt="輸入 -&gt; 執行運算 -&gt; 輸出"></p>
+<p>例如：</p>
+<ul>
+<li>銀行櫃檯的<code>號碼牌領取機</code>，就只會經過 <code>執行運算</code>、<code>輸出結果(號碼牌)</code> 兩個階段，不需要<code>輸入材料</code>。</li>
+<li>日本餐廳外的<code>自動點餐機</code>，就只會經過 <code>輸入材料(錢、菜單)</code>、<code>執行運算</code> 兩個階段，不需要<code>輸出結果</code>（不會馬上由機器完成餐點）。</li>
+</ul>
+<h1 id="宣告-function"><a href="#宣告-function" class="headerlink" title="宣告 function"></a>宣告 function</h1><p>我們剛剛提到的都是使用 <code>____</code> 完成 <code>一組需執行的步驟</code>，例如 <code>『自動咖啡機』</code> 完成 <code>『泡咖啡』</code>、<code>『吐司機』</code> 完成 <code>『烤吐司』</code> 等等。</p>
+<p>那我們要怎麼自己定義這些步驟爲一個 <code>function</code> 呢？ </p>
+<p>我們試著用 Javascript 寫出上述的『自動咖啡機』function 吧！</p>
+<details class="note danger" open><summary><p>simple</p>
+</summary>
+<p>以下的『自動咖啡機』function 程式碼是無法執行的！</p>
+<p>只是一個說明範例喔 😆</p>
+
+</details>
+
+<h2 id="命名"><a href="#命名" class="headerlink" title="命名"></a>命名</h2><p>我們要替 function 命名，之後才能使用它，就如同『自動咖啡機』也是有名字的。</p>
+<details class="note " open><summary><p>orange fas fa-exclamation-triangle simple</p>
+</summary>
+<p>大部份的情況下 function 都會是以 <code>『動詞』</code>的形式命名，上述的『自動咖啡機』只是爲了好理解的比喻而使用名詞 😆</p>
+<p>因此若以 function 的命名的情況下， <code>『泡咖啡 (makeCoffee)』</code> 的命名是更適合的喔！</p>
+<p>阿！對了，雖然 Javascript 的 function 命名支援中文，但是一般來說都是以 <code>英文</code> 命名喔 😀</p>
+
+</details>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">makeCoffee</span>(<span class="params"></span>) &#123;</span><br><span class="line">   碾壓磨碎咖啡豆變成咖啡粉</span><br><span class="line">   用熱水沖泡剛剛完成的咖啡粉</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 Javascript 宣告 function 時需要使用 <code>function</code> 這個關鍵字，並且用 <code>()</code> 放在 function 名稱後，並且將需要執行的步驟用<code>一對 &#123;&#125;</code> 包起來。</p>
+<p><code>&#123;&#125;</code> 包起來的一組需要執行的步驟，就是上述的 <code>執行運算</code> 階段。</p>
+<h2 id="參數（輸入）"><a href="#參數（輸入）" class="headerlink" title="參數（輸入）"></a>參數（輸入）</h2><p>我們已經完成基本的泡咖啡的 function 了！接下來我們要怎麼裝入咖啡豆(coffeeBean)呢？ </p>
+<p>我們會用<code>參數</code>的形式作爲輸入，參數也可以任意地命名，將需要輸入到這個 function 的材料塞在剛剛 function 名稱後的 <code>()</code> 裡面！</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">makeCoffee</span>(<span class="params">coffeeBean <span class="comment">/* 輸入咖啡豆 */</span></span>) &#123;</span><br><span class="line">   <span class="keyword">const</span> coffeePowder <span class="comment">/*咖啡粉*/</span> = 碾壓磨碎(coffeeBean);</span><br><span class="line">   <span class="keyword">const</span> coffee <span class="comment">/*咖啡*/</span> = 熱水沖泡(coffeePowder);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<details class="note " open><summary><p>orange fas fa-exclamation-triangle simple</p>
+</summary>
+<p>順便一提參數可以有 <code>0</code> 到 <code>N</code> 個，不是只能有 <code>1</code> 個喔！😀</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params">param1, param2, .... n</span>) &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+
+<h2 id="回傳（輸出）"><a href="#回傳（輸出）" class="headerlink" title="回傳（輸出）"></a>回傳（輸出）</h2><p>我們在<code>泡咖啡的 function 內</code>已經得到咖啡了！但是我們要怎麼<code>輸出</code>呢？</p>
+<p>在 Javascript function 需要回傳輸出時，需要使用 <code>return</code> 這個關鍵字，並且在<code>return 後面加上要回傳的內容(不可以斷行喔)</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">makeCoffee</span>(<span class="params">coffeeBean</span>) &#123;</span><br><span class="line">   <span class="keyword">const</span> coffeePowder <span class="comment">/*咖啡粉*/</span> = 碾壓磨碎(coffeeBean);</span><br><span class="line">   <span class="keyword">const</span> coffee <span class="comment">/*咖啡*/</span> = 熱水沖泡(coffeePowder);</span><br><span class="line">   <span class="keyword">return</span> coffee; <span class="comment">// 回傳咖啡</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<details class="note " open><summary><p>orange fas fa-exclamation-triangle simple</p>
+</summary>
+<p>相對於參數可以有 <code>0</code> 到 <code>N</code> 個，回傳值只能有 <code>0</code> 或 <code>1</code> 個喔！😀</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params">param1, param2, .... n</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> sth = <span class="number">123</span>;</span><br><span class="line">  <span class="keyword">return</span> sth;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<h1 id="呼叫（執行）function"><a href="#呼叫（執行）function" class="headerlink" title="呼叫（執行）function"></a>呼叫（執行）function</h1><p>在完成 function 的宣告後，我們終於可以執行它啦！怎麼執行呢？就是要<code>『呼叫 call』</code>它！<br>若沒有參數的 function 完成宣告後，我們只需要使用 <code>function 名稱</code> + <code>()</code>;</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 宣告 function</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="comment">// do something...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">fn</span>(); <span class="comment">// 👈 呼叫（執行）function</span></span><br></pre></td></tr></table></figure>
+
+<p>若有參數的 function 的情況，我們只需要使用 <code>function 名稱</code> + <code>(參數)</code>;</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">plus</span>(<span class="params">num1, num2</span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> num1 + num2; <span class="comment">// 此時的參數 num1 值爲 3, 參數 num2 值爲 5</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">plus</span>(<span class="number">3</span>, <span class="number">5</span>); <span class="comment">// 👈 傳入參數 3 跟 5，呼叫（執行）function</span></span><br></pre></td></tr></table></figure>
+<p>我們簡單來看怎麼呼叫 <code>makeCoffee</code> 吧！</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">makeCoffee</span>(<span class="params">coffeeBean</span>) &#123;</span><br><span class="line">   <span class="keyword">const</span> coffeePowder = 碾壓磨碎(coffeeBean);  <span class="comment">// 此時的參數 coffeeBean 值爲 &quot;星巴克派克市場咖啡豆&quot;</span></span><br><span class="line">   <span class="keyword">const</span> coffee = 熱水沖泡(coffeePowder);</span><br><span class="line">   <span class="keyword">return</span> coffee; <span class="comment">// 回傳咖啡</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">makeCoffee</span>(<span class="string">&quot;星巴克派克市場咖啡豆&quot;</span>); <span class="comment">// 👈 傳入參數咖啡豆，呼叫（執行）makeCoffee</span></span><br></pre></td></tr></table></figure>
+
+<p>因爲我們有使用 <code>return</code> 回傳泡好的咖啡，也許我們需要用一個類似容器的變數來裝它，所以我們可以調整為：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">makeCoffee</span>(<span class="params">coffeeBean</span>) &#123;</span><br><span class="line">   <span class="keyword">const</span> coffeePowder = 碾壓磨碎(coffeeBean);  <span class="comment">// 此時的參數 coffeeBean 值爲 &quot;星巴克派克市場咖啡豆&quot;</span></span><br><span class="line">   <span class="keyword">const</span> coffee = 熱水沖泡(coffeePowder);</span><br><span class="line">   <span class="keyword">return</span> coffee; <span class="comment">// 回傳咖啡</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 傳入參數咖啡豆，呼叫（執行）makeCoffee，並且用變數盛裝回傳泡好的咖啡</span></span><br><span class="line"><span class="keyword">const</span> coffee = <span class="title function_">makeCoffee</span>(<span class="string">&quot;星巴克派克市場咖啡豆&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>呼！還是有點抽象嗎？ </p>
+<p>我們用一張視覺想像流程圖來模擬這個 makeCoffee function 的執行過程吧 😆</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-intro-1/function-simulation.jpg" alt="makeCoffee function 的執行模擬過程"></p>
+<details class="note " open><summary><p>red fas fa-exclamation-triangle simple</p>
+</summary>
+<p>有一點要注意的是：在呼叫執行 function 時，請記得要宣告 function 喔！<br>例如以下可能就會出現錯誤：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">abc</span>(); <span class="comment">// 直接呼叫，卻沒有宣告 function</span></span><br></pre></td></tr></table></figure>
+</details>
+
+<h1 id="可執行-function-範例"><a href="#可執行-function-範例" class="headerlink" title="可執行 function 範例"></a>可執行 function 範例</h1><p>上述都是解釋概念用的無法執行的程式碼，我們來簡單地撰寫真正的執行程式碼吧！</p>
+<p>假設我們會計算好幾次的圓形面積，在我們還不會使用 Function 的時候可能會這麼寫：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> area1 = <span class="number">3</span> * <span class="number">3</span> * <span class="number">3.1416</span>;</span><br><span class="line"><span class="keyword">const</span> area2 = <span class="number">9</span> * <span class="number">9</span> * <span class="number">3.1416</span>;</span><br><span class="line"><span class="keyword">const</span> area3 = <span class="number">6</span> * <span class="number">6</span> * <span class="number">3.1416</span>;</span><br><span class="line"><span class="keyword">const</span> area4 = <span class="number">2</span> * <span class="number">2</span> * <span class="number">3.1416</span>;</span><br></pre></td></tr></table></figure>
+<p>若我們已經學會怎麼使用 function，我們可以爲計算圓形面積寫一個 function，參數可以接受傳入的圓半徑：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getCircleArea</span>(<span class="params">radius</span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> radius * radius * <span class="number">3.1416</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因此上述的程式碼我們就可以調成爲：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> area1 = <span class="title function_">getCircleArea</span>(<span class="number">3</span>);</span><br><span class="line"><span class="keyword">const</span> area2 = <span class="title function_">getCircleArea</span>(<span class="number">9</span>);</span><br><span class="line"><span class="keyword">const</span> area3 = <span class="title function_">getCircleArea</span>(<span class="number">6</span>);</span><br><span class="line"><span class="keyword">const</span> area4 = <span class="title function_">getCircleArea</span>(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<p>若主管看到上述給你一個建議說：<br>『在 Javascript 裏面有一個叫做 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/PI">Math.PI</a> 的常數可以使用喔！』</p>
+<p>建議你把 3.1416 調整為 <code>Math.PI</code>。</p>
+<p>那我們只需要將 <code>getCircleArea</code> function 內的 3.1416 改成 <code>Math.PI</code> 就大功告成惹！</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getCircleArea</span>(<span class="params">radius</span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> radius * radius * <span class="title class_">Math</span>.<span class="property">PI</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<details class="note " open><summary><p>blue fas fa-question-circle simple</p>
+</summary>
+<p>對了！ 🤭</p>
+<p>若 function 沒有 return 的關鍵字，what 變數是什麼內容呢？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">sayHi</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;hihihihihi~&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> what = <span class="title function_">sayHi</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(what);</span><br><span class="line"><span class="comment">// 答案是：  `undefined` 😆 </span></span><br></pre></td></tr></table></figure>
+
+<p>若 function 有 return 關鍵字，後面卻沒有任何東西，what 變數是什麼內容呢？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">sayHi</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;hihihihihi~&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> what = <span class="title function_">sayHi</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(what);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 還是 `undefined` 喔 😆</span></span><br></pre></td></tr></table></figure>
+</details>
+
+<h1 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h1><p>這篇爲《 Javascript Function 超基礎入門》系列文的第一篇，簡單地講解了 Function 是什麼、為什麼需要 Function，以及 Function 的呼叫方法。</p>
+<p>之後會再繼續跟大家聊聊 <a href="/js/Function/function-scope/2863996532/" title="Function 的 Scope">Function 的 Scope</a>、<code>Callback Function</code> 等等的主題～😆</p>
+<hr>
+<p>最後感謝你願意看到這裏，希望這篇文章對你有所幫助。</p>
+<p>若你想到身邊有需要這篇文章內容的朋友，也請你幫他一個忙把這篇文章分享給他 😍</p>
+<p>若文章的內容有錯誤的地方，也歡迎隨時一起討論交流。😘</p>
+<p>最後感謝你的閱讀囉，我們下次見！Bye ～ 🚀</p>
+<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><ul>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions">MDN Functions</a></li>
+</ul>
+<hr>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Javascript/" rel="tag"><i class="fa fa-tag"></i> Javascript</a>
+              <a href="/tags/Function/" rel="tag"><i class="fa fa-tag"></i> Function</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/js/Function/function-scope/2863996532/" rel="prev" title="Javascript Function 作用域！一起用小明開分身的故事學習作用域！">
+                  <i class="fa fa-angle-left"></i> Javascript Function 作用域！一起用小明開分身的故事學習作用域！
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/js/Async/async-sync-intro/2534378084/" rel="next" title="Javascript 非同步 &amp; Event Loop！10 分鐘輕鬆圖解學習！">
+                  Javascript 非同步 & Event Loop！10 分鐘輕鬆圖解學習！ <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ChanChanDev</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"Jessie75919","repo":"Jessie75919.github.io","client_id":"5cc00853735d25bd22f3","client_secret":"42c46caebd1f91cd54924e2ad6c3dc6fec94f37e","admin_user":"Jessie75919","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-TW","body":null,"labels":"Gitalk","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"cf1713b1fe63bb874d7bbab4dff8f618"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

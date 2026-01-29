@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="mask-icon" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"chanchandev.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"onmobile":false},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null,"show_result":"flat"},"fold":{"enable":false,"height":500},"language":false,"highlight_theme":"normal"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"找到 ${hits} 個搜索結果（用時 ${time} 毫秒）","hits":"找到 ${hits} 個搜索結果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Chan-Chan-Dev 轉眼間也兩個月大了，因爲一些原因開始著手替他做一些調整與升級，這篇是記錄文章，若有興趣的話歡迎一起看看 Chan-Chan-Dev 經歷了哪些調整吧！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ChanChanDev 升級記錄！一起用 Github Actions 潮一下吧！">
+<meta property="og:url" content="https://chanchandev.com/note/Github-Action/website-upgrade/4114456147/index.html">
+<meta property="og:site_name" content="圈圈工程師">
+<meta property="og:description" content="Chan-Chan-Dev 轉眼間也兩個月大了，因爲一些原因開始著手替他做一些調整與升級，這篇是記錄文章，若有興趣的話歡迎一起看看 Chan-Chan-Dev 經歷了哪些調整吧！">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/website-upgrade/cover.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/website-upgrade/toc.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/hexo-introduction/github-repo-custom-domain-1.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/website-upgrade/digital-ocean.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/website-upgrade/github-action.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/website-upgrade/github-action-start.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/website-upgrade/github-action-secrets.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/hexo-introduction/godday-domain-A-1.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/website-upgrade/cloudflare.jpg">
+<meta property="article:published_time" content="2021-05-29T15:56:26.000Z">
+<meta property="article:modified_time" content="2026-01-28T12:40:17.311Z">
+<meta property="article:author" content="ChanChanDev">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="github-actions">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/website-upgrade/cover.jpg">
+
+
+<link rel="canonical" href="https://chanchandev.com/note/Github-Action/website-upgrade/4114456147/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://chanchandev.com/note/Github-Action/website-upgrade/4114456147/","path":"note/Github-Action/website-upgrade/4114456147/","title":"ChanChanDev 升級記錄！一起用 Github Actions 潮一下吧！"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>ChanChanDev 升級記錄！一起用 Github Actions 潮一下吧！ | 圈圈工程師</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R47Z93ZJTM"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-R47Z93ZJTM","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">圈圈工程師</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Change Change Developer</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-back-end"><a href="/categories/back-end/" rel="section"><i class="fas fa-rocket fa-fw"></i>Back-End</a></li><li class="menu-item menu-item-sharing"><a href="/categories/Sharing/" rel="section"><i class="fas fa-star fa-fw"></i>Sharing</a></li><li class="menu-item menu-item-reading"><a href="/categories/Reading/" rel="section"><i class="fas fa-book fa-fw"></i>Reading</a></li><li class="menu-item menu-item-design-pattern"><a href="/categories/design-pattern/" rel="section"><i class="fas fa-sitemap fa-fw"></i>Design-Pattern</a></li><li class="menu-item menu-item-javascript"><a href="/categories/js/" rel="section"><i class="fas fa-code fa-fw"></i>Javascript</a></li><li class="menu-item menu-item-分類"><a href="/categories/" rel="section"><i class="fas fa-folder-open fa-fw"></i>分類</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E6%83%85%E6%8F%90%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">前情提要</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%8E%AF-nbsp-Chan-Chan-Dev-%E4%B9%8B%E5%89%8D%E5%B7%B2%E7%B6%93%E5%AE%8C%E6%88%90%E4%BA%86%E4%BA%9B%E4%BB%80%E9%BA%BC%E5%91%A2%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">🎯  Chan-Chan-Dev 之前已經完成了些什麼呢？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A5%BD%E5%A5%BD%E7%9A%84%E5%B9%B9%E5%98%9B%E8%A6%81%E8%AA%BF%E6%95%B4%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">好好的幹嘛要調整？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E7%99%BC%E4%BD%88%E4%B9%8B%E5%BE%8C%E2%80%A6"><span class="nav-number">2.0.1.</span> <span class="nav-text">文章發佈之後…</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Github-Page-%E7%99%BC%E4%BD%88%E7%99%BC%E7%94%9F%E9%8C%AF%E8%AA%A4"><span class="nav-number">2.0.2.</span> <span class="nav-text">Github Page 發佈發生錯誤</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Digital-Ocean"><span class="nav-number">3.</span> <span class="nav-text">Digital Ocean</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Github-Actions"><span class="nav-number">4.</span> <span class="nav-text">Github Actions</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Github-Actions-%E5%B0%8F%E5%B0%8F%E7%9B%AE%E6%A8%99"><span class="nav-number">4.1.</span> <span class="nav-text">Github Actions 小小目標</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AD%E9%96%93%E9%81%87%E5%88%B0%E7%9A%84%E5%95%8F%E9%A1%8C%E9%BB%9E"><span class="nav-number">4.2.</span> <span class="nav-text">中間遇到的問題點</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Github-%E5%B0%88%E6%A1%88%E5%85%A7%E7%9A%84-themes-butterfly-%E6%B6%88%E5%A4%B1"><span class="nav-number">4.2.1.</span> <span class="nav-text">Github 專案內的 themes&#x2F;butterfly 消失</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%A6%E9%9A%9B%E8%99%95%E7%90%86%E6%96%B9%E5%BC%8F"><span class="nav-number">4.2.1.1.</span> <span class="nav-text">實際處理方式</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GoDaddy-%E8%AA%BF%E6%95%B4%E7%B6%B2%E5%9F%9F%E4%B8%BB%E6%A9%9F-IP"><span class="nav-number">5.</span> <span class="nav-text">GoDaddy 調整網域主機 IP</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%B0%E7%94%B3%E8%AB%8B%E7%B6%B2%E5%9F%9F-chanchandev-com"><span class="nav-number">6.</span> <span class="nav-text">新申請網域 chanchandev.com</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cloudflare"><span class="nav-number">7.</span> <span class="nav-text">Cloudflare</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BE%8C%E8%A8%98"><span class="nav-number">8.</span> <span class="nav-text">後記</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ChanChanDev"
+      src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+  <p class="site-author-name" itemprop="name">ChanChanDev</p>
+  <div class="site-description" itemprop="description">圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">標籤</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/chanchandev" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;chanchandev" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/chanchandev" title="FaceBook → https:&#x2F;&#x2F;www.facebook.com&#x2F;chanchandev" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-facebook fa-fw"></i>FaceBook</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://chanchandev.com/note/Github-Action/website-upgrade/4114456147/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+      <meta itemprop="name" content="ChanChanDev">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="圈圈工程師">
+      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="ChanChanDev 升級記錄！一起用 Github Actions 潮一下吧！ | 圈圈工程師">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ChanChanDev 升級記錄！一起用 Github Actions 潮一下吧！
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2021-05-29 23:56:26" itemprop="dateCreated datePublished" datetime="2021-05-29T23:56:26+08:00">2021-05-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2026-01-28 20:40:17" itemprop="dateModified" datetime="2026-01-28T20:40:17+08:00">2026-01-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/note/Github-Action/" itemprop="url" rel="index"><span itemprop="name">Github Action</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/website-upgrade/cover.jpg"><br>Chan-Chan-Dev 轉眼間也兩個月大了，因爲一些原因開始著手替他做一些調整與升級，這篇是記錄文章，若有興趣的話歡迎一起看看 Chan-Chan-Dev 經歷了哪些調整吧！</p>
+<span id="more"></span>
+
+<br>
+
+<details class="note success" open><summary><p>simple</p>
+</summary>
+<p>HIHI～😍  如果你是第一次來的話，『Chan-Chan-Dev』是一個專門用簡單的圖文與故事講解網路程式技術的網站。<br>若你也喜歡用這種方式學習的話，歡迎加入 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.facebook.com/chanchandev">Chan-Chan-Dev Facebook</a> 的粉絲團，在發佈的時候就有比較多機會收到通知喔！😍</p>
+
+</details>
+
+<h1 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h1><p>轉眼間 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://chan-chan-dev.com/">chan-chan-dev.com</a> 上線也大概一兩個月了，它是用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io/zh-tw/">Hexo 部落格框架</a>建立的網站。建立的過程有記錄在 《<a href="/note/Hexo/hexo-introduction/2335841689/" title="架設部落格第一次就上手 Hexo + Github + 自訂網域">架設部落格第一次就上手 Hexo + Github + 自訂網域</a>》當中。今天則要聊聊這陣子對於 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://chan-chan-dev.com/">chan-chan-dev.com</a> 的升級調整。</p>
+<details class="note warning" open><summary><p>simple</p>
+</summary>
+<p>這一篇比較類似記錄過程的性質，不諱言很多技術也是自己第一次摸索接觸，因此若有錯誤的地方都歡迎提出來討論喔 😆</p>
+
+</details>
+
+
+<h2 id="🎯-nbsp-Chan-Chan-Dev-之前已經完成了些什麼呢？"><a href="#🎯-nbsp-Chan-Chan-Dev-之前已經完成了些什麼呢？" class="headerlink" title="🎯 &nbsp;Chan-Chan-Dev 之前已經完成了些什麼呢？"></a>🎯 &nbsp;Chan-Chan-Dev 之前已經完成了些什麼呢？</h2><p>  ✅ &nbsp; 設定基本的 Hexo 專案！<br>  ✅ &nbsp; 使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://butterfly.js.org/">Butterfly</a> 的主題套件（也就是目前的主題）！<br>  ✅ &nbsp; 使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io/zh-tw/docs/github-pages#%E7%A7%81%E4%BA%BA%E5%84%B2%E5%AD%98%E5%BA%AB">hexo-deployer-git</a> 套件將網站部署在 Github Page 上，用 <code>&lt;github 帳號&gt;.github.io</code> 作爲網址！<br>  ✅ &nbsp; 去 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://godaddy.com/">GoDadday</a> 購買網域 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://chan-chan-dev.com/">chan-chan-dev.com</a>！<br>  ✅ &nbsp; 因爲 Chan-Chan-Dev 有大量的插畫圖檔，如果都放在 Git 很快就會容量爆炸了，因此額外幫這些圖找個家。目前是放在 AWS 的 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://aws.amazon.com/tw/s3/?did=ft_card&trk=ft_card">S3</a>！<br>  ✅ &nbsp; 在每篇文章最後加上 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://liker.land/jessie75919/civic">Liker</a> 的內容！<br>  ✅ &nbsp; 使用推播通知服務 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.webpushr.com/">WebPushr</a>！</p>
+<p>至於這次做了些哪些升級可以參考目錄，若有興趣的主題可以直接點選直達喔！ 🚄</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/website-upgrade/toc.jpg"></p>
+<p>接下來就從為什麼會有升級動機的故事開始吧。</p>
+<h1 id="好好的幹嘛要調整？"><a href="#好好的幹嘛要調整？" class="headerlink" title="好好的幹嘛要調整？"></a>好好的幹嘛要調整？</h1><p>其實上述的設定基本上已經完成 80% 的基礎設定，應該就可以過著幸福快樂的寫部落格日子？</p>
+<p>問題馬上發生就在自己第一次發佈文章的時候遇到了… 😭</p>
+<h3 id="文章發佈之後…"><a href="#文章發佈之後…" class="headerlink" title="文章發佈之後…"></a>文章發佈之後…</h3><p>因爲使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io/zh-tw/docs/github-pages#%E7%A7%81%E4%BA%BA%E5%84%B2%E5%AD%98%E5%BA%AB">hexo-deployer-git</a> 這個套件發佈，它的預設似乎是會指向 <code>&lt;github 帳號&gt;.github.io</code> 的網址，因此每次在新文章完成部署上線的時候，總是會在 Github Page 自動切回<code>&lt;github 帳號&gt;.github.io</code> 的網址，因此每次發佈之後都要到 Github Page 重新設定 Custom domain 的部分，不然 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://chan-chan-dev.com/">chan-chan-dev.com</a> 這個網址就無法順利使用 😣 😣 😣<br><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/hexo-introduction/github-repo-custom-domain-1.png"></p>
+<p>這個小困擾一開始對自己似乎也沒有太大的障礙，只是每次發佈的時候都要去 Github Page 調整一下上述的設定。但隨著在四月的時候比較大量發文的時候，這個困擾就開始長大了許多 😬 😬 😬</p>
+<h3 id="Github-Page-發佈發生錯誤"><a href="#Github-Page-發佈發生錯誤" class="headerlink" title="Github Page 發佈發生錯誤"></a>Github Page 發佈發生錯誤</h3><p>在發佈上一篇 《<a href="/Front-End/Browser/inside-browser-2/2715917952/" title="瀏覽器學習筆記 Part 2 - 當網址被輸入後，發生了什麼事呢？">瀏覽器學習筆記 Part 2 - 當網址被輸入後，發生了什麼事呢？</a>》的時候發生了我在本機端已經發佈到 Github Page 上，而網站卻依然一直看不到這篇文章的狀況 😭</p>
+<p>在本機端上完全正常運作，而在 Github Page 上卻顯示發生錯誤，黑人問號的我就得到一個連結 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/about-jekyll-build-errors-for-github-pages-sites">About Jekyll build errors for GitHub Pages sites</a>。</p>
+<p>簡單來說就是：叫你自己用 Jekyll 在自己的電腦上跑跑看有什麼問題就對了，但後來在自己亂 try 的之後，消失的那篇文章居然神奇的出現了！ 😑（實際上那時候做了什麼已經不可考了…）</p>
+<details class="note warning" open><summary><p>simple</p>
+</summary>
+<p>那時候突然覺得一直用 Github Page 無法自己完全地控制似乎也不是長久之計，於是開始有了把 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://chan-chan-dev.com/">chan-chan-dev.com</a> 架在自己的 Server 上的想法。</p>
+
+</details>
+
+
+<h1 id="Digital-Ocean"><a href="#Digital-Ocean" class="headerlink" title="Digital Ocean"></a>Digital Ocean</h1><p>之前在工作中比較常用的是 AWS 的 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://aws.amazon.com/tw/ec2/?did=ft_card&trk=ft_card&ec2-whats-new.sort-by=item.additionalFields.postDateTime&ec2-whats-new.sort-order=desc">EC2</a>，只是之前都是用來 Side Projects 的測試，是買在比較遙遠卻相對比較便宜的 US East (N. Virginia) <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions">Available Regions</a>，代價就是會有很大的延遲 😆 😆 😆</p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.digitalocean.com/?refcode=ece717e6e061&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge"><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/website-upgrade/digital-ocean.jpg"></a></p>
+<p>Digital Ocean 是因爲<a target="_blank" rel="noopener external nofollow noreferrer" href="https://cola.workxplay.net/">強者我同事</a>的分享，所以才試試看的。</p>
+<p>目前 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://chan-chan-dev.com/">chan-chan-dev.com</a> 使用最基本的 Basic Plan 放在 Singapore 的區域，相較於 US East (N. Virginia)，操作 Singapore 主機的速度就快的跟光速一樣（<del>廢話</del>！ 😆）</p>
+<details class="note " open><summary><p>green fas fa-bullhorn simple</p>
+</summary>
+<p>如果之前沒有使用過 Digital Ocean 的話，它很貼心地提供<code>免費使用 60 天</code> 的額度扣打。</p>
+<p>有興趣也可以<a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.digitalocean.com/?refcode=ece717e6e061&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge">點擊這裏</a>玩玩看囉！</p>
+
+</details>
+
+<details class="note danger" open><summary><p>modern</p>
+</summary>
+<p>只是記得若不玩了要把 Droplet <strong>『砍掉』</strong>喔，不然超過 60 天<strong>『還是會被扣款』</strong>的！！！</p>
+
+</details>
+
+<p>至於 Server 上的設置就是很簡單地把 Hexo Build 完的檔案上傳上去，設定<a target="_blank" rel="noopener external nofollow noreferrer" href="http://nginx.org/en/docs/beginners_guide.html#static">靜態網站的 Nginx Configure</a>，爲了網址前面的小小鎖頭 🔒 ，不免俗地要 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://letsencrypt.org/zh-tw/">Let’s Encrypt</a> 一下。</p>
+<p>因爲平常在工作中不常設定上述的伺服器環境，因此中間也花了不少的時間呢 😅，不過多做一次就多一次的經驗值囉！加油！</p>
+<h1 id="Github-Actions"><a href="#Github-Actions" class="headerlink" title="Github Actions"></a>Github Actions</h1><p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/features/actions"><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/website-upgrade/github-action.jpg" alt="alt"></a></p>
+<p>因爲前陣子處理到了 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.jenkins.io/">Jenkins</a> 的 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://zh.wikipedia.org/zh-tw/CI/CD">CI/CD</a> 相關任務。也耳聞了 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/features/actions">Github Actions</a> 好長一段時間，只是工作上似乎都沒有機會碰到。於是想說就拿 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://chan-chan-dev.com/">chan-chan-dev.com</a> 來玩玩看簡單的 Github Actions 吧 😍</p>
+<details class="note success" open><summary><p>simple</p>
+</summary>
+<h2 id="Github-Actions-小小目標"><a href="#Github-Actions-小小目標" class="headerlink" title="Github Actions 小小目標"></a>Github Actions 小小目標</h2><p>希望寫完文章後，Git Merge 到 Master 之後就自動幫我完成 Build 並且上傳到 Digital Ocean 的 Server 上完成發佈的動作！</p>
+
+</details>
+
+<p>以下是希望設定 Github Acton 完成的事情：</p>
+<details class="note " open><summary><p>blue fas fa-bolt simple</p>
+</summary>
+<p>當有 commit push 到 master 的時候，完成以下的事情：</p>
+<ul>
+<li>npm install 下載套件</li>
+<li>npm run build 執行 hexo generate build 網站的檔案內容</li>
+<li>把 build 出來的內容用 ssh 的方式上傳到 server 上</li>
+</ul>
+
+</details>
+
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/website-upgrade/github-action-start.jpg" alt="從專案裡可以找到 Actions 的分頁"></p>
+<p>從專案裡可以找到 Actions 的分頁，點擊 <code>set up a workflow yourself</code> 之後就會跳到了可以讓我們輸入 <code>workflow</code> 的 <code>yml</code> 檔的地方。</p>
+<p>以下是 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://chan-chan-dev.com/">chan-chan-dev.com</a> 目前的設定：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">CI</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Controls when the action will run. </span></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="comment"># Triggers the workflow on push</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span> [ <span class="string">master</span> ]</span><br><span class="line"></span><br><span class="line">  <span class="comment"># Allows you to run this workflow manually from the Actions tab</span></span><br><span class="line">  <span class="attr">workflow_dispatch:</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># A workflow run is made up of one or more jobs that can run sequentially or in parallel</span></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="comment"># This workflow contains a single job called &quot;build&quot;</span></span><br><span class="line">  <span class="attr">build:</span></span><br><span class="line">    <span class="comment"># The type of runner that the job will run on</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Steps represent a sequence of tasks that will be executed as part of the job</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="comment"># Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/checkout@v2</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Build</span> <span class="string">Hexo</span> <span class="string">Asset</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          npm install</span></span><br><span class="line"><span class="string">          npm run build</span></span><br><span class="line"><span class="string"></span>      </span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Deploy</span> <span class="string">to</span> <span class="string">Server</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">easingthemes/ssh-deploy@main</span></span><br><span class="line">        <span class="attr">env:</span></span><br><span class="line">            <span class="attr">SSH_PRIVATE_KEY:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.SSH_PRIVATE_KEY</span> <span class="string">&#125;&#125;</span></span><br><span class="line">            <span class="attr">SOURCE:</span> <span class="string">&quot;public/&quot;</span></span><br><span class="line">            <span class="attr">REMOTE_PORT:</span> <span class="string">$&#123;&#123;secrets.PORT</span> <span class="string">&#125;&#125;</span></span><br><span class="line">            <span class="attr">REMOTE_HOST:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.HOST</span> <span class="string">&#125;&#125;</span></span><br><span class="line">            <span class="attr">REMOTE_USER:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.USERNAME</span> <span class="string">&#125;&#125;</span></span><br><span class="line">            <span class="attr">TARGET:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.REMOTE_TARGET</span> <span class="string">&#125;&#125;</span></span><br><span class="line">            <span class="attr">EXCLUDE:</span> <span class="string">&quot;/public/, /node_modules/&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>因爲上傳檔案時需要 Server 登入帳號與 ssh key 相關的敏感資料，對於這些類型的資料可以放在專案 Settings 的 Secrets 裡，之後就可以用 <code>$&#123;&#123; secrets.YOUR_SECRET &#125;&#125;</code> 的形式在執行的時候取得囉！<br><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/website-upgrade/github-action-secrets.jpg"></p>
+<p>另外自己也是剛在摸索 github action，因此這裏就不講解裏面的指令用途，附上那時候參考的更有相關教學囉！</p>
+<ul>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.youtube.com/watch?v=gW1TDirJ5E4">Deploying to a server with GitHub Actions - Up and Running - Elixir Phoenix</a></li>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://zellwk.com/blog/github-actions-deploy/">Deploying to a server via SSH and Rsync in a Github Action</a></li>
+</ul>
+<h2 id="中間遇到的問題點"><a href="#中間遇到的問題點" class="headerlink" title="中間遇到的問題點"></a>中間遇到的問題點</h2><p>那個。。。事情當然不會是一帆風順的 😅</p>
+<h3 id="Github-專案內的-themes-butterfly-消失"><a href="#Github-專案內的-themes-butterfly-消失" class="headerlink" title="Github 專案內的 themes/butterfly 消失"></a>Github 專案內的 themes/butterfly 消失</h3><p>在 Github Actions 中遇到的第一個錯誤就是在上面執行 <code>hexo generate</code>，因爲它不認識 Butterfly 用的 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://butterfly.js.org/posts/4aa8abbe/#%E6%A8%99%E7%B1%A4%E5%A4%96%E6%8E%9B%EF%BC%88Tag-Plugins%EF%BC%89">note 語法</a>，因此在編譯的過程中頻頻發生錯誤 😵‍💫 😵‍💫 😵‍💫</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% note success simple %&#125;</span><br><span class="line">Type something else ~</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>安裝 Butterfly 的時候，相關的套件檔案應該是要放在 <code>themes/butterfly</code> 的目錄下，但在 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://chan-chan-dev.com/">chan-chan-dev.com</a> 的 github 專案的 <code>themes/butterfly</code> 卻沒有任何檔案。</p>
+<p>突然才想到當初是使用 npm 的方法安裝：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i hexo-theme-butterfly</span><br></pre></td></tr></table></figure>
+
+<p>而在 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://butterfly.js.org/posts/21cfbf15/#%E5%AE%89%E8%A3%9D">Butterfly 的安裝文件</a>裡也有提到以下這段：</p>
+<blockquote>
+<p>此方法只支持 Hexo 5.0.0 以上版本<br>通過 npm 安裝並不會在 themes 裏生成主題文件夾，而是在 node_modules 裏生成</p>
+</blockquote>
+<p>於是從<a target="_blank" rel="noopener external nofollow noreferrer" href="https://op30132.github.io/2020/02/05/github-action/">這篇文章</a>找到解法，裏面的大大提到說：</p>
+<blockquote>
+<p>最後發現在上傳源碼到 blog 時，NexT主題檔由於本身是一個專案，有自己的 git 紀錄，因此 push 時沒有跟著傳到 github</p>
+</blockquote>
+<p>它裡面提到三個解法，分別是：</p>
+<ul>
+<li>直接刪掉套件內的 .git 資料夾</li>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="http://andersjing.com/2018/06/30/hexo-theme/">使用 subtree</a></li>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://juejin.cn/post/6844903751908605965">使用 submodules</a></li>
+</ul>
+<details class="note info" open><summary><p>simple</p>
+</summary>
+<p>subtree 與 submodules 到底有啥不同呢？<br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.google.com/search?q=subtree&oq=subtree&aqs=chrome..69i57j69i64l3j69i60l2j69i61.942j0j1&sourceid=chrome&ie=UTF-8">這篇文章</a>寫的很棒棒，有興趣可以參考囉！</p>
+
+</details>
+
+<p>我後來自己選擇第二個方案，使用 subtree 的方式。原因如下：</p>
+<ul>
+<li>想要繼續可以跟上 butterfly 的新版本</li>
+<li>自己有調整 butterfly 裏面的內容，例如在 <code>post.pug</code> 加入 Liker 的內容</li>
+</ul>
+<h4 id="實際處理方式"><a href="#實際處理方式" class="headerlink" title="實際處理方式"></a>實際處理方式</h4><p>在 Github 上 Fork 一份 Butterfly 的專案到自己的帳號底下，因爲有把原本的 Butterfly 專案作爲 upstream，到時候也比較容易更新，並且調整上述自己想要加入 Liker 的內容，並且 subtree 自己的 Fork 出來的 Butterfly 專案。</p>
+<p>經過上述的調整就可以順利地在 github actions 上執行 <code>hexo generate</code> 的指令囉！！🚀 🚀 🚀</p>
+<details class="note success" open><summary><p>simple</p>
+</summary>
+<p>因此，若你有順利看到這篇文章的話，那就已經是用 github actions 部署上去的囉～ 💪 💪 💪</p>
+
+</details>
+
+<h1 id="GoDaddy-調整網域主機-IP"><a href="#GoDaddy-調整網域主機-IP" class="headerlink" title="GoDaddy 調整網域主機 IP"></a>GoDaddy 調整網域主機 IP</h1><p>因爲之前的版本是放在 Github 上，因此之前的在 GoDaddy 設定都是指向 Github：<br><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/hexo-introduction/godday-domain-A-1.png"> </p>
+<p>等到 Digital Ocean 的伺服器設定好了之後，就可以把 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://chan-chan-dev.com/">chan-chan-dev.com</a> 指向伺服器的 IP 啦！😍</p>
+<h1 id="新申請網域-chanchandev-com"><a href="#新申請網域-chanchandev-com" class="headerlink" title="新申請網域 chanchandev.com"></a>新申請網域 chanchandev.com</h1><p>因爲自己在 Server 上設定 Nginx Configure 的時候，一直要輸入 <code>chan-chan-dev.com</code> 這個域名，才覺得當初自己爲啥要用 <code>chan-chan-dev.com</code> 而不用 <code>chanchandev.com</code> 就好…？😱 😱 😱</p>
+<details class="note success" open><summary><p>simple</p>
+</summary>
+<p>對，我就是那麼三心二意的人 🤣 🤣 🤣</p>
+
+</details>
+
+<p>因此，我又去 GoDaddy 申請了 <a href="https://chanchandev.com/">chanchandev.com</a> 的網域，並且也在 Server 調整了 Nginx 的設定，因此現在點擊 <a href="https://chanchandev.com/">chanchandev.com</a> 的網址的話，會看到一模一樣的網站。只是考慮到先前的網址都是使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://chan-chan-dev.com/">chan-chan-dev.com</a>的網域，因此這兩個網址可能會並存好一陣子囉！😆 😆 😆</p>
+<h1 id="Cloudflare"><a href="#Cloudflare" class="headerlink" title="Cloudflare"></a>Cloudflare</h1><p>其實到上面的調整就差不多可以打完收工了，上述已經完成了：</p>
+<ul>
+<li>設定新的 Server 專案環境</li>
+<li>將 GoDaddy 指向新的 Server IP</li>
+<li>設定 Github Actions 讓 push 到 master 即完成部署上線動作</li>
+</ul>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.cloudflare.com/zh-tw/"><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/website-upgrade/cloudflare.jpg"></a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://cola.workxplay.net/">強者我同事</a>之前也跟我分享 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.cloudflare.com/zh-tw/">Cloudflare</a> 讓他用的很開心，於是自己也忍不住玩玩看。</p>
+<p>Cloudflare 是一種 <code>內容傳遞網路（CDN）</code> 的服務。CDN 是指一組分佈在不同地理位置的伺服器，協同工作以提供網際網路內容的快速交付。</p>
+<p>至於為什麼要使用 CDN 呢？Cloudflare 也有準備了一篇<a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.cloudflare.com/zh-tw/learning/cdn/what-is-a-cdn/">很好理解的文章</a>，在這邊分享給大家囉。</p>
+<p>操作其實不會太困難，跟著 Cloudflare 上的指引操作，就可以順利地將 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://chan-chan-dev.com/">chan-chan-dev.com</a> 順利地託管在 Cloudflare 上囉 😍</p>
+<h1 id="後記"><a href="#後記" class="headerlink" title="後記"></a>後記</h1><p>呼～經過了一番努力終於把網站告一段落了 😭 😭 😭 ，在過程中也接觸到之前很多沒有碰過的新服務，感覺是很棒的學習經驗。</p>
+<p>這篇文章的記錄的成分居多，如果你居然有看到這裡的話，真的是十分感謝你的捧場！</p>
+<p>若文章的內容有錯誤的地方，也歡迎隨時一起討論交流。😘 </p>
+<p>最後感謝你的閱讀囉，我們下次見！Bye ～ 🚀</p>
+<hr>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/hexo/" rel="tag"><i class="fa fa-tag"></i> hexo</a>
+              <a href="/tags/github-actions/" rel="tag"><i class="fa fa-tag"></i> github-actions</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/side-project/chanchanweight-intro/1130968268/" rel="prev" title="圈圈•量量初登場！一起來記錄身體狀態吧！">
+                  <i class="fa fa-angle-left"></i> 圈圈•量量初登場！一起來記錄身體狀態吧！
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Front-End/Browser/inside-browser-2/2715917952/" rel="next" title="瀏覽器學習筆記 Part 2 - 當網址被輸入後，發生了什麼事呢？">
+                  瀏覽器學習筆記 Part 2 - 當網址被輸入後，發生了什麼事呢？ <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ChanChanDev</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"Jessie75919","repo":"Jessie75919.github.io","client_id":"5cc00853735d25bd22f3","client_secret":"42c46caebd1f91cd54924e2ad6c3dc6fec94f37e","admin_user":"Jessie75919","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-TW","body":null,"labels":"Gitalk","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"fb5cc4c0012b8c4995f52cd50f9ba772"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

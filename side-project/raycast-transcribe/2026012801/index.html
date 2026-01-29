@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="mask-icon" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"chanchandev.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"onmobile":false},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null,"show_result":"flat"},"fold":{"enable":false,"height":500},"language":false,"highlight_theme":"normal"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"找到 ${hits} 個搜索結果（用時 ${time} 毫秒）","hits":"找到 ${hits} 個搜索結果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="用說話代替打字，讓 AI 幫你把話變成文字！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我只想打嘴砲！如何用 Vibe Coding 解放雙手！打造語音轉文字小幫手 Voice Polish！">
+<meta property="og:url" content="https://chanchandev.com/side-project/raycast-transcribe/2026012801/index.html">
+<meta property="og:site_name" content="圈圈工程師">
+<meta property="og:description" content="用說話代替打字，讓 AI 幫你把話變成文字！">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://chanchandev.com/side-project/raycast-transcribe/2026012801/v3.png">
+<meta property="og:image" content="https://chanchandev.com/side-project/raycast-transcribe/2026012801/v1-ai-studio.png">
+<meta property="og:image" content="https://chanchandev.com/side-project/raycast-transcribe/2026012801/v2.png">
+<meta property="og:image" content="https://chanchandev.com/side-project/raycast-transcribe/2026012801/v3.png">
+<meta property="og:image" content="https://chanchandev.com/side-project/raycast-transcribe/2026012801/raycast-demo-1.gif">
+<meta property="og:image" content="https://chanchandev.com/side-project/raycast-transcribe/2026012801/format-input-1.gif">
+<meta property="og:image" content="https://chanchandev.com/side-project/raycast-transcribe/2026012801/polish-mode-1.gif">
+<meta property="og:image" content="https://chanchandev.com/side-project/raycast-transcribe/2026012801/eng-output.gif">
+<meta property="og:image" content="https://chanchandev.com/side-project/raycast-transcribe/2026012801/eng-output-written.png">
+<meta property="og:image" content="https://chanchandev.com/side-project/raycast-transcribe/2026012801/raycast-settings.png">
+<meta property="og:image" content="https://chanchandev.com/side-project/raycast-transcribe/2026012801/iphone-shortcut.png">
+<meta property="og:image" content="https://chanchandev.com/side-project/raycast-transcribe/2026012801/cost.png">
+<meta property="article:published_time" content="2026-01-28T13:00:00.000Z">
+<meta property="article:modified_time" content="2026-01-29T12:57:57.277Z">
+<meta property="article:author" content="ChanChanDev">
+<meta property="article:tag" content="side-project">
+<meta property="article:tag" content="vibe-coding">
+<meta property="article:tag" content="raycast">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chanchandev.com/side-project/raycast-transcribe/2026012801/v3.png">
+
+
+<link rel="canonical" href="https://chanchandev.com/side-project/raycast-transcribe/2026012801/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://chanchandev.com/side-project/raycast-transcribe/2026012801/","path":"side-project/raycast-transcribe/2026012801/","title":"我只想打嘴砲！如何用 Vibe Coding 解放雙手！打造語音轉文字小幫手 Voice Polish！"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>我只想打嘴砲！如何用 Vibe Coding 解放雙手！打造語音轉文字小幫手 Voice Polish！ | 圈圈工程師</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R47Z93ZJTM"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-R47Z93ZJTM","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">圈圈工程師</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Change Change Developer</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-back-end"><a href="/categories/back-end/" rel="section"><i class="fas fa-rocket fa-fw"></i>Back-End</a></li><li class="menu-item menu-item-sharing"><a href="/categories/Sharing/" rel="section"><i class="fas fa-star fa-fw"></i>Sharing</a></li><li class="menu-item menu-item-reading"><a href="/categories/Reading/" rel="section"><i class="fas fa-book fa-fw"></i>Reading</a></li><li class="menu-item menu-item-design-pattern"><a href="/categories/design-pattern/" rel="section"><i class="fas fa-sitemap fa-fw"></i>Design-Pattern</a></li><li class="menu-item menu-item-javascript"><a href="/categories/js/" rel="section"><i class="fas fa-code fa-fw"></i>Javascript</a></li><li class="menu-item menu-item-分類"><a href="/categories/" rel="section"><i class="fas fa-folder-open fa-fw"></i>分類</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E6%83%85%E6%8F%90%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">前情提要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%96%8B%E7%99%BC%E6%AD%B7%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">開發歷程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%89%88%EF%BC%9AGoogle-AI-Studio"><span class="nav-number">2.1.</span> <span class="nav-text">第一版：Google AI Studio</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%9A%E5%89%8D%E5%BE%8C%E7%AB%AF%E5%88%86%E9%9B%A2"><span class="nav-number">2.2.</span> <span class="nav-text">第二版：前後端分離</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%9C%E6%96%BC%E4%B8%80%E9%BB%9E%E9%BB%9E%E5%BE%8C%E7%AB%AF%E7%9A%84-Murmur"><span class="nav-number">2.2.1.</span> <span class="nav-text">關於一點點後端的 Murmur</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%89%88%EF%BC%9ARaycast-Extension-%F0%9F%8E%89"><span class="nav-number">2.3.</span> <span class="nav-text">第三版：Raycast Extension 🎉</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-number">2.4.</span> <span class="nav-text">基本操作流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4%E4%BB%8B%E7%B4%B9"><span class="nav-number">2.5.</span> <span class="nav-text">指令介紹</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%A3%E8%AA%9E%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.5.1.</span> <span class="nav-text">口語模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B8%E9%9D%A2%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.5.2.</span> <span class="nav-text">書面模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BD%A4%E9%A3%BE%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.5.3.</span> <span class="nav-text">潤飾模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AD%E6%96%87%E7%BF%BB%E8%AD%AF%E6%88%90%E5%8F%A3%E8%AA%9E%E8%8B%B1%E6%96%87%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.5.4.</span> <span class="nav-text">中文翻譯成口語英文模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AD%E6%96%87%E7%BF%BB%E8%AD%AF%E6%88%90%E6%9B%B8%E5%AF%AB%E8%8B%B1%E6%96%87%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.5.5.</span> <span class="nav-text">中文翻譯成書寫英文模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Raycast-%E8%A8%AD%E5%AE%9A"><span class="nav-number">2.6.</span> <span class="nav-text">Raycast 設定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iPhone-%E6%8D%B7%E5%BE%91%E6%95%B4%E5%90%88"><span class="nav-number">2.7.</span> <span class="nav-text">iPhone 捷徑整合</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%9C%E6%96%BC%E8%B2%BB%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">關於費用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%99%90%E5%88%B6"><span class="nav-number">4.</span> <span class="nav-text">限制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8B%E8%BC%89"><span class="nav-number">5.</span> <span class="nav-text">下載</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BE%8C%E8%A8%98"><span class="nav-number">6.</span> <span class="nav-text">後記</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ChanChanDev"
+      src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+  <p class="site-author-name" itemprop="name">ChanChanDev</p>
+  <div class="site-description" itemprop="description">圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">標籤</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/chanchandev" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;chanchandev" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/chanchandev" title="FaceBook → https:&#x2F;&#x2F;www.facebook.com&#x2F;chanchandev" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-facebook fa-fw"></i>FaceBook</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://chanchandev.com/side-project/raycast-transcribe/2026012801/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+      <meta itemprop="name" content="ChanChanDev">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="圈圈工程師">
+      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="我只想打嘴砲！如何用 Vibe Coding 解放雙手！打造語音轉文字小幫手 Voice Polish！ | 圈圈工程師">
+      <meta itemprop="description" content="用說話代替打字，讓 AI 幫你把話變成文字！">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          我只想打嘴砲！如何用 Vibe Coding 解放雙手！打造語音轉文字小幫手 Voice Polish！
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2026-01-28 21:00:00" itemprop="dateCreated datePublished" datetime="2026-01-28T21:00:00+08:00">2026-01-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2026-01-29 20:57:57" itemprop="dateModified" datetime="2026-01-29T20:57:57+08:00">2026-01-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/side-project/" itemprop="url" rel="index"><span itemprop="name">side-project</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">用說話代替打字，讓 AI 幫你把話變成文字！</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><img src="v3.png" alt="v3"></p>
+<span id="more"></span>
+
+<blockquote class="blockquote-center">
+<p><strong>如果你跟我一樣，覺得打字是全世界最累的事情，那你這篇一定要看到最後！🤝</strong></p>
+
+</blockquote>
+
+<h1 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h1><p>我是個懶人，能作就不要站、能動口就不動手（對，我就只是想打嘴砲 XD）</p>
+<p>身為工程師，上班總是會需要大量的用文字訊息溝通（例如：跟 PM 吵架 XD）或者是撰寫文件。</p>
+<p>即使我打字速度已經算蠻快的，一整天下來要花在打字上的時間，還是十分可觀 …（艸</p>
+<p>因為我主要的工作是以使用 Mac 為主，我試過 Mac 內建的語音輸入。</p>
+<p>光中文的語音就有點抓不太準，而且工程師的日常中，常常需要用到英文的專業術語，像是「請幫我 review 一下這個 PR」、「這個 issue 需要 hotfix」這種「中英文夾雜 a.k.a <del>晶晶體</del>」的句子。</p>
+<p>結果 Mac 的語音輸入不是把英文聽成火星文，就是整句話斷得亂七八糟，於是我還是只能自己慢慢用鍵盤打字了 Orz</p>
+<p>因此，我心裡一直期望著：</p>
+<br>
+
+<blockquote class="blockquote-center">
+<p><strong>如果有一個工具，可以讓我「用講的」，不管是中文還是英文，都能準確轉成文字，那該有多好！</strong></p>
+
+</blockquote>
+
+<br>
+
+<p>最近也有看到不少的，例如像 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://wisprflow.ai/">Wispr Flow</a> 或者是 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.typeless.com/?via=waki">typeless</a>。</p>
+<p>但身為工程師，自己又考量到，如果語音輸入有些太私密的話，就會跑到別人那邊去，感到有點資安的疑慮。</p>
+<p>剛好最近 Vibe Coding 很紅，我就想說用這個當主題自己來做一個玩玩看 XD</p>
+<h1 id="開發歷程"><a href="#開發歷程" class="headerlink" title="開發歷程"></a>開發歷程</h1><h2 id="第一版：Google-AI-Studio"><a href="#第一版：Google-AI-Studio" class="headerlink" title="第一版：Google AI Studio"></a>第一版：Google AI Studio</h2><p><img src="v1-ai-studio.png" alt="v1 ai studio"></p>
+<p>一開始我使用 <strong>Google AI Studio</strong> 快速生出了一個基本版本。</p>
+<p>想法簡單暴力：</p>
+<blockquote class="blockquote-center">
+<p><strong>把錄音丟給 Gemini API，讓它幫我轉成文字。</strong></p>
+
+</blockquote>
+
+<p>但做完之後發現一個大問題——如果要上架成純前端的網頁，<code>Gemini APIKey</code> 就會直接曝露在瀏覽器裡面！</p>
+<p>打美得司(翻譯年糕：不行阿) XDD</p>
+<br>
+
+<h2 id="第二版：前後端分離"><a href="#第二版：前後端分離" class="headerlink" title="第二版：前後端分離"></a>第二版：前後端分離</h2><p><img src="v2.png" alt="v2"></p>
+<p>考慮到安全性，我用 <strong><a target="_blank" rel="noopener external nofollow noreferrer" href="https://antigravity.google/">Antigravity IDE</a></strong> 把專案改成前後端分離的模式：</p>
+<ul>
+<li>前端主要負責錄音、讓我複製文字</li>
+<li>後端負責呼叫 Gemini API (Golang)</li>
+</ul>
+<p>這樣 Gemini API Key 就安全地藏在後端了！✅</p>
+<h3 id="關於一點點後端的-Murmur"><a href="#關於一點點後端的-Murmur" class="headerlink" title="關於一點點後端的 Murmur"></a>關於一點點後端的 Murmur</h3><p>一開始 Antigravity 幫我用 Golang 原生的 HTTP，但自己還是比較看習慣用 Gin 的方式，所以就請他調整成 Gin 的框架。</p>
+<p>另外原本的寫法的 Prompt 也散落在不同的檔案裡面，因此請它幫我用了一個 Prompt Builder 方便統一管理。但因為目前的 Prompt 沒有很多，還不需要拆成各自任務的 Prompt，到時候有需要再拆吧～</p>
+<p>由於考量到只有我自己使用，因此預設建立了一套簡易的使用者登入系統，以確保系統上線後僅有我個人能夠存取。</p>
+<p>順便讓 Antigravity 撰寫 api 與 unit test cases，驗證功能是否正確。</p>
+<p>阿，對了！這次是部署在 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://railway.com/dashboard">Railway</a> 這個平台（一個月要 5 美金）</p>
+<br>
+
+<p>就這樣用了一陣子 …</p>
+<p>本來想說可以過著幸福快樂的日子了。</p>
+<br>
+
+<p><strong>只是好景不長 ——</strong></p>
+<p>做完之後我發現 …</p>
+<p>每次要用這個功能，我還是得打開瀏覽器、開啟網頁、點錄音按鈕 … 還是覺得 … 很麻煩（<del>對！我就爛</del>）</p>
+<br>
+
+<h2 id="第三版：Raycast-Extension-🎉"><a href="#第三版：Raycast-Extension-🎉" class="headerlink" title="第三版：Raycast Extension 🎉"></a>第三版：Raycast Extension 🎉</h2><p><img src="v3.png" alt="v3"></p>
+<p>後來我想到，自己一直都是 <strong><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.raycast.com/">Raycast</a></strong> 的愛用者，如果能把這個功能直接整合到 Raycast 裡面，那不就超方便的嗎！</p>
+<p>於是我用 Antigravity 幫我把前面的程式碼改寫成 <strong>Raycast Extension</strong>，並且在 Raycast 的設定裡面填入 Gemini API Key。</p>
+<p>因為是自己的 Gemini APIKey 放在 Raycast 裡，而且是 code 是自己弄的（底下有程式碼開源 repo），所以不用擔心語音檔被上傳到不明伺服器啦（至少我信得過 Google XD）～</p>
+<br>
+
+<blockquote class="blockquote-center">
+<p><strong>現在只要在游標的情況下，按下 Raycast 快捷鍵開啟指令，就能開始講話。講完按 Enter，文字就直接出現在游標的位置！</strong></p>
+<p><strong>(((撒花 ~🎉 🎉 🎉 🎉 🎉 🎉)))</strong></p>
+
+</blockquote>
+
+
+
+
+<br>
+
+<h2 id="基本操作流程"><a href="#基本操作流程" class="headerlink" title="基本操作流程"></a>基本操作流程</h2><blockquote class="blockquote-center">
+<p>🎙️ → 🤖 → ✨ 說話、等待、文字自動出現 🎉</p>
+
+</blockquote>
+
+<table>
+<thead>
+<tr>
+<th align="center">步驟</th>
+<th align="left">說明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="left">在任何輸入框，按下 Raycast 快捷鍵</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="left">開始講話（中文、混搭都可以！）</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="left">按下 Enter 結束錄音</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="left">文字自動貼到游標位置 ✨</td>
+</tr>
+</tbody></table>
+<h2 id="指令介紹"><a href="#指令介紹" class="headerlink" title="指令介紹"></a>指令介紹</h2><blockquote>
+<p><strong>註：以下 demo 前面在計時的部分是我正在說話的時間 XD</strong></p>
+</blockquote>
+<h3 id="口語模式"><a href="#口語模式" class="headerlink" title="口語模式"></a>口語模式</h3><p>為盡可能貼近使用者（也就是我本人 XD），說話的方式，只是把我講話的一些贅字，或者是詞語等等的修飾掉。 </p>
+<blockquote>
+<p>我說的內容是：「要做完 data migration 之後，才能上 production。」</p>
+</blockquote>
+<p><img src="raycast-demo-1.gif" alt="raycast-demo-1"></p>
+<h3 id="書面模式"><a href="#書面模式" class="headerlink" title="書面模式"></a>書面模式</h3><p>請將我所說的話稍作整理，使其能應用於文件上（⬅︎ 這段就是用書面模式輸出的 XD）</p>
+<blockquote>
+<p>我說的內容是：「現在來測試一下語音模式，看能不能整理我現在所說的東西。」</p>
+</blockquote>
+<p><img src="format-input-1.gif" alt="format-input-1"></p>
+<h3 id="潤飾模式"><a href="#潤飾模式" class="headerlink" title="潤飾模式"></a>潤飾模式</h3><p>針對已經產生的文字，希望加以潤飾以下，就可以把這些文字圈選起來，用潤飾模式整理一下</p>
+<p><img src="polish-mode-1.gif" alt="polish-mode-1"></p>
+<h3 id="中文翻譯成口語英文模式"><a href="#中文翻譯成口語英文模式" class="headerlink" title="中文翻譯成口語英文模式"></a>中文翻譯成口語英文模式</h3><p>身為工程師，文件大部分都是用寫英文撰寫，所以就在這個基礎上，加上讓我可以直接講中文，便直接輸出成英文的功能。</p>
+<blockquote>
+<p>我說的內容是：「今天的任務是開發三支 API，並且要跟 client 端討論 API 串接相關的細節。」</p>
+</blockquote>
+<p><img src="eng-output.gif" alt="eng-output"></p>
+<h3 id="中文翻譯成書寫英文模式"><a href="#中文翻譯成書寫英文模式" class="headerlink" title="中文翻譯成書寫英文模式"></a>中文翻譯成書寫英文模式</h3><blockquote>
+<p>我說的內容是：「下班要去健身房，今天的訓練菜單是練背。」</p>
+</blockquote>
+<p><img src="eng-output-written.png" alt="eng-output-written"></p>
+<h2 id="Raycast-設定"><a href="#Raycast-設定" class="headerlink" title="Raycast 設定"></a>Raycast 設定</h2><p>在 Raycast 的 Extension 設定頁面，你可以設定：</p>
+<table>
+<thead>
+<tr>
+<th align="center">設定項目</th>
+<th align="left">說明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Gemini API Key</td>
+<td align="left">你的 Gemini API 金鑰</td>
+</tr>
+<tr>
+<td align="center">Gemini Model</td>
+<td align="left">Google 提供的可選 Gemini 模型（我目前測起來覺得 Gemini-2.0-Flash 算是比較 CP 的選項，等一下會再提到費用的部分）</td>
+</tr>
+<tr>
+<td align="center">Polish Mode</td>
+<td align="left">分成有口語跟書面模式</td>
+</tr>
+<tr>
+<td align="center">Custom Terms</td>
+<td align="left">因為我們家的狗叫嚕嚕米，然後我們也蠻常吃涮乃葉的，對於特殊名詞常常還是抓錯字，就可以在這邊設定</td>
+</tr>
+</tbody></table>
+<p><img src="raycast-settings.png" alt="raycast-settings"></p>
+<p>上述的 Raycast 使用情境都是在 Mac 上使用。</p>
+<br>
+
+<h2 id="iPhone-捷徑整合"><a href="#iPhone-捷徑整合" class="headerlink" title="iPhone 捷徑整合"></a>iPhone 捷徑整合</h2><p>在 iPhone 手機端的話，因為開發 iOS 的 App 成本太高了，所以只好用 iPhone 的捷徑打 api 來處理，就一樣可以用講的得到文字了。</p>
+<p><img src="iphone-shortcut.png" alt="iphone-shortcut"></p>
+<h1 id="關於費用"><a href="#關於費用" class="headerlink" title="關於費用"></a>關於費用</h1><p>因為會需要用 Gemini API，因此還是會有被計價的部分。</p>
+<p>不過自己這樣子試了下來，把它用在工作跟日常的生活上，平均大概是 <strong>1 塊到 3 塊台幣</strong> 之間。</p>
+<p>這樣一個月大概花 90 塊左右，不到 100 塊可以讓我省下這麼多打字的功夫跟時間，感覺是蠻划算的欸！</p>
+<p><img src="cost.png" alt="cost"></p>
+<h1 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h1><p>雖然這個工具看起來十分好用，但它依然有不少限制。首先：</p>
+<ol>
+<li>你需要有一台 Mac。</li>
+<li>剛好有在使用 Raycast。</li>
+<li>電腦要有網路，因為它會去打 Gemini 的 API。</li>
+<li>它平均 API 的時間可能要等待 2 到 3 秒，所以要有點耐性 XD</li>
+<li>你所在的場所剛好可以講話（在圖書館的自修室應該就不太可能了 XD）</li>
+<li>轉出來的文字大部分正確，不過有時候還是得要手動調整。</li>
+</ol>
+<h1 id="下載"><a href="#下載" class="headerlink" title="下載"></a>下載</h1><p>如果你剛好符合上述，又剛好有點興趣。歡迎來這邊玩玩看:</p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/Jessie75919/raycast-voice-polish">👉 點我前往 GitHub 下載 Raycast Voice Polish</a></p>
+<h1 id="後記"><a href="#後記" class="headerlink" title="後記"></a>後記</h1><p>從一月開始嘗試到現在，總算把這個小專案告一個段落了！😭😭😭</p>
+<p>本來只是抱持著「如果這樣會不會很有趣的心態」來玩玩看 <strong>Vibe Coding</strong> ，結果還真的能解決自己生活中的問題。</p>
+<p>從一開始的純前端版本，到前後端分離，再到最後的 Raycast Extension。不過都不是一開始就規劃好的，每一步都是邊做到一半才突然有：「還是可以這樣 … 」的念頭</p>
+<p>另外，這也讓我見識到 vibe coding 的效率。如果從頭到尾都要自己手 key 的話，我想可能兩三個月跑不掉吧，畢竟我沒有花很多時間在上面。</p>
+<p>不過 Vibe Coding 也不是閉著眼睛什麼都不用管。AI 生出來的 code 還是會有一些問題，像是 API 的參數格式跟最新的文件對不上、或者是錯誤處理沒有寫好，更多時候它會自己鬼打牆 QQ… 這時候就需要自己看一下，然後再跟 AI 說：「這邊報錯了，錯誤訊息是 xxx，幫我修一下」，幾個來回通常就能搞定。有時候則是看了就發現它的寫法不是很滿意，只好再請它用某個 Design Pattern 處理。</p>
+<p>我覺得 Vibe Coding 比較像是自己當 PM 許願功能，AI 當工程師。我負責決定許願的內容和驗收，AI 負責實作。但身為工程師有個好處就是，可以看得懂它寫了什麼，不然出問題的時候會不知道從哪裡開始 debug XDD</p>
+<p>雖然可以改的還是很多，但目前這樣就已經有滿足到自己日常工作大部分的需求了。</p>
+<p>而且也只有自己一個使用者，也用得很開心，好像也沒有必要特別上架到 Raycast 的官方 store 上（<del>對，我就懶</del>）</p>
+<p>有了它之後，現在每天工作的時候，只要按一下快捷鍵就能用講的輸入文字，真的是太爽了！！🎉</p>
+<br>
+
+
+<p>這篇文章紀錄成分居多，如果你居然有看到這裡的話，真的是十分感謝！！！</p>
+<p>若文章的內容有錯誤的地方，也歡迎隨時一起討論交流。😘</p>
+<p>最後感謝你的閱讀囉，我們下次見！Bye ～</p>
+<hr>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/side-project/" rel="tag"><i class="fa fa-tag"></i> side-project</a>
+              <a href="/tags/vibe-coding/" rel="tag"><i class="fa fa-tag"></i> vibe-coding</a>
+              <a href="/tags/raycast/" rel="tag"><i class="fa fa-tag"></i> raycast</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/design-pattern/Observer/observer-design-pattern/2118150761/" rel="next" title="觀察者設計模式（Observer Design Pattern）">
+                  觀察者設計模式（Observer Design Pattern） <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ChanChanDev</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"Jessie75919","repo":"Jessie75919.github.io","client_id":"5cc00853735d25bd22f3","client_secret":"42c46caebd1f91cd54924e2ad6c3dc6fec94f37e","admin_user":"Jessie75919","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-TW","body":null,"labels":"Gitalk","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"b7052f8fb85136373c791e7bd68c2865"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="mask-icon" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"chanchandev.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"onmobile":false},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null,"show_result":"flat"},"fold":{"enable":false,"height":500},"language":false,"highlight_theme":"normal"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"找到 ${hits} 個搜索結果（用時 ${time} 毫秒）","hits":"找到 ${hits} 個搜索結果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="Maximum Subarray - Leetcode 圖解演算法">
+<meta property="og:url" content="https://chanchandev.com/dsa/dsa-problem-maximum-subarray/4106250428/index.html">
+<meta property="og:site_name" content="圈圈工程師">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/dsa-problem-maximum-subarray/Cover.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/dsa-problem-maximum-subarray/subarray.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/dsa-problem-maximum-subarray/bruteforce1.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/dsa-problem-maximum-subarray/bruteforce2.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/dsa-problem-maximum-subarray/bruteforce3.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/dsa-problem-maximum-subarray/bruteforce4.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/dsa-problem-maximum-subarray/bruteforce5.png">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/dsa-problem-maximum-subarray/kadane.png">
+<meta property="article:published_time" content="2023-08-19T08:00:23.000Z">
+<meta property="article:modified_time" content="2026-01-28T12:40:17.312Z">
+<meta property="article:author" content="ChanChanDev">
+<meta property="article:tag" content="data-structure-algorithm">
+<meta property="article:tag" content="leetcode">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/dsa-problem-maximum-subarray/Cover.jpg">
+
+
+<link rel="canonical" href="https://chanchandev.com/dsa/dsa-problem-maximum-subarray/4106250428/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://chanchandev.com/dsa/dsa-problem-maximum-subarray/4106250428/","path":"dsa/dsa-problem-maximum-subarray/4106250428/","title":"Maximum Subarray - Leetcode 圖解演算法"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Maximum Subarray - Leetcode 圖解演算法 | 圈圈工程師</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R47Z93ZJTM"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-R47Z93ZJTM","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">圈圈工程師</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Change Change Developer</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-back-end"><a href="/categories/back-end/" rel="section"><i class="fas fa-rocket fa-fw"></i>Back-End</a></li><li class="menu-item menu-item-sharing"><a href="/categories/Sharing/" rel="section"><i class="fas fa-star fa-fw"></i>Sharing</a></li><li class="menu-item menu-item-reading"><a href="/categories/Reading/" rel="section"><i class="fas fa-book fa-fw"></i>Reading</a></li><li class="menu-item menu-item-design-pattern"><a href="/categories/design-pattern/" rel="section"><i class="fas fa-sitemap fa-fw"></i>Design-Pattern</a></li><li class="menu-item menu-item-javascript"><a href="/categories/js/" rel="section"><i class="fas fa-code fa-fw"></i>Javascript</a></li><li class="menu-item menu-item-分類"><a href="/categories/" rel="section"><i class="fas fa-folder-open fa-fw"></i>分類</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%8C%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">題目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E9%A1%8C%E9%9C%80%E7%9F%A5"><span class="nav-number">1.1.</span> <span class="nav-text">解題需知</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">暴力破解法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%96%E8%A7%A3%E9%81%8E%E7%A8%8B"><span class="nav-number">1.2.1.</span> <span class="nav-text">圖解過程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E4%BB%A5%E5%86%8D%E6%9B%B4%E5%A5%BD%E5%97%8E%EF%BC%9F"><span class="nav-number">1.3.</span> <span class="nav-text">可以再更好嗎？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E9%A1%8C%E9%87%8D%E9%BB%9E"><span class="nav-number">1.4.</span> <span class="nav-text">解題重點</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%96%E8%A7%A3%E9%81%8E%E7%A8%8B-1"><span class="nav-number">1.4.1.</span> <span class="nav-text">圖解過程</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ChanChanDev"
+      src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+  <p class="site-author-name" itemprop="name">ChanChanDev</p>
+  <div class="site-description" itemprop="description">圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">標籤</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/chanchandev" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;chanchandev" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/chanchandev" title="FaceBook → https:&#x2F;&#x2F;www.facebook.com&#x2F;chanchandev" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-facebook fa-fw"></i>FaceBook</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://chanchandev.com/dsa/dsa-problem-maximum-subarray/4106250428/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+      <meta itemprop="name" content="ChanChanDev">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="圈圈工程師">
+      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Maximum Subarray - Leetcode 圖解演算法 | 圈圈工程師">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Maximum Subarray - Leetcode 圖解演算法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2023-08-19 16:00:23" itemprop="dateCreated datePublished" datetime="2023-08-19T16:00:23+08:00">2023-08-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2026-01-28 20:40:17" itemprop="dateModified" datetime="2026-01-28T20:40:17+08:00">2026-01-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/dsa/" itemprop="url" rel="index"><span itemprop="name">dsa</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/dsa-problem-maximum-subarray/Cover.jpg"></p>
+<span id="more"></span>
+
+<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Leetcode 題目連結：<a target="_blank" rel="noopener external nofollow noreferrer" href="https://leetcode.com/problems/maximum-subarray/">https://leetcode.com/problems/maximum-subarray/</a></p>
+<details class="note info" open><summary><p>simple</p>
+</summary>
+<p>Given an integer array nums, find the <code>subarray</code> with the largest sum, and return its sum.</p>
+<p>撰寫一段程式碼，可以接受一個整數的陣列，找出最大總和的 <code>子陣列</code> ，並且回傳這個總和。</p>
+<p><strong>範例 1</strong><br>輸入: nums = <code>[-2,1,-6,2,1]</code><br>結果: 3<br>解釋: 可以從子陣列 <code>[2, 1]</code> 中可以得到最大的總和 3</p>
+
+</details>
+
+<h2 id="解題需知"><a href="#解題需知" class="headerlink" title="解題需知"></a>解題需知</h2><p>因爲這一題提到的是 <code>subarray</code> 子陣列，代表元素在陣列中必須要是相鄰的</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/dsa-problem-maximum-subarray/subarray.png" alt="Subarray"></p>
+<h2 id="暴力破解法"><a href="#暴力破解法" class="headerlink" title="暴力破解法"></a>暴力破解法</h2><ul>
+<li>新增一個存放最大總和的變數 <code>maxSum</code>，用第一個元素的值(<code>nums[0]</code>)作爲初始值</li>
+<li>依序把每個元素都加起來到 <code>curSum</code>（可以後面直接看圖解）</li>
+<li>每次加總後的值都跟最大總和比較一次<ul>
+<li>如果新的總和大於最大總和，那就更新最大總和</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxSubArray</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        maxSum = nums[<span class="number">0</span>] <span class="comment"># 新增一個存放最大總和的變數 `maxSum`，用第一個元素的值(`nums[0]`)作爲初始值</span></span><br><span class="line">            </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums)):</span><br><span class="line">            curSum = <span class="number">0</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i, <span class="built_in">len</span>(nums)):</span><br><span class="line">                curSum += nums[j] <span class="comment">#依序把每個元素都加起來到 `curSum`</span></span><br><span class="line">                maxSum = <span class="built_in">max</span>(maxSum, curSum) <span class="comment"># 每次加總後的值都跟最大總和比較一次, 如果新的總和大於最大總和，那就更新最大總和</span></span><br><span class="line">        <span class="keyword">return</span> maxSum</span><br></pre></td></tr></table></figure>
+
+<h3 id="圖解過程"><a href="#圖解過程" class="headerlink" title="圖解過程"></a>圖解過程</h3><p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/dsa-problem-maximum-subarray/bruteforce1.png" alt="i = 0"></p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/dsa-problem-maximum-subarray/bruteforce2.png" alt="i = 1"></p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/dsa-problem-maximum-subarray/bruteforce3.png" alt="i = 2"></p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/dsa-problem-maximum-subarray/bruteforce4.png" alt="i = 3"></p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/dsa-problem-maximum-subarray/bruteforce5.png" alt="i = 4"></p>
+<p>這個過程會需要 <code>i</code> 走過所有的元素，而每次的 <code>i</code> 也都會用 <code>j</code> 走過所有的元素，所以這個演算法的時間複雜度會是 <code>O(N^2)</code></p>
+<h2 id="可以再更好嗎？"><a href="#可以再更好嗎？" class="headerlink" title="可以再更好嗎？"></a>可以再更好嗎？</h2><p>藉由 Kadane’s Algorithm 的技巧，可以讓演算法在 <code>O(N)</code> 的時間複雜度完成</p>
+<details class="note info" open><summary><p>simple</p>
+</summary>
+<p>Kadane 算法掃描一次整個數列的所有數值，在每一個掃描點計算以該點數值為結束點的子數列的最大和（正數和）from <a target="_blank" rel="noopener external nofollow noreferrer" href="https://zh.wikipedia.org/wiki/%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E5%88%97%E9%97%AE%E9%A2%98">Wiki</a></p>
+
+</details>
+
+<h2 id="解題重點"><a href="#解題重點" class="headerlink" title="解題重點"></a>解題重點</h2><ul>
+<li>從第一個元素開始加總整個陣列的所有數值，計算到當前 index 的元素的子陣列的最大總和 <code>curSum</code></li>
+<li>在題目要求的最大總和的前提下，如果 <code>curSum</code> 變成負值，那再繼續加上去只會造成反效果，可以直接從 <code>0</code> 開始（如程式碼的 Line 7）</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxSubArray</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        maxSum = nums[<span class="number">0</span>]</span><br><span class="line">        curSum = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> n <span class="keyword">in</span> nums:</span><br><span class="line">            curSum = <span class="built_in">max</span>(curSum, <span class="number">0</span>)</span><br><span class="line">            curSum += n</span><br><span class="line">            maxSum = <span class="built_in">max</span>(maxSum, curSum)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> maxSum</span><br></pre></td></tr></table></figure>
+<h3 id="圖解過程-1"><a href="#圖解過程-1" class="headerlink" title="圖解過程"></a>圖解過程</h3><p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/dsa-problem-maximum-subarray/kadane.png" alt="kadane algorithm"></p>
+<p>以上就是所有的內容，希望圖解演算法過程有幫助到你，感謝你的收看 🙂</p>
+<br>
+<br>
+
+
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/data-structure-algorithm/" rel="tag"><i class="fa fa-tag"></i> data-structure-algorithm</a>
+              <a href="/tags/leetcode/" rel="tag"><i class="fa fa-tag"></i> leetcode</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/design-pattern/State/state-design-pattern/1543189824/" rel="prev" title="State 設計模式">
+                  <i class="fa fa-angle-left"></i> State 設計模式
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Reading/atomic-habit-to-exercise-consistently/3955946595/" rel="next" title="如何用最小的努力，養成運動的好習慣？">
+                  如何用最小的努力，養成運動的好習慣？ <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ChanChanDev</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"Jessie75919","repo":"Jessie75919.github.io","client_id":"5cc00853735d25bd22f3","client_secret":"42c46caebd1f91cd54924e2ad6c3dc6fec94f37e","admin_user":"Jessie75919","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-TW","body":null,"labels":"Gitalk","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"4b4bfb2b08ac1d5e86c140e497130434"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

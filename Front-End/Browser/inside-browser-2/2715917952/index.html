@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="mask-icon" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"chanchandev.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"onmobile":false},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null,"show_result":"flat"},"fold":{"enable":false,"height":500},"language":false,"highlight_theme":"normal"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"找到 ${hits} 個搜索結果（用時 ${time} 毫秒）","hits":"找到 ${hits} 個搜索結果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="學習了瀏覽器的 Process 與 Thread 之後，接著一起來看看一段網址或搜尋關鍵字被輸入網址列送出之後，在瀏覽器內部會發生什麼有趣的事情吧！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="瀏覽器學習筆記 Part 2 - 當網址被輸入後，發生了什麼事呢？">
+<meta property="og:url" content="https://chanchandev.com/Front-End/Browser/inside-browser-2/2715917952/index.html">
+<meta property="og:site_name" content="圈圈工程師">
+<meta property="og:description" content="學習了瀏覽器的 Process 與 Thread 之後，接著一起來看看一段網址或搜尋關鍵字被輸入網址列送出之後，在瀏覽器內部會發生什麼有趣的事情吧！">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-2/Cover.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-1/Process_Thread.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-2/UI-Thread.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-2/Network-Thread.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-2/Main-Thread.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-2/judgement-of-ui-thread.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-2/navigate-to-stie-1.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-2/redirect-301.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-2/content-type.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-2/check-doc.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-2/find-a-renderer-process.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-2/ipc-to-renderer-process.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-2/stop-loading-icon.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-2/beforeunload-check.jpg">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-2/use-new-rendered-process.jpg">
+<meta property="article:published_time" content="2021-05-16T10:30:08.000Z">
+<meta property="article:modified_time" content="2026-01-28T12:40:17.307Z">
+<meta property="article:author" content="ChanChanDev">
+<meta property="article:tag" content="Front-End">
+<meta property="article:tag" content="Browser">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-2/Cover.jpg">
+
+
+<link rel="canonical" href="https://chanchandev.com/Front-End/Browser/inside-browser-2/2715917952/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://chanchandev.com/Front-End/Browser/inside-browser-2/2715917952/","path":"Front-End/Browser/inside-browser-2/2715917952/","title":"瀏覽器學習筆記 Part 2 - 當網址被輸入後，發生了什麼事呢？"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>瀏覽器學習筆記 Part 2 - 當網址被輸入後，發生了什麼事呢？ | 圈圈工程師</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R47Z93ZJTM"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-R47Z93ZJTM","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">圈圈工程師</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Change Change Developer</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-back-end"><a href="/categories/back-end/" rel="section"><i class="fas fa-rocket fa-fw"></i>Back-End</a></li><li class="menu-item menu-item-sharing"><a href="/categories/Sharing/" rel="section"><i class="fas fa-star fa-fw"></i>Sharing</a></li><li class="menu-item menu-item-reading"><a href="/categories/Reading/" rel="section"><i class="fas fa-book fa-fw"></i>Reading</a></li><li class="menu-item menu-item-design-pattern"><a href="/categories/design-pattern/" rel="section"><i class="fas fa-sitemap fa-fw"></i>Design-Pattern</a></li><li class="menu-item menu-item-javascript"><a href="/categories/js/" rel="section"><i class="fas fa-code fa-fw"></i>Javascript</a></li><li class="menu-item menu-item-分類"><a href="/categories/" rel="section"><i class="fas fa-folder-open fa-fw"></i>分類</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E6%83%85%E6%8F%90%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">前情提要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Navigation-%E6%98%AF%E4%BB%80%E9%BA%BC%E5%91%A2%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">Navigation 是什麼呢？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%99%BB%E5%A0%B4%E8%A7%92%E8%89%B2%E4%BB%8B%E7%B4%B9"><span class="nav-number">3.</span> <span class="nav-text">登場角色介紹</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Browser-Process"><span class="nav-number">3.1.</span> <span class="nav-text">Browser Process</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Renderer-Process"><span class="nav-number">3.2.</span> <span class="nav-text">Renderer Process</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B0%A1%E5%96%AE%E7%9A%84-Navigation-%E9%81%8E%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">簡單的 Navigation 過程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%95%E7%90%86%E7%B6%B2%E5%9D%80%E8%BC%B8%E5%85%A5%E6%A1%86%E8%BC%B8%E5%85%A5%E7%9A%84%E5%85%A7%E5%AE%B9"><span class="nav-number">4.1.</span> <span class="nav-text">處理網址輸入框輸入的內容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%95%B6%E6%88%91%E5%80%91%E6%8C%89%E4%B8%8B-Enter"><span class="nav-number">4.2.</span> <span class="nav-text">當我們按下 Enter</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Redirect-301"><span class="nav-number">4.2.1.</span> <span class="nav-text">Redirect 301</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%80%E5%8F%96%E5%9B%9E%E6%87%89%E8%B3%87%E6%96%99"><span class="nav-number">4.3.</span> <span class="nav-text">讀取回應資料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E6%80%A7%E7%9B%B8%E9%97%9C%E7%9A%84%E6%AA%A2%E6%9F%A5"><span class="nav-number">4.4.</span> <span class="nav-text">安全性相關的檢查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Renderer-Process-%E7%99%BB%E5%A0%B4"><span class="nav-number">4.5.</span> <span class="nav-text">Renderer Process 登場</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%84%AA%E5%8C%96%E5%81%9A%E6%B3%95"><span class="nav-number">4.5.1.</span> <span class="nav-text">優化做法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%B7%E8%A1%8C-Navigation"><span class="nav-number">5.</span> <span class="nav-text">執行 Navigation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E8%AE%80%E5%8F%96%E5%AE%8C%E6%88%90"><span class="nav-number">6.</span> <span class="nav-text">初始化讀取完成</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9B%A2%E9%96%8B%E9%A0%81%E9%9D%A2%E4%B9%8B%E5%89%8D%E7%9A%84%E7%A2%BA%E8%AA%8D"><span class="nav-number">7.</span> <span class="nav-text">離開頁面之前的確認</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B0%E7%9A%84-Renderer-Process"><span class="nav-number">8.</span> <span class="nav-text">使用新的 Renderer Process</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B5%90%E8%AB%96-Wrap-Up"><span class="nav-number">9.</span> <span class="nav-text">結論 Wrap-Up</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%83%E8%80%83"><span class="nav-number">10.</span> <span class="nav-text">參考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ChanChanDev"
+      src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+  <p class="site-author-name" itemprop="name">ChanChanDev</p>
+  <div class="site-description" itemprop="description">圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">標籤</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/chanchandev" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;chanchandev" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/chanchandev" title="FaceBook → https:&#x2F;&#x2F;www.facebook.com&#x2F;chanchandev" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-facebook fa-fw"></i>FaceBook</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://chanchandev.com/Front-End/Browser/inside-browser-2/2715917952/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+      <meta itemprop="name" content="ChanChanDev">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="圈圈工程師">
+      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="瀏覽器學習筆記 Part 2 - 當網址被輸入後，發生了什麼事呢？ | 圈圈工程師">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          瀏覽器學習筆記 Part 2 - 當網址被輸入後，發生了什麼事呢？
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2021-05-16 18:30:08" itemprop="dateCreated datePublished" datetime="2021-05-16T18:30:08+08:00">2021-05-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2026-01-28 20:40:17" itemprop="dateModified" datetime="2026-01-28T20:40:17+08:00">2026-01-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Front-End/" itemprop="url" rel="index"><span itemprop="name">Front-End</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Front-End/Browser/" itemprop="url" rel="index"><span itemprop="name">Browser</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-2/Cover.jpg"><br>學習了瀏覽器的 Process 與 Thread 之後，接著一起來看看一段網址或搜尋關鍵字被輸入網址列送出之後，在瀏覽器內部會發生什麼有趣的事情吧！</p>
+<span id="more"></span>
+
+<br>
+<details class="note success" open><summary><p>simple</p>
+</summary>
+<p>HIHI～😍  如果你是第一次來的話，『Chan-Chan-Dev』是一個專門用簡單的圖文與故事講解網路程式技術的網站。<br>若你也喜歡用這種方式學習的話，歡迎加入 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.facebook.com/chanchandev">Chan-Chan-Dev Facebook</a> 的粉絲團，在發佈的時候就有比較多機會收到通知喔！😍</p>
+
+</details>
+
+<details class="note info" open><summary><p>simple</p>
+</summary>
+<p>這篇的所有內容是來自於原文 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://developers.google.com/web/updates/2018/09/inside-browser-part2">《Inside look at modern web browser (part 2)》</a> 的第二篇。其實已經講的很淺顯易懂而且又有超級可愛的插圖，私心認爲已經很難有比它寫的更好的文章了 ，因此這篇文章更像是自己學習的筆記。</p>
+<p>另外也因爲它是英文的版本，希望藉由自己的筆記分享可以在讓更多人學習到有幫助的資訊喔！😍 </p>
+
+</details>
+
+<h1 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h1><p>既上一篇 <a href="/Front-End/Browser/inside-browser-1/1810002848/" title="瀏覽器學習筆記 Part 1 - 圖解學習 Process 與 Thread！">瀏覽器學習筆記 Part 1 - 圖解學習 Process 與 Thread！</a> 聊過每天所使用的瀏覽器是因爲一群默默地無名的 <code>執行緒 (Thread)</code> 與 <code>行程 (Process)</code> 相戶合作的結果。而其中扮演類似 CEO 角色負責統合調度的則是 <code>Browswer Process</code>。</p>
+<p>還記得上次討論 <code>執行緒 (Thread)</code> 與 <code>行程 (Process)</code> 的關係嗎？如果忘記了也沒問題，用底下的圖片來回憶一下吧 😀<br><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-1/Process_Thread.jpg" alt="執行緒之間是彼此獨立（隔離）的"></p>
+<h1 id="Navigation-是什麼呢？"><a href="#Navigation-是什麼呢？" class="headerlink" title="Navigation 是什麼呢？"></a>Navigation 是什麼呢？</h1><p>當我們在對一個網站發起請求，而瀏覽器接收資料準備顯示這個網頁內容的過程，就叫做 <code>Navigation</code> 囉 😊</p>
+<h1 id="登場角色介紹"><a href="#登場角色介紹" class="headerlink" title="登場角色介紹"></a>登場角色介紹</h1><p>在本篇登場的角色，分別是都是屬於在 <code>Browser Process</code> 內部的 <code>UI Thread</code> 與 <code>Network Thread</code>，與 <code>Renderer Process</code> 的 <code>Main Thread</code>。</p>
+<h2 id="Browser-Process"><a href="#Browser-Process" class="headerlink" title="Browser Process"></a>Browser Process</h2><table>
+<thead>
+<tr>
+<th align="center">UI Thread</th>
+<th align="center">Network Thread</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">瀏覽器界面上的按鈕或者是網址輸入框等等的元件都是我負責的喔！</td>
+<td align="center">我負責網路相關的任務以其接受由網路回傳的資料內容喔！</td>
+</tr>
+<tr>
+<td align="center"><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-2/UI-Thread.jpg"></td>
+<td align="center"><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-2/Network-Thread.jpg"></td>
+</tr>
+</tbody></table>
+<h2 id="Renderer-Process"><a href="#Renderer-Process" class="headerlink" title="Renderer Process"></a>Renderer Process</h2><table>
+<thead>
+<tr>
+<th align="center">Main Thread</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Main Thread 的職責會在下一章節聊到喔 😀</td>
+</tr>
+<tr>
+<td align="center"><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-2/Main-Thread.jpg"></td>
+</tr>
+</tbody></table>
+<p>由上述的分工得知，當我們不管在瀏覽器的網址列輸入什麼內容的時候，第一時間會被 <code>UI Thread</code> 接收處理的喔！</p>
+<h1 id="簡單的-Navigation-過程"><a href="#簡單的-Navigation-過程" class="headerlink" title="簡單的 Navigation 過程"></a>簡單的 Navigation 過程</h1><h2 id="處理網址輸入框輸入的內容"><a href="#處理網址輸入框輸入的內容" class="headerlink" title="處理網址輸入框輸入的內容"></a>處理網址輸入框輸入的內容</h2><p>因爲以 Chrome 來說，網址輸入框其實扮演着兩個角色，分別是：</p>
+<ul>
+<li>網址列</li>
+<li>搜尋列</li>
+</ul>
+<p>因此每當有內容輸入到網址輸入框時，接收到的 <code>UI Thread</code> 都要先判斷一下這個內容究竟是個 <code>網址</code> 還是需要<code>被搜尋的關鍵字</code> 呢？如果是<code>搜尋關鍵字</code>就要丟給搜尋引擎，反之如果是個<code>網址</code> 則需發請求到指定輸入的網址囉。</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-2/judgement-of-ui-thread.jpg" alt="UI Thread 判斷是否爲網址內容或搜尋關鍵字"></p>
+<h2 id="當我們按下-Enter"><a href="#當我們按下-Enter" class="headerlink" title="當我們按下 Enter"></a>當我們按下 Enter</h2><p>當輸入框輸入<code>網址</code>並且按下 Enter 鍵的時候，<code>UI Thread</code> 就會呼叫 <code>Network Thread</code>，請它去取得網站的內容。這時候分頁上會顯示讀取的動畫，而 <code>Network Thread</code> 會爲這個請求，透過適合的協定像是 DNS Lookup 並建立起 TLS 連線。</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-2/navigate-to-stie-1.jpg" alt="UI Thread 呼叫 Network Thread 去取得網站的內容"></p>
+<details class="note success" open><summary><p>simple</p>
+</summary>
+<h3 id="Redirect-301"><a href="#Redirect-301" class="headerlink" title="Redirect 301"></a>Redirect 301</h3><p>如果在請求送出後，<code>Network Thread</code> 接收到對方的伺服器傳來的 redirect header 像是 <code>301</code> 的 HTTP 狀態回應，<code>Network Thread</code> 會去跟 <code>UI Thread</code> 說：對方伺服器請你改用另外一個網址。因此 <code>UI Thread</code> 會在請 <code>Network Thread</code> 去對新的網址發出請求囉。</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-2/redirect-301.jpg"></p>
+
+</details>
+
+
+
+<h2 id="讀取回應資料"><a href="#讀取回應資料" class="headerlink" title="讀取回應資料"></a>讀取回應資料</h2><p>我們在不同網址發起的請求都不太一樣，有的是要求一個 HTML 網頁檔案、有的是想要一個 Json 資料檔，更多時候是想要下載檔案，而檔案的種類又可以分 zip、pdf、圖檔、音樂檔等等等。對於每一個類型的檔案的處理方式都不一樣，於是對於發起的請求的瀏覽器來說，<code>判斷回傳的資料是什麼格式就顯得極爲重要囉</code>。</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-2/content-type.jpg" alt="回應資料所帶的不同 Content-Type"></p>
+<p>因此當請求發出之後，對方的網站伺服器有了回應傳回來時，<code>Network Thread</code> 首先會先看看 <code>Content-Type</code> 的 header 確認<code>回傳的資料類型</code>，至於不同的資料類型在不同的瀏覽器處理方式都有所不同，也可以參考這邊附上 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://source.chromium.org/chromium/chromium/src/+/master:net/base/mime_sniffer.cc;l=5">Source code 的 Comment</a> 看看 Chrome 是怎麼處理這些檔案類型的對應動作吧 😆</p>
+<h2 id="安全性相關的檢查"><a href="#安全性相關的檢查" class="headerlink" title="安全性相關的檢查"></a>安全性相關的檢查</h2><p>在這個階段也會針對瀏覽時的安全性（<a target="_blank" rel="noopener external nofollow noreferrer" href="https://safebrowsing.google.com/">SafeBrowsing</a>）做檢查，若是網域或者是回傳的資料與已知的惡意網站有所吻合的話，那麼 <code>Network Thread</code> 就會馬上跳出一個警告的頁面 💪。</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-2/check-doc.jpg" alt="針對網站安全性的檢查"></p>
+<p>此外，也會針對 <code>跨域讀取阻擋</code>（<a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.chromium.org/Home/chromium-security/corb-for-developers">Cross Origin Read Blocking</a>）的檢查，確保敏感的跨域資料不會被進到 <code>Renderer Process</code> 😀</p>
+<h2 id="Renderer-Process-登場"><a href="#Renderer-Process-登場" class="headerlink" title="Renderer Process 登場"></a>Renderer Process 登場</h2><p>一旦上述的檢查確認完成，<code>Network Thread</code> 也確認收到請求的資料後，就會回報 <code>UI Thread</code> 這些資料已經準備好了！於是 <code>UI Thread</code>會找 <code>Renderer Process</code> 協助渲染出網頁的內容。</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-2/find-a-renderer-process.jpg" alt="找個 Renderer Process"></p>
+<details class="note success" open><summary><p>simple</p>
+</summary>
+<h3 id="優化做法"><a href="#優化做法" class="headerlink" title="優化做法"></a>優化做法</h3><p>因爲網路請求需要花一段時間才能取得回應，因此有一個加速這個流程的優化方法。</p>
+<p>當 <code>UI Thread</code> 送出網路請求給 <code>Network Thread</code> 時，<code>UI Thread</code> 就偷跑先開始找 <code>Renderer Process</code>，因此這兩件事是同時進行的。當一切順利時，當回應資料回來的時候，<code>Renderer Process</code> 也準備好可以接手資料準備囉。</p>
+
+</details>
+
+<h1 id="執行-Navigation"><a href="#執行-Navigation" class="headerlink" title="執行 Navigation"></a>執行 Navigation</h1><p>當回應的<code>資料</code>與 <code>Renderer Process</code>都就位時，<code>Browser Process</code> 就會透過 <code>IPC</code> 的方式通知 <code>Renderer Process</code> 執行 Navigation，通常會一起帶著資料流 (Data Stream)，因此 <code>Renderer Process</code> 保持接收 HTML 資料的狀態。</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-2/ipc-to-renderer-process.jpg" alt="Browser Process 就會透過 IPC 的方式通知 Renderer Process 執行 Navigation"></p>
+<p>一旦 <code>Browser Process</code> 收到 <code>Renderer Process</code> 開始執行的確認訊息時， Navigation 就算告一段落，也將進入<code>開始讀取文件</code>的階段。</p>
+<p>在這個時間點，網址列上會更新爲安全上鎖的狀態，並且顯示新頁面的網站資訊。分頁的 Session History 也將被更新，因此才能在上一頁、下一頁按鈕被點擊的時候回到當時的頁面。此外爲了讓分頁被關閉的時候還能回復使用，Session History 是存在硬碟裡的喔。</p>
+<h1 id="初始化讀取完成"><a href="#初始化讀取完成" class="headerlink" title="初始化讀取完成"></a>初始化讀取完成</h1><p>當 Navigation 執行完成後，<code>Renderer Process</code> 開始著手讀取這些資源與渲染頁面。至於這邊發生的細節則會在下一篇的時候聊到喔。</p>
+<p>當 <code>Renderer Process</code> 完成渲染，他會送 <code>IPC</code> 通知給 <code>Browser Process</code>，這個時候 <code>Browser Process</code> 內的 <code>UI Thread</code> 就會停止在分頁上的讀取動畫。雖然說是完成渲染，但是因爲 Javascript 可能依然會讀取其他額外的資源，並且在這個時間點之後渲染新的內容喔。</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-2/stop-loading-icon.jpg" alt="UI Thread 停止在分頁上的讀取動畫"></p>
+<p>簡單的 Navigation 到這裏就完成囉！😍</p>
+<h1 id="離開頁面之前的確認"><a href="#離開頁面之前的確認" class="headerlink" title="離開頁面之前的確認"></a>離開頁面之前的確認</h1><p>但是如果我們又輸入不同的網址到網址列會發生什麼事情呢？ 😆<br>基本上還是會走上述的流程到不同的網站，只是在離開目前的網站之前，會先檢查一下目前的網站是否有使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeunload_event">beforeunload</a> 的事件。</p>
+<p><code>beforeunload</code> 可以用來製作『是否要離開網站』的提示訊息，當使用者試圖離開或關閉分頁時跳出。因爲任何在分頁內的所有東西都歸 <code>Renderer Process</code> 處理，因此 <code>Browser Process</code> 接到新的 Navigation 請求的時候，必須要確認目前的 <code>Renderer Process</code> 是否有針對 <code>beforeunload</code> 的設定囉。</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-2/beforeunload-check.jpg" alt="Browser Process 與目前的 Renderer Process 確認是否有針對 beforeunload 的設定"></p>
+<p>另外若 Navigation 是由 Javascript 發起的，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="property">location</span> = <span class="string">&quot;https://chan-chan-dev.com&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>確認是否有 <code>beforeunload</code> 的事件的任務就會變成 <code>Renderer Process</code> 的責任囉。然後走著跟 <code>Browser Process</code> 一樣的流程發起 Navigation。</p>
+<h1 id="使用新的-Renderer-Process"><a href="#使用新的-Renderer-Process" class="headerlink" title="使用新的 Renderer Process"></a>使用新的 Renderer Process</h1><p>當有新的 Navigation 到不同的網站時，會產生另一個<code>新的 Renderer Process</code> 來處理新的 Navigation，而目前的 <code>Renderer Process</code> 則繼續存在處理像是 <code>unload</code> 這類型的事件。</p>
+<p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/inside-browser-2/use-new-rendered-process.jpg" alt="當有新的 Navigation 到不同的網站時，會產生另一個新的 Renderer Process 來處理新的 Navigation"></p>
+<h1 id="結論-Wrap-Up"><a href="#結論-Wrap-Up" class="headerlink" title="結論 Wrap-Up"></a>結論 Wrap-Up</h1><details class="note info" open><summary><p>simple</p>
+</summary>
+<p>原文中有一段<a target="_blank" rel="noopener external nofollow noreferrer" href="https://developers.google.com/web/updates/2018/09/inside-browser-part2#in_case_of_service_worker">討論 Service Worker 的部分</a>，自己覺得有點 Service Worker 的部分自己尚未完全理解，因此沒有加入在本篇之中，若有興趣的大大們請移駕到<a target="_blank" rel="noopener external nofollow noreferrer" href="https://developers.google.com/web/updates/2018/09/inside-browser-part2#in_case_of_service_worker">原文</a>收看喔 😆</p>
+
+</details>
+
+<p>在這篇筆記中，才知道原來我們一個簡單地『把網址 Key 進去網址列輸入，並且按下 Enter 到顯示網頁內容』的背後，其實是經過 <code>Browser Process</code> 內部的 <code>UI Thread</code> 判斷輸入內容是否爲網址，若爲網址則請 <code>Network Thread</code> 發起請求取回資料，在中間 <code>Network Thread</code> 又會做不同的檢查到判斷回應的內容類型等等，等到資料回來了才能發起一個 <code>Renderer Process</code>（也可以如同上面所提到的優化方式同時進行），進而請 <code>Renderer Process</code> 渲染出 HTML 的內容。中間還有包含其他手續例如：更新分頁上的讀取動畫等等。</p>
+<p>看似簡單的小功能，居然需要這麼多環節的任務串接起來，才能達到我們平常以爲『瀏覽器就該這樣執行的功能』，也令我著實大開眼界 😮</p>
+<p>在下一篇當中也要跟大家聊聊第三篇 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://developers.google.com/web/updates/2018/09/inside-browser-part3">《Inside look at modern web browser - Part3》</a>。剛剛上述都用『請 <code>Renderer Process</code> 協助渲染 HTML 頁面內容』這句話簡單地帶過，但是實際上在 <code>Renderer Process</code> 會是怎麼運作的呢？有興趣的大大們可以搶先收看原文喔！😀  </p>
+<hr>
+<p>最後感謝你願意看到這裏，希望這篇文章對你有所幫助。</p>
+<p>若你想到身邊有需要這篇文章內容的朋友，也請你幫他一個忙把這篇文章分享給他 😍</p>
+<p>若文章的內容有錯誤的地方，也歡迎隨時一起討論交流。😘 </p>
+<p>最後感謝你的閱讀囉，我們下次見！Bye ～ 🚀</p>
+<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><ul>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://developers.google.com/web/updates/2018/09/inside-browser-part2">Inside look at modern web browser - Part2</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Front-End/" rel="tag"><i class="fa fa-tag"></i> Front-End</a>
+              <a href="/tags/Browser/" rel="tag"><i class="fa fa-tag"></i> Browser</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/note/Github-Action/website-upgrade/4114456147/" rel="prev" title="ChanChanDev 升級記錄！一起用 Github Actions 潮一下吧！">
+                  <i class="fa fa-angle-left"></i> ChanChanDev 升級記錄！一起用 Github Actions 潮一下吧！
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Front-End/Browser/inside-browser-1/1810002848/" rel="next" title="瀏覽器學習筆記 Part 1 - 圖解學習 Process 與 Thread！">
+                  瀏覽器學習筆記 Part 1 - 圖解學習 Process 與 Thread！ <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ChanChanDev</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"Jessie75919","repo":"Jessie75919.github.io","client_id":"5cc00853735d25bd22f3","client_secret":"42c46caebd1f91cd54924e2ad6c3dc6fec94f37e","admin_user":"Jessie75919","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-TW","body":null,"labels":"Gitalk","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"677e866161c718c69db474673327f65b"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

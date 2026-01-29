@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="mask-icon" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"chanchandev.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"onmobile":false},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null,"show_result":"flat"},"fold":{"enable":false,"height":500},"language":false,"highlight_theme":"normal"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"找到 ${hits} 個搜索結果（用時 ${time} 毫秒）","hits":"找到 ${hits} 個搜索結果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="先來說說我們想要開發一個應用程式的話，那這個應用程式要用來幹嘛？所以就要討論應用程式的目的，而這邊的應用程式我先將它的範圍歸納在網頁應用程式的範疇內。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="後端語言學習地圖">
+<meta property="og:url" content="https://chanchandev.com/back-end/backend-map/319603614/index.html">
+<meta property="og:site_name" content="圈圈工程師">
+<meta property="og:description" content="先來說說我們想要開發一個應用程式的話，那這個應用程式要用來幹嘛？所以就要討論應用程式的目的，而這邊的應用程式我先將它的範圍歸納在網頁應用程式的範疇內。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://miro.medium.com/max/2000/0*TaPqs1sAhigjBFHf">
+<meta property="article:published_time" content="2020-04-03T18:49:26.000Z">
+<meta property="article:modified_time" content="2026-01-28T12:40:17.306Z">
+<meta property="article:author" content="ChanChanDev">
+<meta property="article:tag" content="Backend">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://miro.medium.com/max/2000/0*TaPqs1sAhigjBFHf">
+
+
+<link rel="canonical" href="https://chanchandev.com/back-end/backend-map/319603614/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://chanchandev.com/back-end/backend-map/319603614/","path":"back-end/backend-map/319603614/","title":"後端語言學習地圖"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>後端語言學習地圖 | 圈圈工程師</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R47Z93ZJTM"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-R47Z93ZJTM","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">圈圈工程師</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Change Change Developer</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-back-end"><a href="/categories/back-end/" rel="section"><i class="fas fa-rocket fa-fw"></i>Back-End</a></li><li class="menu-item menu-item-sharing"><a href="/categories/Sharing/" rel="section"><i class="fas fa-star fa-fw"></i>Sharing</a></li><li class="menu-item menu-item-reading"><a href="/categories/Reading/" rel="section"><i class="fas fa-book fa-fw"></i>Reading</a></li><li class="menu-item menu-item-design-pattern"><a href="/categories/design-pattern/" rel="section"><i class="fas fa-sitemap fa-fw"></i>Design-Pattern</a></li><li class="menu-item menu-item-javascript"><a href="/categories/js/" rel="section"><i class="fas fa-code fa-fw"></i>Javascript</a></li><li class="menu-item menu-item-分類"><a href="/categories/" rel="section"><i class="fas fa-folder-open fa-fw"></i>分類</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ChanChanDev"
+      src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+  <p class="site-author-name" itemprop="name">ChanChanDev</p>
+  <div class="site-description" itemprop="description">圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">標籤</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/chanchandev" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;chanchandev" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/chanchandev" title="FaceBook → https:&#x2F;&#x2F;www.facebook.com&#x2F;chanchandev" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-facebook fa-fw"></i>FaceBook</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://chanchandev.com/back-end/backend-map/319603614/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+      <meta itemprop="name" content="ChanChanDev">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="圈圈工程師">
+      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="後端語言學習地圖 | 圈圈工程師">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          後端語言學習地圖
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2020-04-04 02:49:26" itemprop="dateCreated datePublished" datetime="2020-04-04T02:49:26+08:00">2020-04-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2026-01-28 20:40:17" itemprop="dateModified" datetime="2026-01-28T20:40:17+08:00">2026-01-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/back-end/" itemprop="url" rel="index"><span itemprop="name">Backend</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><img src="https://miro.medium.com/max/2000/0*TaPqs1sAhigjBFHf"></p>
+<p>先來說說我們想要開發一個應用程式的話，那這個應用程式要用來幹嘛？所以就要討論應用程式的目的，而這邊的應用程式我先將它的範圍歸納在網頁應用程式的範疇內。</p>
+<span id="more"></span>
+
+<p>網頁相關應用程式的目的： 將資料儲存在某一個地方方便日後的存取，並且做有效率的應用進而產生某種價值。 其中的資料可能來源有：</p>
+<ul>
+<li>使用者輸入：帳號、密碼、Email</li>
+<li>公開的資料：天氣氣溫、政府網站公開資料</li>
+<li>應用程式提供者所整理產生的資料：</li>
+</ul>
+<p>有效率的資料應用來自於領域知識的相關處理、資料相關邏輯處理等等，我統一把這些行爲列爲『處理資料』。 例如說：如果你傳訊息給我：『Hello，要不要出來吃飯？』，對於應用程式的角度來說大概會這樣子處理：</p>
+<ul>
+<li>使用者 A（你）輸入一段資料『Hello，要不要出來吃飯？』</li>
+<li>應用程式把這一份資料存在某一個地方</li>
+<li>並且也傳送給使用者 B（我）</li>
+</ul>
+<p>所以從上述角度應用程式層面概括地化分爲：『使用者』、『資料』、『儲存資料』、『處理資料』 所以當在學習一個語言的時候除了某個語言的特有的特性，更多是在學習：</p>
+<ul>
+<li>定義資料<ul>
+<li>變數 / 表達式</li>
+<li>資料型別</li>
+<li>資料結構儲存</li>
+</ul>
+</li>
+<li>處理資料的學習範圍：<ul>
+<li>接收使用者的輸入</li>
+<li>流程判斷</li>
+<li>函數運用</li>
+<li>迴圈</li>
+<li>文字操作</li>
+</ul>
+</li>
+<li>儲存資料的學習範圍：<ul>
+<li>檔案處理</li>
+<li>資料庫操作</li>
+</ul>
+</li>
+</ul>
+<p>當然，你也可能聽過『物件導向語言』等等的關鍵字，但是沒有『物件導向』就無法寫程式了嗎？ 物件導向其實只是一種寫程式的方法論，能讓開發者更有效率、更好維護程式碼或者是寫出更有架構化規模的程式碼，但是一定要就要看你學習的語言是否一定需要物件導向才能寫下去了。 如果這個語言並非物件導向的情況化並不是一定要物件導向才能撰寫程式，例如 PHP 就不是物件導向的程式碼，你可以完全不用管物件導向是什麼也可以寫，只是有用物件導向的寫法的話可以寫出有品質的程式碼，JAVA 就是一個必須要有物件導向知識才能撰寫的程式，也就是為什麼新手一開始學習 JAVA 會很辛苦的原因是因爲，除了上述要學習的內容以外，還需要具備物件導向的知識才能開始撰寫。 所以你需要學習的變成：</p>
+<ul>
+<li>定義資料<ul>
+<li>變數 / 表達式</li>
+<li>資料型別</li>
+<li>資料結構儲存</li>
+</ul>
+</li>
+<li>處理資料的學習範圍：<ul>
+<li>接收使用者的輸入</li>
+<li>流程判斷</li>
+<li>函數運用</li>
+<li>迴圈</li>
+<li>文字操作</li>
+</ul>
+</li>
+<li>儲存資料的學習範圍：<ul>
+<li>檔案處理</li>
+<li>資料庫操作</li>
+</ul>
+</li>
+<li>物件導向</li>
+</ul>
+<p>所以當你辛苦了學習了上述的知識，因爲你的應用程式不可能孤零零地活在自己的世界裏當邊緣人，它必須可以對外聯繫溝通，所以這時候你又必須要讓應用程式有跟外面世界溝通的功能，所以恭喜你必須學會的技能又要多一項：『網路連線』。 所以你需要學習的變成：</p>
+<ul>
+<li>定義資料<ul>
+<li>變數 / 表達式</li>
+<li>資料型別</li>
+<li>資料結構儲存</li>
+</ul>
+</li>
+<li>處理資料的學習範圍：<ul>
+<li>接收使用者的輸入</li>
+<li>流程判斷</li>
+<li>函數運用</li>
+<li>迴圈</li>
+<li>文字操作</li>
+</ul>
+</li>
+<li>儲存資料的學習範圍：<ul>
+<li>檔案處理</li>
+<li>資料庫操作</li>
+</ul>
+</li>
+<li>物件導向</li>
+<li>網路連線</li>
+</ul>
+<p>在我們日常生活中使用了那麼多應用軟體，你有沒有遇過使用的時候遇到 bug 錯誤的經驗呢？所以如果這個錯誤是可以躺著就知道一定會發生問題的錯誤，那是不是就可以先告訴你的應用程式遇到這個錯誤的時候該怎麼應對，如果你的回答是『對阿』，恭喜你你是一個有責任心的開發者，那也順便恭喜你，你就多得多學一個技能叫做『錯誤處理』的技能囉。 所以你需要學習的變成：</p>
+<ul>
+<li>定義資料<ul>
+<li>變數 / 表達式</li>
+<li>資料型別</li>
+<li>資料結構儲存</li>
+</ul>
+</li>
+<li>處理資料的學習範圍：<ul>
+<li>接收使用者的輸入</li>
+<li>流程判斷</li>
+<li>函數運用</li>
+<li>迴圈</li>
+<li>文字操作</li>
+</ul>
+</li>
+<li>儲存資料的學習範圍：<ul>
+<li>檔案處理</li>
+<li>資料庫操作</li>
+</ul>
+</li>
+<li>物件導向</li>
+<li>網路連線</li>
+<li>錯誤處理</li>
+</ul>
+<p>以上只是一個很概略的敘述學習一個後端語言也許需要掌握的知識點，每一個細項其實都還可以有很多的延伸，如果全部列出來我想我自己看了都想放棄了，如果你還有勇氣的話可以繼續往下看下去… 在掌握了上述的知識後，會漸漸地耳聞到『框架』的關鍵字。 what the f**k ? 『框架』說穿了其實就是有一些很常用的功能的大補帖，世界上有一群很好心的人幫你整理好身爲一個網頁應用系統會用到哪些功能，可以讓你『用更少的時間或更少的步驟完成相同的事情』。 舉個生活日常當作例子： 如果你今天心血來潮想要自己來煮飯的時候，也許你需要以下這些步驟：</p>
+<ol>
+<li> 騎車到市場</li>
+<li> 走進市場一一地買你要烹飪的菜</li>
+<li> 從市場騎車回家</li>
+<li> 清洗你要煮的菜開始備料</li>
+<li> 開始烹煮你備好的料</li>
+<li> 終於煮好了，可以開動了。</li>
+</ol>
+<p>上述你爲了要自己煮飯要花上六個步驟，但是其實真正想要享受的過程則是 5 與 6。如果今天有個服務可以幫你把菜都買好、洗乾淨、備好料，然後一整包寄到你家，你就可以省去上述痛苦的 1 ～ 4 的步驟了，就可以開始享受開心的烹飪時光。 雖然這個比喻不見得很貼切，但是你可以把這個服務想像它就是一種『框架』，你想要的完成的事情都相同（已經有備好的料），但是你藉着使用這個服務『框架』，你就可以『用更少的時間或更少的步驟』得到一樣的結果。 當然，你使用這個服務的時候需要付出一些東西，上述的服務你需要付出的就是你荷包裡的 cash，那程式語言的框架呢？沒錯，就是你得花額外的時間成本去學習如何使用這個框架，但是這個學習保證讓你很值得，因爲你從此之後就可以省去惱人的步驟 1 ～ 4，讓你的開發更快速也更開心。 所以你需要學習的變成：</p>
+<ul>
+<li>定義資料<ul>
+<li>變數 / 表達式</li>
+<li>資料型別</li>
+<li>資料結構儲存</li>
+</ul>
+</li>
+<li>處理資料的學習範圍：<ul>
+<li>接收使用者的輸入</li>
+<li>流程判斷</li>
+<li>函數運用</li>
+<li>迴圈</li>
+<li>文字操作</li>
+</ul>
+</li>
+<li>儲存資料的學習範圍：<ul>
+<li>檔案處理</li>
+<li>資料庫操作</li>
+</ul>
+</li>
+<li>物件導向</li>
+<li>網路連線</li>
+<li>錯誤處理</li>
+<li>框架運用</li>
+</ul>
+<p>OK，我想再繼續加東西上去應該你就想要按 X 關閉這個視窗了，或許是打消想要學習的念頭了，爲了你好還是見好就收。 以上是我從設計師轉職工程師 2 年左右的粗淺看法，有任何的想法或者是我有說錯的地方都歡迎與我交流囉，我們下次見啦。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Backend/" rel="tag"><i class="fa fa-tag"></i> Backend</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Basic/Python/python-1-install-python/2164399402/" rel="prev" title="Python 學習 1 : 安裝 Python">
+                  <i class="fa fa-angle-left"></i> Python 學習 1 : 安裝 Python
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ChanChanDev</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"Jessie75919","repo":"Jessie75919.github.io","client_id":"5cc00853735d25bd22f3","client_secret":"42c46caebd1f91cd54924e2ad6c3dc6fec94f37e","admin_user":"Jessie75919","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-TW","body":null,"labels":"Gitalk","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"65930ffb16e6553ef4406a1f73f09aea"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>
