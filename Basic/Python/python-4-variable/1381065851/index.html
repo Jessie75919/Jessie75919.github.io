@@ -277,7 +277,7 @@
 <p>這時候當你需要『Email 盒子』的這個資料的時候，你就不知道他在哪個盒子裏面，所以這時候適當的幫這些盒子標記個命名方便之後辨識取用是個好的方法。</p>
 <p><img src="https://jcxcode.files.wordpress.com/2020/04/image-16.png?w=989"></p>
 <p>那如果我們想在 Python 做到這件事情的話要怎麼做呢？</p>
-<p>my_email = “<a href="mailto:&#109;&#121;&#x2d;&#x65;&#x6d;&#97;&#x69;&#108;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;" rel="external nofollow noreferrer">&#109;&#121;&#x2d;&#x65;&#x6d;&#97;&#x69;&#108;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</a>“</p>
+<p>my_email = “<a href="mailto:&#109;&#121;&#x2d;&#x65;&#109;&#97;&#x69;&#x6c;&#64;&#103;&#x6d;&#97;&#105;&#108;&#x2e;&#99;&#111;&#x6d;" rel="external nofollow noreferrer">&#109;&#121;&#x2d;&#x65;&#109;&#97;&#x69;&#x6c;&#64;&#103;&#x6d;&#97;&#105;&#108;&#x2e;&#99;&#111;&#x6d;</a>“</p>
 <p><img src="https://jcxcode.files.wordpress.com/2020/04/image-19.png?w=949"></p>
 <h2 id="賦值『-』"><a href="#賦值『-』" class="headerlink" title="賦值『=』"></a>賦值『=』</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my_email = <span class="string">&quot;my-email@gmail.com&quot;</span></span><br></pre></td></tr></table></figure>
 
@@ -287,7 +287,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(my_email)</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://jcxcode.files.wordpress.com/2020/04/image-21.png?w=949"></p>
-<p>但是如果我今天換了新的 Email，想要把 my_email 的變數盒子更新爲 “<a href="mailto:&#x6d;&#121;&#45;&#x63;&#x6f;&#111;&#x6c;&#45;&#101;&#109;&#97;&#x69;&#x6c;&#x40;&#103;&#x6d;&#97;&#105;&#108;&#x2e;&#99;&#x6f;&#x6d;" rel="external nofollow noreferrer">&#x6d;&#121;&#45;&#x63;&#x6f;&#111;&#x6c;&#45;&#101;&#109;&#97;&#x69;&#x6c;&#x40;&#103;&#x6d;&#97;&#105;&#108;&#x2e;&#99;&#x6f;&#x6d;</a>“，那我們可以這樣做：</p>
+<p>但是如果我今天換了新的 Email，想要把 my_email 的變數盒子更新爲 “<a href="mailto:&#109;&#x79;&#x2d;&#x63;&#111;&#x6f;&#x6c;&#x2d;&#x65;&#109;&#97;&#105;&#x6c;&#64;&#x67;&#109;&#x61;&#105;&#108;&#x2e;&#99;&#111;&#109;" rel="external nofollow noreferrer">&#109;&#x79;&#x2d;&#x63;&#111;&#x6f;&#x6c;&#x2d;&#x65;&#109;&#97;&#105;&#x6c;&#64;&#x67;&#109;&#x61;&#105;&#108;&#x2e;&#99;&#111;&#109;</a>“，那我們可以這樣做：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my_email = <span class="string">&quot;my-cool-email@gmail.com&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p><img src="https://jcxcode.files.wordpress.com/2020/04/image-22.png?w=949"></p>
@@ -295,7 +295,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(my_email)</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://jcxcode.files.wordpress.com/2020/04/image-23.png?w=949"></p>
-<p>Python 已經告訴我們 my_email 的這個變數盒子內容已經是 『”<a href="mailto:&#x6d;&#x79;&#x2d;&#x63;&#x6f;&#x6f;&#108;&#x2d;&#101;&#109;&#97;&#x69;&#x6c;&#64;&#x67;&#x6d;&#97;&#105;&#x6c;&#x2e;&#99;&#x6f;&#109;" rel="external nofollow noreferrer">&#x6d;&#x79;&#x2d;&#x63;&#x6f;&#x6f;&#108;&#x2d;&#101;&#109;&#97;&#x69;&#x6c;&#64;&#x67;&#x6d;&#97;&#105;&#x6c;&#x2e;&#99;&#x6f;&#109;</a>“』 囉。</p>
+<p>Python 已經告訴我們 my_email 的這個變數盒子內容已經是 『”<a href="mailto:&#109;&#121;&#x2d;&#x63;&#111;&#111;&#108;&#45;&#101;&#109;&#x61;&#105;&#108;&#x40;&#x67;&#109;&#x61;&#x69;&#x6c;&#46;&#99;&#111;&#109;" rel="external nofollow noreferrer">&#109;&#121;&#x2d;&#x63;&#111;&#111;&#108;&#45;&#101;&#109;&#x61;&#105;&#108;&#x40;&#x67;&#109;&#x61;&#x69;&#x6c;&#46;&#99;&#111;&#109;</a>“』 囉。</p>
 <p>所以由此可知如果我們在一個變數盒子 my_email 裏面放了一個 email 資訊，如果我們再對同一個變數盒子 my_email 放新的 email 資訊，舊的那個資訊就會被洗掉覆蓋了，所以 『變數盒子會有一次只能放一個資訊，下一次在放一個新的資訊進來上一個就會不見囉』。</p>
 <p>所以會叫變數的原因就是如同上面的所呈現的，一個變數裏面的資料會一直在程式運作的過程中一直變來變去。</p>
 <p>另外還有一點是：它就是一個記憶體的存放區塊（一個盒子），可以讓開發者『暫時』地存放資料，所以這份資料是無法永久被保存的，如果記憶體沒通電資料就會消失了，所以這份資料最後還是需要會被存在某一個地方（例如：資料庫）喔。</p>
