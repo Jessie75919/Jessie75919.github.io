@@ -1197,7 +1197,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #4959ff;
+    background: #fff;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2673,4 +2673,27 @@ header.header {
   .comments {
     padding: 10px 12px;
   }
+}
+.post-body img[width] {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.post-body img.phone-shot {
+  display: block;
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.post-body img.narrow {
+  display: block;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.post-body img.medium {
+  display: block;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
 }
