@@ -256,12 +256,12 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p><img src="cover-illustration.png" alt="開場示意"></p>
+    <div class="post-body" itemprop="articleBody"><p><img src="/side-project/gemini-management-extension/492080683/cover-illustration.png" alt="開場示意"></p>
 <span id="more"></span>
 
 <h1 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h1><p>我很常想到什麼就跟 AI 開始瞎聊（我想大家都一樣 XD）</p>
 <p>跟它聊「Python 的 asyncio 該怎麼用」是一個對話，跟它聊「最近想學的 AI 工程技能」是另一個對話，跟它討論「下次 side project 想做什麼」又是另一個對話。一天下來開個 5、6 個對話算正常，轉眼間已經一堆過往的對話在那邊了。</p>
-<p><img src="messy-list.png" alt="Gemini 對話側邊欄截圖，展示對話列表"></p>
+<p><img src="/side-project/gemini-management-extension/492080683/messy-list.png" alt="Gemini 對話側邊欄截圖，展示對話列表"></p>
 <p>看到上面，身為分類整理控的自己，讓一堆對話清單散在那邊，其實全身亂不舒服的。</p>
 <blockquote class="blockquote-center">
 <p><strong>因此覺得如果 AI 的對話列表也可以分組就好了。</strong></p>
@@ -295,15 +295,15 @@
 <p>（自己主要是用 Gemini 和 Claude，ChatGPT 自己用得比較少，之後有需求再加。）</p>
 <h1 id="功能介紹"><a href="#功能介紹" class="headerlink" title="功能介紹"></a>功能介紹</h1><h2 id="分資料夾整理對話"><a href="#分資料夾整理對話" class="headerlink" title="分資料夾整理對話"></a>分資料夾整理對話</h2><p>資料夾我刻意做成兩層 —— 第一層是大分類，第二層是底下的細分。</p>
 <p>因為我想要有「程式」底下，還有「系統設計」、「設計模式」、「Python」等等的資料夾分類，因此先拆了<strong>兩層</strong>出來。</p>
-<p><img src="folder-structure.png" alt="兩層資料夾結構示意"></p>
+<p><img src="/side-project/gemini-management-extension/492080683/folder-structure.png" alt="兩層資料夾結構示意"></p>
 <p>歸到資料夾的對話會從原生側欄消失，只出現在它所屬的資料夾裡，不會兩邊重複，看起來乾淨許多。</p>
-<p><img src="folder-demo.gif" alt="新增資料夾並把對話拖進去的操作示意"></p>
+<p><img src="/side-project/gemini-management-extension/492080683/folder-demo.gif" alt="新增資料夾並把對話拖進去的操作示意"></p>
 <h2 id="上鎖隱藏：給內心的對話一個位置"><a href="#上鎖隱藏：給內心的對話一個位置" class="headerlink" title="上鎖隱藏：給內心的對話一個位置"></a>上鎖隱藏：給內心的對話一個位置</h2><p>回到前面那個「樹洞」場景。</p>
 <p>設定主密碼之後，就可以把某個資料夾標記為「上鎖」。</p>
 <p>鎖起來的資料夾——以及它底下所有對話——會從 UI 上<strong>完全消失</strong>。</p>
 <p>不是只把標題遮起來、不是只把對話內文打馬賽克，是整個資料夾跟對話都不見、像沒存在過一樣。</p>
 <p>要顯示這些隱藏內容的話，按下自己設定的快捷鍵，輸入設定的主密碼，就整個解鎖。</p>
-<p><img src="lock-demo.png" alt="上鎖前後對比"></p>
+<p><img src="/side-project/gemini-management-extension/492080683/lock-demo.png" alt="上鎖前後對比"></p>
 <p>如果有人突然出現怎麼辦 ── ！？</p>
 <p>放心！瀏覽器重新整理後，這些隱藏資料夾就會消失了。</p>
 <div class="note warning"><p><strong>不過這邊的「上鎖」是 UI 隱藏，不是加密。</strong></p>
@@ -329,7 +329,7 @@
 <p>每次想找一個對話，眼睛要從左飄到右、右飄到左，像在看雙螢幕，腦袋很累。</p>
 <p>如果你想到要把某個對話移到資料夾，還得<strong>先在左邊找到對話、再到右邊找到目標資料夾</strong> ——</p>
 <p>兩個 UI 完全沒有交集，等於把問題從「找對話」變成「找對話 + 找資料夾」。</p>
-<p><img src="right-vs-left.png" alt="Before / After 對比示意"></p>
+<p><img src="/side-project/gemini-management-extension/492080683/right-vs-left.png" alt="Before / After 對比示意"></p>
 <p>後來改成把資料夾區<strong>整合進原生左側 sidebar 的最上方</strong>，跟原生對話清單共用同一個區塊。</p>
 <p>因為已經習慣聊天列表在左側，使用者的肌肉記憶早就建立好了，這樣做最不違和。</p>
 <p>實作上有一點麻煩——Gemini 和 Claude 的左側 sidebar 是它們自己 framework 渲染的 DOM，會在 SPA route 切換時被重新 mount。</p>
