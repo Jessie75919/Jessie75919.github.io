@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
+  <link rel="mask-icon" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jessie75919.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"onmobile":false},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null,"show_result":"flat"},"fold":{"enable":false,"height":500},"language":false,"highlight_theme":"normal"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"找到 ${hits} 個搜索結果（用時 ${time} 毫秒）","hits":"找到 ${hits} 個搜索結果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="AI 對話越聊越多，讓整理控的我全身不舒服。一言不合做了一個 Chrome Extension，把 AI 的對話列表資料夾，作分群組整理。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[一言不合自己寫 2] 幫 AI 對話加上「資料夾分類」功能">
+<meta property="og:url" content="https://jessie75919.github.io/side-project/gemini-management-extension/492080683/index.html">
+<meta property="og:site_name" content="圈圈工程師">
+<meta property="og:description" content="AI 對話越聊越多，讓整理控的我全身不舒服。一言不合做了一個 Chrome Extension，把 AI 的對話列表資料夾，作分群組整理。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://jessie75919.github.io/side-project/gemini-management-extension/492080683/cover-illustration.png">
+<meta property="og:image" content="https://jessie75919.github.io/side-project/gemini-management-extension/492080683/messy-list.png">
+<meta property="og:image" content="https://jessie75919.github.io/side-project/gemini-management-extension/492080683/folder-structure.png">
+<meta property="og:image" content="https://jessie75919.github.io/side-project/gemini-management-extension/492080683/folder-demo.gif">
+<meta property="og:image" content="https://jessie75919.github.io/side-project/gemini-management-extension/492080683/lock-demo.png">
+<meta property="og:image" content="https://jessie75919.github.io/side-project/gemini-management-extension/492080683/right-vs-left.png">
+<meta property="article:published_time" content="2026-05-23T13:00:00.000Z">
+<meta property="article:modified_time" content="2026-05-23T11:14:26.517Z">
+<meta property="article:author" content="ChanChanDev">
+<meta property="article:tag" content="side-project">
+<meta property="article:tag" content="一言不合自己寫">
+<meta property="article:tag" content="vibe-coding">
+<meta property="article:tag" content="chrome-extension">
+<meta property="article:tag" content="gemini">
+<meta property="article:tag" content="claude">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jessie75919.github.io/side-project/gemini-management-extension/492080683/cover-illustration.png">
+
+
+<link rel="canonical" href="https://jessie75919.github.io/side-project/gemini-management-extension/492080683/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://jessie75919.github.io/side-project/gemini-management-extension/492080683/","path":"side-project/gemini-management-extension/492080683/","title":"[一言不合自己寫 2] 幫 AI 對話加上「資料夾分類」功能"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[一言不合自己寫 2] 幫 AI 對話加上「資料夾分類」功能 | 圈圈工程師</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R47Z93ZJTM"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-R47Z93ZJTM","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">圈圈工程師</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Change Change Developer</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-back-end"><a href="/categories/back-end/" rel="section"><i class="fas fa-rocket fa-fw"></i>Back-End</a></li><li class="menu-item menu-item-sharing"><a href="/categories/Sharing/" rel="section"><i class="fas fa-star fa-fw"></i>Sharing</a></li><li class="menu-item menu-item-reading"><a href="/categories/Reading/" rel="section"><i class="fas fa-book fa-fw"></i>Reading</a></li><li class="menu-item menu-item-design-pattern"><a href="/categories/design-pattern/" rel="section"><i class="fas fa-sitemap fa-fw"></i>Design-Pattern</a></li><li class="menu-item menu-item-javascript"><a href="/categories/js/" rel="section"><i class="fas fa-code fa-fw"></i>Javascript</a></li><li class="menu-item menu-item-一言不合自己寫"><a href="/tags/%E4%B8%80%E8%A8%80%E4%B8%8D%E5%90%88%E8%87%AA%E5%B7%B1%E5%AF%AB/" rel="section"><i class="fas fa-bolt fa-fw"></i>一言不合自己寫</a></li><li class="menu-item menu-item-分類"><a href="/categories/" rel="section"><i class="fas fa-folder-open fa-fw"></i>分類</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E6%83%85%E6%8F%90%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">前情提要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E3%80%8AAI-%E8%81%8A%E5%A4%A9%E5%B0%8D%E8%A9%B1%E8%B3%87%E6%96%99%E5%A4%BE%E3%80%8B%E6%98%AF%E4%BB%80%E9%BA%BC%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">《AI 聊天對話資料夾》是什麼？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%B4%B9"><span class="nav-number">3.</span> <span class="nav-text">功能介紹</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E8%B3%87%E6%96%99%E5%A4%BE%E6%95%B4%E7%90%86%E5%B0%8D%E8%A9%B1"><span class="nav-number">3.1.</span> <span class="nav-text">分資料夾整理對話</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8A%E9%8E%96%E9%9A%B1%E8%97%8F%EF%BC%9A%E7%B5%A6%E5%85%A7%E5%BF%83%E7%9A%84%E5%B0%8D%E8%A9%B1%E4%B8%80%E5%80%8B%E4%BD%8D%E7%BD%AE"><span class="nav-number">3.2.</span> <span class="nav-text">上鎖隱藏：給內心的對話一個位置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%A8%E8%A3%9D%E7%BD%AE%E5%90%8C%E6%AD%A5%EF%BC%9A%E6%8F%9B%E9%9B%BB%E8%85%A6%E4%B9%9F%E4%B8%8D%E7%94%A8%E9%87%8D%E8%A8%AD"><span class="nav-number">3.3.</span> <span class="nav-text">跨裝置同步：換電腦也不用重設</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%82%BA%E4%BB%80%E9%BA%BC%E6%95%B4%E5%90%88%E5%9C%A8%E5%B7%A6%E5%81%B4%E7%9A%84%E5%8E%9F%E7%94%9F%E5%B0%8D%E8%A9%B1%E5%88%97%E8%A1%A8"><span class="nav-number">4.</span> <span class="nav-text">為什麼整合在左側的原生對話列表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%80%E8%A1%93-Stack"><span class="nav-number">5.</span> <span class="nav-text">技術 Stack</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BE%8C%E8%A8%98"><span class="nav-number">6.</span> <span class="nav-text">後記</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ChanChanDev"
+      src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+  <p class="site-author-name" itemprop="name">ChanChanDev</p>
+  <div class="site-description" itemprop="description">圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">標籤</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/chanchandev" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;chanchandev" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/chanchandev" title="FaceBook → https:&#x2F;&#x2F;www.facebook.com&#x2F;chanchandev" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-facebook fa-fw"></i>FaceBook</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jessie75919.github.io/side-project/gemini-management-extension/492080683/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
+      <meta itemprop="name" content="ChanChanDev">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="圈圈工程師">
+      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[一言不合自己寫 2] 幫 AI 對話加上「資料夾分類」功能 | 圈圈工程師">
+      <meta itemprop="description" content="AI 對話越聊越多，讓整理控的我全身不舒服。一言不合做了一個 Chrome Extension，把 AI 的對話列表資料夾，作分群組整理。">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [一言不合自己寫 2] 幫 AI 對話加上「資料夾分類」功能
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+      
+
+      <time title="創建時間：2026-05-23 21:00:00 / 修改時間：19:14:26" itemprop="dateCreated datePublished" datetime="2026-05-23T21:00:00+08:00">2026-05-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/side-project/" itemprop="url" rel="index"><span itemprop="name">side-project</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">AI 對話越聊越多，讓整理控的我全身不舒服。一言不合做了一個 Chrome Extension，把 AI 的對話列表資料夾，作分群組整理。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><img src="cover-illustration.png" alt="開場示意"></p>
+<span id="more"></span>
+
+<h1 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h1><p>我很常想到什麼就跟 AI 開始瞎聊（我想大家都一樣 XD）</p>
+<p>跟它聊「Python 的 asyncio 該怎麼用」是一個對話，跟它聊「最近想學的 AI 工程技能」是另一個對話，跟它討論「下次 side project 想做什麼」又是另一個對話。一天下來開個 5、6 個對話算正常，轉眼間已經一堆過往的對話在那邊了。</p>
+<p><img src="messy-list.png" alt="Gemini 對話側邊欄截圖，展示對話列表"></p>
+<p>看到上面，身為分類整理控的自己，讓一堆對話清單散在那邊，其實全身亂不舒服的。</p>
+<blockquote class="blockquote-center">
+<p><strong>因此覺得如果 AI 的對話列表也可以分組就好了。</strong></p>
+
+</blockquote>
+
+<p>另外，還有另一個煩惱：有些對話我不太想讓路過的人瞄到。</p>
+<p>跟 AI 聊天聊久了會發現，它其實是個很好的樹洞 —— </p>
+<p>最近工作不順心、人生卡關、自我懷疑這種比較內心的話題，我都會找它聊。</p>
+<p>這種對話的標題往往很直白（「如何變得更有自信」這種），擺在側邊欄上，家人從旁邊走過瞄一眼就尷尬死。</p>
+<blockquote class="blockquote-center">
+<p><strong>因此希望可以再加上隱藏上鎖資料夾功能</strong></p>
+
+</blockquote>
+
+<hr>
+<p>帶著上述的兩個需求，我去上網翻了一輪。</p>
+<p>發現市面上其實有幾個解這個問題的工具。但有的要付費——為了「分個資料夾」這件事每個月付費，好像覺得 CP 值不太高。</p>
+<p>有看到免費的 extension 要安裝的時候，有考量到對話內容就是這麼私密的東西，丟給不知道是誰寫的 extension 來幫我整理，總覺得不太放心。</p>
+<p>（其實上次做 <a href="/side-project/2026012801/">Voice Polish</a> 也是同樣的顧慮，語音轉文字也算私密的東西，那時候才決定自己寫一個。）</p>
+<p>現在有什麼願望想許願，就可以請 AI 弄個玩具來試試看。</p>
+<p>於是就有這個《AI 聊天對話資料夾》的小玩具誕生了！</p>
+<h1 id="《AI-聊天對話資料夾》是什麼？"><a href="#《AI-聊天對話資料夾》是什麼？" class="headerlink" title="《AI 聊天對話資料夾》是什麼？"></a>《AI 聊天對話資料夾》是什麼？</h1><p>針對上述需求，這個小玩具的主要目標是：</p>
+<blockquote class="blockquote-center">
+<p><strong>在 Gemini 和 Claude 的對話列表，加上群組分類功能，再順便多一個可以上鎖隱藏的私人資料夾</strong></p>
+
+</blockquote>
+
+
+<p>是 Edge / Chrome 的 extension，目前支援 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://gemini.google.com/">gemini.google.com</a> 和 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://claude.ai/">claude.ai</a>。</p>
+<p>（自己主要是用 Gemini 和 Claude，ChatGPT 自己用得比較少，之後有需求再加。）</p>
+<h1 id="功能介紹"><a href="#功能介紹" class="headerlink" title="功能介紹"></a>功能介紹</h1><h2 id="分資料夾整理對話"><a href="#分資料夾整理對話" class="headerlink" title="分資料夾整理對話"></a>分資料夾整理對話</h2><p>資料夾我刻意做成兩層 —— 第一層是大分類，第二層是底下的細分。</p>
+<p>因為我想要有「程式」底下，還有「系統設計」、「設計模式」、「Python」等等的資料夾分類，因此先拆了<strong>兩層</strong>出來。</p>
+<p><img src="folder-structure.png" alt="兩層資料夾結構示意"></p>
+<p>歸到資料夾的對話會從原生側欄消失，只出現在它所屬的資料夾裡，不會兩邊重複，看起來乾淨許多。</p>
+<p><img src="folder-demo.gif" alt="新增資料夾並把對話拖進去的操作示意"></p>
+<h2 id="上鎖隱藏：給內心的對話一個位置"><a href="#上鎖隱藏：給內心的對話一個位置" class="headerlink" title="上鎖隱藏：給內心的對話一個位置"></a>上鎖隱藏：給內心的對話一個位置</h2><p>回到前面那個「樹洞」場景。</p>
+<p>設定主密碼之後，就可以把某個資料夾標記為「上鎖」。</p>
+<p>鎖起來的資料夾——以及它底下所有對話——會從 UI 上<strong>完全消失</strong>。</p>
+<p>不是只把標題遮起來、不是只把對話內文打馬賽克，是整個資料夾跟對話都不見、像沒存在過一樣。</p>
+<p>要顯示這些隱藏內容的話，按下自己設定的快捷鍵，輸入設定的主密碼，就整個解鎖。</p>
+<p><img src="lock-demo.png" alt="上鎖前後對比"></p>
+<p>如果有人突然出現怎麼辦 ── ！？</p>
+<p>放心！瀏覽器重新整理後，這些隱藏資料夾就會消失了。</p>
+<div class="note warning"><p><strong>不過這邊的「上鎖」是 UI 隱藏，不是加密。</strong></p>
+<p>為的只是以防那種「家人朋友從旁邊路過隨手翻」這種的狀態。</p>
+<p>對我自己來說這個強度剛好夠用了——我要防的本來就只是「身邊的人不小心看到」，不是要藏什麼見不得人的東西，只是內心對話希望保留一點隱私而已。</p>
+</div>
+
+<h2 id="跨裝置同步：換電腦也不用重設"><a href="#跨裝置同步：換電腦也不用重設" class="headerlink" title="跨裝置同步：換電腦也不用重設"></a>跨裝置同步：換電腦也不用重設</h2><p>我有時候在家用 Mac、還有其他台筆電，所以資料夾結構一定要能跨裝置同步。</p>
+<p>這部分用的是 Chrome / Edge 內建的 <code>chrome.storage.sync</code>——只要你的瀏覽器有登入帳號，這個 API 就會自動幫你同步小型設定資料到雲端（綁瀏覽器帳號，免費、沒上限對我這種使用量也夠）。</p>
+<p>換電腦只要：</p>
+<ol>
+<li>同一個瀏覽器帳號登入</li>
+<li>安裝這個 extension</li>
+<li>資料夾結構就會自動跑過來</li>
+</ol>
+<p>不用註冊、不用我自己架後端、不用申請 API Key、不用設密碼以外的任何東西。</p>
+<p>順帶一提，這個專案一開始我其實有用 Cloudflare Workers 自架了一個 sync 後端，後來發現 <code>chrome.storage.sync</code> 已經完全夠用，就把整個後端拔掉了。</p>
+<p>少維護一個東西（對，我就懶～）</p>
+<h1 id="為什麼整合在左側的原生對話列表"><a href="#為什麼整合在左側的原生對話列表" class="headerlink" title="為什麼整合在左側的原生對話列表"></a>為什麼整合在左側的原生對話列表</h1><p>這部分算是一個有點掙扎的設計決定，順便講一下。</p>
+<p>最一開始我把資料夾面板放在 Chrome 的 <strong>side panel</strong>（瀏覽器最右側那條）。理由是技術上最單純——side panel 是 Chrome 官方支援的 extension UI 介面，不用跟原生網頁的 DOM 搶位置，相對穩定。</p>
+<p>實際用了兩三天就發現很卡。</p>
+<p>左邊是 Gemini / Claude 的原生對話清單，右邊是我的資料夾面板。</p>
+<p>每次想找一個對話，眼睛要從左飄到右、右飄到左，像在看雙螢幕，腦袋很累。</p>
+<p>如果你想到要把某個對話移到資料夾，還得<strong>先在左邊找到對話、再到右邊找到目標資料夾</strong> ——</p>
+<p>兩個 UI 完全沒有交集，等於把問題從「找對話」變成「找對話 + 找資料夾」。</p>
+<p><img src="right-vs-left.png" alt="Before / After 對比示意"></p>
+<p>後來改成把資料夾區<strong>整合進原生左側 sidebar 的最上方</strong>，跟原生對話清單共用同一個區塊。</p>
+<p>因為已經習慣聊天列表在左側，使用者的肌肉記憶早就建立好了，這樣做最不違和。</p>
+<p>實作上有一點麻煩——Gemini 和 Claude 的左側 sidebar 是它們自己 framework 渲染的 DOM，會在 SPA route 切換時被重新 mount。</p>
+<p>所以 AI 用 <code>MutationObserver</code> 監聽，被拔掉就 re-mount 回去。實測下來穩定度還行。</p>
+<h1 id="技術-Stack"><a href="#技術-Stack" class="headerlink" title="技術 Stack"></a>技術 Stack</h1><p>不寫太多技術細節，這篇主要還是想分享產品本身。</p>
+<ul>
+<li><strong>Manifest V3</strong> Edge / Chrome extension</li>
+<li><strong>TypeScript + Vite + CRXJS</strong>（CRXJS 是個讓 Vite 可以打包 extension 的 plugin，蠻好用的）</li>
+<li><strong>chrome.storage.sync</strong> 跨裝置</li>
+<li>純前端，沒有後端</li>
+</ul>
+<p>整個 extension 從許願開始大概不到一天開發完成 MVP，後來試用後覺得不滿意，再繼續調整一路到現在。</p>
+<p>中間 spec → plan → implementation 的工作流是用 Claude Code 跑的，這部分就是 Vibe Coding 的一環，等於 AI 幫我寫了大部分的 code，我負責驗收、指方向、debug。</p>
+<h1 id="後記"><a href="#後記" class="headerlink" title="後記"></a>後記</h1><p>呼，目前的功能差不多告一段落了。</p>
+<p>基本上已經完成自己最一開始的兩個許願了。</p>
+<p>有了 AI 不合理的執行速度後，老實說自己看了也覺得這個節奏蠻誇張的。</p>
+<p>如果是過去沒有 Vibe Coding 的時候自己手 key，我大概兩三個月也未必能做出來 —— 畢竟這是業餘時間在弄的東西。</p>
+<p>這次跟做 <a href="/side-project/2026012801/">Voice Polish</a> 那次最大的差別，是這次更認真地用了「先寫 spec、再寫 plan、最後 implementation」的流程（透過 Claude Code 跑的）。</p>
+<p>專案 repo 裡的 <code>docs/superpowers/specs/</code> 和 <code>docs/superpowers/plans/</code> 都還在，每個 feature 都先把設計討論清楚、寫成文件、commit 進 git，再開始動手。</p>
+<p>這套流程的好處是 AI 不會亂跑——它有 spec 可以對齊、有 plan 可以照走，產出的 code 跟我心裡想的版本差距小很多，幾乎不用大改。</p>
+<p>不過整體來說，現在打開 Gemini 看到對話側邊欄整整齊齊分好資料夾、心裡的對話安心地鎖在自己的小角落，那種感覺挺爽的。</p>
+<p>不過老實說，我還是期待哪一天 Gemini 可以真的出資料夾功能啦。這個外掛就可以功臣身退了。</p>
+<p>這篇文章紀錄成分居多，如果你居然有看到這裡的話，真的是十分感謝！</p>
+<p>我們下次見，Bye ～</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/side-project/" rel="tag"><i class="fa fa-tag"></i> side-project</a>
+              <a href="/tags/%E4%B8%80%E8%A8%80%E4%B8%8D%E5%90%88%E8%87%AA%E5%B7%B1%E5%AF%AB/" rel="tag"><i class="fa fa-tag"></i> 一言不合自己寫</a>
+              <a href="/tags/vibe-coding/" rel="tag"><i class="fa fa-tag"></i> vibe-coding</a>
+              <a href="/tags/chrome-extension/" rel="tag"><i class="fa fa-tag"></i> chrome-extension</a>
+              <a href="/tags/gemini/" rel="tag"><i class="fa fa-tag"></i> gemini</a>
+              <a href="/tags/claude/" rel="tag"><i class="fa fa-tag"></i> claude</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/side-project/student-management/3118241358/" rel="prev" title="[一言不合自己寫 3] 我老婆的 Line 記事本，被我這個工程師老公收編了">
+                  <i class="fa fa-angle-left"></i> [一言不合自己寫 3] 我老婆的 Line 記事本，被我這個工程師老公收編了
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/side-project/raycast-transcribe/2026012801/" rel="next" title="[一言不合自己寫 1] 我只想打嘴砲！如何用 Vibe Coding 解放雙手！打造語音轉文字小幫手 Voice Polish！">
+                  [一言不合自己寫 1] 我只想打嘴砲！如何用 Vibe Coding 解放雙手！打造語音轉文字小幫手 Voice Polish！ <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ChanChanDev</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"Jessie75919","repo":"Jessie75919.github.io","client_id":"5cc00853735d25bd22f3","client_secret":"42c46caebd1f91cd54924e2ad6c3dc6fec94f37e","admin_user":"Jessie75919","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-TW","body":null,"labels":"Gitalk","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"f1da34d254c7a2422873b79bc29f0818"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>
