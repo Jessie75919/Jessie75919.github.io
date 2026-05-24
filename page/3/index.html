@@ -1,1194 +1,340 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
-
-  <link rel="apple-touch-icon" sizes="180x180" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
-  <link rel="icon" type="image/png" sizes="16x16" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
-  <link rel="mask-icon" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
-
-<script class="next-config" data-name="main" type="application/json">{"hostname":"jessie75919.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"onmobile":false},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null,"show_result":"flat"},"fold":{"enable":false,"height":500},"language":false,"highlight_theme":"normal"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"找到 ${hits} 個搜索結果（用時 ${time} 毫秒）","hits":"找到 ${hits} 個搜索結果"}}</script><script src="/js/config.js" defer></script>
-
-    <meta name="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>圈圈工程師 - Change Change Developer</title><meta name="keywords" content="程式,閱讀,塗鴉"><meta name="author" content="ChanChanDev"><meta name="copyright" content="ChanChanDev"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="圈圈工程師">
 <meta property="og:url" content="https://jessie75919.github.io/page/3/index.html">
 <meta property="og:site_name" content="圈圈工程師">
 <meta property="og:description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
 <meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
 <meta property="article:author" content="ChanChanDev">
 <meta property="article:tag" content="程式">
 <meta property="article:tag" content="閱讀">
 <meta property="article:tag" content="塗鴉">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png"><link rel="shortcut icon" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico"><link rel="canonical" href="https://jessie75919.github.io/page/3/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-R47Z93ZJTM"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-R47Z93ZJTM');
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '複製成功',
+    error: '複製錯誤',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: ChanChanDev","link":"連結: ","source":"來源: 圈圈工程師","info":"著作權歸作者所有。商業轉載請聯絡作者獲得授權，非商業轉載請註明出處。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isanchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '圈圈工程師',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2026-05-24 10:06:17'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
 
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
 
-<link rel="canonical" href="https://jessie75919.github.io/page/3/">
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
 
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-TW","comments":"","permalink":"","path":"page/3/index.html","title":""}</script>
-
-<script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>圈圈工程師</title>
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
   
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R47Z93ZJTM"></script>
-  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-R47Z93ZJTM","only_pageview":false,"measure_protocol_api_secret":null}</script>
-  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
-
-
-
-
-
-
-
-
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
-<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
-
-  
-
-
-
-
-
-
-  
-
-
-
-
-
-  <noscript>
-    <link rel="stylesheet" href="/css/noscript.css">
-  </noscript>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
-  <div class="headband"></div>
-
-  <main class="main">
-    <div class="column">
-      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切換導航欄" role="button">
-        <span class="toggle-line"></span>
-        <span class="toggle-line"></span>
-        <span class="toggle-line"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <i class="logo-line"></i>
-      <h1 class="site-title">圈圈工程師</h1>
-      <i class="logo-line"></i>
-    </a>
-      <p class="site-subtitle" itemprop="description">Change Change Developer</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
-    </div>
-  </div>
-</div>
-
-
-
-<nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-back-end"><a href="/categories/back-end/" rel="section"><i class="fas fa-rocket fa-fw"></i>Back-End</a></li><li class="menu-item menu-item-sharing"><a href="/categories/Sharing/" rel="section"><i class="fas fa-star fa-fw"></i>Sharing</a></li><li class="menu-item menu-item-reading"><a href="/categories/Reading/" rel="section"><i class="fas fa-book fa-fw"></i>Reading</a></li><li class="menu-item menu-item-design-pattern"><a href="/categories/design-pattern/" rel="section"><i class="fas fa-sitemap fa-fw"></i>Design-Pattern</a></li><li class="menu-item menu-item-javascript"><a href="/categories/js/" rel="section"><i class="fas fa-code fa-fw"></i>Javascript</a></li><li class="menu-item menu-item-一言不合自己寫"><a href="/tags/%E4%B8%80%E8%A8%80%E4%B8%8D%E5%90%88%E8%87%AA%E5%B7%B1%E5%AF%AB/" rel="section"><i class="fas fa-bolt fa-fw"></i>一言不合自己寫</a></li><li class="menu-item menu-item-分類"><a href="/categories/" rel="section"><i class="fas fa-folder-open fa-fw"></i>分類</a></li>
-  </ul>
-</nav>
-
-
-
-
-</header>
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
         
-  
-  <aside class="sidebar">
-
-    <div class="sidebar-inner sidebar-overview-active">
-      <ul class="sidebar-nav">
-        <li class="sidebar-nav-toc">
-          文章目錄
-        </li>
-        <li class="sidebar-nav-overview">
-          本站概要
-        </li>
-      </ul>
-
-      <div class="sidebar-panel-container">
-        <!--noindex-->
-        <div class="post-toc-wrap sidebar-panel">
-        </div>
-        <!--/noindex-->
-
-        <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="ChanChanDev"
-      src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
-  <p class="site-author-name" itemprop="name">ChanChanDev</p>
-  <div class="site-description" itemprop="description">圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。</div>
-</div>
-<div class="site-state-wrap animated">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-        <a href="/archives/">
-          <span class="site-state-item-count">39</span>
-          <span class="site-state-item-name">文章</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-          <a href="/categories/">
-        <span class="site-state-item-count">31</span>
-        <span class="site-state-item-name">分類</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">33</span>
-        <span class="site-state-item-name">標籤</span>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author animated">
-      <span class="links-of-author-item">
-        <a href="https://twitter.com/chanchandev" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;chanchandev" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://www.facebook.com/chanchandev" title="FaceBook → https:&#x2F;&#x2F;www.facebook.com&#x2F;chanchandev" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-facebook fa-fw"></i>FaceBook</a>
-      </span>
-  </div>
-
-        </div>
-      </div>
-    </div>
-
-    
-  </aside>
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">標籤</div><div class="length-num">33</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分類</div><div class="length-num">31</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/categories/back-end/"><i class="fa-fw fas fa-rocket"></i><span> Back-End</span></a></div><div class="menus_item"><a class="site-page" href="/categories/design-pattern/"><i class="fa-fw fas fas fa-sitemap"></i><span> Design-Pattern</span></a></div><div class="menus_item"><a class="site-page" href="/categories/js/"><i class="fa-fw fas fa-code"></i><span> Javascript</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分類</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 歸檔</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/index-img-draw.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">圈圈工程師</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/categories/back-end/"><i class="fa-fw fas fa-rocket"></i><span> Back-End</span></a></div><div class="menus_item"><a class="site-page" href="/categories/design-pattern/"><i class="fa-fw fas fas fa-sitemap"></i><span> Design-Pattern</span></a></div><div class="menus_item"><a class="site-page" href="/categories/js/"><i class="fa-fw fas fa-code"></i><span> Javascript</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分類</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 歸檔</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">圈圈工程師</h1><div id="site-subtitle"><span id="subtitle"></span></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left_radius"><a href="/note/Binary/binary-intro/3766688417/" title="二進位圖解入門教學">     <img class="post_bg" src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/binary-intro/Cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="二進位圖解入門教學"></a></div><div class="recent-post-info"><a class="article-title" href="/note/Binary/binary-intro/3766688417/" title="二進位圖解入門教學">二進位圖解入門教學</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2021-04-25T01:30:30.000Z" title="發表於 2021-04-25 09:30:30">2021-04-25</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/note/">Note</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/note/Binary/">Binary</a></span></div><div class="content">什麼是二進位呢？為什麼又需要二進位？它跟我們有什麼關係？讓我們簡單地用圖解來一起學習二進位吧！
 
 
-    </div>
-
-    <div class="main-inner index posts-expand">
-
-    
+HIHI ～ 😍 如果你是第一次來的話，『Chan-Chan-Dev』是一個專門用簡單的圖文與故事講解網路程式技術的網站。若你也喜歡用這種方式學習的話，歡迎加入 Chan-Chan-Dev Facebook 的粉絲團，在發佈的時候就有比較多機會收到通知喔！😍
 
 
-<div class="post-block">
-  
-  
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jessie75919.github.io/note/Binary/binary-intro/3766688417/">
+這篇文章之前已於 2020/01/05 發佈在 Medium，因爲已經不再維護 Medium，因此將這篇文章搬回來囉！ 😆
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
-      <meta itemprop="name" content="ChanChanDev">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="圈圈工程師">
-      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
-    </span>
+在理解二進位之前，也許可以先從我們最習慣的『十進位』開始出發。
+我們開始吧！😆
+十進位假如有人叫我們從 0 數到 10，我們習慣的數數方式大概會是這樣：『 0, 1, 2, 3, 4, 5, 6, 7, 8, 9』，從 0 一路數到 9，下一個數字遇到了 10，因為是十進位的關係，所以遇到 10 就會自動的進位。
+所謂的『近位』也就是右邊的個位數字歸 0（下圖藍色的 0 ），而在左邊的數字 +1 （下圖紅色的 1）的意思。
 
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 圈圈工程師">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/note/Binary/binary-intro/3766688417/" class="post-title-link" itemprop="url">二進位圖解入門教學</a>
-        </h2>
 
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
 
-      <time title="創建時間：2021-04-25 09:30:30" itemprop="dateCreated datePublished" datetime="2021-04-25T09:30:30+08:00">2021-04-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2026-01-28 20:40:17" itemprop="dateModified" datetime="2026-01-28T20:40:17+08:00">2026-01-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/note/Binary/" itemprop="url" rel="index"><span itemprop="name">Binary</span></a>
-        </span>
-    </span>
+0 ~ 10  的進位至於到了 90 ~ 99 的時候，下一個數 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/js/Function/function-scope/2863996532/" title="Javascript Function 作用域！一起用小明開分身的故事學習作用域！">     <img class="post_bg" src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-scope/Cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Javascript Function 作用域！一起用小明開分身的故事學習作用域！"></a></div><div class="recent-post-info"><a class="article-title" href="/js/Function/function-scope/2863996532/" title="Javascript Function 作用域！一起用小明開分身的故事學習作用域！">Javascript Function 作用域！一起用小明開分身的故事學習作用域！</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2021-04-24T15:25:02.000Z" title="發表於 2021-04-24 23:25:02">2021-04-24</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/js/">Javascript</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/js/Function/">Function</a></span></div><div class="content">當我們學會了 Javascript 的 Function 怎麼使用後，有沒有常常因爲參數、變數、全域變數傻傻分不清楚的問題呢？今天我們就來聊聊 Javascript 的 Function Scope 吧！
 
-  
-</div>
 
-        </div>
-      </header>
+HIHI～😍  如果你是第一次來的話，『Chan-Chan-Dev』是一個專門用簡單的圖文與故事講解網路程式技術的網站。若你也喜歡用這種方式學習的話，歡迎加入 Chan-Chan-Dev Facebook 的粉絲團，在發佈的時候就有比較多機會收到通知喔！😍
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/binary-intro/Cover.jpg"><br>什麼是二進位呢？為什麼又需要二進位？它跟我們有什麼關係？讓我們簡單地用圖解來一起學習二進位吧！</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/note/Binary/binary-intro/3766688417/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
+
+
+Function 前情提要在上一篇 Javascript Function 超基礎入門！老司機勿入！ 提到 Function 的最基礎用法，若錯過的朋友可以先花個簡單的幾分鐘瀏覽一下喔 😀
+Function Scope 函數作用域什麼是 Function Scope 函數作用域呢？ 
+在回答這個問題之前，讓我們一樣來個小故事吧 😆
+從前從前從前在一塊元古的大陸上，這塊大陸上有著好幾個大大小小的原始的部落。
+
+這些部落裡中有個不成文且流傳已久的奇怪規定，就是『任何一個從這個部落出生的人，終其一生都不可以跨越邊界』， ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/js/Function/function-intro/2954858119/" title="Javascript Function 超基礎入門！老司機勿入！">     <img class="post_bg" src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-intro-1/Cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Javascript Function 超基礎入門！老司機勿入！"></a></div><div class="recent-post-info"><a class="article-title" href="/js/Function/function-intro/2954858119/" title="Javascript Function 超基礎入門！老司機勿入！">Javascript Function 超基礎入門！老司機勿入！</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2021-04-21T14:44:06.000Z" title="發表於 2021-04-21 22:44:06">2021-04-21</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/js/">Javascript</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/js/Function/">Function</a></span></div><div class="content">Javascript Function 是什麼？這篇 Function 超入門是寫給初學者的介紹文，用簡單的幾分鐘一起圖解學習 function 的基礎吧！
+
+
+
+HIHI～😍  如果你是第一次來的話，『Chan-Chan-Dev』是一個專門用簡單的圖文與故事講解網路程式技術的網站。若你也喜歡用這種方式學習的話，歡迎加入 Chan-Chan-Dev Facebook 的粉絲團，在發佈的時候就有比較多機會收到通知喔！😍
+
+
+閱讀對象這篇是寫給當初新手小白剛學 Javascript 那個懵懵懂懂的自己，也希望能夠幫助新手階段想要學習 function 的你。
+若已經是老司機的你（欸）… 還是可以快速看過啦！ 😆
+那我們開始囉 😊
+
+為什麼需要 function？function (函數) 是 Javascript 最基本的程式組成區塊之一。
+不過在繼續學習之前，我們用先來問一個很簡單的問題？
+你今天早上有喝咖啡嗎？ 😆
+
+
+OS：「屙？有阿，但跟 function 的關係是啥？🤣」
+有的！其實我們已經默默地都在生活中使用 function 了，只是也許我們沒有意會到這件事情罷了 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/js/Async/async-sync-intro/2534378084/" title="Javascript 非同步 &amp; Event Loop！10 分鐘輕鬆圖解學習！">     <img class="post_bg" src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/Cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Javascript 非同步 &amp; Event Loop！10 分鐘輕鬆圖解學習！"></a></div><div class="recent-post-info"><a class="article-title" href="/js/Async/async-sync-intro/2534378084/" title="Javascript 非同步 &amp; Event Loop！10 分鐘輕鬆圖解學習！">Javascript 非同步 &amp; Event Loop！10 分鐘輕鬆圖解學習！</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2021-04-19T12:40:11.000Z" title="發表於 2021-04-19 20:40:11">2021-04-19</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/js/">Javascript</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/js/Async/">Async</a></span></div><div class="content">有聽過 Javascript 是個『非同步』的語言嗎？為什麼它可以做到『非同步』的效果呢？一起用圖解的方式來學習 Javascript 的『同步』與『非同步』吧！
+
+
+
+
+HIHI～😍  如果你是第一次來的話，『Chan-Chan-Dev』是一個專門用簡單的圖文與故事講解網路程式技術的網站。若你也喜歡用這種方式學習的話，歡迎加入 Chan-Chan-Dev Facebook 的粉絲團，在發佈的時候就有比較多機會收到通知喔！😍
+
+
+在學習 Javascript 過程中，應該多少都會耳聞過 Javascript 非同步 的特性，在聊聊 非同步 的特性之前，也許我們要先知道何爲 同步 囉 😆。
+同步 (Sync)我們用小明早上起床出門上班前的小例子來學習這兩者的差別吧 😀假如小明從起床到上班出門前他需要完成以下幾件事情：
+
+
+刷牙、洗臉 （10 分鐘）
+用義式咖啡機泡咖啡（10 分鐘）
+用電鍋準備午餐（10 分鐘）
+
+
+若今天小明 一件事情完成後，在繼續執行下一件事情。
+例如：刷牙、洗臉 （10 分鐘） 完接著用 用義式咖啡機泡咖啡（10 分鐘） ，然後 用電鍋準備午餐（10 分鐘） ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/HTTP/Cache/cache-intro/1156542307/" title="HTTP Cache 是什麼呢？用小故事圖解來學習 Cache 吧！">     <img class="post_bg" src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/cache-intro/Cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="HTTP Cache 是什麼呢？用小故事圖解來學習 Cache 吧！"></a></div><div class="recent-post-info"><a class="article-title" href="/HTTP/Cache/cache-intro/1156542307/" title="HTTP Cache 是什麼呢？用小故事圖解來學習 Cache 吧！">HTTP Cache 是什麼呢？用小故事圖解來學習 Cache 吧！</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2021-04-07T14:32:23.000Z" title="發表於 2021-04-07 22:32:23">2021-04-07</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/HTTP/">HTTP</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/HTTP/Cache/">Cache</a></span></div><div class="content">
+Http Cache 是什麼？為什麼需要 Cache 呢？今天就來點 Cache 相關的小學習吧！
+
+
+
+
+HIHI～😍  如果你是第一次來的話，『Chan-Chan-Dev』是一個專門用簡單的圖文與故事講解網路程式技術的網站。若你也喜歡用這種方式學習的話，歡迎加入 Chan-Chan-Dev Facebook 的粉絲團，在發佈的時候就有比較多機會收到通知喔！😍
+
+
+我們進入正片囉 😆
+在學習網頁開發的過程中，多多少少都會耳聞 快取 或者是 Cache 這個關鍵字，但是他究竟是用來幹嘛的呢？
+在進入 Cache 的主題前，我們一樣先來個小故事當作起手式。
+這次來說說小明跟料理大師 Chef Master 拜師學藝後自己經營餐館的故事囉！
+
+小明從小就夢想著自己經營著一家餐館，想像著端出熱騰騰的美食到客人面前，客人因爲吃到美食的那刻銷魂的神情，光想到這裏他就感到十分地嚮往。
+無奈他目前的工作都跟美食搭不上邊，於是他終於在 30 歲的時候下定決心要成爲特級廚師 😅，所以就 Google 了一下，在陽明山裡找到曾經也是特級廚師的 Chef Master。經過了半年辛苦的密及訓練，C ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/back-end/Session/session-intro/1577685640/" title="Session &amp; Cookie 傻傻分不清楚：Session 篇">     <img class="post_bg" src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/session-cookie-intro/Session-Cover-Text.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Session &amp; Cookie 傻傻分不清楚：Session 篇"></a></div><div class="recent-post-info"><a class="article-title" href="/back-end/Session/session-intro/1577685640/" title="Session &amp; Cookie 傻傻分不清楚：Session 篇">Session &amp; Cookie 傻傻分不清楚：Session 篇</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2021-04-05T13:34:23.000Z" title="發表於 2021-04-05 21:34:23">2021-04-05</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/back-end/">Backend</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/back-end/Session/">Session</a></span></div><div class="content">
+你知道什麼是 Session 嗎？為什麼需要它？它又是怎麼運作的呢？ 今天就來聊聊 Session 吧！
+
+
+
+
+HIHI～😍  如果你是第一次來的話，『Chan-Chan-Dev』是一個專門用簡單的圖文與故事講解網路程式技術的網站。若你也喜歡用這種方式學習的話，歡迎加入 Chan-Chan-Dev Facebook 的粉絲團，在發佈的時候就有比較多機會收到通知喔！😍
+
+
+
+身爲一個後端工程師，在學習的過程中一定都會經歷過 2 個關鍵字： Session &amp; Cookie。
+也許許多的語言或者是套件已經幫我們完成了 Session 與 Cookie 的功能，我們需要的僅止於知道如何使用他們。然而剛好趁這次的機會來好好瞭解一下他們的使用方式與背後的原理吧。
+前情提要這篇是《 Session &amp; Cookie 傻傻分不清楚》的下篇，簡單地介紹了 Session 是什麼與介紹情境。
+若錯過上集的朋友，可以請往這邊走： Session &amp; Cookie 傻傻分不清楚：Cookie 篇
+
+在上一集我們有提到，因爲 HTTP 無狀態 的情況下，伺服器無法在這麼多個 H ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/back-end/Cookies/cookie-intro/3173700095/" title="Session &amp; Cookie 傻傻分不清楚：Cookie 篇">     <img class="post_bg" src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/session-cookie-intro/Cookie-Cover-Text.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Session &amp; Cookie 傻傻分不清楚：Cookie 篇"></a></div><div class="recent-post-info"><a class="article-title" href="/back-end/Cookies/cookie-intro/3173700095/" title="Session &amp; Cookie 傻傻分不清楚：Cookie 篇">Session &amp; Cookie 傻傻分不清楚：Cookie 篇</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2021-03-20T13:34:23.000Z" title="發表於 2021-03-20 21:34:23">2021-03-20</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/back-end/">Backend</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/back-end/Cookies/">Cookies</a></span></div><div class="content">你知道什麼是 Cookie 嗎？為什麼需要它？它又是怎麼運作的呢？今天就來聊聊 Cookie 吧!
+
+
+
+HIHI～😍  如果你是第一次來的話，『Chan-Chan-Dev』是一個專門用簡單的圖文與故事講解網路程式技術的網站。若你也喜歡用這種方式學習的話，歡迎加入 Chan-Chan-Dev Facebook 的粉絲團，在發佈的時候就有比較多機會收到通知喔！😍
+
+
+
+身爲一個後端工程師，在學習的過程中一定都會經歷過 2 個關鍵字： Session &amp; Cookie。
+也許許多的語言或者是套件已經幫我們完成了 Session 與 Cookie 的功能，我們需要的僅止於知道如何使用他們。然而剛好趁這次的機會來好好瞭解一下他們的使用方式與背後的原理吧。
+前情提要HTTP (Hypertext Transfer Protocol) 協定目前大部分所有的網路溝通的方式都建立在 HTTP 的協定上。至於 HTTP 是什麼呢？今天先不聊這 Part 😆
+簡單地解釋一下 HTTP 的最基本運作方式：
+
+使用者 會對 伺服器 發起一個 HTTP 請求 (Request)
+伺服器 接到 使用 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/note/Hexo/hexo-introduction/2335841689/" title="架設部落格第一次就上手 Hexo + Github + 自訂網域">     <img class="post_bg" src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/hexo-introduction/index.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="架設部落格第一次就上手 Hexo + Github + 自訂網域"></a></div><div class="recent-post-info"><a class="article-title" href="/note/Hexo/hexo-introduction/2335841689/" title="架設部落格第一次就上手 Hexo + Github + 自訂網域">架設部落格第一次就上手 Hexo + Github + 自訂網域</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2021-03-07T04:02:38.000Z" title="發表於 2021-03-07 12:02:38">2021-03-07</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/note/">Note</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/note/Hexo/">Hexo</a></span></div><div class="content">
+身爲一個工程師，隨著時間的成長，所需學習的知識日益增加。對於過往的知識都要完美地記得似乎是一個不可能的任務。於是爲自己所學的技能設立一個知識資料庫讓未來的自己可以查詢似乎就變得十分重要了，就來看看如何用  Hexo + Github 架設部落格吧！
+
+
+
+
+HIHI～😍  如果你是第一次來的話，『Chan-Chan-Dev』是一個專門用簡單的圖文與故事講解網路程式技術的網站。若你也喜歡用這種方式學習的話，歡迎加入 Chan-Chan-Dev Facebook 的粉絲團，在發佈的時候就有比較多機會收到通知喔！😍
+
+
+
+這篇文章是寫給誰看的呢？
+會使用 Git 的工程師 或 對 Git 有一定瞭解的人
+瞭解 Markdown 語法怎麼使用
+需要架設自己 Blog 且 希望有自己的網域的人
+
+若你已經知道為什麼要寫 Blog 與使用 Hexo 的原因的朋友，可以快轉到 安裝 / 設定 Hexo 囉 😍
+
+為什麼要架設 Blog身爲一個工程師，隨著時間的成長，所需學習的知識日益增加。對於過往的知識都要完美地記得似乎是一個不可能的任務。於是爲自己所學的技能設立一個知識資料庫讓未來的自己可 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/Sharing/%E5%A6%82%E6%9E%9C%E6%97%A9%E7%9F%A5%E9%81%93/early-return/3835460171/" title="儘早 Return 函數：讓 if 邏輯條件判斷不再一層又一層！">     <img class="post_bg" src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/early-return/early-return-index.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="儘早 Return 函數：讓 if 邏輯條件判斷不再一層又一層！"></a></div><div class="recent-post-info"><a class="article-title" href="/Sharing/%E5%A6%82%E6%9E%9C%E6%97%A9%E7%9F%A5%E9%81%93/early-return/3835460171/" title="儘早 Return 函數：讓 if 邏輯條件判斷不再一層又一層！">儘早 Return 函數：讓 if 邏輯條件判斷不再一層又一層！</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2021-03-05T05:11:47.000Z" title="發表於 2021-03-05 13:11:47">2021-03-05</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Sharing/">Sharing</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/Sharing/%E5%A6%82%E6%9E%9C%E6%97%A9%E7%9F%A5%E9%81%93/">如果早知道</a></span></div><div class="content">
+程式新手只會知道 function 回傳值的時候需要用到 return，但 return 的使用時機只有如此嗎？一起來看看如何用 return 讓程式碼變得更簡潔易懂的方法吧！
+
+
+
+
+HIHI～😍  如果你是第一次來的話，『Chan-Chan-Dev』是一個專門用簡單的圖文與故事講解網路程式技術的網站。若你也喜歡用這種方式學習的話，歡迎加入 Chan-Chan-Dev Facebook 的粉絲團，在發佈的時候就有比較多機會收到通知喔！😍
+
+
+
+相信大家在寫程式的過程中，常常會遇到一些需要判斷好幾個不同狀況的時候，例如：表單送出前的驗證。
+例如以下有一個類似這樣子的表單：
+
+上面的欄位設定都是爲必須填寫的，所以在讓使用者送出之前，我們就必須要一一地檢查使用者是不是有輸入內容（這邊討論的是不使用套件來做驗證的範圍喔 😆）。
+所以我們要檢查以下：
+
+使用者帳號是否有填寫，如果沒有就跳出提示。
+使用者 Email 是否有填寫，如果沒有就跳出提示。
+使用者 Email 格式是否正確，如果沒有就跳出提示。
+使用者密碼是否有填寫，如果沒有就跳出提示。
+使用者地址是否有填寫，如果沒有就跳出提 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/design-pattern/Strategy/Strategy%20%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/2415029893/" title="Strategy 設計模式">     <img class="post_bg" src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/Strategy-Intro/Untitled.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Strategy 設計模式"></a></div><div class="recent-post-info"><a class="article-title" href="/design-pattern/Strategy/Strategy%20%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/2415029893/" title="Strategy 設計模式">Strategy 設計模式</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2021-03-04T15:47:22.000Z" title="發表於 2021-03-04 23:47:22">2021-03-04</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/design-pattern/">Design-Pattern</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/design-pattern/Strategy/">Strategy</a></span></div><div class="content">
+大衛總是因爲不同女友而要表現的行爲都有所不同，而搞得自己暈頭轉向，但後來學習了 Strategy 設計模式後，他就更有組織地管理他的女友們了，女友們也變得更滿意了，一起來看看他怎麼做到的吧！
+
+
+
+
+HIHI～😍  如果你是第一次來的話，『Chan-Chan-Dev』是一個專門用簡單的圖文與故事講解網路程式技術的網站。若你也喜歡用這種方式學習的話，歡迎加入 Chan-Chan-Dev Facebook 的粉絲團，在發佈的時候就有比較多機會收到通知喔！😍
+
+
+
+在寫程式的過程中，一定很常遇到需要很多不同情況而有不同行爲(策略)的功能。
+這樣子例子在生活中其實滿常見的，例如天氣變冷了，我們受到 Natural call 就會不自覺地想要吃火鍋，而天氣變熱了，我們就會覺得吃涼麵比較清爽，明明都是『吃』的行爲，但是卻因爲『氣溫』的情況不同，就會讓這個『吃』的行爲（策略）而有所不同。
+所以如果要達到上述的不同情況有不同的行爲，那條件語句是邏輯判斷的過程中無可避免的必須，但隨著情況增長，條件語句也會跟着變多，很快地就會難以維護了。
+因此很多不同的情況下，要如何用更少的 if else 更有結 ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/2/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#content-inner">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#content-inner">4</a><a class="extend next" rel="next" href="/page/4/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">ChanChanDev</div><div class="author-info__description">Coding x Reading x Painting</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">標籤</div><div class="length-num">33</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分類</div><div class="length-num">31</div></a></div></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/side-project/student-management/3118241358/" title="[一言不合自己寫 3] 把音樂老師老婆當客戶，開發家教學生管理系統 ── 聽聽音樂 APP"><img src="/side-project/student-management/3118241358/cover.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="[一言不合自己寫 3] 把音樂老師老婆當客戶，開發家教學生管理系統 ── 聽聽音樂 APP"/></a><div class="content"><a class="title" href="/side-project/student-management/3118241358/" title="[一言不合自己寫 3] 把音樂老師老婆當客戶，開發家教學生管理系統 ── 聽聽音樂 APP">[一言不合自己寫 3] 把音樂老師老婆當客戶，開發家教學生管理系統 ── 聽聽音樂 APP</a><time datetime="2026-05-23T15:30:00.000Z" title="發表於 2026-05-23 23:30:00">2026-05-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/side-project/gemini-management-extension/492080683/" title="[一言不合自己寫 2] 幫 AI 對話加上「資料夾分類」功能"><img src="/side-project/gemini-management-extension/492080683/cover-illustration.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="[一言不合自己寫 2] 幫 AI 對話加上「資料夾分類」功能"/></a><div class="content"><a class="title" href="/side-project/gemini-management-extension/492080683/" title="[一言不合自己寫 2] 幫 AI 對話加上「資料夾分類」功能">[一言不合自己寫 2] 幫 AI 對話加上「資料夾分類」功能</a><time datetime="2026-05-23T13:00:00.000Z" title="發表於 2026-05-23 21:00:00">2026-05-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/side-project/raycast-transcribe/2026012801/" title="[一言不合自己寫 1] 我只想打嘴砲！如何用 Vibe Coding 解放雙手！打造語音轉文字小幫手 Voice Polish！"><img src="/side-project/raycast-transcribe/2026012801/v3.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="[一言不合自己寫 1] 我只想打嘴砲！如何用 Vibe Coding 解放雙手！打造語音轉文字小幫手 Voice Polish！"/></a><div class="content"><a class="title" href="/side-project/raycast-transcribe/2026012801/" title="[一言不合自己寫 1] 我只想打嘴砲！如何用 Vibe Coding 解放雙手！打造語音轉文字小幫手 Voice Polish！">[一言不合自己寫 1] 我只想打嘴砲！如何用 Vibe Coding 解放雙手！打造語音轉文字小幫手 Voice Polish！</a><time datetime="2026-01-28T13:00:00.000Z" title="發表於 2026-01-28 21:00:00">2026-01-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/design-pattern/Observer/observer-design-pattern/2118150761/" title="觀察者設計模式（Observer Design Pattern）"><img src="/design-pattern/Observer/observer-design-pattern/2118150761/cover.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="觀察者設計模式（Observer Design Pattern）"/></a><div class="content"><a class="title" href="/design-pattern/Observer/observer-design-pattern/2118150761/" title="觀察者設計模式（Observer Design Pattern）">觀察者設計模式（Observer Design Pattern）</a><time datetime="2023-10-14T08:24:54.000Z" title="發表於 2023-10-14 16:24:54">2023-10-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/dsa/Container-With-Most-Water/858250619/" title="Leetcode 筆記 - 圖解解題 Container With Most Water"><img src="/dsa/Container-With-Most-Water/858250619/cover.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Leetcode 筆記 - 圖解解題 Container With Most Water"/></a><div class="content"><a class="title" href="/dsa/Container-With-Most-Water/858250619/" title="Leetcode 筆記 - 圖解解題 Container With Most Water">Leetcode 筆記 - 圖解解題 Container With Most Water</a><time datetime="2023-10-11T23:54:34.000Z" title="發表於 2023-10-12 07:54:34">2023-10-12</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分類</span>
+            <a class="card-more-btn" href="/categories/" title="檢視更多">
+    <i class="fas fa-angle-right"></i></a>
             </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jessie75919.github.io/js/Function/function-scope/2863996532/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
-      <meta itemprop="name" content="ChanChanDev">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="圈圈工程師">
-      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 圈圈工程師">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/js/Function/function-scope/2863996532/" class="post-title-link" itemprop="url">Javascript Function 作用域！一起用小明開分身的故事學習作用域！</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2021-04-24 23:25:02" itemprop="dateCreated datePublished" datetime="2021-04-24T23:25:02+08:00">2021-04-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2026-01-28 20:40:17" itemprop="dateModified" datetime="2026-01-28T20:40:17+08:00">2026-01-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/js/" itemprop="url" rel="index"><span itemprop="name">Javascript</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/js/Function/" itemprop="url" rel="index"><span itemprop="name">Function</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-scope/Cover.jpg"><br>當我們學會了 Javascript 的 Function 怎麼使用後，有沒有常常因爲參數、變數、全域變數傻傻分不清楚的問題呢？今天我們就來聊聊 Javascript 的 Function Scope 吧！</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/js/Function/function-scope/2863996532/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jessie75919.github.io/js/Function/function-intro/2954858119/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
-      <meta itemprop="name" content="ChanChanDev">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="圈圈工程師">
-      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 圈圈工程師">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/js/Function/function-intro/2954858119/" class="post-title-link" itemprop="url">Javascript Function 超基礎入門！老司機勿入！</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2021-04-21 22:44:06" itemprop="dateCreated datePublished" datetime="2021-04-21T22:44:06+08:00">2021-04-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2026-01-28 20:40:17" itemprop="dateModified" datetime="2026-01-28T20:40:17+08:00">2026-01-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/js/" itemprop="url" rel="index"><span itemprop="name">Javascript</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/js/Function/" itemprop="url" rel="index"><span itemprop="name">Function</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/js-function-intro-1/Cover.jpg"><br>Javascript Function 是什麼？這篇 Function 超入門是寫給初學者的介紹文，用簡單的幾分鐘一起圖解學習 function 的基礎吧！</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/js/Function/function-intro/2954858119/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jessie75919.github.io/js/Async/async-sync-intro/2534378084/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
-      <meta itemprop="name" content="ChanChanDev">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="圈圈工程師">
-      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 圈圈工程師">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/js/Async/async-sync-intro/2534378084/" class="post-title-link" itemprop="url">Javascript 非同步 & Event Loop！10 分鐘輕鬆圖解學習！</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2021-04-19 20:40:11" itemprop="dateCreated datePublished" datetime="2021-04-19T20:40:11+08:00">2021-04-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2026-01-28 20:40:17" itemprop="dateModified" datetime="2026-01-28T20:40:17+08:00">2026-01-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/js/" itemprop="url" rel="index"><span itemprop="name">Javascript</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/js/Async/" itemprop="url" rel="index"><span itemprop="name">Async</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/async-sync-intro/Cover.jpg"><br>有聽過 Javascript 是個『非同步』的語言嗎？為什麼它可以做到『非同步』的效果呢？一起用圖解的方式來學習 Javascript 的『同步』與『非同步』吧！</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/js/Async/async-sync-intro/2534378084/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jessie75919.github.io/HTTP/Cache/cache-intro/1156542307/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
-      <meta itemprop="name" content="ChanChanDev">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="圈圈工程師">
-      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 圈圈工程師">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/HTTP/Cache/cache-intro/1156542307/" class="post-title-link" itemprop="url">HTTP Cache 是什麼呢？用小故事圖解來學習 Cache 吧！</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2021-04-07 22:32:23" itemprop="dateCreated datePublished" datetime="2021-04-07T22:32:23+08:00">2021-04-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2026-01-28 20:40:17" itemprop="dateModified" datetime="2026-01-28T20:40:17+08:00">2026-01-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/HTTP/" itemprop="url" rel="index"><span itemprop="name">HTTP</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/HTTP/Cache/" itemprop="url" rel="index"><span itemprop="name">Cache</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/cache-intro/Cover.jpg"></p>
-<p>Http Cache 是什麼？為什麼需要 Cache 呢？今天就來點 Cache 相關的小學習吧！</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/HTTP/Cache/cache-intro/1156542307/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jessie75919.github.io/back-end/Session/session-intro/1577685640/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
-      <meta itemprop="name" content="ChanChanDev">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="圈圈工程師">
-      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 圈圈工程師">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/back-end/Session/session-intro/1577685640/" class="post-title-link" itemprop="url">Session & Cookie 傻傻分不清楚：Session 篇</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2021-04-05 21:34:23" itemprop="dateCreated datePublished" datetime="2021-04-05T21:34:23+08:00">2021-04-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2026-01-28 20:40:17" itemprop="dateModified" datetime="2026-01-28T20:40:17+08:00">2026-01-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/back-end/" itemprop="url" rel="index"><span itemprop="name">Backend</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/back-end/Session/" itemprop="url" rel="index"><span itemprop="name">Session</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/session-cookie-intro/Session-Cover.jpg"></p>
-<p>你知道什麼是 Session 嗎？為什麼需要它？它又是怎麼運作的呢？ 今天就來聊聊 Session 吧！</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/back-end/Session/session-intro/1577685640/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jessie75919.github.io/back-end/Cookies/cookie-intro/3173700095/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
-      <meta itemprop="name" content="ChanChanDev">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="圈圈工程師">
-      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 圈圈工程師">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/back-end/Cookies/cookie-intro/3173700095/" class="post-title-link" itemprop="url">Session & Cookie 傻傻分不清楚：Cookie 篇</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2021-03-20 21:34:23" itemprop="dateCreated datePublished" datetime="2021-03-20T21:34:23+08:00">2021-03-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2026-01-28 20:40:17" itemprop="dateModified" datetime="2026-01-28T20:40:17+08:00">2026-01-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/back-end/" itemprop="url" rel="index"><span itemprop="name">Backend</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/back-end/Cookies/" itemprop="url" rel="index"><span itemprop="name">Cookies</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/session-cookie-intro/Cookie-cover.jpg"><br>你知道什麼是 Cookie 嗎？為什麼需要它？它又是怎麼運作的呢？今天就來聊聊 Cookie 吧!</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/back-end/Cookies/cookie-intro/3173700095/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jessie75919.github.io/note/Hexo/hexo-introduction/2335841689/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
-      <meta itemprop="name" content="ChanChanDev">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="圈圈工程師">
-      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 圈圈工程師">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/note/Hexo/hexo-introduction/2335841689/" class="post-title-link" itemprop="url">架設部落格第一次就上手 Hexo + Github + 自訂網域</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2021-03-07 12:02:38" itemprop="dateCreated datePublished" datetime="2021-03-07T12:02:38+08:00">2021-03-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2026-01-28 20:40:17" itemprop="dateModified" datetime="2026-01-28T20:40:17+08:00">2026-01-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/note/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/hexo-introduction/index.png"></p>
-<p>身爲一個工程師，隨著時間的成長，所需學習的知識日益增加。對於過往的知識都要完美地記得似乎是一個不可能的任務。於是爲自己所學的技能設立一個知識資料庫讓未來的自己可以查詢似乎就變得十分重要了，就來看看如何用  Hexo + Github 架設部落格吧！</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/note/Hexo/hexo-introduction/2335841689/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jessie75919.github.io/Sharing/%E5%A6%82%E6%9E%9C%E6%97%A9%E7%9F%A5%E9%81%93/early-return/3835460171/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
-      <meta itemprop="name" content="ChanChanDev">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="圈圈工程師">
-      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 圈圈工程師">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/Sharing/%E5%A6%82%E6%9E%9C%E6%97%A9%E7%9F%A5%E9%81%93/early-return/3835460171/" class="post-title-link" itemprop="url">儘早 Return 函數：讓 if 邏輯條件判斷不再一層又一層！</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2021-03-05 13:11:47" itemprop="dateCreated datePublished" datetime="2021-03-05T13:11:47+08:00">2021-03-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2026-01-28 20:40:17" itemprop="dateModified" datetime="2026-01-28T20:40:17+08:00">2026-01-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Sharing/" itemprop="url" rel="index"><span itemprop="name">Sharing</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Sharing/%E5%A6%82%E6%9E%9C%E6%97%A9%E7%9F%A5%E9%81%93/" itemprop="url" rel="index"><span itemprop="name">如果早知道</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/early-return/early-return-index.png"></p>
-<p>程式新手只會知道 function 回傳值的時候需要用到 return，但 return 的使用時機只有如此嗎？一起來看看如何用 return 讓程式碼變得更簡潔易懂的方法吧！</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Sharing/%E5%A6%82%E6%9E%9C%E6%97%A9%E7%9F%A5%E9%81%93/early-return/3835460171/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jessie75919.github.io/design-pattern/Strategy/Strategy%20%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/2415029893/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
-      <meta itemprop="name" content="ChanChanDev">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="圈圈工程師">
-      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 圈圈工程師">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/design-pattern/Strategy/Strategy%20%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/2415029893/" class="post-title-link" itemprop="url">Strategy 設計模式</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2021-03-04 23:47:22" itemprop="dateCreated datePublished" datetime="2021-03-04T23:47:22+08:00">2021-03-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2026-01-28 20:40:17" itemprop="dateModified" datetime="2026-01-28T20:40:17+08:00">2026-01-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/design-pattern/" itemprop="url" rel="index"><span itemprop="name">Design-Pattern</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/design-pattern/Strategy/" itemprop="url" rel="index"><span itemprop="name">Strategy</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/Strategy-Intro/Untitled.png"></p>
-<p>大衛總是因爲不同女友而要表現的行爲都有所不同，而搞得自己暈頭轉向，但後來學習了 Strategy 設計模式後，他就更有組織地管理他的女友們了，女友們也變得更滿意了，一起來看看他怎麼做到的吧！</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/design-pattern/Strategy/Strategy%20%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/2415029893/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一頁" aria-label="上一頁" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" title="下一頁" aria-label="下一頁" href="/page/4/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
-</div>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-inner">
-
-  <div class="copyright">
-    &copy; 2020 – 
-    <span itemprop="copyrightYear">2026</span>
-    <span class="with-love">
-      <i class="fa fa-heart"></i>
-    </span>
-    <span class="author" itemprop="copyrightHolder">ChanChanDev</span>
-  </div>
-
-    </div>
-  </footer>
-
-  
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-  <div class="sidebar-dimmer"></div>
-  <div class="back-to-top" role="button" aria-label="回到頂端">
-    <i class="fa fa-arrow-up fa-lg"></i>
-    <span>0%</span>
-  </div>
-  <div class="reading-progress-bar"></div>
-
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
-
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"Jessie75919","repo":"Jessie75919.github.io","client_id":"5cc00853735d25bd22f3","client_secret":"42c46caebd1f91cd54924e2ad6c3dc6fec94f37e","admin_user":"Jessie75919","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-TW","body":null,"labels":"Gitalk","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"9d8d3da09189165dcde8f1d3e109ad78"}</script>
-<script src="/js/third-party/comments/gitalk.js" defer></script>
-
-</body>
-</html>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/back-end/"><span class="card-category-list-name">Backend</span><span class="card-category-list-count">3</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/back-end/Cookies/"><span class="card-category-list-name">Cookies</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/back-end/Session/"><span class="card-category-list-name">Session</span><span class="card-category-list-count">1</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Basic/"><span class="card-category-list-name">Basic</span><span class="card-category-list-count">5</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Basic/Python/"><span class="card-category-list-name">Python</span><span class="card-category-list-count">5</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/design-pattern/"><span class="card-category-list-name">Design-Pattern</span><span class="card-category-list-count">7</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/design-pattern/Bridge/"><span class="card-category-list-name">Bridge</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/design-pattern/Chain-of-Responsibility/"><span class="card-category-list-name">Chain of Responsibility</span><span class="card-category-list-count">1</span></a></li></ul></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>標籤</span></div><div class="card-tag-cloud"><a href="/tags/Async/" style="font-size: 1.1em; color: #999">Async</a> <a href="/tags/Backend/" style="font-size: 1.26em; color: #999fa8">Backend</a> <a href="/tags/Browser/" style="font-size: 1.18em; color: #999ca1">Browser</a> <a href="/tags/Cache/" style="font-size: 1.1em; color: #999">Cache</a> <a href="/tags/Design-Pattern/" style="font-size: 1.5em; color: #99a9bf">Design-Pattern</a> <a href="/tags/Django/" style="font-size: 1.1em; color: #999">Django</a> <a href="/tags/Event-Loop/" style="font-size: 1.1em; color: #999">Event Loop</a> <a href="/tags/Front-End/" style="font-size: 1.18em; color: #999ca1">Front-End</a> <a href="/tags/Function/" style="font-size: 1.18em; color: #999ca1">Function</a> <a href="/tags/HTTP/" style="font-size: 1.1em; color: #999">HTTP</a> <a href="/tags/Hexo/" style="font-size: 1.1em; color: #999">Hexo</a> <a href="/tags/Javascript/" style="font-size: 1.26em; color: #999fa8">Javascript</a> <a href="/tags/Python/" style="font-size: 1.42em; color: #99a6b7">Python</a> <a href="/tags/Readability/" style="font-size: 1.1em; color: #999">Readability</a> <a href="/tags/Reading/" style="font-size: 1.26em; color: #999fa8">Reading</a> <a href="/tags/Sharing/" style="font-size: 1.1em; color: #999">Sharing</a> <a href="/tags/Softwares/" style="font-size: 1.18em; color: #999ca1">Softwares</a> <a href="/tags/chrome-extension/" style="font-size: 1.1em; color: #999">chrome-extension</a> <a href="/tags/claude/" style="font-size: 1.1em; color: #999">claude</a> <a href="/tags/data-structure-algorithm/" style="font-size: 1.18em; color: #999ca1">data-structure-algorithm</a> <a href="/tags/gemini/" style="font-size: 1.1em; color: #999">gemini</a> <a href="/tags/github-actions/" style="font-size: 1.1em; color: #999">github-actions</a> <a href="/tags/hexo/" style="font-size: 1.1em; color: #999">hexo</a> <a href="/tags/leetcode/" style="font-size: 1.18em; color: #999ca1">leetcode</a> <a href="/tags/line-bot/" style="font-size: 1.1em; color: #999">line-bot</a> <a href="/tags/pwa/" style="font-size: 1.1em; color: #999">pwa</a> <a href="/tags/raycast/" style="font-size: 1.1em; color: #999">raycast</a> <a href="/tags/side-project/" style="font-size: 1.34em; color: #99a3b0">side-project</a> <a href="/tags/vibe-coding/" style="font-size: 1.26em; color: #999fa8">vibe-coding</a> <a href="/tags/%E4%B8%80%E8%A8%80%E4%B8%8D%E5%90%88%E8%87%AA%E5%B7%B1%E5%AF%AB/" style="font-size: 1.26em; color: #999fa8">一言不合自己寫</a> <a href="/tags/%E4%BA%8C%E9%80%B2%E4%BD%8D/" style="font-size: 1.1em; color: #999">二進位</a> <a href="/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/" style="font-size: 1.1em; color: #999">小技巧</a> <a href="/tags/%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/" style="font-size: 1.5em; color: #99a9bf">設計模式</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>歸檔</span><a class="card-more-btn" href="/archives/" title="檢視更多">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/05/"><span class="card-archive-list-date">五月 2026</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/01/"><span class="card-archive-list-date">一月 2026</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/08/"><span class="card-archive-list-date">八月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/05/"><span class="card-archive-list-date">五月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/04/"><span class="card-archive-list-date">四月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/03/"><span class="card-archive-list-date">三月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/02/"><span class="card-archive-list-date">二月 2023</span><span class="card-archive-list-count">1</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>網站資訊</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章數目 :</div><div class="item-count">39</div></div><div class="webinfo-item"><div class="item-name">本站總字數 :</div><div class="item-count">82.9k</div></div><div class="webinfo-item"><div class="item-name">本站訪客數 :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">本站總訪問量 :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">最後更新時間 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-05-24T02:06:17.409Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2026 By ChanChanDev</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主題 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="淺色和深色模式轉換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到頂部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>function subtitleType () {
+  if (true) { 
+    var typed = new Typed("#subtitle", {
+      strings: "console.log(&quothello world!&quot);,System.out.print(&quothello world!&quot);,echo &quothello world!&quot;".split(","),
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50
+    })
+  } else {
+    document.getElementById("subtitle").innerHTML = 'console.log(&quothello world!&quot);'
+  }
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.jsdelivr.net/npm/typed.js/lib/typed.min.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}</script></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

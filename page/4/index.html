@@ -1,1101 +1,353 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
-
-  <link rel="apple-touch-icon" sizes="180x180" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
-  <link rel="icon" type="image/png" sizes="16x16" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico">
-  <link rel="mask-icon" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
-
-<script class="next-config" data-name="main" type="application/json">{"hostname":"jessie75919.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"onmobile":false},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null,"show_result":"flat"},"fold":{"enable":false,"height":500},"language":false,"highlight_theme":"normal"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"找到 ${hits} 個搜索結果（用時 ${time} 毫秒）","hits":"找到 ${hits} 個搜索結果"}}</script><script src="/js/config.js" defer></script>
-
-    <meta name="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>圈圈工程師 - Change Change Developer</title><meta name="keywords" content="程式,閱讀,塗鴉"><meta name="author" content="ChanChanDev"><meta name="copyright" content="ChanChanDev"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="圈圈工程師">
 <meta property="og:url" content="https://jessie75919.github.io/page/4/index.html">
 <meta property="og:site_name" content="圈圈工程師">
 <meta property="og:description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
 <meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
 <meta property="article:author" content="ChanChanDev">
 <meta property="article:tag" content="程式">
 <meta property="article:tag" content="閱讀">
 <meta property="article:tag" content="塗鴉">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png"><link rel="shortcut icon" href="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/favicon.ico"><link rel="canonical" href="https://jessie75919.github.io/page/4/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-R47Z93ZJTM"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-R47Z93ZJTM');
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '複製成功',
+    error: '複製錯誤',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: ChanChanDev","link":"連結: ","source":"來源: 圈圈工程師","info":"著作權歸作者所有。商業轉載請聯絡作者獲得授權，非商業轉載請註明出處。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isanchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '圈圈工程師',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2026-05-24 10:06:17'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
 
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
 
-<link rel="canonical" href="https://jessie75919.github.io/page/4/">
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
 
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-TW","comments":"","permalink":"","path":"page/4/index.html","title":""}</script>
-
-<script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>圈圈工程師</title>
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
   
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R47Z93ZJTM"></script>
-  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-R47Z93ZJTM","only_pageview":false,"measure_protocol_api_secret":null}</script>
-  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
-
-
-
-
-
-
-
-
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
-<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
-
-  
-
-
-
-
-
-
-  
-
-
-
-
-
-  <noscript>
-    <link rel="stylesheet" href="/css/noscript.css">
-  </noscript>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
-  <div class="headband"></div>
-
-  <main class="main">
-    <div class="column">
-      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切換導航欄" role="button">
-        <span class="toggle-line"></span>
-        <span class="toggle-line"></span>
-        <span class="toggle-line"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <i class="logo-line"></i>
-      <h1 class="site-title">圈圈工程師</h1>
-      <i class="logo-line"></i>
-    </a>
-      <p class="site-subtitle" itemprop="description">Change Change Developer</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
-    </div>
-  </div>
-</div>
-
-
-
-<nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-back-end"><a href="/categories/back-end/" rel="section"><i class="fas fa-rocket fa-fw"></i>Back-End</a></li><li class="menu-item menu-item-sharing"><a href="/categories/Sharing/" rel="section"><i class="fas fa-star fa-fw"></i>Sharing</a></li><li class="menu-item menu-item-reading"><a href="/categories/Reading/" rel="section"><i class="fas fa-book fa-fw"></i>Reading</a></li><li class="menu-item menu-item-design-pattern"><a href="/categories/design-pattern/" rel="section"><i class="fas fa-sitemap fa-fw"></i>Design-Pattern</a></li><li class="menu-item menu-item-javascript"><a href="/categories/js/" rel="section"><i class="fas fa-code fa-fw"></i>Javascript</a></li><li class="menu-item menu-item-一言不合自己寫"><a href="/tags/%E4%B8%80%E8%A8%80%E4%B8%8D%E5%90%88%E8%87%AA%E5%B7%B1%E5%AF%AB/" rel="section"><i class="fas fa-bolt fa-fw"></i>一言不合自己寫</a></li><li class="menu-item menu-item-分類"><a href="/categories/" rel="section"><i class="fas fa-folder-open fa-fw"></i>分類</a></li>
-  </ul>
-</nav>
-
-
-
-
-</header>
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
         
-  
-  <aside class="sidebar">
-
-    <div class="sidebar-inner sidebar-overview-active">
-      <ul class="sidebar-nav">
-        <li class="sidebar-nav-toc">
-          文章目錄
-        </li>
-        <li class="sidebar-nav-overview">
-          本站概要
-        </li>
-      </ul>
-
-      <div class="sidebar-panel-container">
-        <!--noindex-->
-        <div class="post-toc-wrap sidebar-panel">
-        </div>
-        <!--/noindex-->
-
-        <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="ChanChanDev"
-      src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
-  <p class="site-author-name" itemprop="name">ChanChanDev</p>
-  <div class="site-description" itemprop="description">圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。</div>
-</div>
-<div class="site-state-wrap animated">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-        <a href="/archives/">
-          <span class="site-state-item-count">39</span>
-          <span class="site-state-item-name">文章</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-          <a href="/categories/">
-        <span class="site-state-item-count">31</span>
-        <span class="site-state-item-name">分類</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">33</span>
-        <span class="site-state-item-name">標籤</span>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author animated">
-      <span class="links-of-author-item">
-        <a href="https://twitter.com/chanchandev" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;chanchandev" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://www.facebook.com/chanchandev" title="FaceBook → https:&#x2F;&#x2F;www.facebook.com&#x2F;chanchandev" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-facebook fa-fw"></i>FaceBook</a>
-      </span>
-  </div>
-
-        </div>
-      </div>
-    </div>
-
-    
-  </aside>
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">標籤</div><div class="length-num">33</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分類</div><div class="length-num">31</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/categories/back-end/"><i class="fa-fw fas fa-rocket"></i><span> Back-End</span></a></div><div class="menus_item"><a class="site-page" href="/categories/design-pattern/"><i class="fa-fw fas fas fa-sitemap"></i><span> Design-Pattern</span></a></div><div class="menus_item"><a class="site-page" href="/categories/js/"><i class="fa-fw fas fa-code"></i><span> Javascript</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分類</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 歸檔</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/index-img-draw.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">圈圈工程師</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/categories/back-end/"><i class="fa-fw fas fa-rocket"></i><span> Back-End</span></a></div><div class="menus_item"><a class="site-page" href="/categories/design-pattern/"><i class="fa-fw fas fas fa-sitemap"></i><span> Design-Pattern</span></a></div><div class="menus_item"><a class="site-page" href="/categories/js/"><i class="fa-fw fas fa-code"></i><span> Javascript</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分類</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 歸檔</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">圈圈工程師</h1><div id="site-subtitle"><span id="subtitle"></span></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left_radius"><a href="/design-pattern/Bridge/Bridge-Intro/2482019753/" title="Bridge 設計模式">     <img class="post_bg" src="https://cdn-images-1.medium.com/max/800/1*aKv69F-H150JS66lUqojGQ.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Bridge 設計模式"></a></div><div class="recent-post-info"><a class="article-title" href="/design-pattern/Bridge/Bridge-Intro/2482019753/" title="Bridge 設計模式">Bridge 設計模式</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2020-08-30T02:40:31.000Z" title="發表於 2020-08-30 10:40:31">2020-08-30</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/design-pattern/">Design-Pattern</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/design-pattern/Bridge/">Bridge</a></span></div><div class="content">
+我們可能會遇到因爲物件有不同的變型，而造成組成出來的類別衆多的困擾，例如汽車與機車，都分別有藍色與白色，就有四種排列組合：藍色汽車、白色汽車、藍色機車、白色機車，隨著交通工具的總類與顏色變多，可以組合出來的數量就會爆炸性地增加。如果你也有這個困擾，那就一起來看看如何使用 Bridge 設計模式來解決吧！
 
 
-    </div>
-
-    <div class="main-inner index posts-expand">
-
-    
+HIHI～😍  如果你是第一次來的話，『Chan-Chan-Dev』是一個專門用簡單的圖文與故事講解網路程式技術的網站。若你也喜歡用這種方式學習的話，歡迎加入 Chan-Chan-Dev Facebook 的粉絲團，在發佈的時候就有比較多機會收到通知喔！😍
 
 
-<div class="post-block">
-  
-  
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jessie75919.github.io/design-pattern/Bridge/Bridge-Intro/2482019753/">
+設計模式有很多種，但自己都是處於一知半解，所以在學習的過程也做些筆記與思考，希望幫助自己更能理解用法與使用的時機。
+而這次在 Refactor Guru 的學習了 Bridge 的這個設計模式，但以下是我自己掰出來的小情境與筆記，所以我們來看看 Bridge 的設計模式要怎麼使用囉。
+不用 Bridge 的設計模式會怎樣？🤔一樣來個情境做起手式，傑西 KeyCode 有限公司的工程師有 John、Mary，他們兩位 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/design-pattern/Interface/Interface-Intro/3712077079/" title="小故事圖解物件導向的 interface 是什麼？為什麼要 interface？什麼時候要 interface？">     <img class="post_bg" src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/Interface-Intro/index.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="小故事圖解物件導向的 interface 是什麼？為什麼要 interface？什麼時候要 interface？"></a></div><div class="recent-post-info"><a class="article-title" href="/design-pattern/Interface/Interface-Intro/3712077079/" title="小故事圖解物件導向的 interface 是什麼？為什麼要 interface？什麼時候要 interface？">小故事圖解物件導向的 interface 是什麼？為什麼要 interface？什麼時候要 interface？</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2020-08-13T01:14:08.000Z" title="發表於 2020-08-13 09:14:08">2020-08-13</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/design-pattern/">Design-Pattern</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/design-pattern/Interface/">Interface</a></span></div><div class="content">
+剛學程式的時候你有疑惑過為什麼要 interface 嗎？感覺用了會讓人更一頭霧水不是嗎？如果你也有這個疑惑的話，那就一起用個小故事來輕鬆瞭解為什麼我們需要 interface 吧！
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
-      <meta itemprop="name" content="ChanChanDev">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="圈圈工程師">
-      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
-    </span>
 
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 圈圈工程師">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/design-pattern/Bridge/Bridge-Intro/2482019753/" class="post-title-link" itemprop="url">Bridge 設計模式</a>
-        </h2>
 
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
+HIHI～😍  如果你是第一次來的話，『Chan-Chan-Dev』是一個專門用簡單的圖文與故事講解網路程式技術的網站。若你也喜歡用這種方式學習的話，歡迎加入 Chan-Chan-Dev Facebook 的粉絲團，在發佈的時候就有比較多機會收到通知喔！😍
 
-      <time title="創建時間：2020-08-30 10:40:31" itemprop="dateCreated datePublished" datetime="2020-08-30T10:40:31+08:00">2020-08-30</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2026-01-28 20:40:17" itemprop="dateModified" datetime="2026-01-28T20:40:17+08:00">2026-01-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/design-pattern/" itemprop="url" rel="index"><span itemprop="name">Design-Pattern</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/design-pattern/Bridge/" itemprop="url" rel="index"><span itemprop="name">Bridge</span></a>
-        </span>
-    </span>
 
-  
-</div>
 
-        </div>
-      </header>
+剛開始在學習物件導向的時候，學習了 class、object、繼承、封裝等等的使用方式，但是在這之中最無法參透的是：
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="https://cdn-images-1.medium.com/max/800/1*aKv69F-H150JS66lUqojGQ.png"></p>
-<p>我們可能會遇到因爲物件有不同的變型，而造成組成出來的類別衆多的困擾，例如汽車與機車，都分別有藍色與白色，就有四種排列組合：藍色汽車、白色汽車、藍色機車、白色機車，隨著交通工具的總類與顏色變多，可以組合出來的數量就會爆炸性地增加。如果你也有這個困擾，那就一起來看看如何使用 Bridge 設計模式來解決吧！</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/design-pattern/Bridge/Bridge-Intro/2482019753/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
+為什麼需要 interface？
+
+interface 翻譯成中文是『介面』，程式語言中的物件跟『介面』看字面上的意思感覺好像是八桿子打不著的關係，所以一直無法理解 interface 的用途，所以不得不說自已也遇過不知道什麼時候需要 interface，或者是只是覺得用了很帥才用，所以你問那時候的我為什麼要用，我也只能回答你：「因爲看大家都這樣子用，感覺這樣用很帥阿。」
+所以今天我們就來聊聊為什麼需要 inter ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/design-pattern/SRP/single-responsibility-principle/2543391104/" title="Single Responsibility Principle（單一職責）">     <img class="post_bg" src="https://jcxcode.files.wordpress.com/2020/07/image-12.png?w=1024" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Single Responsibility Principle（單一職責）"></a></div><div class="recent-post-info"><a class="article-title" href="/design-pattern/SRP/single-responsibility-principle/2543391104/" title="Single Responsibility Principle（單一職責）">Single Responsibility Principle（單一職責）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2020-07-05T07:53:00.000Z" title="發表於 2020-07-05 15:53:00">2020-07-05</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/design-pattern/">Design-Pattern</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/design-pattern/SRP/">SRP</a></span></div><div class="content">
+剛學寫程式的時候，很容易就把所有的功能寫在同一個檔案上或者是類別上，我們就這樣創造了 God Class（神之類別），這樣有什麼不妥嗎？會有什麼問題呢？一起用一個小故事來看看這樣潛在的風險與如何避免吧！
+
+
+HIHI～😍  如果你是第一次來的話，『Chan-Chan-Dev』是一個專門用簡單的圖文與故事講解網路程式技術的網站。若你也喜歡用這種方式學習的話，歡迎加入 Chan-Chan-Dev Facebook 的粉絲團，在發佈的時候就有比較多機會收到通知喔！😍
+
+
+
+Solid 的第一個 S 代表的就是 Single Responsibility Principle (SRP) ，翻成中文為「單一職責」。至於 Solid 是什麼意思，網路上應該滿多解釋的，而且我也可能無法在解釋的比他們好，有興趣可以參考底下的連結：https://zh.wikipedia.org/wiki/SOLID\_(%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1)
+
+為什麼要單一化職責？我們從一個情境來當起手勢：
+傑西的夢想是開一家早餐店，但是一 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/Basic/Python/python-5-variable-name/2092910160/" title="Python 學習 5: 變數命名">     <img class="post_bg" src="https://s3.ap-northeast-1.amazonaws.com/happycoding.production/post_cover/pyhton.jepg.png_1541832388png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python 學習 5: 變數命名"></a></div><div class="recent-post-info"><a class="article-title" href="/Basic/Python/python-5-variable-name/2092910160/" title="Python 學習 5: 變數命名">Python 學習 5: 變數命名</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2020-04-09T12:20:06.000Z" title="發表於 2020-04-09 20:20:06">2020-04-09</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Basic/">Basic</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/Basic/Python/">Python</a></span></div><div class="content">
+在 Python 學習 4 : 變數 我們聊到變數其實就是一個被貼了標籤命名的一個可以暫存資料的盒子，所以除了把資料放進去變數以外，另外還有做一件事情就是『變數的命名』，讓我們繼續看下去囉。
+
+
+在 Python 裡命名是有一些規則的：
+變數的名稱不能是 Python 的『保留字』Python 的保留字
+and
+except
+lambda
+with
+as
+finally
+nonlocal
+while
+assert
+false
+None
+yield
+break
+for
+not
+class
+from
+or
+continue
+global
+pass
+def
+if
+raise
+del
+import
+return
+elif
+in
+True
+else
+is
+try
+
+https://www.tutorialspoint.com/What-are-Reserved-Keywords-in-Python
+上面爲 Python3 的保留字，保留字就是在 Python3 執行的過程中，會被用到語法關鍵字，例如 if 、else、return 等等，之後會在提到這幾個語法關鍵字的用法，這邊先稍微跟大家帶過 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/Basic/Python/python-4-variable/1381065851/" title="Python 學習 4 : 變數">     <img class="post_bg" src="https://s3.ap-northeast-1.amazonaws.com/happycoding.production/post_cover/pyhton.jepg.png_1541832388png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python 學習 4 : 變數"></a></div><div class="recent-post-info"><a class="article-title" href="/Basic/Python/python-4-variable/1381065851/" title="Python 學習 4 : 變數">Python 學習 4 : 變數</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2020-04-07T15:10:29.000Z" title="發表於 2020-04-07 23:10:29">2020-04-07</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Basic/">Basic</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/Basic/Python/">Python</a></span></div><div class="content">
+我們在 後端語言學習地圖 中內容中，其中有提到一個關鍵字叫做『變數』，所以我們今天就來聊聊『變數』的概念。
+
+
+
+『變數』照字面上的解釋就是一個會變動的數值，它不是固定不變的。可以把它想像成在電腦記憶體裏面一個『盒子』，你可以在『盒子』存放一些資訊，並且可以替這個『盒子』貼上標籤命名。
+
+假如你要把你的 Email 放進記憶體的『盒子』裡，還記得 Python 學習 3 :  資料型別 提過的觀念，Email 是一個『字串類型』的資料，所以需要被用『雙引號』或『單引號』包起來，看起來有點像是這樣子。
+
+但是如果我們多放了把 Email、姓名、電話都放在『不同』的盒子裏面的話，畫面上就會像是這個樣子：
+
+這時候當你需要『Email 盒子』的這個資料的時候，你就不知道他在哪個盒子裏面，所以這時候適當的幫這些盒子標記個命名方便之後辨識取用是個好的方法。
+
+那如果我們想在 Python 做到這件事情的話要怎麼做呢？
+my_email = “&#x6d;&#x79;&#x2d;&#101;&#109;&#97;&#105;&#x6c;&#64;&#x67;&#x6d;&#97;&#x69;&# ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/Basic/Python/python-3-type/3256133090/" title="Python 學習 3 : 資料型別">     <img class="post_bg" src="https://s3.ap-northeast-1.amazonaws.com/happycoding.production/post_cover/pyhton.jepg.png_1541832388png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python 學習 3 : 資料型別"></a></div><div class="recent-post-info"><a class="article-title" href="/Basic/Python/python-3-type/3256133090/" title="Python 學習 3 : 資料型別">Python 學習 3 : 資料型別</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2020-04-05T12:29:05.000Z" title="發表於 2020-04-05 20:29:05">2020-04-05</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Basic/">Basic</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/Basic/Python/">Python</a></span></div><div class="content">
+在 後端語言學習地圖 中的『定義資料』的範圍裡，有提到其中有一個稱爲『資料型別』的部分。使用者的輸入中，Python 可能會有以下這幾種類型：
+
+整數（int）：年齡
+字串（str）：Email、帳號密碼
+浮點數（float）：美金匯率
+布林值（bool）：是否訂閱電子報的勾選框
+
+整數 int沒有小數點的數字在 Python 中都會被視爲『整數』類型的資料，且正負整數或者是零都是可以的，例如：
+1230999-999
+
+
+浮點數 float反之有小數點的數字在 Python 中都會被視爲『浮點數』類型的資料，且正負浮點數或者是 0.0 都是可以的，例如：
+1230.0999.9-999.9
+
+
+字串 str在 Python 中字串類型的資料就是爲文字類型的資料，他們需要被『雙引號』或者是『單引號』，所以以下幾種都是可以的。
+12&quot;learn python&quot;&#x27;learn python&#x27;
+
+
+另外有個比較特別的是，如果你把數字一樣用單引號或雙引號包起來的話，那麼 Python 也會把它視爲是字串類型的資料喔。例如：
+12&quot;999&quo ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/Basic/Python/python-2-interact-with-python/2447585378/" title="Python 學習 2 : 與 Python 互動">     <img class="post_bg" src="https://s3.ap-northeast-1.amazonaws.com/happycoding.production/post_cover/pyhton.jepg.png_1541832388png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python 學習 2 : 與 Python 互動"></a></div><div class="recent-post-info"><a class="article-title" href="/Basic/Python/python-2-interact-with-python/2447585378/" title="Python 學習 2 : 與 Python 互動">Python 學習 2 : 與 Python 互動</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2020-04-05T03:58:02.000Z" title="發表於 2020-04-05 11:58:02">2020-04-05</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Basic/">Basic</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/Basic/Python/">Python</a></span></div><div class="content">
+
+
+在 Python 學習 1 : 安裝 Python 成功地安裝了 Python 之後，接下來我們可以試著跟它互動一下，我們在 Terminal 輸入：
+1python3
+
+
+接下來我們就可以在這邊撰寫簡單的 Python 程式碼，當然不會在這邊寫完整個 Python 的程式碼，但是可以把它當作一個互動遊樂場，可以讓你與 Python 有互動。
+例如我們可以試著輸入簡單地運算 4 + 4 然後按下 Enter ，Python 就會告訴我們運算的結果。
+
+所以就可以任意地輸入簡單地運算例如：
+
+接下來如果需要想要離開這個互動模式的話，只需要輸入：
+1exit()
+
+
+記得 exit 後面需要加上一對括弧喔，就可以順利地離開囉。
+以上就是簡單地與 Python 互動的方式，下一章節要來一起學習 Python 學習 3 : 資料型別，今天就先到這邊囉。
+感謝收看 😀
+</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/Basic/Python/python-1-install-python/2164399402/" title="Python 學習 1 : 安裝 Python">     <img class="post_bg" src="https://s3.ap-northeast-1.amazonaws.com/happycoding.production/post_cover/pyhton.jepg.png_1541832388png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python 學習 1 : 安裝 Python"></a></div><div class="recent-post-info"><a class="article-title" href="/Basic/Python/python-1-install-python/2164399402/" title="Python 學習 1 : 安裝 Python">Python 學習 1 : 安裝 Python</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2020-04-03T19:58:41.000Z" title="發表於 2020-04-04 03:58:41">2020-04-04</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Basic/">Basic</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/Basic/Python/">Python</a></span></div><div class="content">
+
+
+Before Start哈囉，如果你剛好寫想學習 Python，那我正好也想學，那我們就一起開始囉。之後學習的過程會按照著這個 後端語言學習地圖 的進度前進，希望我們能夠一步一步地走到最後囉。
+首先要 Python 當好朋友之前，你的電腦裏面必須要有 Python 吧？不然怎麼當朋友？我們可以到 Python 官網 下載最新版的 Python，因爲 jc 的電腦是使用 Mac，所以都是會以 Mac 作爲畫面截圖的範例喔。
+
+下載安裝檔案並且完成後，可以打開 Mac 的 Terminal，並且輸入以下：
+1python --version
+
+
+目前 jc 電腦上安裝的版本是 python 2.7.16
+如果有成功地出現上面的畫面的話，恭禧你 Python 已經住在你的電腦囉。附帶一提，上面的指令後面加上 --version 其實是在查詢目前安裝的 python 的版本。
+但眼尖的你應該會發現，不對呀？剛剛不是明明安裝了 Python 3.8 版嗎？
+沒錯，因爲 Python 其實目前有分 2.7 與 3.8 的版本，所以如果使用 python 當作指令的話預設就會使用 2.7 的版 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/back-end/backend-map/319603614/" title="後端語言學習地圖">     <img class="post_bg" src="https://miro.medium.com/max/2000/0*TaPqs1sAhigjBFHf" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="後端語言學習地圖"></a></div><div class="recent-post-info"><a class="article-title" href="/back-end/backend-map/319603614/" title="後端語言學習地圖">後端語言學習地圖</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2020-04-03T18:49:26.000Z" title="發表於 2020-04-04 02:49:26">2020-04-04</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/back-end/">Backend</a></span></div><div class="content">
+先來說說我們想要開發一個應用程式的話，那這個應用程式要用來幹嘛？所以就要討論應用程式的目的，而這邊的應用程式我先將它的範圍歸納在網頁應用程式的範疇內。
+
+
+網頁相關應用程式的目的： 將資料儲存在某一個地方方便日後的存取，並且做有效率的應用進而產生某種價值。 其中的資料可能來源有：
+
+使用者輸入：帳號、密碼、Email
+公開的資料：天氣氣溫、政府網站公開資料
+應用程式提供者所整理產生的資料：
+
+有效率的資料應用來自於領域知識的相關處理、資料相關邏輯處理等等，我統一把這些行爲列爲『處理資料』。 例如說：如果你傳訊息給我：『Hello，要不要出來吃飯？』，對於應用程式的角度來說大概會這樣子處理：
+
+使用者 A（你）輸入一段資料『Hello，要不要出來吃飯？』
+應用程式把這一份資料存在某一個地方
+並且也傳送給使用者 B（我）
+
+所以從上述角度應用程式層面概括地化分爲：『使用者』、『資料』、『儲存資料』、『處理資料』 所以當在學習一個語言的時候除了某個語言的特有的特性，更多是在學習：
+
+定義資料
+變數 / 表達式
+資料型別
+資料結構儲存
+
+
+處理資料的學習範圍：
+接收使用者的輸入
+流程判斷
+函 ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/3/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/#content-inner">3</a><span class="page-number current">4</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">ChanChanDev</div><div class="author-info__description">Coding x Reading x Painting</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">標籤</div><div class="length-num">33</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分類</div><div class="length-num">31</div></a></div></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/side-project/student-management/3118241358/" title="[一言不合自己寫 3] 把音樂老師老婆當客戶，開發家教學生管理系統 ── 聽聽音樂 APP"><img src="/side-project/student-management/3118241358/cover.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="[一言不合自己寫 3] 把音樂老師老婆當客戶，開發家教學生管理系統 ── 聽聽音樂 APP"/></a><div class="content"><a class="title" href="/side-project/student-management/3118241358/" title="[一言不合自己寫 3] 把音樂老師老婆當客戶，開發家教學生管理系統 ── 聽聽音樂 APP">[一言不合自己寫 3] 把音樂老師老婆當客戶，開發家教學生管理系統 ── 聽聽音樂 APP</a><time datetime="2026-05-23T15:30:00.000Z" title="發表於 2026-05-23 23:30:00">2026-05-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/side-project/gemini-management-extension/492080683/" title="[一言不合自己寫 2] 幫 AI 對話加上「資料夾分類」功能"><img src="/side-project/gemini-management-extension/492080683/cover-illustration.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="[一言不合自己寫 2] 幫 AI 對話加上「資料夾分類」功能"/></a><div class="content"><a class="title" href="/side-project/gemini-management-extension/492080683/" title="[一言不合自己寫 2] 幫 AI 對話加上「資料夾分類」功能">[一言不合自己寫 2] 幫 AI 對話加上「資料夾分類」功能</a><time datetime="2026-05-23T13:00:00.000Z" title="發表於 2026-05-23 21:00:00">2026-05-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/side-project/raycast-transcribe/2026012801/" title="[一言不合自己寫 1] 我只想打嘴砲！如何用 Vibe Coding 解放雙手！打造語音轉文字小幫手 Voice Polish！"><img src="/side-project/raycast-transcribe/2026012801/v3.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="[一言不合自己寫 1] 我只想打嘴砲！如何用 Vibe Coding 解放雙手！打造語音轉文字小幫手 Voice Polish！"/></a><div class="content"><a class="title" href="/side-project/raycast-transcribe/2026012801/" title="[一言不合自己寫 1] 我只想打嘴砲！如何用 Vibe Coding 解放雙手！打造語音轉文字小幫手 Voice Polish！">[一言不合自己寫 1] 我只想打嘴砲！如何用 Vibe Coding 解放雙手！打造語音轉文字小幫手 Voice Polish！</a><time datetime="2026-01-28T13:00:00.000Z" title="發表於 2026-01-28 21:00:00">2026-01-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/design-pattern/Observer/observer-design-pattern/2118150761/" title="觀察者設計模式（Observer Design Pattern）"><img src="/design-pattern/Observer/observer-design-pattern/2118150761/cover.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="觀察者設計模式（Observer Design Pattern）"/></a><div class="content"><a class="title" href="/design-pattern/Observer/observer-design-pattern/2118150761/" title="觀察者設計模式（Observer Design Pattern）">觀察者設計模式（Observer Design Pattern）</a><time datetime="2023-10-14T08:24:54.000Z" title="發表於 2023-10-14 16:24:54">2023-10-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/dsa/Container-With-Most-Water/858250619/" title="Leetcode 筆記 - 圖解解題 Container With Most Water"><img src="/dsa/Container-With-Most-Water/858250619/cover.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Leetcode 筆記 - 圖解解題 Container With Most Water"/></a><div class="content"><a class="title" href="/dsa/Container-With-Most-Water/858250619/" title="Leetcode 筆記 - 圖解解題 Container With Most Water">Leetcode 筆記 - 圖解解題 Container With Most Water</a><time datetime="2023-10-11T23:54:34.000Z" title="發表於 2023-10-12 07:54:34">2023-10-12</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分類</span>
+            <a class="card-more-btn" href="/categories/" title="檢視更多">
+    <i class="fas fa-angle-right"></i></a>
             </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jessie75919.github.io/design-pattern/Interface/Interface-Intro/3712077079/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
-      <meta itemprop="name" content="ChanChanDev">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="圈圈工程師">
-      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 圈圈工程師">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/design-pattern/Interface/Interface-Intro/3712077079/" class="post-title-link" itemprop="url">小故事圖解物件導向的 interface 是什麼？為什麼要 interface？什麼時候要 interface？</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2020-08-13 09:14:08" itemprop="dateCreated datePublished" datetime="2020-08-13T09:14:08+08:00">2020-08-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2026-01-28 20:40:17" itemprop="dateModified" datetime="2026-01-28T20:40:17+08:00">2026-01-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/design-pattern/" itemprop="url" rel="index"><span itemprop="name">Design-Pattern</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/design-pattern/Interface/" itemprop="url" rel="index"><span itemprop="name">Interface</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="https://chanchandev.s3.ap-northeast-2.amazonaws.com/blogs/Interface-Intro/index.png"></p>
-<p>剛學程式的時候你有疑惑過為什麼要 interface 嗎？感覺用了會讓人更一頭霧水不是嗎？如果你也有這個疑惑的話，那就一起用個小故事來輕鬆瞭解為什麼我們需要 interface 吧！</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/design-pattern/Interface/Interface-Intro/3712077079/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jessie75919.github.io/design-pattern/SRP/single-responsibility-principle/2543391104/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
-      <meta itemprop="name" content="ChanChanDev">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="圈圈工程師">
-      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 圈圈工程師">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/design-pattern/SRP/single-responsibility-principle/2543391104/" class="post-title-link" itemprop="url">Single Responsibility Principle（單一職責）</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2020-07-05 15:53:00" itemprop="dateCreated datePublished" datetime="2020-07-05T15:53:00+08:00">2020-07-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2026-01-28 20:40:17" itemprop="dateModified" datetime="2026-01-28T20:40:17+08:00">2026-01-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/design-pattern/" itemprop="url" rel="index"><span itemprop="name">Design-Pattern</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/design-pattern/SRP/" itemprop="url" rel="index"><span itemprop="name">SRP</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="https://jcxcode.files.wordpress.com/2020/07/image-12.png?w=1024"></p>
-<p>剛學寫程式的時候，很容易就把所有的功能寫在同一個檔案上或者是類別上，我們就這樣創造了 God Class（神之類別），這樣有什麼不妥嗎？會有什麼問題呢？一起用一個小故事來看看這樣潛在的風險與如何避免吧！</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/design-pattern/SRP/single-responsibility-principle/2543391104/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jessie75919.github.io/Basic/Python/python-5-variable-name/2092910160/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
-      <meta itemprop="name" content="ChanChanDev">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="圈圈工程師">
-      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 圈圈工程師">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/Basic/Python/python-5-variable-name/2092910160/" class="post-title-link" itemprop="url">Python 學習 5: 變數命名</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2020-04-09 20:20:06" itemprop="dateCreated datePublished" datetime="2020-04-09T20:20:06+08:00">2020-04-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2026-01-28 20:40:17" itemprop="dateModified" datetime="2026-01-28T20:40:17+08:00">2026-01-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Basic/" itemprop="url" rel="index"><span itemprop="name">Basic</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Basic/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="https://s3.ap-northeast-1.amazonaws.com/happycoding.production/post_cover/pyhton.jepg.png_1541832388png"></p>
-<p>在 <a href="/Basic/Python/python-4-variable/1381065851/" title="Python 學習 4 : 變數">Python 學習 4 : 變數</a> 我們聊到變數其實就是一個被貼了標籤命名的一個可以暫存資料的盒子，所以除了把資料放進去變數以外，另外還有做一件事情就是『變數的命名』，讓我們繼續看下去囉。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Basic/Python/python-5-variable-name/2092910160/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jessie75919.github.io/Basic/Python/python-4-variable/1381065851/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
-      <meta itemprop="name" content="ChanChanDev">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="圈圈工程師">
-      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 圈圈工程師">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/Basic/Python/python-4-variable/1381065851/" class="post-title-link" itemprop="url">Python 學習 4 : 變數</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2020-04-07 23:10:29" itemprop="dateCreated datePublished" datetime="2020-04-07T23:10:29+08:00">2020-04-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2026-01-28 20:40:17" itemprop="dateModified" datetime="2026-01-28T20:40:17+08:00">2026-01-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Basic/" itemprop="url" rel="index"><span itemprop="name">Basic</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Basic/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="https://s3.ap-northeast-1.amazonaws.com/happycoding.production/post_cover/pyhton.jepg.png_1541832388png"></p>
-<p>我們在 <a href="/back-end/backend-map/319603614/" title="後端語言學習地圖">後端語言學習地圖</a> 中內容中，其中有提到一個關鍵字叫做『變數』，所以我們今天就來聊聊『變數』的概念。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Basic/Python/python-4-variable/1381065851/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jessie75919.github.io/Basic/Python/python-3-type/3256133090/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
-      <meta itemprop="name" content="ChanChanDev">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="圈圈工程師">
-      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 圈圈工程師">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/Basic/Python/python-3-type/3256133090/" class="post-title-link" itemprop="url">Python 學習 3 : 資料型別</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2020-04-05 20:29:05" itemprop="dateCreated datePublished" datetime="2020-04-05T20:29:05+08:00">2020-04-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2026-01-28 20:40:17" itemprop="dateModified" datetime="2026-01-28T20:40:17+08:00">2026-01-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Basic/" itemprop="url" rel="index"><span itemprop="name">Basic</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Basic/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="https://s3.ap-northeast-1.amazonaws.com/happycoding.production/post_cover/pyhton.jepg.png_1541832388png"></p>
-<p>在 <a href="/back-end/backend-map/319603614/" title="後端語言學習地圖">後端語言學習地圖</a> 中的『定義資料』的範圍裡，有提到其中有一個稱爲『資料型別』的部分。使用者的輸入中，Python 可能會有以下這幾種類型：</p>
-<ul>
-<li>整數（int）：年齡</li>
-<li>字串（str）：Email、帳號密碼</li>
-<li>浮點數（float）：美金匯率</li>
-<li>布林值（bool）：是否訂閱電子報的勾選框
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Basic/Python/python-3-type/3256133090/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jessie75919.github.io/Basic/Python/python-2-interact-with-python/2447585378/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
-      <meta itemprop="name" content="ChanChanDev">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="圈圈工程師">
-      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 圈圈工程師">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/Basic/Python/python-2-interact-with-python/2447585378/" class="post-title-link" itemprop="url">Python 學習 2 : 與 Python 互動</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2020-04-05 11:58:02" itemprop="dateCreated datePublished" datetime="2020-04-05T11:58:02+08:00">2020-04-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2026-05-23 23:52:23" itemprop="dateModified" datetime="2026-05-23T23:52:23+08:00">2026-05-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Basic/" itemprop="url" rel="index"><span itemprop="name">Basic</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Basic/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="https://s3.ap-northeast-1.amazonaws.com/happycoding.production/post_cover/pyhton.jepg.png_1541832388png"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Basic/Python/python-2-interact-with-python/2447585378/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jessie75919.github.io/Basic/Python/python-1-install-python/2164399402/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
-      <meta itemprop="name" content="ChanChanDev">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="圈圈工程師">
-      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 圈圈工程師">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/Basic/Python/python-1-install-python/2164399402/" class="post-title-link" itemprop="url">Python 學習 1 : 安裝 Python</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2020-04-04 03:58:41" itemprop="dateCreated datePublished" datetime="2020-04-04T03:58:41+08:00">2020-04-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2026-01-28 20:40:17" itemprop="dateModified" datetime="2026-01-28T20:40:17+08:00">2026-01-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Basic/" itemprop="url" rel="index"><span itemprop="name">Basic</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Basic/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="https://s3.ap-northeast-1.amazonaws.com/happycoding.production/post_cover/pyhton.jepg.png_1541832388png"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Basic/Python/python-1-install-python/2164399402/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jessie75919.github.io/back-end/backend-map/319603614/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://chanchandev.s3.ap-northeast-2.amazonaws.com/imgs/chan-chan-dev-logo.png">
-      <meta itemprop="name" content="ChanChanDev">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="圈圈工程師">
-      <meta itemprop="description" content="圈圈工程師圖文技術 Blog，以簡單的插圖與故事的方式，希望讓大家更輕鬆地理解艱深難懂的技術內容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 圈圈工程師">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/back-end/backend-map/319603614/" class="post-title-link" itemprop="url">後端語言學習地圖</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2020-04-04 02:49:26" itemprop="dateCreated datePublished" datetime="2020-04-04T02:49:26+08:00">2020-04-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2026-01-28 20:40:17" itemprop="dateModified" datetime="2026-01-28T20:40:17+08:00">2026-01-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/back-end/" itemprop="url" rel="index"><span itemprop="name">Backend</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="https://miro.medium.com/max/2000/0*TaPqs1sAhigjBFHf"></p>
-<p>先來說說我們想要開發一個應用程式的話，那這個應用程式要用來幹嘛？所以就要討論應用程式的目的，而這邊的應用程式我先將它的範圍歸納在網頁應用程式的範疇內。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/back-end/backend-map/319603614/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一頁" aria-label="上一頁" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
-  </nav>
-
-</div>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-inner">
-
-  <div class="copyright">
-    &copy; 2020 – 
-    <span itemprop="copyrightYear">2026</span>
-    <span class="with-love">
-      <i class="fa fa-heart"></i>
-    </span>
-    <span class="author" itemprop="copyrightHolder">ChanChanDev</span>
-  </div>
-
-    </div>
-  </footer>
-
-  
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-  <div class="sidebar-dimmer"></div>
-  <div class="back-to-top" role="button" aria-label="回到頂端">
-    <i class="fa fa-arrow-up fa-lg"></i>
-    <span>0%</span>
-  </div>
-  <div class="reading-progress-bar"></div>
-
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
-
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"Jessie75919","repo":"Jessie75919.github.io","client_id":"5cc00853735d25bd22f3","client_secret":"42c46caebd1f91cd54924e2ad6c3dc6fec94f37e","admin_user":"Jessie75919","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-TW","body":null,"labels":"Gitalk","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"dbb1aad0300bb8f37fa677175e85a293"}</script>
-<script src="/js/third-party/comments/gitalk.js" defer></script>
-
-</body>
-</html>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/back-end/"><span class="card-category-list-name">Backend</span><span class="card-category-list-count">3</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/back-end/Cookies/"><span class="card-category-list-name">Cookies</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/back-end/Session/"><span class="card-category-list-name">Session</span><span class="card-category-list-count">1</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Basic/"><span class="card-category-list-name">Basic</span><span class="card-category-list-count">5</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Basic/Python/"><span class="card-category-list-name">Python</span><span class="card-category-list-count">5</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/design-pattern/"><span class="card-category-list-name">Design-Pattern</span><span class="card-category-list-count">7</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/design-pattern/Bridge/"><span class="card-category-list-name">Bridge</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/design-pattern/Chain-of-Responsibility/"><span class="card-category-list-name">Chain of Responsibility</span><span class="card-category-list-count">1</span></a></li></ul></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>標籤</span></div><div class="card-tag-cloud"><a href="/tags/Async/" style="font-size: 1.1em; color: #999">Async</a> <a href="/tags/Backend/" style="font-size: 1.26em; color: #999fa8">Backend</a> <a href="/tags/Browser/" style="font-size: 1.18em; color: #999ca1">Browser</a> <a href="/tags/Cache/" style="font-size: 1.1em; color: #999">Cache</a> <a href="/tags/Design-Pattern/" style="font-size: 1.5em; color: #99a9bf">Design-Pattern</a> <a href="/tags/Django/" style="font-size: 1.1em; color: #999">Django</a> <a href="/tags/Event-Loop/" style="font-size: 1.1em; color: #999">Event Loop</a> <a href="/tags/Front-End/" style="font-size: 1.18em; color: #999ca1">Front-End</a> <a href="/tags/Function/" style="font-size: 1.18em; color: #999ca1">Function</a> <a href="/tags/HTTP/" style="font-size: 1.1em; color: #999">HTTP</a> <a href="/tags/Hexo/" style="font-size: 1.1em; color: #999">Hexo</a> <a href="/tags/Javascript/" style="font-size: 1.26em; color: #999fa8">Javascript</a> <a href="/tags/Python/" style="font-size: 1.42em; color: #99a6b7">Python</a> <a href="/tags/Readability/" style="font-size: 1.1em; color: #999">Readability</a> <a href="/tags/Reading/" style="font-size: 1.26em; color: #999fa8">Reading</a> <a href="/tags/Sharing/" style="font-size: 1.1em; color: #999">Sharing</a> <a href="/tags/Softwares/" style="font-size: 1.18em; color: #999ca1">Softwares</a> <a href="/tags/chrome-extension/" style="font-size: 1.1em; color: #999">chrome-extension</a> <a href="/tags/claude/" style="font-size: 1.1em; color: #999">claude</a> <a href="/tags/data-structure-algorithm/" style="font-size: 1.18em; color: #999ca1">data-structure-algorithm</a> <a href="/tags/gemini/" style="font-size: 1.1em; color: #999">gemini</a> <a href="/tags/github-actions/" style="font-size: 1.1em; color: #999">github-actions</a> <a href="/tags/hexo/" style="font-size: 1.1em; color: #999">hexo</a> <a href="/tags/leetcode/" style="font-size: 1.18em; color: #999ca1">leetcode</a> <a href="/tags/line-bot/" style="font-size: 1.1em; color: #999">line-bot</a> <a href="/tags/pwa/" style="font-size: 1.1em; color: #999">pwa</a> <a href="/tags/raycast/" style="font-size: 1.1em; color: #999">raycast</a> <a href="/tags/side-project/" style="font-size: 1.34em; color: #99a3b0">side-project</a> <a href="/tags/vibe-coding/" style="font-size: 1.26em; color: #999fa8">vibe-coding</a> <a href="/tags/%E4%B8%80%E8%A8%80%E4%B8%8D%E5%90%88%E8%87%AA%E5%B7%B1%E5%AF%AB/" style="font-size: 1.26em; color: #999fa8">一言不合自己寫</a> <a href="/tags/%E4%BA%8C%E9%80%B2%E4%BD%8D/" style="font-size: 1.1em; color: #999">二進位</a> <a href="/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/" style="font-size: 1.1em; color: #999">小技巧</a> <a href="/tags/%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/" style="font-size: 1.5em; color: #99a9bf">設計模式</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>歸檔</span><a class="card-more-btn" href="/archives/" title="檢視更多">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/05/"><span class="card-archive-list-date">五月 2026</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/01/"><span class="card-archive-list-date">一月 2026</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/08/"><span class="card-archive-list-date">八月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/05/"><span class="card-archive-list-date">五月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/04/"><span class="card-archive-list-date">四月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/03/"><span class="card-archive-list-date">三月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/02/"><span class="card-archive-list-date">二月 2023</span><span class="card-archive-list-count">1</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>網站資訊</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章數目 :</div><div class="item-count">39</div></div><div class="webinfo-item"><div class="item-name">本站總字數 :</div><div class="item-count">82.9k</div></div><div class="webinfo-item"><div class="item-name">本站訪客數 :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">本站總訪問量 :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">最後更新時間 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-05-24T02:06:17.409Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2026 By ChanChanDev</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主題 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="淺色和深色模式轉換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到頂部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>function subtitleType () {
+  if (true) { 
+    var typed = new Typed("#subtitle", {
+      strings: "console.log(&quothello world!&quot);,System.out.print(&quothello world!&quot);,echo &quothello world!&quot;".split(","),
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50
+    })
+  } else {
+    document.getElementById("subtitle").innerHTML = 'console.log(&quothello world!&quot);'
+  }
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.jsdelivr.net/npm/typed.js/lib/typed.min.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}</script></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
