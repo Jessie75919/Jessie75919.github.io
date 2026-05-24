@@ -1197,7 +1197,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #ff5774;
+    background: #d57d50;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2676,24 +2676,29 @@ header.header {
 }
 .post-body img[width] {
   display: block;
+  max-width: 100%;
+  height: auto;
   margin-left: auto;
   margin-right: auto;
 }
 .post-body img.phone-shot {
   display: block;
-  max-width: 320px;
+  max-width: min(320px, 100%);
+  height: auto;
   margin-left: auto;
   margin-right: auto;
 }
 .post-body img.narrow {
   display: block;
-  max-width: 480px;
+  max-width: min(480px, 100%);
+  height: auto;
   margin-left: auto;
   margin-right: auto;
 }
 .post-body img.medium {
   display: block;
-  max-width: 720px;
+  max-width: min(720px, 100%);
+  height: auto;
   margin-left: auto;
   margin-right: auto;
 }
